@@ -1,0 +1,130 @@
+            #ifdef FILT1
+            Pin_debug1_Write( 1 );
+            for( filterOutIndex = 0; filterOutIndex < BUFFLEN; filterOutIndex++ )
+            {
+                filterOut[ filterOutIndex ] = iir_coupled_form( audioBuff[buffOutput][filterOutIndex], &temp_reg_filt1, coeff_filt1 );                 
+            }
+            Pin_debug1_Write( 0 );
+            avg = mean( filterOut );
+            
+            std = stdDev( filterOut , avg );
+            
+            for( index = 0; index < 8; index++ )
+            {
+                if( std > thrshld[ index ] )
+                {
+                    ledVal = ledVal | ( 1 << index );
+                }
+                
+            }
+            ledsOut[0] = ledVal;
+            
+            #endif
+            
+            #ifdef FILT2
+            for( filterOutIndex = 0; filterOutIndex < BUFFLEN; filterOutIndex++ )
+            {
+                filterOut[ filterOutIndex ] = iir_coupled_form( audioBuff[buffOutput][filterOutIndex], &temp_reg_filt2, coeff_filt2 );                 
+            }
+            avg = mean( filterOut );
+            std = stdDev( filterOut , avg );
+            for( index = 0; index < 8; index++ )
+            {
+                if( std > thrshld[ index ] )
+                {
+                    ledVal = ledVal | ( 1 << index );
+                }
+                
+            }
+            ledsOut[1] = ledVal;
+            #endif
+            
+            #ifdef FILT3
+            for( filterOutIndex = 0; filterOutIndex < BUFFLEN; filterOutIndex++ )
+            {
+                filterOut[ filterOutIndex ] = iir_coupled_form( audioBuff[buffOutput][filterOutIndex], &temp_reg_filt3, coeff_filt3 );                 
+            }
+            avg = mean( filterOut );
+            std = stdDev( filterOut , avg );
+            for( index = 0; index < 8; index++ )
+            {
+                if( std > thrshld[ index ] )
+                {
+                    ledVal = ledVal | ( 1 << index );
+                }
+                
+            }
+            ledsOut[2] = ledVal;
+            #endif
+            
+            #ifdef FILT4
+            for( filterOutIndex = 0; filterOutIndex < BUFFLEN; filterOutIndex++ )
+            {
+                filterOut[ filterOutIndex ] = iir_coupled_form( audioBuff[buffOutput][filterOutIndex], &temp_reg_filt4, coeff_filt4 );                 
+            }
+            avg = mean( filterOut );
+            std = stdDev( filterOut , avg );
+            for( index = 0; index < 8; index++ )
+            {
+                if( std > thrshld[ index ] )
+                {
+                    ledVal = ledVal | ( 1 << index );
+                }
+                
+            }
+            ledsOut[3] = ledVal;
+            #endif
+            
+            #ifdef FILT5
+            for( filterOutIndex = 0; filterOutIndex < BUFFLEN; filterOutIndex++ )
+            {
+                filterOut[ filterOutIndex ] = iir_coupled_form( audioBuff[buffOutput][filterOutIndex], &temp_reg_filt5, coeff_filt5 );                 
+            }
+            avg = mean( filterOut );
+            std = stdDev( filterOut , avg );
+            for( index = 0; index < 8; index++ )
+            {
+                if( std > thrshld[ index ] )
+                {
+                    ledVal = ledVal | ( 1 << index );
+                }
+                
+            }
+            ledsOut[4] = ledVal;
+            #endif
+            
+            #ifdef FILT6
+            for( filterOutIndex = 0; filterOutIndex < BUFFLEN; filterOutIndex++ )
+            {
+                filterOut[ filterOutIndex ] = iir_coupled_form( audioBuff[buffOutput][filterOutIndex], &temp_reg_filt6, coeff_filt6 );                 
+            }
+            avg = mean( filterOut );
+            std = stdDev( filterOut , avg );
+            for( index = 0; index < 8; index++ )
+            {
+                if( std > thrshld[ index ] )
+                {
+                    ledVal = ledVal | ( 1 << index );
+                }
+                
+            }
+            ledsOut[5] = ledVal;
+            #endif
+            
+            #ifdef FILT7
+            for( filterOutIndex = 0; filterOutIndex < BUFFLEN; filterOutIndex++ )
+            {
+                filterOut[ filterOutIndex ] = iir_coupled_form( audioBuff[buffOutput][filterOutIndex], &temp_reg_filt7, coeff_filt7 );                 
+            }
+            avg = mean( filterOut );
+            std = stdDev( filterOut , avg );
+            for( index = 0; index < 8; index++ )
+            {
+                if( std > thrshld[ index ] )
+                {
+                    ledVal = ledVal | ( 1 << index );
+                }
+                
+            }
+            ledsOut[6] = ledVal;
+            #endif

@@ -1,0 +1,4569 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"CySpc.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.CySpcStart,"ax",%progbits
+  20              		.align	2
+  21              		.global	CySpcStart
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	CySpcStart, %function
+  25              	CySpcStart:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\CySpc.c"
+   1:Generated_Source\PSoC5/CySpc.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC5/CySpc.c **** * \file CySpc.c
+   3:Generated_Source\PSoC5/CySpc.c **** * \version 5.70
+   4:Generated_Source\PSoC5/CySpc.c **** *
+   5:Generated_Source\PSoC5/CySpc.c **** * \brief Provides an API for the System Performance Component.
+   6:Generated_Source\PSoC5/CySpc.c **** * The SPC functions are not meant to be called directly by the user
+   7:Generated_Source\PSoC5/CySpc.c **** * application.
+   8:Generated_Source\PSoC5/CySpc.c **** *
+   9:Generated_Source\PSoC5/CySpc.c **** ********************************************************************************
+  10:Generated_Source\PSoC5/CySpc.c **** * \copyright
+  11:Generated_Source\PSoC5/CySpc.c **** * Copyright 2008-2018, Cypress Semiconductor Corporation.  All rights reserved.
+  12:Generated_Source\PSoC5/CySpc.c **** * You may use this file only in accordance with the license, terms, conditions,
+  13:Generated_Source\PSoC5/CySpc.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  14:Generated_Source\PSoC5/CySpc.c **** * the software package with which this file was provided.
+  15:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+  16:Generated_Source\PSoC5/CySpc.c **** 
+  17:Generated_Source\PSoC5/CySpc.c **** #include "CySpc.h"
+  18:Generated_Source\PSoC5/CySpc.c **** 
+  19:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_KEY_ONE                      (0xB6u)
+  20:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_KEY_TWO(x)                   ((uint8) (((uint16) 0xD3u) + ((uint16) (x))))
+  21:Generated_Source\PSoC5/CySpc.c **** 
+  22:Generated_Source\PSoC5/CySpc.c **** /* Command Codes */
+  23:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_LD_BYTE                  (0x00u)
+  24:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_LD_MULTI_BYTE            (0x01u)
+  25:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_LD_ROW                   (0x02u)
+  26:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_RD_BYTE                  (0x03u)
+  27:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_RD_MULTI_BYTE            (0x04u)
+  28:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_WR_ROW                   (0x05u)
+  29:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_WR_USER_NVL              (0x06u)
+  30:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_PRG_ROW                  (0x07u)
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 2
+
+
+  31:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_ER_SECTOR                (0x08u)
+  32:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_ER_ALL                   (0x09u)
+  33:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_RD_HIDDEN                (0x0Au)
+  34:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_PRG_PROTECT              (0x0Bu)
+  35:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_CHECKSUM                 (0x0Cu)
+  36:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_DWNLD_ALGORITHM          (0x0Du)
+  37:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_GET_TEMP                 (0x0Eu)
+  38:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_GET_ADC                  (0x0Fu)
+  39:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_RD_NVL_VOLATILE          (0x10u)
+  40:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_SETUP_TS                 (0x11u)
+  41:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_DISABLE_TS               (0x12u)
+  42:Generated_Source\PSoC5/CySpc.c **** #define CY_SPC_CMD_ER_ROW                   (0x13u)
+  43:Generated_Source\PSoC5/CySpc.c **** 
+  44:Generated_Source\PSoC5/CySpc.c **** /* Enable bit in Active and Alternate Active mode templates */
+  45:Generated_Source\PSoC5/CySpc.c **** #define PM_SPC_PM_EN                        (0x08u)
+  46:Generated_Source\PSoC5/CySpc.c **** 
+  47:Generated_Source\PSoC5/CySpc.c **** /* Gate calls to the SPC. */
+  48:Generated_Source\PSoC5/CySpc.c **** uint8 SpcLockState = CY_SPC_UNLOCKED;
+  49:Generated_Source\PSoC5/CySpc.c **** 
+  50:Generated_Source\PSoC5/CySpc.c **** 
+  51:Generated_Source\PSoC5/CySpc.c **** #if(CY_PSOC5)
+  52:Generated_Source\PSoC5/CySpc.c **** 
+  53:Generated_Source\PSoC5/CySpc.c ****     /***************************************************************************
+  54:Generated_Source\PSoC5/CySpc.c ****     * The wait-state pipeline must be enabled prior to accessing the SPC
+  55:Generated_Source\PSoC5/CySpc.c ****     * register interface regardless of CPU frequency. The CySpcLock() saves
+  56:Generated_Source\PSoC5/CySpc.c ****     * current wait-state pipeline state and enables it. The CySpcUnlock()
+  57:Generated_Source\PSoC5/CySpc.c ****     * function, which must be called after SPC transaction, restores original
+  58:Generated_Source\PSoC5/CySpc.c ****     * state.
+  59:Generated_Source\PSoC5/CySpc.c ****     ***************************************************************************/
+  60:Generated_Source\PSoC5/CySpc.c ****     static uint32 spcWaitPipeBypass = 0u;
+  61:Generated_Source\PSoC5/CySpc.c **** 
+  62:Generated_Source\PSoC5/CySpc.c **** #endif  /* (CY_PSOC5) */
+  63:Generated_Source\PSoC5/CySpc.c **** 
+  64:Generated_Source\PSoC5/CySpc.c **** 
+  65:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+  66:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcStart
+  67:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+  68:Generated_Source\PSoC5/CySpc.c **** *  Starts the SPC.
+  69:Generated_Source\PSoC5/CySpc.c **** *
+  70:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+  71:Generated_Source\PSoC5/CySpc.c **** void CySpcStart(void) 
+  72:Generated_Source\PSoC5/CySpc.c **** {
+  28              		.loc 1 72 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  73:Generated_Source\PSoC5/CySpc.c ****     /* Save current global interrupt enable and disable it */
+  74:Generated_Source\PSoC5/CySpc.c ****     uint8 interruptState = CyEnterCriticalSection();
+  36              		.loc 1 74 0
+  37 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+  38              	.LVL0:
+  75:Generated_Source\PSoC5/CySpc.c **** 
+  76:Generated_Source\PSoC5/CySpc.c ****     CY_SPC_PM_ACT_REG  |= PM_SPC_PM_EN;
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 3
+
+
+  39              		.loc 1 76 0
+  40 0006 0749     		ldr	r1, .L3
+  77:Generated_Source\PSoC5/CySpc.c ****     CY_SPC_PM_STBY_REG |= PM_SPC_PM_EN;
+  41              		.loc 1 77 0
+  42 0008 074A     		ldr	r2, .L3+4
+  76:Generated_Source\PSoC5/CySpc.c ****     CY_SPC_PM_STBY_REG |= PM_SPC_PM_EN;
+  43              		.loc 1 76 0
+  44 000a 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+  45 000c 43F00803 		orr	r3, r3, #8
+  46 0010 0B70     		strb	r3, [r1]
+  47              		.loc 1 77 0
+  48 0012 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  49 0014 43F00803 		orr	r3, r3, #8
+  50 0018 1370     		strb	r3, [r2]
+  78:Generated_Source\PSoC5/CySpc.c **** 
+  79:Generated_Source\PSoC5/CySpc.c ****     /* Restore global interrupt enable state */
+  80:Generated_Source\PSoC5/CySpc.c ****     CyExitCriticalSection(interruptState);
+  81:Generated_Source\PSoC5/CySpc.c **** }
+  51              		.loc 1 81 0
+  52 001a BDE80840 		pop	{r3, lr}
+  53              		.cfi_restore 14
+  54              		.cfi_restore 3
+  55              		.cfi_def_cfa_offset 0
+  80:Generated_Source\PSoC5/CySpc.c **** }
+  56              		.loc 1 80 0
+  57 001e FFF7FEBF 		b	CyExitCriticalSection
+  58              	.LVL1:
+  59              	.L4:
+  60 0022 00BF     		.align	2
+  61              	.L3:
+  62 0024 A0430040 		.word	1073759136
+  63 0028 B0430040 		.word	1073759152
+  64              		.cfi_endproc
+  65              	.LFE0:
+  66              		.size	CySpcStart, .-CySpcStart
+  67              		.section	.text.CySpcStop,"ax",%progbits
+  68              		.align	2
+  69              		.global	CySpcStop
+  70              		.thumb
+  71              		.thumb_func
+  72              		.type	CySpcStop, %function
+  73              	CySpcStop:
+  74              	.LFB1:
+  82:Generated_Source\PSoC5/CySpc.c **** 
+  83:Generated_Source\PSoC5/CySpc.c **** 
+  84:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+  85:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcStop
+  86:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+  87:Generated_Source\PSoC5/CySpc.c **** *  Stops the SPC.
+  88:Generated_Source\PSoC5/CySpc.c **** *
+  89:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+  90:Generated_Source\PSoC5/CySpc.c **** void CySpcStop(void) 
+  91:Generated_Source\PSoC5/CySpc.c **** {
+  75              		.loc 1 91 0
+  76              		.cfi_startproc
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 4
+
+
+  79 0000 08B5     		push	{r3, lr}
+  80              		.cfi_def_cfa_offset 8
+  81              		.cfi_offset 3, -8
+  82              		.cfi_offset 14, -4
+  92:Generated_Source\PSoC5/CySpc.c ****     /* Save current global interrupt enable and disable it */
+  93:Generated_Source\PSoC5/CySpc.c ****     uint8 interruptState = CyEnterCriticalSection();
+  83              		.loc 1 93 0
+  84 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+  85              	.LVL2:
+  94:Generated_Source\PSoC5/CySpc.c **** 
+  95:Generated_Source\PSoC5/CySpc.c ****     CY_SPC_PM_ACT_REG  &= ((uint8)(~PM_SPC_PM_EN));
+  86              		.loc 1 95 0
+  87 0006 0749     		ldr	r1, .L7
+  96:Generated_Source\PSoC5/CySpc.c ****     CY_SPC_PM_STBY_REG &= ((uint8)(~PM_SPC_PM_EN));
+  88              		.loc 1 96 0
+  89 0008 074A     		ldr	r2, .L7+4
+  95:Generated_Source\PSoC5/CySpc.c ****     CY_SPC_PM_STBY_REG &= ((uint8)(~PM_SPC_PM_EN));
+  90              		.loc 1 95 0
+  91 000a 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+  92 000c 03F0F703 		and	r3, r3, #247
+  93 0010 0B70     		strb	r3, [r1]
+  94              		.loc 1 96 0
+  95 0012 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  96 0014 03F0F703 		and	r3, r3, #247
+  97 0018 1370     		strb	r3, [r2]
+  97:Generated_Source\PSoC5/CySpc.c **** 
+  98:Generated_Source\PSoC5/CySpc.c ****     /* Restore global interrupt enable state */
+  99:Generated_Source\PSoC5/CySpc.c ****     CyExitCriticalSection(interruptState);
+ 100:Generated_Source\PSoC5/CySpc.c **** }
+  98              		.loc 1 100 0
+  99 001a BDE80840 		pop	{r3, lr}
+ 100              		.cfi_restore 14
+ 101              		.cfi_restore 3
+ 102              		.cfi_def_cfa_offset 0
+  99:Generated_Source\PSoC5/CySpc.c **** }
+ 103              		.loc 1 99 0
+ 104 001e FFF7FEBF 		b	CyExitCriticalSection
+ 105              	.LVL3:
+ 106              	.L8:
+ 107 0022 00BF     		.align	2
+ 108              	.L7:
+ 109 0024 A0430040 		.word	1073759136
+ 110 0028 B0430040 		.word	1073759152
+ 111              		.cfi_endproc
+ 112              	.LFE1:
+ 113              		.size	CySpcStop, .-CySpcStop
+ 114              		.section	.text.CySpcReadData,"ax",%progbits
+ 115              		.align	2
+ 116              		.global	CySpcReadData
+ 117              		.thumb
+ 118              		.thumb_func
+ 119              		.type	CySpcReadData, %function
+ 120              	CySpcReadData:
+ 121              	.LFB2:
+ 101:Generated_Source\PSoC5/CySpc.c **** 
+ 102:Generated_Source\PSoC5/CySpc.c **** 
+ 103:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 5
+
+
+ 104:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcReadData
+ 105:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 106:Generated_Source\PSoC5/CySpc.c **** *  Reads data from the SPC.
+ 107:Generated_Source\PSoC5/CySpc.c **** *
+ 108:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 buffer:
+ 109:Generated_Source\PSoC5/CySpc.c **** *   Address to store data read.
+ 110:Generated_Source\PSoC5/CySpc.c **** *
+ 111:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 size:
+ 112:Generated_Source\PSoC5/CySpc.c **** *   Number of bytes to read from the SPC.
+ 113:Generated_Source\PSoC5/CySpc.c **** *
+ 114:Generated_Source\PSoC5/CySpc.c **** * \return
+ 115:Generated_Source\PSoC5/CySpc.c **** *  uint8:
+ 116:Generated_Source\PSoC5/CySpc.c **** *   The number of bytes read from the SPC.
+ 117:Generated_Source\PSoC5/CySpc.c **** *
+ 118:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 119:Generated_Source\PSoC5/CySpc.c **** uint8 CySpcReadData(uint8 buffer[], uint8 size) 
+ 120:Generated_Source\PSoC5/CySpc.c **** {
+ 122              		.loc 1 120 0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              	.LVL4:
+ 127 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 128              		.cfi_def_cfa_offset 24
+ 129              		.cfi_offset 4, -24
+ 130              		.cfi_offset 5, -20
+ 131              		.cfi_offset 6, -16
+ 132              		.cfi_offset 7, -12
+ 133              		.cfi_offset 8, -8
+ 134              		.cfi_offset 14, -4
+ 121:Generated_Source\PSoC5/CySpc.c ****     uint8 i;
+ 122:Generated_Source\PSoC5/CySpc.c **** 
+ 123:Generated_Source\PSoC5/CySpc.c ****     for(i = 0u; i < size; i++)
+ 135              		.loc 1 123 0
+ 136 0004 0F46     		mov	r7, r1
+ 137 0006 99B1     		cbz	r1, .L10
+ 138 0008 4E1E     		subs	r6, r1, #1
+ 139 000a F6B2     		uxtb	r6, r6
+ 140 000c 0644     		add	r6, r6, r0
+ 141 000e 451E     		subs	r5, r0, #1
+ 124:Generated_Source\PSoC5/CySpc.c ****     {
+ 125:Generated_Source\PSoC5/CySpc.c ****         while(!CY_SPC_DATA_READY)
+ 142              		.loc 1 125 0
+ 143 0010 094C     		ldr	r4, .L24
+ 126:Generated_Source\PSoC5/CySpc.c ****         {
+ 127:Generated_Source\PSoC5/CySpc.c ****             CyDelayUs(1u);
+ 128:Generated_Source\PSoC5/CySpc.c ****         }
+ 129:Generated_Source\PSoC5/CySpc.c ****         buffer[i] = CY_SPC_CPU_DATA_REG;
+ 144              		.loc 1 129 0
+ 145 0012 DFF82880 		ldr	r8, .L24+4
+ 146 0016 02E0     		b	.L22
+ 147              	.LVL5:
+ 148              	.L12:
+ 127:Generated_Source\PSoC5/CySpc.c ****         }
+ 149              		.loc 1 127 0
+ 150 0018 0120     		movs	r0, #1
+ 151 001a FFF7FEFF 		bl	CyDelayUs
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 6
+
+
+ 152              	.LVL6:
+ 153              	.L22:
+ 125:Generated_Source\PSoC5/CySpc.c ****         {
+ 154              		.loc 1 125 0
+ 155 001e 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 156 0020 DB07     		lsls	r3, r3, #31
+ 157 0022 F9D5     		bpl	.L12
+ 158              		.loc 1 129 0
+ 159 0024 98F80030 		ldrb	r3, [r8]	@ zero_extendqisi2
+ 160 0028 05F8013F 		strb	r3, [r5, #1]!
+ 161              	.LVL7:
+ 123:Generated_Source\PSoC5/CySpc.c ****     {
+ 162              		.loc 1 123 0
+ 163 002c B542     		cmp	r5, r6
+ 164 002e F6D1     		bne	.L22
+ 165              	.LVL8:
+ 166              	.L10:
+ 130:Generated_Source\PSoC5/CySpc.c ****     }
+ 131:Generated_Source\PSoC5/CySpc.c **** 
+ 132:Generated_Source\PSoC5/CySpc.c ****     return(i);
+ 133:Generated_Source\PSoC5/CySpc.c **** }
+ 167              		.loc 1 133 0
+ 168 0030 3846     		mov	r0, r7
+ 169 0032 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 170              	.L25:
+ 171 0036 00BF     		.align	2
+ 172              	.L24:
+ 173 0038 22470040 		.word	1073760034
+ 174 003c 20470040 		.word	1073760032
+ 175              		.cfi_endproc
+ 176              	.LFE2:
+ 177              		.size	CySpcReadData, .-CySpcReadData
+ 178              		.section	.text.CySpcLoadMultiByte,"ax",%progbits
+ 179              		.align	2
+ 180              		.global	CySpcLoadMultiByte
+ 181              		.thumb
+ 182              		.thumb_func
+ 183              		.type	CySpcLoadMultiByte, %function
+ 184              	CySpcLoadMultiByte:
+ 185              	.LFB3:
+ 134:Generated_Source\PSoC5/CySpc.c **** 
+ 135:Generated_Source\PSoC5/CySpc.c **** 
+ 136:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 137:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcLoadMultiByte
+ 138:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 139:Generated_Source\PSoC5/CySpc.c **** *  Loads 1 to 32 bytes of data into the row latch of a Flash/EEPROM array.
+ 140:Generated_Source\PSoC5/CySpc.c **** *
+ 141:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 array:
+ 142:Generated_Source\PSoC5/CySpc.c **** *   Id of the array.
+ 143:Generated_Source\PSoC5/CySpc.c **** *
+ 144:Generated_Source\PSoC5/CySpc.c **** *  \param uint16 address:
+ 145:Generated_Source\PSoC5/CySpc.c **** *   Flash/eeprom addrress
+ 146:Generated_Source\PSoC5/CySpc.c **** *
+ 147:Generated_Source\PSoC5/CySpc.c **** *  \param uint8* buffer:
+ 148:Generated_Source\PSoC5/CySpc.c **** *   Data to load to the row latch
+ 149:Generated_Source\PSoC5/CySpc.c **** *
+ 150:Generated_Source\PSoC5/CySpc.c **** *  \param uint16 number:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 7
+
+
+ 151:Generated_Source\PSoC5/CySpc.c **** *   Number bytes to load.
+ 152:Generated_Source\PSoC5/CySpc.c **** *
+ 153:Generated_Source\PSoC5/CySpc.c **** * \return
+ 154:Generated_Source\PSoC5/CySpc.c **** *  CYRET_STARTED
+ 155:Generated_Source\PSoC5/CySpc.c **** *  CYRET_CANCELED
+ 156:Generated_Source\PSoC5/CySpc.c **** *  CYRET_LOCKED
+ 157:Generated_Source\PSoC5/CySpc.c **** *  CYRET_BAD_PARAM
+ 158:Generated_Source\PSoC5/CySpc.c **** *
+ 159:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 160:Generated_Source\PSoC5/CySpc.c **** cystatus CySpcLoadMultiByte(uint8 array, uint16 address, const uint8 buffer[], uint8 size)\
+ 161:Generated_Source\PSoC5/CySpc.c **** 
+ 162:Generated_Source\PSoC5/CySpc.c **** {
+ 186              		.loc 1 162 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 0
+ 189              		@ frame_needed = 0, uses_anonymous_args = 0
+ 190              		@ link register save eliminated.
+ 191              	.LVL9:
+ 163:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 164:Generated_Source\PSoC5/CySpc.c ****     uint8 i;
+ 165:Generated_Source\PSoC5/CySpc.c **** 
+ 166:Generated_Source\PSoC5/CySpc.c ****     /***************************************************************************
+ 167:Generated_Source\PSoC5/CySpc.c ****     * Check if number is correct for array. Number must be less than
+ 168:Generated_Source\PSoC5/CySpc.c ****     * 32 for Flash or less than 16 for EEPROM.
+ 169:Generated_Source\PSoC5/CySpc.c ****     ***************************************************************************/
+ 170:Generated_Source\PSoC5/CySpc.c ****     if(((array < CY_SPC_LAST_FLASH_ARRAYID) && (size < 32u)) ||
+ 192              		.loc 1 170 0
+ 193 0000 3E28     		cmp	r0, #62
+ 162:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 194              		.loc 1 162 0
+ 195 0002 F0B4     		push	{r4, r5, r6, r7}
+ 196              		.cfi_def_cfa_offset 16
+ 197              		.cfi_offset 4, -16
+ 198              		.cfi_offset 5, -12
+ 199              		.cfi_offset 6, -8
+ 200              		.cfi_offset 7, -4
+ 201              		.loc 1 170 0
+ 202 0004 08D8     		bhi	.L27
+ 203              		.loc 1 170 0 is_stmt 0 discriminator 1
+ 204 0006 1F2B     		cmp	r3, #31
+ 205 0008 0AD8     		bhi	.L34
+ 206              	.L28:
+ 171:Generated_Source\PSoC5/CySpc.c ****        ((array > CY_SPC_LAST_FLASH_ARRAYID) && (size < 16u)))
+ 172:Generated_Source\PSoC5/CySpc.c ****     {
+ 173:Generated_Source\PSoC5/CySpc.c ****         if(CY_SPC_IDLE)
+ 207              		.loc 1 173 0 is_stmt 1
+ 208 000a 174D     		ldr	r5, .L41
+ 209 000c 2C78     		ldrb	r4, [r5]	@ zero_extendqisi2
+ 210 000e A607     		lsls	r6, r4, #30
+ 211 0010 09D4     		bmi	.L39
+ 174:Generated_Source\PSoC5/CySpc.c ****         {
+ 175:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = CY_SPC_KEY_ONE;
+ 176:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_LD_MULTI_BYTE);
+ 177:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = CY_SPC_CMD_LD_MULTI_BYTE;
+ 178:Generated_Source\PSoC5/CySpc.c **** 
+ 179:Generated_Source\PSoC5/CySpc.c ****             if(CY_SPC_BUSY)
+ 180:Generated_Source\PSoC5/CySpc.c ****             {
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 8
+
+
+ 181:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = array;
+ 182:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = 1u & HI8(address);
+ 183:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = LO8(address);
+ 184:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = ((uint8)(size - 1u));
+ 185:Generated_Source\PSoC5/CySpc.c **** 
+ 186:Generated_Source\PSoC5/CySpc.c ****                 for(i = 0u; i < size; i++)
+ 187:Generated_Source\PSoC5/CySpc.c ****                 {
+ 188:Generated_Source\PSoC5/CySpc.c ****                     CY_SPC_CPU_DATA_REG = buffer[i];
+ 189:Generated_Source\PSoC5/CySpc.c ****                 }
+ 190:Generated_Source\PSoC5/CySpc.c ****             }
+ 191:Generated_Source\PSoC5/CySpc.c ****             else
+ 192:Generated_Source\PSoC5/CySpc.c ****             {
+ 193:Generated_Source\PSoC5/CySpc.c ****                 status = CYRET_CANCELED;
+ 194:Generated_Source\PSoC5/CySpc.c ****             }
+ 195:Generated_Source\PSoC5/CySpc.c ****         }
+ 196:Generated_Source\PSoC5/CySpc.c ****         else
+ 197:Generated_Source\PSoC5/CySpc.c ****         {
+ 198:Generated_Source\PSoC5/CySpc.c ****             status = CYRET_LOCKED;
+ 212              		.loc 1 198 0
+ 213 0012 0420     		movs	r0, #4
+ 214              	.LVL10:
+ 215              	.L29:
+ 199:Generated_Source\PSoC5/CySpc.c ****         }
+ 200:Generated_Source\PSoC5/CySpc.c ****     }
+ 201:Generated_Source\PSoC5/CySpc.c ****     else
+ 202:Generated_Source\PSoC5/CySpc.c ****     {
+ 203:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_BAD_PARAM;
+ 204:Generated_Source\PSoC5/CySpc.c ****     }
+ 205:Generated_Source\PSoC5/CySpc.c **** 
+ 206:Generated_Source\PSoC5/CySpc.c ****     return(status);
+ 207:Generated_Source\PSoC5/CySpc.c **** }
+ 216              		.loc 1 207 0
+ 217 0014 F0BC     		pop	{r4, r5, r6, r7}
+ 218              		.cfi_remember_state
+ 219              		.cfi_restore 7
+ 220              		.cfi_restore 6
+ 221              		.cfi_restore 5
+ 222              		.cfi_restore 4
+ 223              		.cfi_def_cfa_offset 0
+ 224 0016 7047     		bx	lr
+ 225              	.LVL11:
+ 226              	.L27:
+ 227              		.cfi_restore_state
+ 170:Generated_Source\PSoC5/CySpc.c ****        ((array > CY_SPC_LAST_FLASH_ARRAYID) && (size < 16u)))
+ 228              		.loc 1 170 0 discriminator 3
+ 229 0018 3F28     		cmp	r0, #63
+ 230 001a 01D0     		beq	.L34
+ 171:Generated_Source\PSoC5/CySpc.c ****     {
+ 231              		.loc 1 171 0
+ 232 001c 0F2B     		cmp	r3, #15
+ 233 001e F4D9     		bls	.L28
+ 234              	.L34:
+ 235              		.loc 1 207 0
+ 236 0020 F0BC     		pop	{r4, r5, r6, r7}
+ 237              		.cfi_remember_state
+ 238              		.cfi_restore 4
+ 239              		.cfi_restore 5
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 9
+
+
+ 240              		.cfi_restore 6
+ 241              		.cfi_restore 7
+ 242              		.cfi_def_cfa_offset 0
+ 203:Generated_Source\PSoC5/CySpc.c ****     }
+ 243              		.loc 1 203 0
+ 244 0022 0120     		movs	r0, #1
+ 245              	.LVL12:
+ 246              		.loc 1 207 0
+ 247 0024 7047     		bx	lr
+ 248              	.LVL13:
+ 249              	.L39:
+ 250              		.cfi_restore_state
+ 175:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_LD_MULTI_BYTE);
+ 251              		.loc 1 175 0
+ 252 0026 114C     		ldr	r4, .L41+4
+ 253 0028 B626     		movs	r6, #182
+ 254 002a 2670     		strb	r6, [r4]
+ 176:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = CY_SPC_CMD_LD_MULTI_BYTE;
+ 255              		.loc 1 176 0
+ 256 002c D427     		movs	r7, #212
+ 177:Generated_Source\PSoC5/CySpc.c **** 
+ 257              		.loc 1 177 0
+ 258 002e 0126     		movs	r6, #1
+ 176:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = CY_SPC_CMD_LD_MULTI_BYTE;
+ 259              		.loc 1 176 0
+ 260 0030 2770     		strb	r7, [r4]
+ 177:Generated_Source\PSoC5/CySpc.c **** 
+ 261              		.loc 1 177 0
+ 262 0032 2670     		strb	r6, [r4]
+ 179:Generated_Source\PSoC5/CySpc.c ****             {
+ 263              		.loc 1 179 0
+ 264 0034 2D78     		ldrb	r5, [r5]	@ zero_extendqisi2
+ 265 0036 AD07     		lsls	r5, r5, #30
+ 266 0038 02D5     		bpl	.L40
+ 267              		.loc 1 207 0
+ 268 003a F0BC     		pop	{r4, r5, r6, r7}
+ 269              		.cfi_remember_state
+ 270              		.cfi_restore 4
+ 271              		.cfi_restore 5
+ 272              		.cfi_restore 6
+ 273              		.cfi_restore 7
+ 274              		.cfi_def_cfa_offset 0
+ 193:Generated_Source\PSoC5/CySpc.c ****             }
+ 275              		.loc 1 193 0
+ 276 003c 0920     		movs	r0, #9
+ 277              	.LVL14:
+ 278              		.loc 1 207 0
+ 279 003e 7047     		bx	lr
+ 280              	.LVL15:
+ 281              	.L40:
+ 282              		.cfi_restore_state
+ 184:Generated_Source\PSoC5/CySpc.c **** 
+ 283              		.loc 1 184 0
+ 284 0040 5D1E     		subs	r5, r3, #1
+ 182:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = LO8(address);
+ 285              		.loc 1 182 0
+ 286 0042 C1F30026 		ubfx	r6, r1, #8, #1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 10
+
+
+ 184:Generated_Source\PSoC5/CySpc.c **** 
+ 287              		.loc 1 184 0
+ 288 0046 EDB2     		uxtb	r5, r5
+ 183:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = ((uint8)(size - 1u));
+ 289              		.loc 1 183 0
+ 290 0048 C9B2     		uxtb	r1, r1
+ 291              	.LVL16:
+ 181:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = 1u & HI8(address);
+ 292              		.loc 1 181 0
+ 293 004a 2070     		strb	r0, [r4]
+ 182:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = LO8(address);
+ 294              		.loc 1 182 0
+ 295 004c 2670     		strb	r6, [r4]
+ 183:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = ((uint8)(size - 1u));
+ 296              		.loc 1 183 0
+ 297 004e 2170     		strb	r1, [r4]
+ 184:Generated_Source\PSoC5/CySpc.c **** 
+ 298              		.loc 1 184 0
+ 299 0050 2570     		strb	r5, [r4]
+ 300              	.LVL17:
+ 186:Generated_Source\PSoC5/CySpc.c ****                 {
+ 301              		.loc 1 186 0
+ 302 0052 33B1     		cbz	r3, .L32
+ 303 0054 5119     		adds	r1, r2, r5
+ 304 0056 013A     		subs	r2, r2, #1
+ 305              	.LVL18:
+ 306              	.L31:
+ 188:Generated_Source\PSoC5/CySpc.c ****                 }
+ 307              		.loc 1 188 0 discriminator 3
+ 308 0058 12F8013F 		ldrb	r3, [r2, #1]!	@ zero_extendqisi2
+ 309              	.LVL19:
+ 186:Generated_Source\PSoC5/CySpc.c ****                 {
+ 310              		.loc 1 186 0 discriminator 3
+ 311 005c 8A42     		cmp	r2, r1
+ 188:Generated_Source\PSoC5/CySpc.c ****                 }
+ 312              		.loc 1 188 0 discriminator 3
+ 313 005e 2370     		strb	r3, [r4]
+ 314              	.LVL20:
+ 186:Generated_Source\PSoC5/CySpc.c ****                 {
+ 315              		.loc 1 186 0 discriminator 3
+ 316 0060 FAD1     		bne	.L31
+ 317              	.LVL21:
+ 318              	.L32:
+ 163:Generated_Source\PSoC5/CySpc.c ****     uint8 i;
+ 319              		.loc 1 163 0
+ 320 0062 0720     		movs	r0, #7
+ 321              	.LVL22:
+ 322 0064 D6E7     		b	.L29
+ 323              	.L42:
+ 324 0066 00BF     		.align	2
+ 325              	.L41:
+ 326 0068 22470040 		.word	1073760034
+ 327 006c 20470040 		.word	1073760032
+ 328              		.cfi_endproc
+ 329              	.LFE3:
+ 330              		.size	CySpcLoadMultiByte, .-CySpcLoadMultiByte
+ 331              		.section	.text.CySpcLoadRow,"ax",%progbits
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 11
+
+
+ 332              		.align	2
+ 333              		.global	CySpcLoadRow
+ 334              		.thumb
+ 335              		.thumb_func
+ 336              		.type	CySpcLoadRow, %function
+ 337              	CySpcLoadRow:
+ 338              	.LFB4:
+ 208:Generated_Source\PSoC5/CySpc.c **** 
+ 209:Generated_Source\PSoC5/CySpc.c **** 
+ 210:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 211:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcLoadRow
+ 212:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 213:Generated_Source\PSoC5/CySpc.c **** *  Loads a row of data into the row latch of a Flash/EEPROM array.
+ 214:Generated_Source\PSoC5/CySpc.c **** *
+ 215:Generated_Source\PSoC5/CySpc.c **** *  The buffer pointer should point to the data that should be written to the
+ 216:Generated_Source\PSoC5/CySpc.c **** *  flash row directly (no data in ECC/flash will be preserved). It is Flash API
+ 217:Generated_Source\PSoC5/CySpc.c **** *  responsibility to prepare data: the preserved data are copied from flash into
+ 218:Generated_Source\PSoC5/CySpc.c **** *  array with the modified data.
+ 219:Generated_Source\PSoC5/CySpc.c **** *
+ 220:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 array:
+ 221:Generated_Source\PSoC5/CySpc.c **** *   Id of the array.
+ 222:Generated_Source\PSoC5/CySpc.c **** *
+ 223:Generated_Source\PSoC5/CySpc.c **** *  \param uint8* buffer:
+ 224:Generated_Source\PSoC5/CySpc.c **** *   Data to be loaded to the row latch
+ 225:Generated_Source\PSoC5/CySpc.c **** *
+ 226:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 size:
+ 227:Generated_Source\PSoC5/CySpc.c **** *   The number of data bytes that the SPC expects to be written. Depends on the
+ 228:Generated_Source\PSoC5/CySpc.c **** *   type of the array and, if the array is Flash, whether ECC is being enabled
+ 229:Generated_Source\PSoC5/CySpc.c **** *   or not. There are following values: flash row latch size with ECC enabled,
+ 230:Generated_Source\PSoC5/CySpc.c **** *   flash row latch size with ECC disabled and EEPROM row latch size.
+ 231:Generated_Source\PSoC5/CySpc.c **** *
+ 232:Generated_Source\PSoC5/CySpc.c **** * \return
+ 233:Generated_Source\PSoC5/CySpc.c **** *  CYRET_STARTED
+ 234:Generated_Source\PSoC5/CySpc.c **** *  CYRET_CANCELED
+ 235:Generated_Source\PSoC5/CySpc.c **** *  CYRET_LOCKED
+ 236:Generated_Source\PSoC5/CySpc.c **** *
+ 237:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 238:Generated_Source\PSoC5/CySpc.c **** cystatus CySpcLoadRow(uint8 array, const uint8 buffer[], uint16 size)
+ 239:Generated_Source\PSoC5/CySpc.c **** {
+ 339              		.loc 1 239 0
+ 340              		.cfi_startproc
+ 341              		@ args = 0, pretend = 0, frame = 0
+ 342              		@ frame_needed = 0, uses_anonymous_args = 0
+ 343              		@ link register save eliminated.
+ 344              	.LVL23:
+ 345 0000 F0B4     		push	{r4, r5, r6, r7}
+ 346              		.cfi_def_cfa_offset 16
+ 347              		.cfi_offset 4, -16
+ 348              		.cfi_offset 5, -12
+ 349              		.cfi_offset 6, -8
+ 350              		.cfi_offset 7, -4
+ 240:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 241:Generated_Source\PSoC5/CySpc.c ****     uint16 i;
+ 242:Generated_Source\PSoC5/CySpc.c **** 
+ 243:Generated_Source\PSoC5/CySpc.c ****     /* Make sure the SPC is ready to accept command */
+ 244:Generated_Source\PSoC5/CySpc.c ****     if(CY_SPC_IDLE)
+ 351              		.loc 1 244 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 12
+
+
+ 352 0002 114C     		ldr	r4, .L52
+ 353              	.LVL24:
+ 354 0004 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 355 0006 9D07     		lsls	r5, r3, #30
+ 356 0008 1BD5     		bpl	.L48
+ 245:Generated_Source\PSoC5/CySpc.c ****     {
+ 246:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_ONE;
+ 357              		.loc 1 246 0
+ 358 000a 104B     		ldr	r3, .L52+4
+ 359 000c B627     		movs	r7, #182
+ 247:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_LD_ROW);
+ 360              		.loc 1 247 0
+ 361 000e D526     		movs	r6, #213
+ 248:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_CMD_LD_ROW;
+ 362              		.loc 1 248 0
+ 363 0010 0225     		movs	r5, #2
+ 246:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_LD_ROW);
+ 364              		.loc 1 246 0
+ 365 0012 1F70     		strb	r7, [r3]
+ 247:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_LD_ROW);
+ 366              		.loc 1 247 0
+ 367 0014 1E70     		strb	r6, [r3]
+ 368              		.loc 1 248 0
+ 369 0016 1D70     		strb	r5, [r3]
+ 249:Generated_Source\PSoC5/CySpc.c **** 
+ 250:Generated_Source\PSoC5/CySpc.c ****         /* Make sure the command was accepted */
+ 251:Generated_Source\PSoC5/CySpc.c ****         if(CY_SPC_BUSY)
+ 370              		.loc 1 251 0
+ 371 0018 2478     		ldrb	r4, [r4]	@ zero_extendqisi2
+ 372 001a A407     		lsls	r4, r4, #30
+ 373 001c 0ED4     		bmi	.L49
+ 252:Generated_Source\PSoC5/CySpc.c ****         {
+ 253:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = array;
+ 374              		.loc 1 253 0
+ 375 001e 1870     		strb	r0, [r3]
+ 376              	.LVL25:
+ 254:Generated_Source\PSoC5/CySpc.c **** 
+ 255:Generated_Source\PSoC5/CySpc.c ****             for(i = 0u; i < size; i++)
+ 377              		.loc 1 255 0
+ 378 0020 4AB1     		cbz	r2, .L47
+ 256:Generated_Source\PSoC5/CySpc.c ****             {
+ 257:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = buffer[i];
+ 379              		.loc 1 257 0
+ 380 0022 1846     		mov	r0, r3
+ 381              	.LVL26:
+ 382 0024 013A     		subs	r2, r2, #1
+ 383              	.LVL27:
+ 384 0026 92B2     		uxth	r2, r2
+ 385 0028 0A44     		add	r2, r2, r1
+ 386 002a 0139     		subs	r1, r1, #1
+ 387              	.LVL28:
+ 388              	.L46:
+ 389              		.loc 1 257 0 is_stmt 0 discriminator 3
+ 390 002c 11F8013F 		ldrb	r3, [r1, #1]!	@ zero_extendqisi2
+ 391              	.LVL29:
+ 255:Generated_Source\PSoC5/CySpc.c ****             {
+ 392              		.loc 1 255 0 is_stmt 1 discriminator 3
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 13
+
+
+ 393 0030 9142     		cmp	r1, r2
+ 394              		.loc 1 257 0 discriminator 3
+ 395 0032 0370     		strb	r3, [r0]
+ 396              	.LVL30:
+ 255:Generated_Source\PSoC5/CySpc.c ****             {
+ 397              		.loc 1 255 0 discriminator 3
+ 398 0034 FAD1     		bne	.L46
+ 399              	.LVL31:
+ 400              	.L47:
+ 240:Generated_Source\PSoC5/CySpc.c ****     uint16 i;
+ 401              		.loc 1 240 0
+ 402 0036 0720     		movs	r0, #7
+ 403              	.LVL32:
+ 258:Generated_Source\PSoC5/CySpc.c ****             }
+ 259:Generated_Source\PSoC5/CySpc.c ****         }
+ 260:Generated_Source\PSoC5/CySpc.c ****         else
+ 261:Generated_Source\PSoC5/CySpc.c ****         {
+ 262:Generated_Source\PSoC5/CySpc.c ****             status = CYRET_CANCELED;
+ 263:Generated_Source\PSoC5/CySpc.c ****         }
+ 264:Generated_Source\PSoC5/CySpc.c ****     }
+ 265:Generated_Source\PSoC5/CySpc.c ****     else
+ 266:Generated_Source\PSoC5/CySpc.c ****     {
+ 267:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_LOCKED;
+ 268:Generated_Source\PSoC5/CySpc.c ****     }
+ 269:Generated_Source\PSoC5/CySpc.c **** 
+ 270:Generated_Source\PSoC5/CySpc.c ****     return(status);
+ 271:Generated_Source\PSoC5/CySpc.c **** }
+ 404              		.loc 1 271 0
+ 405 0038 F0BC     		pop	{r4, r5, r6, r7}
+ 406              		.cfi_remember_state
+ 407              		.cfi_restore 7
+ 408              		.cfi_restore 6
+ 409              		.cfi_restore 5
+ 410              		.cfi_restore 4
+ 411              		.cfi_def_cfa_offset 0
+ 412 003a 7047     		bx	lr
+ 413              	.LVL33:
+ 414              	.L49:
+ 415              		.cfi_restore_state
+ 262:Generated_Source\PSoC5/CySpc.c ****         }
+ 416              		.loc 1 262 0
+ 417 003c 0920     		movs	r0, #9
+ 418              	.LVL34:
+ 419              		.loc 1 271 0
+ 420 003e F0BC     		pop	{r4, r5, r6, r7}
+ 421              		.cfi_remember_state
+ 422              		.cfi_restore 4
+ 423              		.cfi_restore 5
+ 424              		.cfi_restore 6
+ 425              		.cfi_restore 7
+ 426              		.cfi_def_cfa_offset 0
+ 427 0040 7047     		bx	lr
+ 428              	.LVL35:
+ 429              	.L48:
+ 430              		.cfi_restore_state
+ 267:Generated_Source\PSoC5/CySpc.c ****     }
+ 431              		.loc 1 267 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 14
+
+
+ 432 0042 0420     		movs	r0, #4
+ 433              	.LVL36:
+ 434              		.loc 1 271 0
+ 435 0044 F0BC     		pop	{r4, r5, r6, r7}
+ 436              		.cfi_restore 4
+ 437              		.cfi_restore 5
+ 438              		.cfi_restore 6
+ 439              		.cfi_restore 7
+ 440              		.cfi_def_cfa_offset 0
+ 441 0046 7047     		bx	lr
+ 442              	.L53:
+ 443              		.align	2
+ 444              	.L52:
+ 445 0048 22470040 		.word	1073760034
+ 446 004c 20470040 		.word	1073760032
+ 447              		.cfi_endproc
+ 448              	.LFE4:
+ 449              		.size	CySpcLoadRow, .-CySpcLoadRow
+ 450              		.section	.text.CySpcLoadRowFull,"ax",%progbits
+ 451              		.align	2
+ 452              		.global	CySpcLoadRowFull
+ 453              		.thumb
+ 454              		.thumb_func
+ 455              		.type	CySpcLoadRowFull, %function
+ 456              	CySpcLoadRowFull:
+ 457              	.LFB5:
+ 272:Generated_Source\PSoC5/CySpc.c **** 
+ 273:Generated_Source\PSoC5/CySpc.c **** 
+ 274:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 275:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcLoadRowFull
+ 276:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 277:Generated_Source\PSoC5/CySpc.c **** *  Loads a row of data into the row latch of a Flash/EEPROM array.
+ 278:Generated_Source\PSoC5/CySpc.c **** *
+ 279:Generated_Source\PSoC5/CySpc.c **** *  The only data that are going to be changed should be passed. The function
+ 280:Generated_Source\PSoC5/CySpc.c **** *  will handle unmodified data preservation based on DWR settings and input
+ 281:Generated_Source\PSoC5/CySpc.c **** *  parameters.
+ 282:Generated_Source\PSoC5/CySpc.c **** *
+ 283:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 array:
+ 284:Generated_Source\PSoC5/CySpc.c **** *   Id of the array.
+ 285:Generated_Source\PSoC5/CySpc.c **** *
+ 286:Generated_Source\PSoC5/CySpc.c **** *  \param uint16 row:
+ 287:Generated_Source\PSoC5/CySpc.c **** *   Flash row number to be loaded.
+ 288:Generated_Source\PSoC5/CySpc.c **** *
+ 289:Generated_Source\PSoC5/CySpc.c **** *  \param uint8* buffer:
+ 290:Generated_Source\PSoC5/CySpc.c **** *   Data to be loaded to the row latch
+ 291:Generated_Source\PSoC5/CySpc.c **** *
+ 292:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 size:
+ 293:Generated_Source\PSoC5/CySpc.c **** *   The number of data bytes that the SPC expects to be written. Depends on the
+ 294:Generated_Source\PSoC5/CySpc.c **** *   type of the array and, if the array is Flash, whether ECC is being enabled
+ 295:Generated_Source\PSoC5/CySpc.c **** *   or not. There are following values: flash row latch size with ECC enabled,
+ 296:Generated_Source\PSoC5/CySpc.c **** *   flash row latch size with ECC disabled and EEPROM row latch size.
+ 297:Generated_Source\PSoC5/CySpc.c **** *
+ 298:Generated_Source\PSoC5/CySpc.c **** * \return
+ 299:Generated_Source\PSoC5/CySpc.c **** *  CYRET_STARTED
+ 300:Generated_Source\PSoC5/CySpc.c **** *  CYRET_CANCELED
+ 301:Generated_Source\PSoC5/CySpc.c **** *  CYRET_LOCKED
+ 302:Generated_Source\PSoC5/CySpc.c **** *
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 15
+
+
+ 303:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 304:Generated_Source\PSoC5/CySpc.c **** cystatus CySpcLoadRowFull(uint8 array, uint16 row, const uint8 buffer[], uint16 size)\
+ 305:Generated_Source\PSoC5/CySpc.c **** 
+ 306:Generated_Source\PSoC5/CySpc.c **** {
+ 458              		.loc 1 306 0
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 0
+ 461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 462              		@ link register save eliminated.
+ 463              	.LVL37:
+ 464 0000 F0B4     		push	{r4, r5, r6, r7}
+ 465              		.cfi_def_cfa_offset 16
+ 466              		.cfi_offset 4, -16
+ 467              		.cfi_offset 5, -12
+ 468              		.cfi_offset 6, -8
+ 469              		.cfi_offset 7, -4
+ 307:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 308:Generated_Source\PSoC5/CySpc.c ****     uint16 i;
+ 309:Generated_Source\PSoC5/CySpc.c **** 
+ 310:Generated_Source\PSoC5/CySpc.c ****     #if (CYDEV_ECC_ENABLE == 0)
+ 311:Generated_Source\PSoC5/CySpc.c ****         uint32 offset;
+ 312:Generated_Source\PSoC5/CySpc.c ****     #endif /* (CYDEV_ECC_ENABLE == 0) */
+ 313:Generated_Source\PSoC5/CySpc.c **** 
+ 314:Generated_Source\PSoC5/CySpc.c ****     /* Make sure the SPC is ready to accept command */
+ 315:Generated_Source\PSoC5/CySpc.c ****     if(CY_SPC_IDLE)
+ 470              		.loc 1 315 0
+ 471 0002 1B4C     		ldr	r4, .L66
+ 472 0004 2578     		ldrb	r5, [r4]	@ zero_extendqisi2
+ 473              	.LVL38:
+ 474 0006 AD07     		lsls	r5, r5, #30
+ 475 0008 1DD5     		bpl	.L60
+ 316:Generated_Source\PSoC5/CySpc.c ****     {
+ 317:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_ONE;
+ 476              		.loc 1 317 0
+ 477 000a 1A4D     		ldr	r5, .L66+4
+ 478 000c B626     		movs	r6, #182
+ 479 000e 2E70     		strb	r6, [r5]
+ 318:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_LD_ROW);
+ 480              		.loc 1 318 0
+ 481 0010 D527     		movs	r7, #213
+ 319:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_CMD_LD_ROW;
+ 482              		.loc 1 319 0
+ 483 0012 0226     		movs	r6, #2
+ 318:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_LD_ROW);
+ 484              		.loc 1 318 0
+ 485 0014 2F70     		strb	r7, [r5]
+ 486              		.loc 1 319 0
+ 487 0016 2E70     		strb	r6, [r5]
+ 320:Generated_Source\PSoC5/CySpc.c **** 
+ 321:Generated_Source\PSoC5/CySpc.c ****         /* Make sure the command was accepted */
+ 322:Generated_Source\PSoC5/CySpc.c ****         if(CY_SPC_BUSY)
+ 488              		.loc 1 322 0
+ 489 0018 2478     		ldrb	r4, [r4]	@ zero_extendqisi2
+ 490 001a A407     		lsls	r4, r4, #30
+ 491 001c 10D4     		bmi	.L61
+ 323:Generated_Source\PSoC5/CySpc.c ****         {
+ 324:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = array;
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 16
+
+
+ 492              		.loc 1 324 0
+ 493 001e 2870     		strb	r0, [r5]
+ 494              	.LVL39:
+ 325:Generated_Source\PSoC5/CySpc.c **** 
+ 326:Generated_Source\PSoC5/CySpc.c ****             /*******************************************************************
+ 327:Generated_Source\PSoC5/CySpc.c ****             * If "Enable Error Correcting Code (ECC)" and "Store Configuration
+ 328:Generated_Source\PSoC5/CySpc.c ****             * Data in ECC" DWR options are disabled, ECC section is available
+ 329:Generated_Source\PSoC5/CySpc.c ****             * for user data.
+ 330:Generated_Source\PSoC5/CySpc.c ****             *******************************************************************/
+ 331:Generated_Source\PSoC5/CySpc.c ****             #if ((CYDEV_ECC_ENABLE == 0u) && (CYDEV_CONFIGURATION_ECC == 0u))
+ 332:Generated_Source\PSoC5/CySpc.c **** 
+ 333:Generated_Source\PSoC5/CySpc.c ****                 /*******************************************************************
+ 334:Generated_Source\PSoC5/CySpc.c ****                 * If size parameter equals size of the ECC row and selected array
+ 335:Generated_Source\PSoC5/CySpc.c ****                 * identification corresponds to the flash array (but not to EEPROM
+ 336:Generated_Source\PSoC5/CySpc.c ****                 * array) then data are going to be written to the ECC section.
+ 337:Generated_Source\PSoC5/CySpc.c ****                 * In this case flash data must be preserved. The flash data copied
+ 338:Generated_Source\PSoC5/CySpc.c ****                 * from flash data section to the SPC data register.
+ 339:Generated_Source\PSoC5/CySpc.c ****                 *******************************************************************/
+ 340:Generated_Source\PSoC5/CySpc.c ****                 if ((size == CYDEV_ECC_ROW_SIZE) && (array <= CY_SPC_LAST_FLASH_ARRAYID))
+ 341:Generated_Source\PSoC5/CySpc.c ****                 {
+ 342:Generated_Source\PSoC5/CySpc.c ****                     offset = CYDEV_FLS_BASE +
+ 343:Generated_Source\PSoC5/CySpc.c ****                              ((uint32) array * CYDEV_FLS_SECTOR_SIZE) +
+ 344:Generated_Source\PSoC5/CySpc.c ****                              ((uint32)   row * CYDEV_FLS_ROW_SIZE   );
+ 345:Generated_Source\PSoC5/CySpc.c **** 
+ 346:Generated_Source\PSoC5/CySpc.c ****                     for (i = 0u; i < CYDEV_FLS_ROW_SIZE; i++)
+ 347:Generated_Source\PSoC5/CySpc.c ****                     {
+ 348:Generated_Source\PSoC5/CySpc.c ****                         CY_SPC_CPU_DATA_REG = CY_GET_XTND_REG8((void CYFAR *)(offset + i));
+ 349:Generated_Source\PSoC5/CySpc.c ****                     }
+ 350:Generated_Source\PSoC5/CySpc.c ****                 }
+ 351:Generated_Source\PSoC5/CySpc.c **** 
+ 352:Generated_Source\PSoC5/CySpc.c ****             #endif /* ((CYDEV_ECC_ENABLE == 0u) && (CYDEV_CONFIGURATION_ECC == 0u)) */
+ 353:Generated_Source\PSoC5/CySpc.c **** 
+ 354:Generated_Source\PSoC5/CySpc.c **** 
+ 355:Generated_Source\PSoC5/CySpc.c ****             for(i = 0u; i < size; i++)
+ 495              		.loc 1 355 0
+ 496 0020 5BB1     		cbz	r3, .L58
+ 497 0022 5E1E     		subs	r6, r3, #1
+ 498 0024 B6B2     		uxth	r6, r6
+ 499 0026 1644     		add	r6, r6, r2
+ 500 0028 013A     		subs	r2, r2, #1
+ 501              	.LVL40:
+ 502              	.L57:
+ 356:Generated_Source\PSoC5/CySpc.c ****             {
+ 357:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_DATA_REG = buffer[i];
+ 503              		.loc 1 357 0 discriminator 3
+ 504 002a 12F8014F 		ldrb	r4, [r2, #1]!	@ zero_extendqisi2
+ 505              	.LVL41:
+ 355:Generated_Source\PSoC5/CySpc.c ****             {
+ 506              		.loc 1 355 0 discriminator 3
+ 507 002e B242     		cmp	r2, r6
+ 508              		.loc 1 357 0 discriminator 3
+ 509 0030 2C70     		strb	r4, [r5]
+ 510              	.LVL42:
+ 355:Generated_Source\PSoC5/CySpc.c ****             {
+ 511              		.loc 1 355 0 discriminator 3
+ 512 0032 FAD1     		bne	.L57
+ 358:Generated_Source\PSoC5/CySpc.c ****             }
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 17
+
+
+ 359:Generated_Source\PSoC5/CySpc.c **** 
+ 360:Generated_Source\PSoC5/CySpc.c **** 
+ 361:Generated_Source\PSoC5/CySpc.c ****             /*******************************************************************
+ 362:Generated_Source\PSoC5/CySpc.c ****             * If "Enable Error Correcting Code (ECC)" DWR option is disabled,
+ 363:Generated_Source\PSoC5/CySpc.c ****             * ECC section can be used for storing device configuration data
+ 364:Generated_Source\PSoC5/CySpc.c ****             * ("Store Configuration Data in ECC" DWR option is enabled) or for
+ 365:Generated_Source\PSoC5/CySpc.c ****             * storing user data in the ECC section ("Store Configuration Data in
+ 366:Generated_Source\PSoC5/CySpc.c ****             * ECC" DWR option is enabled). In both cases, the data in the ECC
+ 367:Generated_Source\PSoC5/CySpc.c ****             * section must be preserved if flash data is written.
+ 368:Generated_Source\PSoC5/CySpc.c ****             *******************************************************************/
+ 369:Generated_Source\PSoC5/CySpc.c ****             #if (CYDEV_ECC_ENABLE == 0)
+ 370:Generated_Source\PSoC5/CySpc.c **** 
+ 371:Generated_Source\PSoC5/CySpc.c **** 
+ 372:Generated_Source\PSoC5/CySpc.c ****                 /*******************************************************************
+ 373:Generated_Source\PSoC5/CySpc.c ****                 * If size parameter equals size of the flash row and selected array
+ 374:Generated_Source\PSoC5/CySpc.c ****                 * identification corresponds to the flash array (but not to EEPROM
+ 375:Generated_Source\PSoC5/CySpc.c ****                 * array) then data are going to be written to the flash data
+ 376:Generated_Source\PSoC5/CySpc.c ****                 * section. In this case, ECC section data must be preserved.
+ 377:Generated_Source\PSoC5/CySpc.c ****                 * The ECC section data copied from ECC section to the SPC data
+ 378:Generated_Source\PSoC5/CySpc.c ****                 * register.
+ 379:Generated_Source\PSoC5/CySpc.c ****                 *******************************************************************/
+ 380:Generated_Source\PSoC5/CySpc.c ****                 if ((size == CYDEV_FLS_ROW_SIZE) && (array <= CY_SPC_LAST_FLASH_ARRAYID))
+ 513              		.loc 1 380 0
+ 514 0034 B3F5807F 		cmp	r3, #256
+ 515 0038 08D0     		beq	.L65
+ 516              	.LVL43:
+ 517              	.L58:
+ 381:Generated_Source\PSoC5/CySpc.c ****                 {
+ 382:Generated_Source\PSoC5/CySpc.c ****                     offset = CYDEV_ECC_BASE +
+ 383:Generated_Source\PSoC5/CySpc.c ****                             ((uint32) array * CYDEV_ECC_SECTOR_SIZE) +
+ 384:Generated_Source\PSoC5/CySpc.c ****                             ((uint32) row   * CYDEV_ECC_ROW_SIZE   );
+ 385:Generated_Source\PSoC5/CySpc.c **** 
+ 386:Generated_Source\PSoC5/CySpc.c ****                     for (i = 0u; i < CYDEV_ECC_ROW_SIZE; i++)
+ 387:Generated_Source\PSoC5/CySpc.c ****                     {
+ 388:Generated_Source\PSoC5/CySpc.c ****                         CY_SPC_CPU_DATA_REG = CY_GET_XTND_REG8((void CYFAR *)(offset + i));
+ 389:Generated_Source\PSoC5/CySpc.c ****                     }
+ 390:Generated_Source\PSoC5/CySpc.c ****                 }
+ 391:Generated_Source\PSoC5/CySpc.c **** 
+ 392:Generated_Source\PSoC5/CySpc.c ****             #else
+ 393:Generated_Source\PSoC5/CySpc.c **** 
+ 394:Generated_Source\PSoC5/CySpc.c ****                 if(0u != row)
+ 395:Generated_Source\PSoC5/CySpc.c ****                 {
+ 396:Generated_Source\PSoC5/CySpc.c ****                     /* To remove unreferenced local variable warning */
+ 397:Generated_Source\PSoC5/CySpc.c ****                 }
+ 398:Generated_Source\PSoC5/CySpc.c **** 
+ 399:Generated_Source\PSoC5/CySpc.c ****             #endif /* (CYDEV_ECC_ENABLE == 0) */
+ 400:Generated_Source\PSoC5/CySpc.c ****         }
+ 401:Generated_Source\PSoC5/CySpc.c ****         else
+ 402:Generated_Source\PSoC5/CySpc.c ****         {
+ 403:Generated_Source\PSoC5/CySpc.c ****             status = CYRET_CANCELED;
+ 404:Generated_Source\PSoC5/CySpc.c ****         }
+ 405:Generated_Source\PSoC5/CySpc.c ****     }
+ 406:Generated_Source\PSoC5/CySpc.c ****     else
+ 407:Generated_Source\PSoC5/CySpc.c ****     {
+ 408:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_LOCKED;
+ 409:Generated_Source\PSoC5/CySpc.c ****     }
+ 410:Generated_Source\PSoC5/CySpc.c **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 18
+
+
+ 411:Generated_Source\PSoC5/CySpc.c ****     return(status);
+ 412:Generated_Source\PSoC5/CySpc.c **** }
+ 518              		.loc 1 412 0
+ 519 003a F0BC     		pop	{r4, r5, r6, r7}
+ 520              		.cfi_remember_state
+ 521              		.cfi_restore 4
+ 522              		.cfi_restore 5
+ 523              		.cfi_restore 6
+ 524              		.cfi_restore 7
+ 525              		.cfi_def_cfa_offset 0
+ 307:Generated_Source\PSoC5/CySpc.c ****     uint16 i;
+ 526              		.loc 1 307 0
+ 527 003c 0720     		movs	r0, #7
+ 528              	.LVL44:
+ 529              		.loc 1 412 0
+ 530 003e 7047     		bx	lr
+ 531              	.LVL45:
+ 532              	.L61:
+ 533              		.cfi_restore_state
+ 403:Generated_Source\PSoC5/CySpc.c ****         }
+ 534              		.loc 1 403 0
+ 535 0040 0920     		movs	r0, #9
+ 536              	.LVL46:
+ 537              		.loc 1 412 0
+ 538 0042 F0BC     		pop	{r4, r5, r6, r7}
+ 539              		.cfi_remember_state
+ 540              		.cfi_restore 7
+ 541              		.cfi_restore 6
+ 542              		.cfi_restore 5
+ 543              		.cfi_restore 4
+ 544              		.cfi_def_cfa_offset 0
+ 545 0044 7047     		bx	lr
+ 546              	.LVL47:
+ 547              	.L60:
+ 548              		.cfi_restore_state
+ 408:Generated_Source\PSoC5/CySpc.c ****     }
+ 549              		.loc 1 408 0
+ 550 0046 0420     		movs	r0, #4
+ 551              	.LVL48:
+ 552              		.loc 1 412 0
+ 553 0048 F0BC     		pop	{r4, r5, r6, r7}
+ 554              		.cfi_remember_state
+ 555              		.cfi_restore 4
+ 556              		.cfi_restore 5
+ 557              		.cfi_restore 6
+ 558              		.cfi_restore 7
+ 559              		.cfi_def_cfa_offset 0
+ 560 004a 7047     		bx	lr
+ 561              	.LVL49:
+ 562              	.L65:
+ 563              		.cfi_restore_state
+ 380:Generated_Source\PSoC5/CySpc.c ****                 {
+ 564              		.loc 1 380 0 discriminator 1
+ 565 004c 3F28     		cmp	r0, #63
+ 566 004e F4D8     		bhi	.L58
+ 382:Generated_Source\PSoC5/CySpc.c ****                             ((uint32) array * CYDEV_ECC_SECTOR_SIZE) +
+ 567              		.loc 1 382 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 19
+
+
+ 568 0050 00F51030 		add	r0, r0, #147456
+ 569              	.LVL50:
+ 570 0054 01EB0021 		add	r1, r1, r0, lsl #8
+ 571              	.LVL51:
+ 572 0058 4901     		lsls	r1, r1, #5
+ 573              	.LVL52:
+ 388:Generated_Source\PSoC5/CySpc.c ****                     }
+ 574              		.loc 1 388 0
+ 575 005a 0648     		ldr	r0, .L66+4
+ 382:Generated_Source\PSoC5/CySpc.c ****                             ((uint32) array * CYDEV_ECC_SECTOR_SIZE) +
+ 576              		.loc 1 382 0
+ 577 005c 0A46     		mov	r2, r1
+ 578 005e 2031     		adds	r1, r1, #32
+ 579              	.LVL53:
+ 580              	.L59:
+ 388:Generated_Source\PSoC5/CySpc.c ****                     }
+ 581              		.loc 1 388 0 discriminator 3
+ 582 0060 12F8013B 		ldrb	r3, [r2], #1	@ zero_extendqisi2
+ 583              	.LVL54:
+ 584 0064 DBB2     		uxtb	r3, r3
+ 386:Generated_Source\PSoC5/CySpc.c ****                     {
+ 585              		.loc 1 386 0 discriminator 3
+ 586 0066 9142     		cmp	r1, r2
+ 388:Generated_Source\PSoC5/CySpc.c ****                     }
+ 587              		.loc 1 388 0 discriminator 3
+ 588 0068 0370     		strb	r3, [r0]
+ 589              	.LVL55:
+ 386:Generated_Source\PSoC5/CySpc.c ****                     {
+ 590              		.loc 1 386 0 discriminator 3
+ 591 006a F9D1     		bne	.L59
+ 592 006c E5E7     		b	.L58
+ 593              	.L67:
+ 594 006e 00BF     		.align	2
+ 595              	.L66:
+ 596 0070 22470040 		.word	1073760034
+ 597 0074 20470040 		.word	1073760032
+ 598              		.cfi_endproc
+ 599              	.LFE5:
+ 600              		.size	CySpcLoadRowFull, .-CySpcLoadRowFull
+ 601              		.section	.text.CySpcWriteRow,"ax",%progbits
+ 602              		.align	2
+ 603              		.global	CySpcWriteRow
+ 604              		.thumb
+ 605              		.thumb_func
+ 606              		.type	CySpcWriteRow, %function
+ 607              	CySpcWriteRow:
+ 608              	.LFB6:
+ 413:Generated_Source\PSoC5/CySpc.c **** 
+ 414:Generated_Source\PSoC5/CySpc.c **** 
+ 415:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 416:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcWriteRow
+ 417:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 418:Generated_Source\PSoC5/CySpc.c **** *  Erases then programs a row in Flash/EEPROM with data in row latch.
+ 419:Generated_Source\PSoC5/CySpc.c **** *
+ 420:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 array:
+ 421:Generated_Source\PSoC5/CySpc.c **** *   Id of the array.
+ 422:Generated_Source\PSoC5/CySpc.c **** *
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 20
+
+
+ 423:Generated_Source\PSoC5/CySpc.c **** *  \param uint16 address:
+ 424:Generated_Source\PSoC5/CySpc.c **** *   flash/eeprom addrress
+ 425:Generated_Source\PSoC5/CySpc.c **** *
+ 426:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 tempPolarity:
+ 427:Generated_Source\PSoC5/CySpc.c **** *   temperature polarity.
+ 428:Generated_Source\PSoC5/CySpc.c **** *   \param 1: the Temp Magnitude is interpreted as a positive value
+ 429:Generated_Source\PSoC5/CySpc.c **** *   \param 0: the Temp Magnitude is interpreted as a negative value
+ 430:Generated_Source\PSoC5/CySpc.c **** *
+ 431:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 tempMagnitude:
+ 432:Generated_Source\PSoC5/CySpc.c **** *   temperature magnitude.
+ 433:Generated_Source\PSoC5/CySpc.c **** *
+ 434:Generated_Source\PSoC5/CySpc.c **** * \return
+ 435:Generated_Source\PSoC5/CySpc.c **** *  CYRET_STARTED
+ 436:Generated_Source\PSoC5/CySpc.c **** *  CYRET_CANCELED
+ 437:Generated_Source\PSoC5/CySpc.c **** *  CYRET_LOCKED
+ 438:Generated_Source\PSoC5/CySpc.c **** *
+ 439:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 440:Generated_Source\PSoC5/CySpc.c **** cystatus CySpcWriteRow(uint8 array, uint16 address, uint8 tempPolarity, uint8 tempMagnitude)\
+ 441:Generated_Source\PSoC5/CySpc.c **** 
+ 442:Generated_Source\PSoC5/CySpc.c **** {
+ 609              		.loc 1 442 0
+ 610              		.cfi_startproc
+ 611              		@ args = 0, pretend = 0, frame = 0
+ 612              		@ frame_needed = 0, uses_anonymous_args = 0
+ 613              		@ link register save eliminated.
+ 614              	.LVL56:
+ 615 0000 F0B4     		push	{r4, r5, r6, r7}
+ 616              		.cfi_def_cfa_offset 16
+ 617              		.cfi_offset 4, -16
+ 618              		.cfi_offset 5, -12
+ 619              		.cfi_offset 6, -8
+ 620              		.cfi_offset 7, -4
+ 443:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 444:Generated_Source\PSoC5/CySpc.c **** 
+ 445:Generated_Source\PSoC5/CySpc.c ****     /* Make sure the SPC is ready to accept command */
+ 446:Generated_Source\PSoC5/CySpc.c ****     if(CY_SPC_IDLE)
+ 621              		.loc 1 446 0
+ 622 0002 0F4D     		ldr	r5, .L73
+ 623 0004 2C78     		ldrb	r4, [r5]	@ zero_extendqisi2
+ 624 0006 A607     		lsls	r6, r4, #30
+ 625 0008 16D5     		bpl	.L70
+ 447:Generated_Source\PSoC5/CySpc.c ****     {
+ 448:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_ONE;
+ 626              		.loc 1 448 0
+ 627 000a 0E4C     		ldr	r4, .L73+4
+ 628 000c B626     		movs	r6, #182
+ 629 000e 2670     		strb	r6, [r4]
+ 449:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_WR_ROW);
+ 630              		.loc 1 449 0
+ 631 0010 D827     		movs	r7, #216
+ 450:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_CMD_WR_ROW;
+ 632              		.loc 1 450 0
+ 633 0012 0526     		movs	r6, #5
+ 449:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_WR_ROW);
+ 634              		.loc 1 449 0
+ 635 0014 2770     		strb	r7, [r4]
+ 636              		.loc 1 450 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 21
+
+
+ 637 0016 2670     		strb	r6, [r4]
+ 451:Generated_Source\PSoC5/CySpc.c **** 
+ 452:Generated_Source\PSoC5/CySpc.c ****         /* Make sure the command was accepted */
+ 453:Generated_Source\PSoC5/CySpc.c ****         if(CY_SPC_BUSY)
+ 638              		.loc 1 453 0
+ 639 0018 2D78     		ldrb	r5, [r5]	@ zero_extendqisi2
+ 640 001a AD07     		lsls	r5, r5, #30
+ 641 001c 09D4     		bmi	.L71
+ 454:Generated_Source\PSoC5/CySpc.c ****         {
+ 455:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = array;
+ 456:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = HI8(address);
+ 642              		.loc 1 456 0
+ 643 001e 0D0A     		lsrs	r5, r1, #8
+ 457:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = LO8(address);
+ 644              		.loc 1 457 0
+ 645 0020 C9B2     		uxtb	r1, r1
+ 646              	.LVL57:
+ 455:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = HI8(address);
+ 647              		.loc 1 455 0
+ 648 0022 2070     		strb	r0, [r4]
+ 456:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = LO8(address);
+ 649              		.loc 1 456 0
+ 650 0024 2570     		strb	r5, [r4]
+ 651              		.loc 1 457 0
+ 652 0026 2170     		strb	r1, [r4]
+ 458:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = tempPolarity;
+ 653              		.loc 1 458 0
+ 654 0028 2270     		strb	r2, [r4]
+ 459:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = tempMagnitude;
+ 655              		.loc 1 459 0
+ 656 002a 2370     		strb	r3, [r4]
+ 443:Generated_Source\PSoC5/CySpc.c **** 
+ 657              		.loc 1 443 0
+ 658 002c 0720     		movs	r0, #7
+ 659              	.LVL58:
+ 460:Generated_Source\PSoC5/CySpc.c ****         }
+ 461:Generated_Source\PSoC5/CySpc.c ****         else
+ 462:Generated_Source\PSoC5/CySpc.c ****         {
+ 463:Generated_Source\PSoC5/CySpc.c ****             status = CYRET_CANCELED;
+ 464:Generated_Source\PSoC5/CySpc.c ****         }
+ 465:Generated_Source\PSoC5/CySpc.c ****     }
+ 466:Generated_Source\PSoC5/CySpc.c ****     else
+ 467:Generated_Source\PSoC5/CySpc.c ****     {
+ 468:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_LOCKED;
+ 469:Generated_Source\PSoC5/CySpc.c ****     }
+ 470:Generated_Source\PSoC5/CySpc.c **** 
+ 471:Generated_Source\PSoC5/CySpc.c ****     return(status);
+ 472:Generated_Source\PSoC5/CySpc.c **** }
+ 660              		.loc 1 472 0
+ 661 002e F0BC     		pop	{r4, r5, r6, r7}
+ 662              		.cfi_remember_state
+ 663              		.cfi_restore 7
+ 664              		.cfi_restore 6
+ 665              		.cfi_restore 5
+ 666              		.cfi_restore 4
+ 667              		.cfi_def_cfa_offset 0
+ 668 0030 7047     		bx	lr
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 22
+
+
+ 669              	.LVL59:
+ 670              	.L71:
+ 671              		.cfi_restore_state
+ 463:Generated_Source\PSoC5/CySpc.c ****         }
+ 672              		.loc 1 463 0
+ 673 0032 0920     		movs	r0, #9
+ 674              	.LVL60:
+ 675              		.loc 1 472 0
+ 676 0034 F0BC     		pop	{r4, r5, r6, r7}
+ 677              		.cfi_remember_state
+ 678              		.cfi_restore 4
+ 679              		.cfi_restore 5
+ 680              		.cfi_restore 6
+ 681              		.cfi_restore 7
+ 682              		.cfi_def_cfa_offset 0
+ 683 0036 7047     		bx	lr
+ 684              	.LVL61:
+ 685              	.L70:
+ 686              		.cfi_restore_state
+ 468:Generated_Source\PSoC5/CySpc.c ****     }
+ 687              		.loc 1 468 0
+ 688 0038 0420     		movs	r0, #4
+ 689              	.LVL62:
+ 690              		.loc 1 472 0
+ 691 003a F0BC     		pop	{r4, r5, r6, r7}
+ 692              		.cfi_restore 4
+ 693              		.cfi_restore 5
+ 694              		.cfi_restore 6
+ 695              		.cfi_restore 7
+ 696              		.cfi_def_cfa_offset 0
+ 697 003c 7047     		bx	lr
+ 698              	.L74:
+ 699 003e 00BF     		.align	2
+ 700              	.L73:
+ 701 0040 22470040 		.word	1073760034
+ 702 0044 20470040 		.word	1073760032
+ 703              		.cfi_endproc
+ 704              	.LFE6:
+ 705              		.size	CySpcWriteRow, .-CySpcWriteRow
+ 706              		.section	.text.CySpcEraseSector,"ax",%progbits
+ 707              		.align	2
+ 708              		.global	CySpcEraseSector
+ 709              		.thumb
+ 710              		.thumb_func
+ 711              		.type	CySpcEraseSector, %function
+ 712              	CySpcEraseSector:
+ 713              	.LFB7:
+ 473:Generated_Source\PSoC5/CySpc.c **** 
+ 474:Generated_Source\PSoC5/CySpc.c **** 
+ 475:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 476:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcEraseSector
+ 477:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 478:Generated_Source\PSoC5/CySpc.c **** *  Erases all data in the addressed sector (block of 64 rows).
+ 479:Generated_Source\PSoC5/CySpc.c **** *
+ 480:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 array:
+ 481:Generated_Source\PSoC5/CySpc.c **** *   Id of the array.
+ 482:Generated_Source\PSoC5/CySpc.c **** *
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 23
+
+
+ 483:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 sectorNumber:
+ 484:Generated_Source\PSoC5/CySpc.c **** *   Zero based sector number within Flash/EEPROM array
+ 485:Generated_Source\PSoC5/CySpc.c **** *
+ 486:Generated_Source\PSoC5/CySpc.c **** * \return
+ 487:Generated_Source\PSoC5/CySpc.c **** *  CYRET_STARTED
+ 488:Generated_Source\PSoC5/CySpc.c **** *  CYRET_CANCELED
+ 489:Generated_Source\PSoC5/CySpc.c **** *  CYRET_LOCKED
+ 490:Generated_Source\PSoC5/CySpc.c **** *
+ 491:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 492:Generated_Source\PSoC5/CySpc.c **** cystatus CySpcEraseSector(uint8 array, uint8 sectorNumber)
+ 493:Generated_Source\PSoC5/CySpc.c **** {
+ 714              		.loc 1 493 0
+ 715              		.cfi_startproc
+ 716              		@ args = 0, pretend = 0, frame = 0
+ 717              		@ frame_needed = 0, uses_anonymous_args = 0
+ 718              		@ link register save eliminated.
+ 719              	.LVL63:
+ 494:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 495:Generated_Source\PSoC5/CySpc.c **** 
+ 496:Generated_Source\PSoC5/CySpc.c ****     /* Make sure the SPC is ready to accept command */
+ 497:Generated_Source\PSoC5/CySpc.c ****     if(CY_SPC_IDLE)
+ 720              		.loc 1 497 0
+ 721 0000 0C4A     		ldr	r2, .L80
+ 722 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 723 0004 9B07     		lsls	r3, r3, #30
+ 724 0006 12D5     		bpl	.L77
+ 493:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 725              		.loc 1 493 0
+ 726 0008 70B4     		push	{r4, r5, r6}
+ 727              		.cfi_def_cfa_offset 12
+ 728              		.cfi_offset 4, -12
+ 729              		.cfi_offset 5, -8
+ 730              		.cfi_offset 6, -4
+ 498:Generated_Source\PSoC5/CySpc.c ****     {
+ 499:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_ONE;
+ 731              		.loc 1 499 0
+ 732 000a 0B4B     		ldr	r3, .L80+4
+ 733 000c B626     		movs	r6, #182
+ 500:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_ER_SECTOR);
+ 734              		.loc 1 500 0
+ 735 000e DB25     		movs	r5, #219
+ 501:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_CMD_ER_SECTOR;
+ 736              		.loc 1 501 0
+ 737 0010 0824     		movs	r4, #8
+ 499:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_ER_SECTOR);
+ 738              		.loc 1 499 0
+ 739 0012 1E70     		strb	r6, [r3]
+ 500:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_ER_SECTOR);
+ 740              		.loc 1 500 0
+ 741 0014 1D70     		strb	r5, [r3]
+ 742              		.loc 1 501 0
+ 743 0016 1C70     		strb	r4, [r3]
+ 502:Generated_Source\PSoC5/CySpc.c **** 
+ 503:Generated_Source\PSoC5/CySpc.c ****         /* Make sure the command was accepted */
+ 504:Generated_Source\PSoC5/CySpc.c ****         if(CY_SPC_BUSY)
+ 744              		.loc 1 504 0
+ 745 0018 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 24
+
+
+ 746 001a 9207     		lsls	r2, r2, #30
+ 747 001c 04D4     		bmi	.L78
+ 505:Generated_Source\PSoC5/CySpc.c ****         {
+ 506:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = array;
+ 748              		.loc 1 506 0
+ 749 001e 1870     		strb	r0, [r3]
+ 507:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = sectorNumber;
+ 750              		.loc 1 507 0
+ 751 0020 1970     		strb	r1, [r3]
+ 494:Generated_Source\PSoC5/CySpc.c **** 
+ 752              		.loc 1 494 0
+ 753 0022 0720     		movs	r0, #7
+ 754              	.LVL64:
+ 508:Generated_Source\PSoC5/CySpc.c ****         }
+ 509:Generated_Source\PSoC5/CySpc.c ****         else
+ 510:Generated_Source\PSoC5/CySpc.c ****         {
+ 511:Generated_Source\PSoC5/CySpc.c ****             status = CYRET_CANCELED;
+ 512:Generated_Source\PSoC5/CySpc.c ****         }
+ 513:Generated_Source\PSoC5/CySpc.c ****     }
+ 514:Generated_Source\PSoC5/CySpc.c ****     else
+ 515:Generated_Source\PSoC5/CySpc.c ****     {
+ 516:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_LOCKED;
+ 517:Generated_Source\PSoC5/CySpc.c ****     }
+ 518:Generated_Source\PSoC5/CySpc.c **** 
+ 519:Generated_Source\PSoC5/CySpc.c ****     return(status);
+ 520:Generated_Source\PSoC5/CySpc.c **** }
+ 755              		.loc 1 520 0
+ 756 0024 70BC     		pop	{r4, r5, r6}
+ 757              		.cfi_remember_state
+ 758              		.cfi_restore 6
+ 759              		.cfi_restore 5
+ 760              		.cfi_restore 4
+ 761              		.cfi_def_cfa_offset 0
+ 762 0026 7047     		bx	lr
+ 763              	.LVL65:
+ 764              	.L78:
+ 765              		.cfi_restore_state
+ 511:Generated_Source\PSoC5/CySpc.c ****         }
+ 766              		.loc 1 511 0
+ 767 0028 0920     		movs	r0, #9
+ 768              	.LVL66:
+ 769              		.loc 1 520 0
+ 770 002a 70BC     		pop	{r4, r5, r6}
+ 771              		.cfi_restore 4
+ 772              		.cfi_restore 5
+ 773              		.cfi_restore 6
+ 774              		.cfi_def_cfa_offset 0
+ 775 002c 7047     		bx	lr
+ 776              	.LVL67:
+ 777              	.L77:
+ 516:Generated_Source\PSoC5/CySpc.c ****     }
+ 778              		.loc 1 516 0
+ 779 002e 0420     		movs	r0, #4
+ 780              	.LVL68:
+ 781              		.loc 1 520 0
+ 782 0030 7047     		bx	lr
+ 783              	.L81:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 25
+
+
+ 784 0032 00BF     		.align	2
+ 785              	.L80:
+ 786 0034 22470040 		.word	1073760034
+ 787 0038 20470040 		.word	1073760032
+ 788              		.cfi_endproc
+ 789              	.LFE7:
+ 790              		.size	CySpcEraseSector, .-CySpcEraseSector
+ 791              		.section	.text.CySpcEraseRow,"ax",%progbits
+ 792              		.align	2
+ 793              		.global	CySpcEraseRow
+ 794              		.thumb
+ 795              		.thumb_func
+ 796              		.type	CySpcEraseRow, %function
+ 797              	CySpcEraseRow:
+ 798              	.LFB8:
+ 521:Generated_Source\PSoC5/CySpc.c **** 
+ 522:Generated_Source\PSoC5/CySpc.c **** 
+ 523:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 524:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcEraseRow
+ 525:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 526:Generated_Source\PSoC5/CySpc.c **** *  Erases a row in Flash.
+ 527:Generated_Source\PSoC5/CySpc.c **** *
+ 528:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 array:
+ 529:Generated_Source\PSoC5/CySpc.c **** *   Id of the array.
+ 530:Generated_Source\PSoC5/CySpc.c **** *
+ 531:Generated_Source\PSoC5/CySpc.c **** *  \param uint16 address:
+ 532:Generated_Source\PSoC5/CySpc.c **** *   Flash address
+ 533:Generated_Source\PSoC5/CySpc.c **** *
+ 534:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 tempPolarity:
+ 535:Generated_Source\PSoC5/CySpc.c **** *   temperature polarity.
+ 536:Generated_Source\PSoC5/CySpc.c **** *   \param 1: the Temp Magnitude is interpreted as a positive value
+ 537:Generated_Source\PSoC5/CySpc.c **** *   \param 0: the Temp Magnitude is interpreted as a negative value
+ 538:Generated_Source\PSoC5/CySpc.c **** *
+ 539:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 tempMagnitude:
+ 540:Generated_Source\PSoC5/CySpc.c **** *   temperature magnitude.
+ 541:Generated_Source\PSoC5/CySpc.c **** *
+ 542:Generated_Source\PSoC5/CySpc.c **** * \return
+ 543:Generated_Source\PSoC5/CySpc.c **** *  CYRET_STARTED
+ 544:Generated_Source\PSoC5/CySpc.c **** *  CYRET_CANCELED
+ 545:Generated_Source\PSoC5/CySpc.c **** *  CYRET_LOCKED
+ 546:Generated_Source\PSoC5/CySpc.c **** *
+ 547:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 548:Generated_Source\PSoC5/CySpc.c **** cystatus CySpcEraseRow(uint8 array, uint16 address, uint8 tempPolarity, uint8 tempMagnitude)\
+ 549:Generated_Source\PSoC5/CySpc.c **** 
+ 550:Generated_Source\PSoC5/CySpc.c **** {
+ 799              		.loc 1 550 0
+ 800              		.cfi_startproc
+ 801              		@ args = 0, pretend = 0, frame = 0
+ 802              		@ frame_needed = 0, uses_anonymous_args = 0
+ 803              		@ link register save eliminated.
+ 804              	.LVL69:
+ 805 0000 F0B4     		push	{r4, r5, r6, r7}
+ 806              		.cfi_def_cfa_offset 16
+ 807              		.cfi_offset 4, -16
+ 808              		.cfi_offset 5, -12
+ 809              		.cfi_offset 6, -8
+ 810              		.cfi_offset 7, -4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 26
+
+
+ 551:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 552:Generated_Source\PSoC5/CySpc.c **** 
+ 553:Generated_Source\PSoC5/CySpc.c ****     /* Make sure the SPC is ready to accept command */
+ 554:Generated_Source\PSoC5/CySpc.c ****     if(CY_SPC_IDLE)
+ 811              		.loc 1 554 0
+ 812 0002 0F4D     		ldr	r5, .L87
+ 813 0004 2C78     		ldrb	r4, [r5]	@ zero_extendqisi2
+ 814 0006 A607     		lsls	r6, r4, #30
+ 815 0008 16D5     		bpl	.L84
+ 555:Generated_Source\PSoC5/CySpc.c ****     {
+ 556:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_ONE;
+ 816              		.loc 1 556 0
+ 817 000a 0E4C     		ldr	r4, .L87+4
+ 818 000c B626     		movs	r6, #182
+ 819 000e 2670     		strb	r6, [r4]
+ 557:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_ER_ROW);
+ 820              		.loc 1 557 0
+ 821 0010 E627     		movs	r7, #230
+ 558:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_CMD_ER_ROW;
+ 822              		.loc 1 558 0
+ 823 0012 1326     		movs	r6, #19
+ 557:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_ER_ROW);
+ 824              		.loc 1 557 0
+ 825 0014 2770     		strb	r7, [r4]
+ 826              		.loc 1 558 0
+ 827 0016 2670     		strb	r6, [r4]
+ 559:Generated_Source\PSoC5/CySpc.c **** 
+ 560:Generated_Source\PSoC5/CySpc.c ****         /* Make sure the command was accepted */
+ 561:Generated_Source\PSoC5/CySpc.c ****         if(CY_SPC_BUSY)
+ 828              		.loc 1 561 0
+ 829 0018 2D78     		ldrb	r5, [r5]	@ zero_extendqisi2
+ 830 001a AD07     		lsls	r5, r5, #30
+ 831 001c 09D4     		bmi	.L85
+ 562:Generated_Source\PSoC5/CySpc.c ****         {
+ 563:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = array;
+ 564:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = HI8(address);
+ 832              		.loc 1 564 0
+ 833 001e 0D0A     		lsrs	r5, r1, #8
+ 565:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = LO8(address);
+ 834              		.loc 1 565 0
+ 835 0020 C9B2     		uxtb	r1, r1
+ 836              	.LVL70:
+ 563:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = HI8(address);
+ 837              		.loc 1 563 0
+ 838 0022 2070     		strb	r0, [r4]
+ 564:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = LO8(address);
+ 839              		.loc 1 564 0
+ 840 0024 2570     		strb	r5, [r4]
+ 841              		.loc 1 565 0
+ 842 0026 2170     		strb	r1, [r4]
+ 566:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = tempPolarity;
+ 843              		.loc 1 566 0
+ 844 0028 2270     		strb	r2, [r4]
+ 567:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = tempMagnitude;
+ 845              		.loc 1 567 0
+ 846 002a 2370     		strb	r3, [r4]
+ 551:Generated_Source\PSoC5/CySpc.c **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 27
+
+
+ 847              		.loc 1 551 0
+ 848 002c 0720     		movs	r0, #7
+ 849              	.LVL71:
+ 568:Generated_Source\PSoC5/CySpc.c ****         }
+ 569:Generated_Source\PSoC5/CySpc.c ****         else
+ 570:Generated_Source\PSoC5/CySpc.c ****         {
+ 571:Generated_Source\PSoC5/CySpc.c ****             status = CYRET_CANCELED;
+ 572:Generated_Source\PSoC5/CySpc.c ****         }
+ 573:Generated_Source\PSoC5/CySpc.c ****     }
+ 574:Generated_Source\PSoC5/CySpc.c ****     else
+ 575:Generated_Source\PSoC5/CySpc.c ****     {
+ 576:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_LOCKED;
+ 577:Generated_Source\PSoC5/CySpc.c ****     }
+ 578:Generated_Source\PSoC5/CySpc.c **** 
+ 579:Generated_Source\PSoC5/CySpc.c ****     return(status);
+ 580:Generated_Source\PSoC5/CySpc.c **** }
+ 850              		.loc 1 580 0
+ 851 002e F0BC     		pop	{r4, r5, r6, r7}
+ 852              		.cfi_remember_state
+ 853              		.cfi_restore 7
+ 854              		.cfi_restore 6
+ 855              		.cfi_restore 5
+ 856              		.cfi_restore 4
+ 857              		.cfi_def_cfa_offset 0
+ 858 0030 7047     		bx	lr
+ 859              	.LVL72:
+ 860              	.L85:
+ 861              		.cfi_restore_state
+ 571:Generated_Source\PSoC5/CySpc.c ****         }
+ 862              		.loc 1 571 0
+ 863 0032 0920     		movs	r0, #9
+ 864              	.LVL73:
+ 865              		.loc 1 580 0
+ 866 0034 F0BC     		pop	{r4, r5, r6, r7}
+ 867              		.cfi_remember_state
+ 868              		.cfi_restore 4
+ 869              		.cfi_restore 5
+ 870              		.cfi_restore 6
+ 871              		.cfi_restore 7
+ 872              		.cfi_def_cfa_offset 0
+ 873 0036 7047     		bx	lr
+ 874              	.LVL74:
+ 875              	.L84:
+ 876              		.cfi_restore_state
+ 576:Generated_Source\PSoC5/CySpc.c ****     }
+ 877              		.loc 1 576 0
+ 878 0038 0420     		movs	r0, #4
+ 879              	.LVL75:
+ 880              		.loc 1 580 0
+ 881 003a F0BC     		pop	{r4, r5, r6, r7}
+ 882              		.cfi_restore 4
+ 883              		.cfi_restore 5
+ 884              		.cfi_restore 6
+ 885              		.cfi_restore 7
+ 886              		.cfi_def_cfa_offset 0
+ 887 003c 7047     		bx	lr
+ 888              	.L88:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 28
+
+
+ 889 003e 00BF     		.align	2
+ 890              	.L87:
+ 891 0040 22470040 		.word	1073760034
+ 892 0044 20470040 		.word	1073760032
+ 893              		.cfi_endproc
+ 894              	.LFE8:
+ 895              		.size	CySpcEraseRow, .-CySpcEraseRow
+ 896              		.section	.text.CySpcGetTemp,"ax",%progbits
+ 897              		.align	2
+ 898              		.global	CySpcGetTemp
+ 899              		.thumb
+ 900              		.thumb_func
+ 901              		.type	CySpcGetTemp, %function
+ 902              	CySpcGetTemp:
+ 903              	.LFB9:
+ 581:Generated_Source\PSoC5/CySpc.c **** 
+ 582:Generated_Source\PSoC5/CySpc.c **** 
+ 583:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 584:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcGetTemp
+ 585:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 586:Generated_Source\PSoC5/CySpc.c **** *  Returns the internal die temperature
+ 587:Generated_Source\PSoC5/CySpc.c **** *
+ 588:Generated_Source\PSoC5/CySpc.c **** *  \param uint8 numSamples:
+ 589:Generated_Source\PSoC5/CySpc.c **** *   Number of samples. Valid values are 1-5, resulting in 2 - 32 samples
+ 590:Generated_Source\PSoC5/CySpc.c **** *   respectively.
+ 591:Generated_Source\PSoC5/CySpc.c **** *
+ 592:Generated_Source\PSoC5/CySpc.c **** * \param uint16 timerPeriod:
+ 593:Generated_Source\PSoC5/CySpc.c **** *   Number of ADC ACLK cycles. A valid 14 bit value is accepted, higher 2 bits
+ 594:Generated_Source\PSoC5/CySpc.c **** *   of 16 bit values are ignored.
+ 595:Generated_Source\PSoC5/CySpc.c **** *
+ 596:Generated_Source\PSoC5/CySpc.c **** * \param uint8 clkDivSelect:
+ 597:Generated_Source\PSoC5/CySpc.c **** *   ADC ACLK clock divide value. Valid values are 2 - 225.
+ 598:Generated_Source\PSoC5/CySpc.c **** *
+ 599:Generated_Source\PSoC5/CySpc.c **** * \return
+ 600:Generated_Source\PSoC5/CySpc.c **** *  CYRET_STARTED
+ 601:Generated_Source\PSoC5/CySpc.c **** *  CYRET_CANCELED
+ 602:Generated_Source\PSoC5/CySpc.c **** *  CYRET_LOCKED
+ 603:Generated_Source\PSoC5/CySpc.c **** *
+ 604:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 605:Generated_Source\PSoC5/CySpc.c **** cystatus CySpcGetTemp(uint8 numSamples)
+ 606:Generated_Source\PSoC5/CySpc.c **** {
+ 904              		.loc 1 606 0
+ 905              		.cfi_startproc
+ 906              		@ args = 0, pretend = 0, frame = 0
+ 907              		@ frame_needed = 0, uses_anonymous_args = 0
+ 908              		@ link register save eliminated.
+ 909              	.LVL76:
+ 607:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 608:Generated_Source\PSoC5/CySpc.c **** 
+ 609:Generated_Source\PSoC5/CySpc.c ****     /* Make sure the SPC is ready to accept command */
+ 610:Generated_Source\PSoC5/CySpc.c ****     if(CY_SPC_IDLE)
+ 910              		.loc 1 610 0
+ 911 0000 0B4A     		ldr	r2, .L94
+ 912 0002 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 913 0004 9907     		lsls	r1, r3, #30
+ 914 0006 11D5     		bpl	.L91
+ 606:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 29
+
+
+ 915              		.loc 1 606 0
+ 916 0008 30B4     		push	{r4, r5}
+ 917              		.cfi_def_cfa_offset 8
+ 918              		.cfi_offset 4, -8
+ 919              		.cfi_offset 5, -4
+ 611:Generated_Source\PSoC5/CySpc.c ****     {
+ 612:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_ONE;
+ 920              		.loc 1 612 0
+ 921 000a 0A4B     		ldr	r3, .L94+4
+ 922 000c B625     		movs	r5, #182
+ 613:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_GET_TEMP);
+ 923              		.loc 1 613 0
+ 924 000e E124     		movs	r4, #225
+ 614:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_CMD_GET_TEMP;
+ 925              		.loc 1 614 0
+ 926 0010 0E21     		movs	r1, #14
+ 612:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_GET_TEMP);
+ 927              		.loc 1 612 0
+ 928 0012 1D70     		strb	r5, [r3]
+ 613:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_GET_TEMP);
+ 929              		.loc 1 613 0
+ 930 0014 1C70     		strb	r4, [r3]
+ 931              		.loc 1 614 0
+ 932 0016 1970     		strb	r1, [r3]
+ 615:Generated_Source\PSoC5/CySpc.c **** 
+ 616:Generated_Source\PSoC5/CySpc.c ****         /* Make sure the command was accepted */
+ 617:Generated_Source\PSoC5/CySpc.c ****         if(CY_SPC_BUSY)
+ 933              		.loc 1 617 0
+ 934 0018 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 935 001a 9207     		lsls	r2, r2, #30
+ 936 001c 03D4     		bmi	.L92
+ 618:Generated_Source\PSoC5/CySpc.c ****         {
+ 619:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_DATA_REG = numSamples;
+ 937              		.loc 1 619 0
+ 938 001e 1870     		strb	r0, [r3]
+ 620:Generated_Source\PSoC5/CySpc.c ****         }
+ 621:Generated_Source\PSoC5/CySpc.c ****         else
+ 622:Generated_Source\PSoC5/CySpc.c ****         {
+ 623:Generated_Source\PSoC5/CySpc.c ****             status = CYRET_CANCELED;
+ 624:Generated_Source\PSoC5/CySpc.c ****         }
+ 625:Generated_Source\PSoC5/CySpc.c ****     }
+ 626:Generated_Source\PSoC5/CySpc.c ****     else
+ 627:Generated_Source\PSoC5/CySpc.c ****     {
+ 628:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_LOCKED;
+ 629:Generated_Source\PSoC5/CySpc.c ****     }
+ 630:Generated_Source\PSoC5/CySpc.c **** 
+ 631:Generated_Source\PSoC5/CySpc.c ****     return(status);
+ 632:Generated_Source\PSoC5/CySpc.c **** }
+ 939              		.loc 1 632 0
+ 940 0020 30BC     		pop	{r4, r5}
+ 941              		.cfi_remember_state
+ 942              		.cfi_restore 5
+ 943              		.cfi_restore 4
+ 944              		.cfi_def_cfa_offset 0
+ 607:Generated_Source\PSoC5/CySpc.c **** 
+ 945              		.loc 1 607 0
+ 946 0022 0720     		movs	r0, #7
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 30
+
+
+ 947              	.LVL77:
+ 948              		.loc 1 632 0
+ 949 0024 7047     		bx	lr
+ 950              	.LVL78:
+ 951              	.L92:
+ 952              		.cfi_restore_state
+ 623:Generated_Source\PSoC5/CySpc.c ****         }
+ 953              		.loc 1 623 0
+ 954 0026 0920     		movs	r0, #9
+ 955              	.LVL79:
+ 956              		.loc 1 632 0
+ 957 0028 30BC     		pop	{r4, r5}
+ 958              		.cfi_restore 4
+ 959              		.cfi_restore 5
+ 960              		.cfi_def_cfa_offset 0
+ 961 002a 7047     		bx	lr
+ 962              	.LVL80:
+ 963              	.L91:
+ 628:Generated_Source\PSoC5/CySpc.c ****     }
+ 964              		.loc 1 628 0
+ 965 002c 0420     		movs	r0, #4
+ 966              	.LVL81:
+ 967              		.loc 1 632 0
+ 968 002e 7047     		bx	lr
+ 969              	.L95:
+ 970              		.align	2
+ 971              	.L94:
+ 972 0030 22470040 		.word	1073760034
+ 973 0034 20470040 		.word	1073760032
+ 974              		.cfi_endproc
+ 975              	.LFE9:
+ 976              		.size	CySpcGetTemp, .-CySpcGetTemp
+ 977              		.section	.text.CySpcLock,"ax",%progbits
+ 978              		.align	2
+ 979              		.global	CySpcLock
+ 980              		.thumb
+ 981              		.thumb_func
+ 982              		.type	CySpcLock, %function
+ 983              	CySpcLock:
+ 984              	.LFB10:
+ 633:Generated_Source\PSoC5/CySpc.c **** 
+ 634:Generated_Source\PSoC5/CySpc.c **** 
+ 635:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 636:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcLock
+ 637:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 638:Generated_Source\PSoC5/CySpc.c **** *  Locks the SPC so it can not be used by someone else:
+ 639:Generated_Source\PSoC5/CySpc.c **** *   - Saves wait-pipeline enable state and enable pipeline (PSoC5)
+ 640:Generated_Source\PSoC5/CySpc.c **** *
+ 641:Generated_Source\PSoC5/CySpc.c **** * \return
+ 642:Generated_Source\PSoC5/CySpc.c **** *  CYRET_SUCCESS - if the resource was free.
+ 643:Generated_Source\PSoC5/CySpc.c **** *  CYRET_LOCKED  - if the SPC is in use.
+ 644:Generated_Source\PSoC5/CySpc.c **** *
+ 645:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 646:Generated_Source\PSoC5/CySpc.c **** cystatus CySpcLock(void)
+ 647:Generated_Source\PSoC5/CySpc.c **** {
+ 985              		.loc 1 647 0
+ 986              		.cfi_startproc
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 31
+
+
+ 987              		@ args = 0, pretend = 0, frame = 0
+ 988              		@ frame_needed = 0, uses_anonymous_args = 0
+ 989              	.LVL82:
+ 990 0000 38B5     		push	{r3, r4, r5, lr}
+ 991              		.cfi_def_cfa_offset 16
+ 992              		.cfi_offset 3, -16
+ 993              		.cfi_offset 4, -12
+ 994              		.cfi_offset 5, -8
+ 995              		.cfi_offset 14, -4
+ 648:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_LOCKED;
+ 649:Generated_Source\PSoC5/CySpc.c ****     uint8 interruptState;
+ 650:Generated_Source\PSoC5/CySpc.c **** 
+ 651:Generated_Source\PSoC5/CySpc.c ****     /* Enter critical section */
+ 652:Generated_Source\PSoC5/CySpc.c ****     interruptState = CyEnterCriticalSection();
+ 996              		.loc 1 652 0
+ 997 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+ 998              	.LVL83:
+ 653:Generated_Source\PSoC5/CySpc.c **** 
+ 654:Generated_Source\PSoC5/CySpc.c ****     if(CY_SPC_UNLOCKED == SpcLockState)
+ 999              		.loc 1 654 0
+ 1000 0006 0D4A     		ldr	r2, .L102
+ 1001 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 1002 000a 23B1     		cbz	r3, .L101
+ 648:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_LOCKED;
+ 1003              		.loc 1 648 0
+ 1004 000c 0424     		movs	r4, #4
+ 1005              	.LVL84:
+ 1006              	.L97:
+ 655:Generated_Source\PSoC5/CySpc.c ****     {
+ 656:Generated_Source\PSoC5/CySpc.c ****         SpcLockState = CY_SPC_LOCKED;
+ 657:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_SUCCESS;
+ 658:Generated_Source\PSoC5/CySpc.c **** 
+ 659:Generated_Source\PSoC5/CySpc.c ****         #if(CY_PSOC5)
+ 660:Generated_Source\PSoC5/CySpc.c **** 
+ 661:Generated_Source\PSoC5/CySpc.c ****             if(0u != (CY_SPC_CPU_WAITPIPE_REG & CY_SPC_CPU_WAITPIPE_BYPASS))
+ 662:Generated_Source\PSoC5/CySpc.c ****             {
+ 663:Generated_Source\PSoC5/CySpc.c ****                 /* Enable pipeline registers */
+ 664:Generated_Source\PSoC5/CySpc.c ****                 CY_SPC_CPU_WAITPIPE_REG &= ((uint32)(~CY_SPC_CPU_WAITPIPE_BYPASS));
+ 665:Generated_Source\PSoC5/CySpc.c **** 
+ 666:Generated_Source\PSoC5/CySpc.c ****                 /* At least 2 NOP instructions are recommended */
+ 667:Generated_Source\PSoC5/CySpc.c ****                 CY_NOP;
+ 668:Generated_Source\PSoC5/CySpc.c ****                 CY_NOP;
+ 669:Generated_Source\PSoC5/CySpc.c ****                 CY_NOP;
+ 670:Generated_Source\PSoC5/CySpc.c **** 
+ 671:Generated_Source\PSoC5/CySpc.c ****                 spcWaitPipeBypass = CY_SPC_CPU_WAITPIPE_BYPASS;
+ 672:Generated_Source\PSoC5/CySpc.c ****             }
+ 673:Generated_Source\PSoC5/CySpc.c **** 
+ 674:Generated_Source\PSoC5/CySpc.c ****         #endif  /* (CY_PSOC5) */
+ 675:Generated_Source\PSoC5/CySpc.c ****     }
+ 676:Generated_Source\PSoC5/CySpc.c **** 
+ 677:Generated_Source\PSoC5/CySpc.c ****     /* Exit critical section */
+ 678:Generated_Source\PSoC5/CySpc.c ****     CyExitCriticalSection(interruptState);
+ 1007              		.loc 1 678 0
+ 1008 000e FFF7FEFF 		bl	CyExitCriticalSection
+ 1009              	.LVL85:
+ 679:Generated_Source\PSoC5/CySpc.c **** 
+ 680:Generated_Source\PSoC5/CySpc.c ****     return(status);
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 32
+
+
+ 681:Generated_Source\PSoC5/CySpc.c **** }
+ 1010              		.loc 1 681 0
+ 1011 0012 2046     		mov	r0, r4
+ 1012 0014 38BD     		pop	{r3, r4, r5, pc}
+ 1013              	.LVL86:
+ 1014              	.L101:
+ 656:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_SUCCESS;
+ 1015              		.loc 1 656 0
+ 1016 0016 0125     		movs	r5, #1
+ 661:Generated_Source\PSoC5/CySpc.c ****             {
+ 1017              		.loc 1 661 0
+ 1018 0018 0949     		ldr	r1, .L102+4
+ 656:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_SUCCESS;
+ 1019              		.loc 1 656 0
+ 1020 001a 1570     		strb	r5, [r2]
+ 1021              	.LVL87:
+ 661:Generated_Source\PSoC5/CySpc.c ****             {
+ 1022              		.loc 1 661 0
+ 1023 001c 0C68     		ldr	r4, [r1]
+ 1024 001e 2C40     		ands	r4, r4, r5
+ 1025 0020 F5D0     		beq	.L97
+ 664:Generated_Source\PSoC5/CySpc.c **** 
+ 1026              		.loc 1 664 0
+ 1027 0022 0C68     		ldr	r4, [r1]
+ 1028 0024 24F00104 		bic	r4, r4, #1
+ 1029 0028 0C60     		str	r4, [r1]
+ 667:Generated_Source\PSoC5/CySpc.c ****                 CY_NOP;
+ 1030              		.loc 1 667 0
+ 1031              		.syntax unified
+ 1032              	@ 667 "Generated_Source\PSoC5\CySpc.c" 1
+ 1033 002a 00BF     		NOP
+ 1034              	
+ 1035              	@ 0 "" 2
+ 668:Generated_Source\PSoC5/CySpc.c ****                 CY_NOP;
+ 1036              		.loc 1 668 0
+ 1037              	@ 668 "Generated_Source\PSoC5\CySpc.c" 1
+ 1038 002c 00BF     		NOP
+ 1039              	
+ 1040              	@ 0 "" 2
+ 669:Generated_Source\PSoC5/CySpc.c **** 
+ 1041              		.loc 1 669 0
+ 1042              	@ 669 "Generated_Source\PSoC5\CySpc.c" 1
+ 1043 002e 00BF     		NOP
+ 1044              	
+ 1045              	@ 0 "" 2
+ 657:Generated_Source\PSoC5/CySpc.c **** 
+ 1046              		.loc 1 657 0
+ 1047              		.thumb
+ 1048              		.syntax unified
+ 1049 0030 1C46     		mov	r4, r3
+ 1050              	.LVL88:
+ 671:Generated_Source\PSoC5/CySpc.c ****             }
+ 1051              		.loc 1 671 0
+ 1052 0032 5560     		str	r5, [r2, #4]
+ 678:Generated_Source\PSoC5/CySpc.c **** 
+ 1053              		.loc 1 678 0
+ 1054 0034 FFF7FEFF 		bl	CyExitCriticalSection
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 33
+
+
+ 1055              	.LVL89:
+ 1056              		.loc 1 681 0
+ 1057 0038 2046     		mov	r0, r4
+ 1058 003a 38BD     		pop	{r3, r4, r5, pc}
+ 1059              	.LVL90:
+ 1060              	.L103:
+ 1061              		.align	2
+ 1062              	.L102:
+ 1063 003c 00000000 		.word	.LANCHOR0
+ 1064 0040 04000840 		.word	1074266116
+ 1065              		.cfi_endproc
+ 1066              	.LFE10:
+ 1067              		.size	CySpcLock, .-CySpcLock
+ 1068              		.section	.text.CySpcUnlock,"ax",%progbits
+ 1069              		.align	2
+ 1070              		.global	CySpcUnlock
+ 1071              		.thumb
+ 1072              		.thumb_func
+ 1073              		.type	CySpcUnlock, %function
+ 1074              	CySpcUnlock:
+ 1075              	.LFB11:
+ 682:Generated_Source\PSoC5/CySpc.c **** 
+ 683:Generated_Source\PSoC5/CySpc.c **** 
+ 684:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 685:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcUnlock
+ 686:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 687:Generated_Source\PSoC5/CySpc.c **** *  Unlocks the SPC so it can be used by someone else:
+ 688:Generated_Source\PSoC5/CySpc.c **** *   - Restores wait-pipeline enable state (PSoC5)
+ 689:Generated_Source\PSoC5/CySpc.c **** *
+ 690:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 691:Generated_Source\PSoC5/CySpc.c **** void CySpcUnlock(void)
+ 692:Generated_Source\PSoC5/CySpc.c **** {
+ 1076              		.loc 1 692 0
+ 1077              		.cfi_startproc
+ 1078              		@ args = 0, pretend = 0, frame = 0
+ 1079              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1080 0000 10B5     		push	{r4, lr}
+ 1081              		.cfi_def_cfa_offset 8
+ 1082              		.cfi_offset 4, -8
+ 1083              		.cfi_offset 14, -4
+ 693:Generated_Source\PSoC5/CySpc.c ****     uint8 interruptState;
+ 694:Generated_Source\PSoC5/CySpc.c **** 
+ 695:Generated_Source\PSoC5/CySpc.c ****     /* Enter critical section */
+ 696:Generated_Source\PSoC5/CySpc.c ****     interruptState = CyEnterCriticalSection();
+ 1084              		.loc 1 696 0
+ 1085 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+ 1086              	.LVL91:
+ 697:Generated_Source\PSoC5/CySpc.c **** 
+ 698:Generated_Source\PSoC5/CySpc.c ****     /* Release the SPC object */
+ 699:Generated_Source\PSoC5/CySpc.c ****     SpcLockState = CY_SPC_UNLOCKED;
+ 1087              		.loc 1 699 0
+ 1088 0006 094B     		ldr	r3, .L107
+ 1089 0008 0022     		movs	r2, #0
+ 700:Generated_Source\PSoC5/CySpc.c **** 
+ 701:Generated_Source\PSoC5/CySpc.c ****     #if(CY_PSOC5)
+ 702:Generated_Source\PSoC5/CySpc.c **** 
+ 703:Generated_Source\PSoC5/CySpc.c ****         if(CY_SPC_CPU_WAITPIPE_BYPASS == spcWaitPipeBypass)
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 34
+
+
+ 1090              		.loc 1 703 0
+ 1091 000a 5968     		ldr	r1, [r3, #4]
+ 699:Generated_Source\PSoC5/CySpc.c **** 
+ 1092              		.loc 1 699 0
+ 1093 000c 1A70     		strb	r2, [r3]
+ 1094              		.loc 1 703 0
+ 1095 000e 0129     		cmp	r1, #1
+ 1096 0010 08D1     		bne	.L105
+ 704:Generated_Source\PSoC5/CySpc.c ****         {
+ 705:Generated_Source\PSoC5/CySpc.c ****             /* Force to bypass pipeline registers */
+ 706:Generated_Source\PSoC5/CySpc.c ****             CY_SPC_CPU_WAITPIPE_REG |= CY_SPC_CPU_WAITPIPE_BYPASS;
+ 1097              		.loc 1 706 0
+ 1098 0012 074C     		ldr	r4, .L107+4
+ 1099 0014 2168     		ldr	r1, [r4]
+ 1100 0016 41F00101 		orr	r1, r1, #1
+ 1101 001a 2160     		str	r1, [r4]
+ 707:Generated_Source\PSoC5/CySpc.c **** 
+ 708:Generated_Source\PSoC5/CySpc.c ****             /* At least 2 NOP instructions are recommended */
+ 709:Generated_Source\PSoC5/CySpc.c ****             CY_NOP;
+ 1102              		.loc 1 709 0
+ 1103              		.syntax unified
+ 1104              	@ 709 "Generated_Source\PSoC5\CySpc.c" 1
+ 1105 001c 00BF     		NOP
+ 1106              	
+ 1107              	@ 0 "" 2
+ 710:Generated_Source\PSoC5/CySpc.c ****             CY_NOP;
+ 1108              		.loc 1 710 0
+ 1109              	@ 710 "Generated_Source\PSoC5\CySpc.c" 1
+ 1110 001e 00BF     		NOP
+ 1111              	
+ 1112              	@ 0 "" 2
+ 711:Generated_Source\PSoC5/CySpc.c ****             CY_NOP;
+ 1113              		.loc 1 711 0
+ 1114              	@ 711 "Generated_Source\PSoC5\CySpc.c" 1
+ 1115 0020 00BF     		NOP
+ 1116              	
+ 1117              	@ 0 "" 2
+ 712:Generated_Source\PSoC5/CySpc.c **** 
+ 713:Generated_Source\PSoC5/CySpc.c ****             spcWaitPipeBypass = 0u;
+ 1118              		.loc 1 713 0
+ 1119              		.thumb
+ 1120              		.syntax unified
+ 1121 0022 5A60     		str	r2, [r3, #4]
+ 1122              	.L105:
+ 714:Generated_Source\PSoC5/CySpc.c ****         }
+ 715:Generated_Source\PSoC5/CySpc.c **** 
+ 716:Generated_Source\PSoC5/CySpc.c ****     #endif  /* (CY_PSOC5) */
+ 717:Generated_Source\PSoC5/CySpc.c **** 
+ 718:Generated_Source\PSoC5/CySpc.c ****     /* Exit critical section */
+ 719:Generated_Source\PSoC5/CySpc.c ****     CyExitCriticalSection(interruptState);
+ 720:Generated_Source\PSoC5/CySpc.c **** }
+ 1123              		.loc 1 720 0
+ 1124 0024 BDE81040 		pop	{r4, lr}
+ 1125              		.cfi_restore 14
+ 1126              		.cfi_restore 4
+ 1127              		.cfi_def_cfa_offset 0
+ 719:Generated_Source\PSoC5/CySpc.c **** }
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 35
+
+
+ 1128              		.loc 1 719 0
+ 1129 0028 FFF7FEBF 		b	CyExitCriticalSection
+ 1130              	.LVL92:
+ 1131              	.L108:
+ 1132              		.align	2
+ 1133              	.L107:
+ 1134 002c 00000000 		.word	.LANCHOR0
+ 1135 0030 04000840 		.word	1074266116
+ 1136              		.cfi_endproc
+ 1137              	.LFE11:
+ 1138              		.size	CySpcUnlock, .-CySpcUnlock
+ 1139              		.section	.text.CySpcGetAlgorithm,"ax",%progbits
+ 1140              		.align	2
+ 1141              		.global	CySpcGetAlgorithm
+ 1142              		.thumb
+ 1143              		.thumb_func
+ 1144              		.type	CySpcGetAlgorithm, %function
+ 1145              	CySpcGetAlgorithm:
+ 1146              	.LFB12:
+ 721:Generated_Source\PSoC5/CySpc.c **** 
+ 722:Generated_Source\PSoC5/CySpc.c **** 
+ 723:Generated_Source\PSoC5/CySpc.c **** /*******************************************************************************
+ 724:Generated_Source\PSoC5/CySpc.c **** * Function Name: CySpcGetAlgorithm
+ 725:Generated_Source\PSoC5/CySpc.c **** ****************************************************************************//**
+ 726:Generated_Source\PSoC5/CySpc.c **** *  Downloads SPC algorithm from SPC SROM into SRAM.
+ 727:Generated_Source\PSoC5/CySpc.c **** *
+ 728:Generated_Source\PSoC5/CySpc.c **** * \return
+ 729:Generated_Source\PSoC5/CySpc.c **** *  CYRET_STARTED
+ 730:Generated_Source\PSoC5/CySpc.c **** *  CYRET_LOCKED
+ 731:Generated_Source\PSoC5/CySpc.c **** *
+ 732:Generated_Source\PSoC5/CySpc.c **** *******************************************************************************/
+ 733:Generated_Source\PSoC5/CySpc.c **** cystatus CySpcGetAlgorithm(void)
+ 734:Generated_Source\PSoC5/CySpc.c **** {
+ 1147              		.loc 1 734 0
+ 1148              		.cfi_startproc
+ 1149              		@ args = 0, pretend = 0, frame = 0
+ 1150              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1151              		@ link register save eliminated.
+ 1152              	.LVL93:
+ 735:Generated_Source\PSoC5/CySpc.c ****     cystatus status = CYRET_STARTED;
+ 736:Generated_Source\PSoC5/CySpc.c **** 
+ 737:Generated_Source\PSoC5/CySpc.c ****     /* Make sure the SPC is ready to accept command */
+ 738:Generated_Source\PSoC5/CySpc.c ****     if(CY_SPC_IDLE)
+ 1153              		.loc 1 738 0
+ 1154 0000 074B     		ldr	r3, .L112
+ 1155 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1156 0004 9B07     		lsls	r3, r3, #30
+ 1157 0006 08D5     		bpl	.L111
+ 739:Generated_Source\PSoC5/CySpc.c ****     {
+ 740:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_ONE;
+ 1158              		.loc 1 740 0
+ 1159 0008 064B     		ldr	r3, .L112+4
+ 1160 000a B620     		movs	r0, #182
+ 741:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_DWNLD_ALGORITHM);
+ 1161              		.loc 1 741 0
+ 1162 000c E021     		movs	r1, #224
+ 742:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_CMD_DWNLD_ALGORITHM;
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 36
+
+
+ 1163              		.loc 1 742 0
+ 1164 000e 0D22     		movs	r2, #13
+ 740:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_DWNLD_ALGORITHM);
+ 1165              		.loc 1 740 0
+ 1166 0010 1870     		strb	r0, [r3]
+ 741:Generated_Source\PSoC5/CySpc.c ****         CY_SPC_CPU_DATA_REG = CY_SPC_KEY_TWO(CY_SPC_CMD_DWNLD_ALGORITHM);
+ 1167              		.loc 1 741 0
+ 1168 0012 1970     		strb	r1, [r3]
+ 735:Generated_Source\PSoC5/CySpc.c **** 
+ 1169              		.loc 1 735 0
+ 1170 0014 0720     		movs	r0, #7
+ 1171              		.loc 1 742 0
+ 1172 0016 1A70     		strb	r2, [r3]
+ 1173 0018 7047     		bx	lr
+ 1174              	.L111:
+ 743:Generated_Source\PSoC5/CySpc.c ****     }
+ 744:Generated_Source\PSoC5/CySpc.c ****     else
+ 745:Generated_Source\PSoC5/CySpc.c ****     {
+ 746:Generated_Source\PSoC5/CySpc.c ****         status = CYRET_LOCKED;
+ 1175              		.loc 1 746 0
+ 1176 001a 0420     		movs	r0, #4
+ 1177              	.LVL94:
+ 747:Generated_Source\PSoC5/CySpc.c ****     }
+ 748:Generated_Source\PSoC5/CySpc.c **** 
+ 749:Generated_Source\PSoC5/CySpc.c ****     return(status);
+ 750:Generated_Source\PSoC5/CySpc.c **** }
+ 1178              		.loc 1 750 0
+ 1179 001c 7047     		bx	lr
+ 1180              	.L113:
+ 1181 001e 00BF     		.align	2
+ 1182              	.L112:
+ 1183 0020 22470040 		.word	1073760034
+ 1184 0024 20470040 		.word	1073760032
+ 1185              		.cfi_endproc
+ 1186              	.LFE12:
+ 1187              		.size	CySpcGetAlgorithm, .-CySpcGetAlgorithm
+ 1188              		.global	SpcLockState
+ 1189              		.bss
+ 1190              		.align	2
+ 1191              		.set	.LANCHOR0,. + 0
+ 1192              		.type	SpcLockState, %object
+ 1193              		.size	SpcLockState, 1
+ 1194              	SpcLockState:
+ 1195 0000 00       		.space	1
+ 1196 0001 000000   		.space	3
+ 1197              		.type	spcWaitPipeBypass, %object
+ 1198              		.size	spcWaitPipeBypass, 4
+ 1199              	spcWaitPipeBypass:
+ 1200 0004 00000000 		.space	4
+ 1201              		.text
+ 1202              	.Letext0:
+ 1203              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 1204              		.file 3 "Generated_Source\\PSoC5\\CyLib.h"
+ 1205              		.section	.debug_info,"",%progbits
+ 1206              	.Ldebug_info0:
+ 1207 0000 5D050000 		.4byte	0x55d
+ 1208 0004 0400     		.2byte	0x4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 37
+
+
+ 1209 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1210 000a 04       		.byte	0x4
+ 1211 000b 01       		.uleb128 0x1
+ 1212 000c E9010000 		.4byte	.LASF48
+ 1213 0010 0C       		.byte	0xc
+ 1214 0011 BD010000 		.4byte	.LASF49
+ 1215 0015 3B000000 		.4byte	.LASF50
+ 1216 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1217 001d 00000000 		.4byte	0
+ 1218 0021 00000000 		.4byte	.Ldebug_line0
+ 1219 0025 02       		.uleb128 0x2
+ 1220 0026 01       		.byte	0x1
+ 1221 0027 06       		.byte	0x6
+ 1222 0028 6A030000 		.4byte	.LASF0
+ 1223 002c 02       		.uleb128 0x2
+ 1224 002d 01       		.byte	0x1
+ 1225 002e 08       		.byte	0x8
+ 1226 002f 6C010000 		.4byte	.LASF1
+ 1227 0033 02       		.uleb128 0x2
+ 1228 0034 02       		.byte	0x2
+ 1229 0035 05       		.byte	0x5
+ 1230 0036 30030000 		.4byte	.LASF2
+ 1231 003a 02       		.uleb128 0x2
+ 1232 003b 02       		.byte	0x2
+ 1233 003c 07       		.byte	0x7
+ 1234 003d D6000000 		.4byte	.LASF3
+ 1235 0041 02       		.uleb128 0x2
+ 1236 0042 04       		.byte	0x4
+ 1237 0043 05       		.byte	0x5
+ 1238 0044 55030000 		.4byte	.LASF4
+ 1239 0048 02       		.uleb128 0x2
+ 1240 0049 04       		.byte	0x4
+ 1241 004a 07       		.byte	0x7
+ 1242 004b 34010000 		.4byte	.LASF5
+ 1243 004f 02       		.uleb128 0x2
+ 1244 0050 08       		.byte	0x8
+ 1245 0051 05       		.byte	0x5
+ 1246 0052 FA020000 		.4byte	.LASF6
+ 1247 0056 02       		.uleb128 0x2
+ 1248 0057 08       		.byte	0x8
+ 1249 0058 07       		.byte	0x7
+ 1250 0059 04010000 		.4byte	.LASF7
+ 1251 005d 03       		.uleb128 0x3
+ 1252 005e 04       		.byte	0x4
+ 1253 005f 05       		.byte	0x5
+ 1254 0060 696E7400 		.ascii	"int\000"
+ 1255 0064 02       		.uleb128 0x2
+ 1256 0065 04       		.byte	0x4
+ 1257 0066 07       		.byte	0x7
+ 1258 0067 DC010000 		.4byte	.LASF8
+ 1259 006b 04       		.uleb128 0x4
+ 1260 006c 46010000 		.4byte	.LASF9
+ 1261 0070 02       		.byte	0x2
+ 1262 0071 E401     		.2byte	0x1e4
+ 1263 0073 2C000000 		.4byte	0x2c
+ 1264 0077 04       		.uleb128 0x4
+ 1265 0078 8E010000 		.4byte	.LASF10
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 38
+
+
+ 1266 007c 02       		.byte	0x2
+ 1267 007d E501     		.2byte	0x1e5
+ 1268 007f 3A000000 		.4byte	0x3a
+ 1269 0083 04       		.uleb128 0x4
+ 1270 0084 9F010000 		.4byte	.LASF11
+ 1271 0088 02       		.byte	0x2
+ 1272 0089 E601     		.2byte	0x1e6
+ 1273 008b 48000000 		.4byte	0x48
+ 1274 008f 02       		.uleb128 0x2
+ 1275 0090 04       		.byte	0x4
+ 1276 0091 04       		.byte	0x4
+ 1277 0092 FE000000 		.4byte	.LASF12
+ 1278 0096 02       		.uleb128 0x2
+ 1279 0097 08       		.byte	0x8
+ 1280 0098 04       		.byte	0x4
+ 1281 0099 7A010000 		.4byte	.LASF13
+ 1282 009d 02       		.uleb128 0x2
+ 1283 009e 01       		.byte	0x1
+ 1284 009f 08       		.byte	0x8
+ 1285 00a0 12030000 		.4byte	.LASF14
+ 1286 00a4 04       		.uleb128 0x4
+ 1287 00a5 13000000 		.4byte	.LASF15
+ 1288 00a9 02       		.byte	0x2
+ 1289 00aa 8602     		.2byte	0x286
+ 1290 00ac 48000000 		.4byte	0x48
+ 1291 00b0 04       		.uleb128 0x4
+ 1292 00b1 20010000 		.4byte	.LASF16
+ 1293 00b5 02       		.byte	0x2
+ 1294 00b6 8E02     		.2byte	0x28e
+ 1295 00b8 BC000000 		.4byte	0xbc
+ 1296 00bc 05       		.uleb128 0x5
+ 1297 00bd 6B000000 		.4byte	0x6b
+ 1298 00c1 04       		.uleb128 0x4
+ 1299 00c2 1C000000 		.4byte	.LASF17
+ 1300 00c6 02       		.byte	0x2
+ 1301 00c7 9002     		.2byte	0x290
+ 1302 00c9 CD000000 		.4byte	0xcd
+ 1303 00cd 05       		.uleb128 0x5
+ 1304 00ce 83000000 		.4byte	0x83
+ 1305 00d2 02       		.uleb128 0x2
+ 1306 00d3 08       		.byte	0x8
+ 1307 00d4 04       		.byte	0x4
+ 1308 00d5 5E030000 		.4byte	.LASF18
+ 1309 00d9 02       		.uleb128 0x2
+ 1310 00da 04       		.byte	0x4
+ 1311 00db 07       		.byte	0x7
+ 1312 00dc D4020000 		.4byte	.LASF19
+ 1313 00e0 06       		.uleb128 0x6
+ 1314 00e1 22000000 		.4byte	.LASF20
+ 1315 00e5 01       		.byte	0x1
+ 1316 00e6 47       		.byte	0x47
+ 1317 00e7 00000000 		.4byte	.LFB0
+ 1318 00eb 2C000000 		.4byte	.LFE0-.LFB0
+ 1319 00ef 01       		.uleb128 0x1
+ 1320 00f0 9C       		.byte	0x9c
+ 1321 00f1 17010000 		.4byte	0x117
+ 1322 00f5 07       		.uleb128 0x7
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 39
+
+
+ 1323 00f6 25010000 		.4byte	.LASF22
+ 1324 00fa 01       		.byte	0x1
+ 1325 00fb 4A       		.byte	0x4a
+ 1326 00fc 6B000000 		.4byte	0x6b
+ 1327 0100 00000000 		.4byte	.LLST0
+ 1328 0104 08       		.uleb128 0x8
+ 1329 0105 06000000 		.4byte	.LVL0
+ 1330 0109 3F050000 		.4byte	0x53f
+ 1331 010d 09       		.uleb128 0x9
+ 1332 010e 22000000 		.4byte	.LVL1
+ 1333 0112 4A050000 		.4byte	0x54a
+ 1334 0116 00       		.byte	0
+ 1335 0117 06       		.uleb128 0x6
+ 1336 0118 CC000000 		.4byte	.LASF21
+ 1337 011c 01       		.byte	0x1
+ 1338 011d 5A       		.byte	0x5a
+ 1339 011e 00000000 		.4byte	.LFB1
+ 1340 0122 2C000000 		.4byte	.LFE1-.LFB1
+ 1341 0126 01       		.uleb128 0x1
+ 1342 0127 9C       		.byte	0x9c
+ 1343 0128 4E010000 		.4byte	0x14e
+ 1344 012c 07       		.uleb128 0x7
+ 1345 012d 25010000 		.4byte	.LASF22
+ 1346 0131 01       		.byte	0x1
+ 1347 0132 5D       		.byte	0x5d
+ 1348 0133 6B000000 		.4byte	0x6b
+ 1349 0137 13000000 		.4byte	.LLST1
+ 1350 013b 08       		.uleb128 0x8
+ 1351 013c 06000000 		.4byte	.LVL2
+ 1352 0140 3F050000 		.4byte	0x53f
+ 1353 0144 09       		.uleb128 0x9
+ 1354 0145 22000000 		.4byte	.LVL3
+ 1355 0149 4A050000 		.4byte	0x54a
+ 1356 014d 00       		.byte	0
+ 1357 014e 0A       		.uleb128 0xa
+ 1358 014f E9000000 		.4byte	.LASF25
+ 1359 0153 01       		.byte	0x1
+ 1360 0154 77       		.byte	0x77
+ 1361 0155 6B000000 		.4byte	0x6b
+ 1362 0159 00000000 		.4byte	.LFB2
+ 1363 015d 40000000 		.4byte	.LFE2-.LFB2
+ 1364 0161 01       		.uleb128 0x1
+ 1365 0162 9C       		.byte	0x9c
+ 1366 0163 A2010000 		.4byte	0x1a2
+ 1367 0167 0B       		.uleb128 0xb
+ 1368 0168 AE020000 		.4byte	.LASF23
+ 1369 016c 01       		.byte	0x1
+ 1370 016d 77       		.byte	0x77
+ 1371 016e A2010000 		.4byte	0x1a2
+ 1372 0172 26000000 		.4byte	.LLST2
+ 1373 0176 0B       		.uleb128 0xb
+ 1374 0177 1B010000 		.4byte	.LASF24
+ 1375 017b 01       		.byte	0x1
+ 1376 017c 77       		.byte	0x77
+ 1377 017d 6B000000 		.4byte	0x6b
+ 1378 0181 47000000 		.4byte	.LLST3
+ 1379 0185 0C       		.uleb128 0xc
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 40
+
+
+ 1380 0186 6900     		.ascii	"i\000"
+ 1381 0188 01       		.byte	0x1
+ 1382 0189 79       		.byte	0x79
+ 1383 018a 6B000000 		.4byte	0x6b
+ 1384 018e 68000000 		.4byte	.LLST4
+ 1385 0192 0D       		.uleb128 0xd
+ 1386 0193 1E000000 		.4byte	.LVL6
+ 1387 0197 55050000 		.4byte	0x555
+ 1388 019b 0E       		.uleb128 0xe
+ 1389 019c 01       		.uleb128 0x1
+ 1390 019d 50       		.byte	0x50
+ 1391 019e 01       		.uleb128 0x1
+ 1392 019f 31       		.byte	0x31
+ 1393 01a0 00       		.byte	0
+ 1394 01a1 00       		.byte	0
+ 1395 01a2 0F       		.uleb128 0xf
+ 1396 01a3 04       		.byte	0x4
+ 1397 01a4 6B000000 		.4byte	0x6b
+ 1398 01a8 0A       		.uleb128 0xa
+ 1399 01a9 00000000 		.4byte	.LASF26
+ 1400 01ad 01       		.byte	0x1
+ 1401 01ae A0       		.byte	0xa0
+ 1402 01af A4000000 		.4byte	0xa4
+ 1403 01b3 00000000 		.4byte	.LFB3
+ 1404 01b7 70000000 		.4byte	.LFE3-.LFB3
+ 1405 01bb 01       		.uleb128 0x1
+ 1406 01bc 9C       		.byte	0x9c
+ 1407 01bd 1A020000 		.4byte	0x21a
+ 1408 01c1 0B       		.uleb128 0xb
+ 1409 01c2 66010000 		.4byte	.LASF27
+ 1410 01c6 01       		.byte	0x1
+ 1411 01c7 A0       		.byte	0xa0
+ 1412 01c8 6B000000 		.4byte	0x6b
+ 1413 01cc 8F000000 		.4byte	.LLST5
+ 1414 01d0 0B       		.uleb128 0xb
+ 1415 01d1 C4000000 		.4byte	.LASF28
+ 1416 01d5 01       		.byte	0x1
+ 1417 01d6 A0       		.byte	0xa0
+ 1418 01d7 77000000 		.4byte	0x77
+ 1419 01db FB000000 		.4byte	.LLST6
+ 1420 01df 0B       		.uleb128 0xb
+ 1421 01e0 AE020000 		.4byte	.LASF23
+ 1422 01e4 01       		.byte	0x1
+ 1423 01e5 A0       		.byte	0xa0
+ 1424 01e6 1A020000 		.4byte	0x21a
+ 1425 01ea 35010000 		.4byte	.LLST7
+ 1426 01ee 0B       		.uleb128 0xb
+ 1427 01ef 1B010000 		.4byte	.LASF24
+ 1428 01f3 01       		.byte	0x1
+ 1429 01f4 A0       		.byte	0xa0
+ 1430 01f5 6B000000 		.4byte	0x6b
+ 1431 01f9 6F010000 		.4byte	.LLST8
+ 1432 01fd 07       		.uleb128 0x7
+ 1433 01fe F7000000 		.4byte	.LASF29
+ 1434 0202 01       		.byte	0x1
+ 1435 0203 A3       		.byte	0xa3
+ 1436 0204 A4000000 		.4byte	0xa4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 41
+
+
+ 1437 0208 A9010000 		.4byte	.LLST9
+ 1438 020c 0C       		.uleb128 0xc
+ 1439 020d 6900     		.ascii	"i\000"
+ 1440 020f 01       		.byte	0x1
+ 1441 0210 A4       		.byte	0xa4
+ 1442 0211 6B000000 		.4byte	0x6b
+ 1443 0215 02020000 		.4byte	.LLST10
+ 1444 0219 00       		.byte	0
+ 1445 021a 0F       		.uleb128 0xf
+ 1446 021b 04       		.byte	0x4
+ 1447 021c 20020000 		.4byte	0x220
+ 1448 0220 10       		.uleb128 0x10
+ 1449 0221 6B000000 		.4byte	0x6b
+ 1450 0225 0A       		.uleb128 0xa
+ 1451 0226 C7020000 		.4byte	.LASF30
+ 1452 022a 01       		.byte	0x1
+ 1453 022b EE       		.byte	0xee
+ 1454 022c A4000000 		.4byte	0xa4
+ 1455 0230 00000000 		.4byte	.LFB4
+ 1456 0234 50000000 		.4byte	.LFE4-.LFB4
+ 1457 0238 01       		.uleb128 0x1
+ 1458 0239 9C       		.byte	0x9c
+ 1459 023a 88020000 		.4byte	0x288
+ 1460 023e 0B       		.uleb128 0xb
+ 1461 023f 66010000 		.4byte	.LASF27
+ 1462 0243 01       		.byte	0x1
+ 1463 0244 EE       		.byte	0xee
+ 1464 0245 6B000000 		.4byte	0x6b
+ 1465 0249 3C020000 		.4byte	.LLST11
+ 1466 024d 0B       		.uleb128 0xb
+ 1467 024e AE020000 		.4byte	.LASF23
+ 1468 0252 01       		.byte	0x1
+ 1469 0253 EE       		.byte	0xee
+ 1470 0254 1A020000 		.4byte	0x21a
+ 1471 0258 9B020000 		.4byte	.LLST12
+ 1472 025c 0B       		.uleb128 0xb
+ 1473 025d 1B010000 		.4byte	.LASF24
+ 1474 0261 01       		.byte	0x1
+ 1475 0262 EE       		.byte	0xee
+ 1476 0263 77000000 		.4byte	0x77
+ 1477 0267 C7020000 		.4byte	.LLST13
+ 1478 026b 07       		.uleb128 0x7
+ 1479 026c F7000000 		.4byte	.LASF29
+ 1480 0270 01       		.byte	0x1
+ 1481 0271 F0       		.byte	0xf0
+ 1482 0272 A4000000 		.4byte	0xa4
+ 1483 0276 F3020000 		.4byte	.LLST14
+ 1484 027a 0C       		.uleb128 0xc
+ 1485 027b 6900     		.ascii	"i\000"
+ 1486 027d 01       		.byte	0x1
+ 1487 027e F1       		.byte	0xf1
+ 1488 027f 77000000 		.4byte	0x77
+ 1489 0283 40030000 		.4byte	.LLST15
+ 1490 0287 00       		.byte	0
+ 1491 0288 11       		.uleb128 0x11
+ 1492 0289 76030000 		.4byte	.LASF31
+ 1493 028d 01       		.byte	0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 42
+
+
+ 1494 028e 3001     		.2byte	0x130
+ 1495 0290 A4000000 		.4byte	0xa4
+ 1496 0294 00000000 		.4byte	.LFB5
+ 1497 0298 78000000 		.4byte	.LFE5-.LFB5
+ 1498 029c 01       		.uleb128 0x1
+ 1499 029d 9C       		.byte	0x9c
+ 1500 029e 11030000 		.4byte	0x311
+ 1501 02a2 12       		.uleb128 0x12
+ 1502 02a3 66010000 		.4byte	.LASF27
+ 1503 02a7 01       		.byte	0x1
+ 1504 02a8 3001     		.2byte	0x130
+ 1505 02aa 6B000000 		.4byte	0x6b
+ 1506 02ae 7A030000 		.4byte	.LLST16
+ 1507 02b2 13       		.uleb128 0x13
+ 1508 02b3 726F7700 		.ascii	"row\000"
+ 1509 02b7 01       		.byte	0x1
+ 1510 02b8 3001     		.2byte	0x130
+ 1511 02ba 77000000 		.4byte	0x77
+ 1512 02be E6030000 		.4byte	.LLST17
+ 1513 02c2 12       		.uleb128 0x12
+ 1514 02c3 AE020000 		.4byte	.LASF23
+ 1515 02c7 01       		.byte	0x1
+ 1516 02c8 3001     		.2byte	0x130
+ 1517 02ca 1A020000 		.4byte	0x21a
+ 1518 02ce 20040000 		.4byte	.LLST18
+ 1519 02d2 12       		.uleb128 0x12
+ 1520 02d3 1B010000 		.4byte	.LASF24
+ 1521 02d7 01       		.byte	0x1
+ 1522 02d8 3001     		.2byte	0x130
+ 1523 02da 77000000 		.4byte	0x77
+ 1524 02de 5A040000 		.4byte	.LLST19
+ 1525 02e2 14       		.uleb128 0x14
+ 1526 02e3 F7000000 		.4byte	.LASF29
+ 1527 02e7 01       		.byte	0x1
+ 1528 02e8 3301     		.2byte	0x133
+ 1529 02ea A4000000 		.4byte	0xa4
+ 1530 02ee 94040000 		.4byte	.LLST20
+ 1531 02f2 15       		.uleb128 0x15
+ 1532 02f3 6900     		.ascii	"i\000"
+ 1533 02f5 01       		.byte	0x1
+ 1534 02f6 3401     		.2byte	0x134
+ 1535 02f8 77000000 		.4byte	0x77
+ 1536 02fc ED040000 		.4byte	.LLST21
+ 1537 0300 14       		.uleb128 0x14
+ 1538 0301 29030000 		.4byte	.LASF32
+ 1539 0305 01       		.byte	0x1
+ 1540 0306 3701     		.2byte	0x137
+ 1541 0308 83000000 		.4byte	0x83
+ 1542 030c 68050000 		.4byte	.LLST22
+ 1543 0310 00       		.byte	0
+ 1544 0311 11       		.uleb128 0x11
+ 1545 0312 2D000000 		.4byte	.LASF33
+ 1546 0316 01       		.byte	0x1
+ 1547 0317 B801     		.2byte	0x1b8
+ 1548 0319 A4000000 		.4byte	0xa4
+ 1549 031d 00000000 		.4byte	.LFB6
+ 1550 0321 48000000 		.4byte	.LFE6-.LFB6
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 43
+
+
+ 1551 0325 01       		.uleb128 0x1
+ 1552 0326 9C       		.byte	0x9c
+ 1553 0327 78030000 		.4byte	0x378
+ 1554 032b 12       		.uleb128 0x12
+ 1555 032c 66010000 		.4byte	.LASF27
+ 1556 0330 01       		.byte	0x1
+ 1557 0331 B801     		.2byte	0x1b8
+ 1558 0333 6B000000 		.4byte	0x6b
+ 1559 0337 88050000 		.4byte	.LLST23
+ 1560 033b 12       		.uleb128 0x12
+ 1561 033c C4000000 		.4byte	.LASF28
+ 1562 0340 01       		.byte	0x1
+ 1563 0341 B801     		.2byte	0x1b8
+ 1564 0343 77000000 		.4byte	0x77
+ 1565 0347 DB050000 		.4byte	.LLST24
+ 1566 034b 16       		.uleb128 0x16
+ 1567 034c 59010000 		.4byte	.LASF34
+ 1568 0350 01       		.byte	0x1
+ 1569 0351 B801     		.2byte	0x1b8
+ 1570 0353 6B000000 		.4byte	0x6b
+ 1571 0357 01       		.uleb128 0x1
+ 1572 0358 52       		.byte	0x52
+ 1573 0359 16       		.uleb128 0x16
+ 1574 035a A0020000 		.4byte	.LASF35
+ 1575 035e 01       		.byte	0x1
+ 1576 035f B801     		.2byte	0x1b8
+ 1577 0361 6B000000 		.4byte	0x6b
+ 1578 0365 01       		.uleb128 0x1
+ 1579 0366 53       		.byte	0x53
+ 1580 0367 14       		.uleb128 0x14
+ 1581 0368 F7000000 		.4byte	.LASF29
+ 1582 036c 01       		.byte	0x1
+ 1583 036d BB01     		.2byte	0x1bb
+ 1584 036f A4000000 		.4byte	0xa4
+ 1585 0373 07060000 		.4byte	.LLST25
+ 1586 0377 00       		.byte	0
+ 1587 0378 11       		.uleb128 0x11
+ 1588 0379 E9020000 		.4byte	.LASF36
+ 1589 037d 01       		.byte	0x1
+ 1590 037e EC01     		.2byte	0x1ec
+ 1591 0380 A4000000 		.4byte	0xa4
+ 1592 0384 00000000 		.4byte	.LFB7
+ 1593 0388 3C000000 		.4byte	.LFE7-.LFB7
+ 1594 038c 01       		.uleb128 0x1
+ 1595 038d 9C       		.byte	0x9c
+ 1596 038e C1030000 		.4byte	0x3c1
+ 1597 0392 12       		.uleb128 0x12
+ 1598 0393 66010000 		.4byte	.LASF27
+ 1599 0397 01       		.byte	0x1
+ 1600 0398 EC01     		.2byte	0x1ec
+ 1601 039a 6B000000 		.4byte	0x6b
+ 1602 039e 54060000 		.4byte	.LLST26
+ 1603 03a2 16       		.uleb128 0x16
+ 1604 03a3 48030000 		.4byte	.LASF37
+ 1605 03a7 01       		.byte	0x1
+ 1606 03a8 EC01     		.2byte	0x1ec
+ 1607 03aa 6B000000 		.4byte	0x6b
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 44
+
+
+ 1608 03ae 01       		.uleb128 0x1
+ 1609 03af 51       		.byte	0x51
+ 1610 03b0 14       		.uleb128 0x14
+ 1611 03b1 F7000000 		.4byte	.LASF29
+ 1612 03b5 01       		.byte	0x1
+ 1613 03b6 EE01     		.2byte	0x1ee
+ 1614 03b8 A4000000 		.4byte	0xa4
+ 1615 03bc A7060000 		.4byte	.LLST27
+ 1616 03c0 00       		.byte	0
+ 1617 03c1 11       		.uleb128 0x11
+ 1618 03c2 3A030000 		.4byte	.LASF38
+ 1619 03c6 01       		.byte	0x1
+ 1620 03c7 2402     		.2byte	0x224
+ 1621 03c9 A4000000 		.4byte	0xa4
+ 1622 03cd 00000000 		.4byte	.LFB8
+ 1623 03d1 48000000 		.4byte	.LFE8-.LFB8
+ 1624 03d5 01       		.uleb128 0x1
+ 1625 03d6 9C       		.byte	0x9c
+ 1626 03d7 28040000 		.4byte	0x428
+ 1627 03db 12       		.uleb128 0x12
+ 1628 03dc 66010000 		.4byte	.LASF27
+ 1629 03e0 01       		.byte	0x1
+ 1630 03e1 2402     		.2byte	0x224
+ 1631 03e3 6B000000 		.4byte	0x6b
+ 1632 03e7 F4060000 		.4byte	.LLST28
+ 1633 03eb 12       		.uleb128 0x12
+ 1634 03ec C4000000 		.4byte	.LASF28
+ 1635 03f0 01       		.byte	0x1
+ 1636 03f1 2402     		.2byte	0x224
+ 1637 03f3 77000000 		.4byte	0x77
+ 1638 03f7 47070000 		.4byte	.LLST29
+ 1639 03fb 16       		.uleb128 0x16
+ 1640 03fc 59010000 		.4byte	.LASF34
+ 1641 0400 01       		.byte	0x1
+ 1642 0401 2402     		.2byte	0x224
+ 1643 0403 6B000000 		.4byte	0x6b
+ 1644 0407 01       		.uleb128 0x1
+ 1645 0408 52       		.byte	0x52
+ 1646 0409 16       		.uleb128 0x16
+ 1647 040a A0020000 		.4byte	.LASF35
+ 1648 040e 01       		.byte	0x1
+ 1649 040f 2402     		.2byte	0x224
+ 1650 0411 6B000000 		.4byte	0x6b
+ 1651 0415 01       		.uleb128 0x1
+ 1652 0416 53       		.byte	0x53
+ 1653 0417 14       		.uleb128 0x14
+ 1654 0418 F7000000 		.4byte	.LASF29
+ 1655 041c 01       		.byte	0x1
+ 1656 041d 2702     		.2byte	0x227
+ 1657 041f A4000000 		.4byte	0xa4
+ 1658 0423 73070000 		.4byte	.LLST30
+ 1659 0427 00       		.byte	0
+ 1660 0428 11       		.uleb128 0x11
+ 1661 0429 81010000 		.4byte	.LASF39
+ 1662 042d 01       		.byte	0x1
+ 1663 042e 5D02     		.2byte	0x25d
+ 1664 0430 A4000000 		.4byte	0xa4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 45
+
+
+ 1665 0434 00000000 		.4byte	.LFB9
+ 1666 0438 38000000 		.4byte	.LFE9-.LFB9
+ 1667 043c 01       		.uleb128 0x1
+ 1668 043d 9C       		.byte	0x9c
+ 1669 043e 63040000 		.4byte	0x463
+ 1670 0442 12       		.uleb128 0x12
+ 1671 0443 87030000 		.4byte	.LASF40
+ 1672 0447 01       		.byte	0x1
+ 1673 0448 5D02     		.2byte	0x25d
+ 1674 044a 6B000000 		.4byte	0x6b
+ 1675 044e C0070000 		.4byte	.LLST31
+ 1676 0452 14       		.uleb128 0x14
+ 1677 0453 F7000000 		.4byte	.LASF29
+ 1678 0457 01       		.byte	0x1
+ 1679 0458 5F02     		.2byte	0x25f
+ 1680 045a A4000000 		.4byte	0xa4
+ 1681 045e 11080000 		.4byte	.LLST32
+ 1682 0462 00       		.byte	0
+ 1683 0463 11       		.uleb128 0x11
+ 1684 0464 95010000 		.4byte	.LASF41
+ 1685 0468 01       		.byte	0x1
+ 1686 0469 8602     		.2byte	0x286
+ 1687 046b A4000000 		.4byte	0xa4
+ 1688 046f 00000000 		.4byte	.LFB10
+ 1689 0473 44000000 		.4byte	.LFE10-.LFB10
+ 1690 0477 01       		.uleb128 0x1
+ 1691 0478 9C       		.byte	0x9c
+ 1692 0479 B9040000 		.4byte	0x4b9
+ 1693 047d 14       		.uleb128 0x14
+ 1694 047e F7000000 		.4byte	.LASF29
+ 1695 0482 01       		.byte	0x1
+ 1696 0483 8802     		.2byte	0x288
+ 1697 0485 A4000000 		.4byte	0xa4
+ 1698 0489 5E080000 		.4byte	.LLST33
+ 1699 048d 14       		.uleb128 0x14
+ 1700 048e 25010000 		.4byte	.LASF22
+ 1701 0492 01       		.byte	0x1
+ 1702 0493 8902     		.2byte	0x289
+ 1703 0495 6B000000 		.4byte	0x6b
+ 1704 0499 AB080000 		.4byte	.LLST34
+ 1705 049d 08       		.uleb128 0x8
+ 1706 049e 06000000 		.4byte	.LVL83
+ 1707 04a2 3F050000 		.4byte	0x53f
+ 1708 04a6 08       		.uleb128 0x8
+ 1709 04a7 12000000 		.4byte	.LVL85
+ 1710 04ab 4A050000 		.4byte	0x54a
+ 1711 04af 08       		.uleb128 0x8
+ 1712 04b0 38000000 		.4byte	.LVL89
+ 1713 04b4 4A050000 		.4byte	0x54a
+ 1714 04b8 00       		.byte	0
+ 1715 04b9 17       		.uleb128 0x17
+ 1716 04ba DD020000 		.4byte	.LASF42
+ 1717 04be 01       		.byte	0x1
+ 1718 04bf B302     		.2byte	0x2b3
+ 1719 04c1 00000000 		.4byte	.LFB11
+ 1720 04c5 34000000 		.4byte	.LFE11-.LFB11
+ 1721 04c9 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 46
+
+
+ 1722 04ca 9C       		.byte	0x9c
+ 1723 04cb F2040000 		.4byte	0x4f2
+ 1724 04cf 14       		.uleb128 0x14
+ 1725 04d0 25010000 		.4byte	.LASF22
+ 1726 04d4 01       		.byte	0x1
+ 1727 04d5 B502     		.2byte	0x2b5
+ 1728 04d7 6B000000 		.4byte	0x6b
+ 1729 04db C9080000 		.4byte	.LLST35
+ 1730 04df 08       		.uleb128 0x8
+ 1731 04e0 06000000 		.4byte	.LVL91
+ 1732 04e4 3F050000 		.4byte	0x53f
+ 1733 04e8 09       		.uleb128 0x9
+ 1734 04e9 2C000000 		.4byte	.LVL92
+ 1735 04ed 4A050000 		.4byte	0x54a
+ 1736 04f1 00       		.byte	0
+ 1737 04f2 11       		.uleb128 0x11
+ 1738 04f3 17030000 		.4byte	.LASF43
+ 1739 04f7 01       		.byte	0x1
+ 1740 04f8 DD02     		.2byte	0x2dd
+ 1741 04fa A4000000 		.4byte	0xa4
+ 1742 04fe 00000000 		.4byte	.LFB12
+ 1743 0502 28000000 		.4byte	.LFE12-.LFB12
+ 1744 0506 01       		.uleb128 0x1
+ 1745 0507 9C       		.byte	0x9c
+ 1746 0508 1D050000 		.4byte	0x51d
+ 1747 050c 14       		.uleb128 0x14
+ 1748 050d F7000000 		.4byte	.LASF29
+ 1749 0511 01       		.byte	0x1
+ 1750 0512 DF02     		.2byte	0x2df
+ 1751 0514 A4000000 		.4byte	0xa4
+ 1752 0518 DC080000 		.4byte	.LLST36
+ 1753 051c 00       		.byte	0
+ 1754 051d 18       		.uleb128 0x18
+ 1755 051e B5020000 		.4byte	.LASF44
+ 1756 0522 01       		.byte	0x1
+ 1757 0523 3C       		.byte	0x3c
+ 1758 0524 83000000 		.4byte	0x83
+ 1759 0528 05       		.uleb128 0x5
+ 1760 0529 03       		.byte	0x3
+ 1761 052a 04000000 		.4byte	spcWaitPipeBypass
+ 1762 052e 19       		.uleb128 0x19
+ 1763 052f 4C010000 		.4byte	.LASF51
+ 1764 0533 01       		.byte	0x1
+ 1765 0534 30       		.byte	0x30
+ 1766 0535 6B000000 		.4byte	0x6b
+ 1767 0539 05       		.uleb128 0x5
+ 1768 053a 03       		.byte	0x3
+ 1769 053b 00000000 		.4byte	SpcLockState
+ 1770 053f 1A       		.uleb128 0x1a
+ 1771 0540 A6010000 		.4byte	.LASF45
+ 1772 0544 A6010000 		.4byte	.LASF45
+ 1773 0548 03       		.byte	0x3
+ 1774 0549 7D       		.byte	0x7d
+ 1775 054a 1A       		.uleb128 0x1a
+ 1776 054b 8A020000 		.4byte	.LASF46
+ 1777 054f 8A020000 		.4byte	.LASF46
+ 1778 0553 03       		.byte	0x3
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 47
+
+
+ 1779 0554 7E       		.byte	0x7e
+ 1780 0555 1A       		.uleb128 0x1a
+ 1781 0556 08030000 		.4byte	.LASF47
+ 1782 055a 08030000 		.4byte	.LASF47
+ 1783 055e 03       		.byte	0x3
+ 1784 055f 77       		.byte	0x77
+ 1785 0560 00       		.byte	0
+ 1786              		.section	.debug_abbrev,"",%progbits
+ 1787              	.Ldebug_abbrev0:
+ 1788 0000 01       		.uleb128 0x1
+ 1789 0001 11       		.uleb128 0x11
+ 1790 0002 01       		.byte	0x1
+ 1791 0003 25       		.uleb128 0x25
+ 1792 0004 0E       		.uleb128 0xe
+ 1793 0005 13       		.uleb128 0x13
+ 1794 0006 0B       		.uleb128 0xb
+ 1795 0007 03       		.uleb128 0x3
+ 1796 0008 0E       		.uleb128 0xe
+ 1797 0009 1B       		.uleb128 0x1b
+ 1798 000a 0E       		.uleb128 0xe
+ 1799 000b 55       		.uleb128 0x55
+ 1800 000c 17       		.uleb128 0x17
+ 1801 000d 11       		.uleb128 0x11
+ 1802 000e 01       		.uleb128 0x1
+ 1803 000f 10       		.uleb128 0x10
+ 1804 0010 17       		.uleb128 0x17
+ 1805 0011 00       		.byte	0
+ 1806 0012 00       		.byte	0
+ 1807 0013 02       		.uleb128 0x2
+ 1808 0014 24       		.uleb128 0x24
+ 1809 0015 00       		.byte	0
+ 1810 0016 0B       		.uleb128 0xb
+ 1811 0017 0B       		.uleb128 0xb
+ 1812 0018 3E       		.uleb128 0x3e
+ 1813 0019 0B       		.uleb128 0xb
+ 1814 001a 03       		.uleb128 0x3
+ 1815 001b 0E       		.uleb128 0xe
+ 1816 001c 00       		.byte	0
+ 1817 001d 00       		.byte	0
+ 1818 001e 03       		.uleb128 0x3
+ 1819 001f 24       		.uleb128 0x24
+ 1820 0020 00       		.byte	0
+ 1821 0021 0B       		.uleb128 0xb
+ 1822 0022 0B       		.uleb128 0xb
+ 1823 0023 3E       		.uleb128 0x3e
+ 1824 0024 0B       		.uleb128 0xb
+ 1825 0025 03       		.uleb128 0x3
+ 1826 0026 08       		.uleb128 0x8
+ 1827 0027 00       		.byte	0
+ 1828 0028 00       		.byte	0
+ 1829 0029 04       		.uleb128 0x4
+ 1830 002a 16       		.uleb128 0x16
+ 1831 002b 00       		.byte	0
+ 1832 002c 03       		.uleb128 0x3
+ 1833 002d 0E       		.uleb128 0xe
+ 1834 002e 3A       		.uleb128 0x3a
+ 1835 002f 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 48
+
+
+ 1836 0030 3B       		.uleb128 0x3b
+ 1837 0031 05       		.uleb128 0x5
+ 1838 0032 49       		.uleb128 0x49
+ 1839 0033 13       		.uleb128 0x13
+ 1840 0034 00       		.byte	0
+ 1841 0035 00       		.byte	0
+ 1842 0036 05       		.uleb128 0x5
+ 1843 0037 35       		.uleb128 0x35
+ 1844 0038 00       		.byte	0
+ 1845 0039 49       		.uleb128 0x49
+ 1846 003a 13       		.uleb128 0x13
+ 1847 003b 00       		.byte	0
+ 1848 003c 00       		.byte	0
+ 1849 003d 06       		.uleb128 0x6
+ 1850 003e 2E       		.uleb128 0x2e
+ 1851 003f 01       		.byte	0x1
+ 1852 0040 3F       		.uleb128 0x3f
+ 1853 0041 19       		.uleb128 0x19
+ 1854 0042 03       		.uleb128 0x3
+ 1855 0043 0E       		.uleb128 0xe
+ 1856 0044 3A       		.uleb128 0x3a
+ 1857 0045 0B       		.uleb128 0xb
+ 1858 0046 3B       		.uleb128 0x3b
+ 1859 0047 0B       		.uleb128 0xb
+ 1860 0048 27       		.uleb128 0x27
+ 1861 0049 19       		.uleb128 0x19
+ 1862 004a 11       		.uleb128 0x11
+ 1863 004b 01       		.uleb128 0x1
+ 1864 004c 12       		.uleb128 0x12
+ 1865 004d 06       		.uleb128 0x6
+ 1866 004e 40       		.uleb128 0x40
+ 1867 004f 18       		.uleb128 0x18
+ 1868 0050 9742     		.uleb128 0x2117
+ 1869 0052 19       		.uleb128 0x19
+ 1870 0053 01       		.uleb128 0x1
+ 1871 0054 13       		.uleb128 0x13
+ 1872 0055 00       		.byte	0
+ 1873 0056 00       		.byte	0
+ 1874 0057 07       		.uleb128 0x7
+ 1875 0058 34       		.uleb128 0x34
+ 1876 0059 00       		.byte	0
+ 1877 005a 03       		.uleb128 0x3
+ 1878 005b 0E       		.uleb128 0xe
+ 1879 005c 3A       		.uleb128 0x3a
+ 1880 005d 0B       		.uleb128 0xb
+ 1881 005e 3B       		.uleb128 0x3b
+ 1882 005f 0B       		.uleb128 0xb
+ 1883 0060 49       		.uleb128 0x49
+ 1884 0061 13       		.uleb128 0x13
+ 1885 0062 02       		.uleb128 0x2
+ 1886 0063 17       		.uleb128 0x17
+ 1887 0064 00       		.byte	0
+ 1888 0065 00       		.byte	0
+ 1889 0066 08       		.uleb128 0x8
+ 1890 0067 898201   		.uleb128 0x4109
+ 1891 006a 00       		.byte	0
+ 1892 006b 11       		.uleb128 0x11
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 49
+
+
+ 1893 006c 01       		.uleb128 0x1
+ 1894 006d 31       		.uleb128 0x31
+ 1895 006e 13       		.uleb128 0x13
+ 1896 006f 00       		.byte	0
+ 1897 0070 00       		.byte	0
+ 1898 0071 09       		.uleb128 0x9
+ 1899 0072 898201   		.uleb128 0x4109
+ 1900 0075 00       		.byte	0
+ 1901 0076 11       		.uleb128 0x11
+ 1902 0077 01       		.uleb128 0x1
+ 1903 0078 9542     		.uleb128 0x2115
+ 1904 007a 19       		.uleb128 0x19
+ 1905 007b 31       		.uleb128 0x31
+ 1906 007c 13       		.uleb128 0x13
+ 1907 007d 00       		.byte	0
+ 1908 007e 00       		.byte	0
+ 1909 007f 0A       		.uleb128 0xa
+ 1910 0080 2E       		.uleb128 0x2e
+ 1911 0081 01       		.byte	0x1
+ 1912 0082 3F       		.uleb128 0x3f
+ 1913 0083 19       		.uleb128 0x19
+ 1914 0084 03       		.uleb128 0x3
+ 1915 0085 0E       		.uleb128 0xe
+ 1916 0086 3A       		.uleb128 0x3a
+ 1917 0087 0B       		.uleb128 0xb
+ 1918 0088 3B       		.uleb128 0x3b
+ 1919 0089 0B       		.uleb128 0xb
+ 1920 008a 27       		.uleb128 0x27
+ 1921 008b 19       		.uleb128 0x19
+ 1922 008c 49       		.uleb128 0x49
+ 1923 008d 13       		.uleb128 0x13
+ 1924 008e 11       		.uleb128 0x11
+ 1925 008f 01       		.uleb128 0x1
+ 1926 0090 12       		.uleb128 0x12
+ 1927 0091 06       		.uleb128 0x6
+ 1928 0092 40       		.uleb128 0x40
+ 1929 0093 18       		.uleb128 0x18
+ 1930 0094 9742     		.uleb128 0x2117
+ 1931 0096 19       		.uleb128 0x19
+ 1932 0097 01       		.uleb128 0x1
+ 1933 0098 13       		.uleb128 0x13
+ 1934 0099 00       		.byte	0
+ 1935 009a 00       		.byte	0
+ 1936 009b 0B       		.uleb128 0xb
+ 1937 009c 05       		.uleb128 0x5
+ 1938 009d 00       		.byte	0
+ 1939 009e 03       		.uleb128 0x3
+ 1940 009f 0E       		.uleb128 0xe
+ 1941 00a0 3A       		.uleb128 0x3a
+ 1942 00a1 0B       		.uleb128 0xb
+ 1943 00a2 3B       		.uleb128 0x3b
+ 1944 00a3 0B       		.uleb128 0xb
+ 1945 00a4 49       		.uleb128 0x49
+ 1946 00a5 13       		.uleb128 0x13
+ 1947 00a6 02       		.uleb128 0x2
+ 1948 00a7 17       		.uleb128 0x17
+ 1949 00a8 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 50
+
+
+ 1950 00a9 00       		.byte	0
+ 1951 00aa 0C       		.uleb128 0xc
+ 1952 00ab 34       		.uleb128 0x34
+ 1953 00ac 00       		.byte	0
+ 1954 00ad 03       		.uleb128 0x3
+ 1955 00ae 08       		.uleb128 0x8
+ 1956 00af 3A       		.uleb128 0x3a
+ 1957 00b0 0B       		.uleb128 0xb
+ 1958 00b1 3B       		.uleb128 0x3b
+ 1959 00b2 0B       		.uleb128 0xb
+ 1960 00b3 49       		.uleb128 0x49
+ 1961 00b4 13       		.uleb128 0x13
+ 1962 00b5 02       		.uleb128 0x2
+ 1963 00b6 17       		.uleb128 0x17
+ 1964 00b7 00       		.byte	0
+ 1965 00b8 00       		.byte	0
+ 1966 00b9 0D       		.uleb128 0xd
+ 1967 00ba 898201   		.uleb128 0x4109
+ 1968 00bd 01       		.byte	0x1
+ 1969 00be 11       		.uleb128 0x11
+ 1970 00bf 01       		.uleb128 0x1
+ 1971 00c0 31       		.uleb128 0x31
+ 1972 00c1 13       		.uleb128 0x13
+ 1973 00c2 00       		.byte	0
+ 1974 00c3 00       		.byte	0
+ 1975 00c4 0E       		.uleb128 0xe
+ 1976 00c5 8A8201   		.uleb128 0x410a
+ 1977 00c8 00       		.byte	0
+ 1978 00c9 02       		.uleb128 0x2
+ 1979 00ca 18       		.uleb128 0x18
+ 1980 00cb 9142     		.uleb128 0x2111
+ 1981 00cd 18       		.uleb128 0x18
+ 1982 00ce 00       		.byte	0
+ 1983 00cf 00       		.byte	0
+ 1984 00d0 0F       		.uleb128 0xf
+ 1985 00d1 0F       		.uleb128 0xf
+ 1986 00d2 00       		.byte	0
+ 1987 00d3 0B       		.uleb128 0xb
+ 1988 00d4 0B       		.uleb128 0xb
+ 1989 00d5 49       		.uleb128 0x49
+ 1990 00d6 13       		.uleb128 0x13
+ 1991 00d7 00       		.byte	0
+ 1992 00d8 00       		.byte	0
+ 1993 00d9 10       		.uleb128 0x10
+ 1994 00da 26       		.uleb128 0x26
+ 1995 00db 00       		.byte	0
+ 1996 00dc 49       		.uleb128 0x49
+ 1997 00dd 13       		.uleb128 0x13
+ 1998 00de 00       		.byte	0
+ 1999 00df 00       		.byte	0
+ 2000 00e0 11       		.uleb128 0x11
+ 2001 00e1 2E       		.uleb128 0x2e
+ 2002 00e2 01       		.byte	0x1
+ 2003 00e3 3F       		.uleb128 0x3f
+ 2004 00e4 19       		.uleb128 0x19
+ 2005 00e5 03       		.uleb128 0x3
+ 2006 00e6 0E       		.uleb128 0xe
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 51
+
+
+ 2007 00e7 3A       		.uleb128 0x3a
+ 2008 00e8 0B       		.uleb128 0xb
+ 2009 00e9 3B       		.uleb128 0x3b
+ 2010 00ea 05       		.uleb128 0x5
+ 2011 00eb 27       		.uleb128 0x27
+ 2012 00ec 19       		.uleb128 0x19
+ 2013 00ed 49       		.uleb128 0x49
+ 2014 00ee 13       		.uleb128 0x13
+ 2015 00ef 11       		.uleb128 0x11
+ 2016 00f0 01       		.uleb128 0x1
+ 2017 00f1 12       		.uleb128 0x12
+ 2018 00f2 06       		.uleb128 0x6
+ 2019 00f3 40       		.uleb128 0x40
+ 2020 00f4 18       		.uleb128 0x18
+ 2021 00f5 9742     		.uleb128 0x2117
+ 2022 00f7 19       		.uleb128 0x19
+ 2023 00f8 01       		.uleb128 0x1
+ 2024 00f9 13       		.uleb128 0x13
+ 2025 00fa 00       		.byte	0
+ 2026 00fb 00       		.byte	0
+ 2027 00fc 12       		.uleb128 0x12
+ 2028 00fd 05       		.uleb128 0x5
+ 2029 00fe 00       		.byte	0
+ 2030 00ff 03       		.uleb128 0x3
+ 2031 0100 0E       		.uleb128 0xe
+ 2032 0101 3A       		.uleb128 0x3a
+ 2033 0102 0B       		.uleb128 0xb
+ 2034 0103 3B       		.uleb128 0x3b
+ 2035 0104 05       		.uleb128 0x5
+ 2036 0105 49       		.uleb128 0x49
+ 2037 0106 13       		.uleb128 0x13
+ 2038 0107 02       		.uleb128 0x2
+ 2039 0108 17       		.uleb128 0x17
+ 2040 0109 00       		.byte	0
+ 2041 010a 00       		.byte	0
+ 2042 010b 13       		.uleb128 0x13
+ 2043 010c 05       		.uleb128 0x5
+ 2044 010d 00       		.byte	0
+ 2045 010e 03       		.uleb128 0x3
+ 2046 010f 08       		.uleb128 0x8
+ 2047 0110 3A       		.uleb128 0x3a
+ 2048 0111 0B       		.uleb128 0xb
+ 2049 0112 3B       		.uleb128 0x3b
+ 2050 0113 05       		.uleb128 0x5
+ 2051 0114 49       		.uleb128 0x49
+ 2052 0115 13       		.uleb128 0x13
+ 2053 0116 02       		.uleb128 0x2
+ 2054 0117 17       		.uleb128 0x17
+ 2055 0118 00       		.byte	0
+ 2056 0119 00       		.byte	0
+ 2057 011a 14       		.uleb128 0x14
+ 2058 011b 34       		.uleb128 0x34
+ 2059 011c 00       		.byte	0
+ 2060 011d 03       		.uleb128 0x3
+ 2061 011e 0E       		.uleb128 0xe
+ 2062 011f 3A       		.uleb128 0x3a
+ 2063 0120 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 52
+
+
+ 2064 0121 3B       		.uleb128 0x3b
+ 2065 0122 05       		.uleb128 0x5
+ 2066 0123 49       		.uleb128 0x49
+ 2067 0124 13       		.uleb128 0x13
+ 2068 0125 02       		.uleb128 0x2
+ 2069 0126 17       		.uleb128 0x17
+ 2070 0127 00       		.byte	0
+ 2071 0128 00       		.byte	0
+ 2072 0129 15       		.uleb128 0x15
+ 2073 012a 34       		.uleb128 0x34
+ 2074 012b 00       		.byte	0
+ 2075 012c 03       		.uleb128 0x3
+ 2076 012d 08       		.uleb128 0x8
+ 2077 012e 3A       		.uleb128 0x3a
+ 2078 012f 0B       		.uleb128 0xb
+ 2079 0130 3B       		.uleb128 0x3b
+ 2080 0131 05       		.uleb128 0x5
+ 2081 0132 49       		.uleb128 0x49
+ 2082 0133 13       		.uleb128 0x13
+ 2083 0134 02       		.uleb128 0x2
+ 2084 0135 17       		.uleb128 0x17
+ 2085 0136 00       		.byte	0
+ 2086 0137 00       		.byte	0
+ 2087 0138 16       		.uleb128 0x16
+ 2088 0139 05       		.uleb128 0x5
+ 2089 013a 00       		.byte	0
+ 2090 013b 03       		.uleb128 0x3
+ 2091 013c 0E       		.uleb128 0xe
+ 2092 013d 3A       		.uleb128 0x3a
+ 2093 013e 0B       		.uleb128 0xb
+ 2094 013f 3B       		.uleb128 0x3b
+ 2095 0140 05       		.uleb128 0x5
+ 2096 0141 49       		.uleb128 0x49
+ 2097 0142 13       		.uleb128 0x13
+ 2098 0143 02       		.uleb128 0x2
+ 2099 0144 18       		.uleb128 0x18
+ 2100 0145 00       		.byte	0
+ 2101 0146 00       		.byte	0
+ 2102 0147 17       		.uleb128 0x17
+ 2103 0148 2E       		.uleb128 0x2e
+ 2104 0149 01       		.byte	0x1
+ 2105 014a 3F       		.uleb128 0x3f
+ 2106 014b 19       		.uleb128 0x19
+ 2107 014c 03       		.uleb128 0x3
+ 2108 014d 0E       		.uleb128 0xe
+ 2109 014e 3A       		.uleb128 0x3a
+ 2110 014f 0B       		.uleb128 0xb
+ 2111 0150 3B       		.uleb128 0x3b
+ 2112 0151 05       		.uleb128 0x5
+ 2113 0152 27       		.uleb128 0x27
+ 2114 0153 19       		.uleb128 0x19
+ 2115 0154 11       		.uleb128 0x11
+ 2116 0155 01       		.uleb128 0x1
+ 2117 0156 12       		.uleb128 0x12
+ 2118 0157 06       		.uleb128 0x6
+ 2119 0158 40       		.uleb128 0x40
+ 2120 0159 18       		.uleb128 0x18
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 53
+
+
+ 2121 015a 9742     		.uleb128 0x2117
+ 2122 015c 19       		.uleb128 0x19
+ 2123 015d 01       		.uleb128 0x1
+ 2124 015e 13       		.uleb128 0x13
+ 2125 015f 00       		.byte	0
+ 2126 0160 00       		.byte	0
+ 2127 0161 18       		.uleb128 0x18
+ 2128 0162 34       		.uleb128 0x34
+ 2129 0163 00       		.byte	0
+ 2130 0164 03       		.uleb128 0x3
+ 2131 0165 0E       		.uleb128 0xe
+ 2132 0166 3A       		.uleb128 0x3a
+ 2133 0167 0B       		.uleb128 0xb
+ 2134 0168 3B       		.uleb128 0x3b
+ 2135 0169 0B       		.uleb128 0xb
+ 2136 016a 49       		.uleb128 0x49
+ 2137 016b 13       		.uleb128 0x13
+ 2138 016c 02       		.uleb128 0x2
+ 2139 016d 18       		.uleb128 0x18
+ 2140 016e 00       		.byte	0
+ 2141 016f 00       		.byte	0
+ 2142 0170 19       		.uleb128 0x19
+ 2143 0171 34       		.uleb128 0x34
+ 2144 0172 00       		.byte	0
+ 2145 0173 03       		.uleb128 0x3
+ 2146 0174 0E       		.uleb128 0xe
+ 2147 0175 3A       		.uleb128 0x3a
+ 2148 0176 0B       		.uleb128 0xb
+ 2149 0177 3B       		.uleb128 0x3b
+ 2150 0178 0B       		.uleb128 0xb
+ 2151 0179 49       		.uleb128 0x49
+ 2152 017a 13       		.uleb128 0x13
+ 2153 017b 3F       		.uleb128 0x3f
+ 2154 017c 19       		.uleb128 0x19
+ 2155 017d 02       		.uleb128 0x2
+ 2156 017e 18       		.uleb128 0x18
+ 2157 017f 00       		.byte	0
+ 2158 0180 00       		.byte	0
+ 2159 0181 1A       		.uleb128 0x1a
+ 2160 0182 2E       		.uleb128 0x2e
+ 2161 0183 00       		.byte	0
+ 2162 0184 3F       		.uleb128 0x3f
+ 2163 0185 19       		.uleb128 0x19
+ 2164 0186 3C       		.uleb128 0x3c
+ 2165 0187 19       		.uleb128 0x19
+ 2166 0188 6E       		.uleb128 0x6e
+ 2167 0189 0E       		.uleb128 0xe
+ 2168 018a 03       		.uleb128 0x3
+ 2169 018b 0E       		.uleb128 0xe
+ 2170 018c 3A       		.uleb128 0x3a
+ 2171 018d 0B       		.uleb128 0xb
+ 2172 018e 3B       		.uleb128 0x3b
+ 2173 018f 0B       		.uleb128 0xb
+ 2174 0190 00       		.byte	0
+ 2175 0191 00       		.byte	0
+ 2176 0192 00       		.byte	0
+ 2177              		.section	.debug_loc,"",%progbits
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 54
+
+
+ 2178              	.Ldebug_loc0:
+ 2179              	.LLST0:
+ 2180 0000 06000000 		.4byte	.LVL0
+ 2181 0004 21000000 		.4byte	.LVL1-1
+ 2182 0008 0100     		.2byte	0x1
+ 2183 000a 50       		.byte	0x50
+ 2184 000b 00000000 		.4byte	0
+ 2185 000f 00000000 		.4byte	0
+ 2186              	.LLST1:
+ 2187 0013 06000000 		.4byte	.LVL2
+ 2188 0017 21000000 		.4byte	.LVL3-1
+ 2189 001b 0100     		.2byte	0x1
+ 2190 001d 50       		.byte	0x50
+ 2191 001e 00000000 		.4byte	0
+ 2192 0022 00000000 		.4byte	0
+ 2193              	.LLST2:
+ 2194 0026 00000000 		.4byte	.LVL4
+ 2195 002a 18000000 		.4byte	.LVL5
+ 2196 002e 0100     		.2byte	0x1
+ 2197 0030 50       		.byte	0x50
+ 2198 0031 18000000 		.4byte	.LVL5
+ 2199 0035 40000000 		.4byte	.LFE2
+ 2200 0039 0400     		.2byte	0x4
+ 2201 003b F3       		.byte	0xf3
+ 2202 003c 01       		.uleb128 0x1
+ 2203 003d 50       		.byte	0x50
+ 2204 003e 9F       		.byte	0x9f
+ 2205 003f 00000000 		.4byte	0
+ 2206 0043 00000000 		.4byte	0
+ 2207              	.LLST3:
+ 2208 0047 00000000 		.4byte	.LVL4
+ 2209 004b 18000000 		.4byte	.LVL5
+ 2210 004f 0100     		.2byte	0x1
+ 2211 0051 51       		.byte	0x51
+ 2212 0052 18000000 		.4byte	.LVL5
+ 2213 0056 40000000 		.4byte	.LFE2
+ 2214 005a 0400     		.2byte	0x4
+ 2215 005c F3       		.byte	0xf3
+ 2216 005d 01       		.uleb128 0x1
+ 2217 005e 51       		.byte	0x51
+ 2218 005f 9F       		.byte	0x9f
+ 2219 0060 00000000 		.4byte	0
+ 2220 0064 00000000 		.4byte	0
+ 2221              	.LLST4:
+ 2222 0068 00000000 		.4byte	.LVL4
+ 2223 006c 18000000 		.4byte	.LVL5
+ 2224 0070 0200     		.2byte	0x2
+ 2225 0072 30       		.byte	0x30
+ 2226 0073 9F       		.byte	0x9f
+ 2227 0074 2C000000 		.4byte	.LVL7
+ 2228 0078 30000000 		.4byte	.LVL8
+ 2229 007c 0900     		.2byte	0x9
+ 2230 007e 75       		.byte	0x75
+ 2231 007f 00       		.sleb128 0
+ 2232 0080 F3       		.byte	0xf3
+ 2233 0081 01       		.uleb128 0x1
+ 2234 0082 50       		.byte	0x50
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 55
+
+
+ 2235 0083 31       		.byte	0x31
+ 2236 0084 1C       		.byte	0x1c
+ 2237 0085 1C       		.byte	0x1c
+ 2238 0086 9F       		.byte	0x9f
+ 2239 0087 00000000 		.4byte	0
+ 2240 008b 00000000 		.4byte	0
+ 2241              	.LLST5:
+ 2242 008f 00000000 		.4byte	.LVL9
+ 2243 0093 14000000 		.4byte	.LVL10
+ 2244 0097 0100     		.2byte	0x1
+ 2245 0099 50       		.byte	0x50
+ 2246 009a 14000000 		.4byte	.LVL10
+ 2247 009e 18000000 		.4byte	.LVL11
+ 2248 00a2 0400     		.2byte	0x4
+ 2249 00a4 F3       		.byte	0xf3
+ 2250 00a5 01       		.uleb128 0x1
+ 2251 00a6 50       		.byte	0x50
+ 2252 00a7 9F       		.byte	0x9f
+ 2253 00a8 18000000 		.4byte	.LVL11
+ 2254 00ac 24000000 		.4byte	.LVL12
+ 2255 00b0 0100     		.2byte	0x1
+ 2256 00b2 50       		.byte	0x50
+ 2257 00b3 24000000 		.4byte	.LVL12
+ 2258 00b7 26000000 		.4byte	.LVL13
+ 2259 00bb 0400     		.2byte	0x4
+ 2260 00bd F3       		.byte	0xf3
+ 2261 00be 01       		.uleb128 0x1
+ 2262 00bf 50       		.byte	0x50
+ 2263 00c0 9F       		.byte	0x9f
+ 2264 00c1 26000000 		.4byte	.LVL13
+ 2265 00c5 3E000000 		.4byte	.LVL14
+ 2266 00c9 0100     		.2byte	0x1
+ 2267 00cb 50       		.byte	0x50
+ 2268 00cc 3E000000 		.4byte	.LVL14
+ 2269 00d0 40000000 		.4byte	.LVL15
+ 2270 00d4 0400     		.2byte	0x4
+ 2271 00d6 F3       		.byte	0xf3
+ 2272 00d7 01       		.uleb128 0x1
+ 2273 00d8 50       		.byte	0x50
+ 2274 00d9 9F       		.byte	0x9f
+ 2275 00da 40000000 		.4byte	.LVL15
+ 2276 00de 64000000 		.4byte	.LVL22
+ 2277 00e2 0100     		.2byte	0x1
+ 2278 00e4 50       		.byte	0x50
+ 2279 00e5 64000000 		.4byte	.LVL22
+ 2280 00e9 70000000 		.4byte	.LFE3
+ 2281 00ed 0400     		.2byte	0x4
+ 2282 00ef F3       		.byte	0xf3
+ 2283 00f0 01       		.uleb128 0x1
+ 2284 00f1 50       		.byte	0x50
+ 2285 00f2 9F       		.byte	0x9f
+ 2286 00f3 00000000 		.4byte	0
+ 2287 00f7 00000000 		.4byte	0
+ 2288              	.LLST6:
+ 2289 00fb 00000000 		.4byte	.LVL9
+ 2290 00ff 14000000 		.4byte	.LVL10
+ 2291 0103 0100     		.2byte	0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 56
+
+
+ 2292 0105 51       		.byte	0x51
+ 2293 0106 14000000 		.4byte	.LVL10
+ 2294 010a 18000000 		.4byte	.LVL11
+ 2295 010e 0400     		.2byte	0x4
+ 2296 0110 F3       		.byte	0xf3
+ 2297 0111 01       		.uleb128 0x1
+ 2298 0112 51       		.byte	0x51
+ 2299 0113 9F       		.byte	0x9f
+ 2300 0114 18000000 		.4byte	.LVL11
+ 2301 0118 4A000000 		.4byte	.LVL16
+ 2302 011c 0100     		.2byte	0x1
+ 2303 011e 51       		.byte	0x51
+ 2304 011f 4A000000 		.4byte	.LVL16
+ 2305 0123 70000000 		.4byte	.LFE3
+ 2306 0127 0400     		.2byte	0x4
+ 2307 0129 F3       		.byte	0xf3
+ 2308 012a 01       		.uleb128 0x1
+ 2309 012b 51       		.byte	0x51
+ 2310 012c 9F       		.byte	0x9f
+ 2311 012d 00000000 		.4byte	0
+ 2312 0131 00000000 		.4byte	0
+ 2313              	.LLST7:
+ 2314 0135 00000000 		.4byte	.LVL9
+ 2315 0139 14000000 		.4byte	.LVL10
+ 2316 013d 0100     		.2byte	0x1
+ 2317 013f 52       		.byte	0x52
+ 2318 0140 14000000 		.4byte	.LVL10
+ 2319 0144 18000000 		.4byte	.LVL11
+ 2320 0148 0400     		.2byte	0x4
+ 2321 014a F3       		.byte	0xf3
+ 2322 014b 01       		.uleb128 0x1
+ 2323 014c 52       		.byte	0x52
+ 2324 014d 9F       		.byte	0x9f
+ 2325 014e 18000000 		.4byte	.LVL11
+ 2326 0152 58000000 		.4byte	.LVL18
+ 2327 0156 0100     		.2byte	0x1
+ 2328 0158 52       		.byte	0x52
+ 2329 0159 58000000 		.4byte	.LVL18
+ 2330 015d 70000000 		.4byte	.LFE3
+ 2331 0161 0400     		.2byte	0x4
+ 2332 0163 F3       		.byte	0xf3
+ 2333 0164 01       		.uleb128 0x1
+ 2334 0165 52       		.byte	0x52
+ 2335 0166 9F       		.byte	0x9f
+ 2336 0167 00000000 		.4byte	0
+ 2337 016b 00000000 		.4byte	0
+ 2338              	.LLST8:
+ 2339 016f 00000000 		.4byte	.LVL9
+ 2340 0173 14000000 		.4byte	.LVL10
+ 2341 0177 0100     		.2byte	0x1
+ 2342 0179 53       		.byte	0x53
+ 2343 017a 14000000 		.4byte	.LVL10
+ 2344 017e 18000000 		.4byte	.LVL11
+ 2345 0182 0400     		.2byte	0x4
+ 2346 0184 F3       		.byte	0xf3
+ 2347 0185 01       		.uleb128 0x1
+ 2348 0186 53       		.byte	0x53
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 57
+
+
+ 2349 0187 9F       		.byte	0x9f
+ 2350 0188 18000000 		.4byte	.LVL11
+ 2351 018c 58000000 		.4byte	.LVL18
+ 2352 0190 0100     		.2byte	0x1
+ 2353 0192 53       		.byte	0x53
+ 2354 0193 58000000 		.4byte	.LVL18
+ 2355 0197 70000000 		.4byte	.LFE3
+ 2356 019b 0400     		.2byte	0x4
+ 2357 019d F3       		.byte	0xf3
+ 2358 019e 01       		.uleb128 0x1
+ 2359 019f 53       		.byte	0x53
+ 2360 01a0 9F       		.byte	0x9f
+ 2361 01a1 00000000 		.4byte	0
+ 2362 01a5 00000000 		.4byte	0
+ 2363              	.LLST9:
+ 2364 01a9 00000000 		.4byte	.LVL9
+ 2365 01ad 14000000 		.4byte	.LVL10
+ 2366 01b1 0200     		.2byte	0x2
+ 2367 01b3 37       		.byte	0x37
+ 2368 01b4 9F       		.byte	0x9f
+ 2369 01b5 14000000 		.4byte	.LVL10
+ 2370 01b9 18000000 		.4byte	.LVL11
+ 2371 01bd 0100     		.2byte	0x1
+ 2372 01bf 50       		.byte	0x50
+ 2373 01c0 18000000 		.4byte	.LVL11
+ 2374 01c4 24000000 		.4byte	.LVL12
+ 2375 01c8 0200     		.2byte	0x2
+ 2376 01ca 37       		.byte	0x37
+ 2377 01cb 9F       		.byte	0x9f
+ 2378 01cc 24000000 		.4byte	.LVL12
+ 2379 01d0 26000000 		.4byte	.LVL13
+ 2380 01d4 0100     		.2byte	0x1
+ 2381 01d6 50       		.byte	0x50
+ 2382 01d7 26000000 		.4byte	.LVL13
+ 2383 01db 3E000000 		.4byte	.LVL14
+ 2384 01df 0200     		.2byte	0x2
+ 2385 01e1 37       		.byte	0x37
+ 2386 01e2 9F       		.byte	0x9f
+ 2387 01e3 3E000000 		.4byte	.LVL14
+ 2388 01e7 40000000 		.4byte	.LVL15
+ 2389 01eb 0100     		.2byte	0x1
+ 2390 01ed 50       		.byte	0x50
+ 2391 01ee 40000000 		.4byte	.LVL15
+ 2392 01f2 70000000 		.4byte	.LFE3
+ 2393 01f6 0200     		.2byte	0x2
+ 2394 01f8 37       		.byte	0x37
+ 2395 01f9 9F       		.byte	0x9f
+ 2396 01fa 00000000 		.4byte	0
+ 2397 01fe 00000000 		.4byte	0
+ 2398              	.LLST10:
+ 2399 0202 52000000 		.4byte	.LVL17
+ 2400 0206 58000000 		.4byte	.LVL18
+ 2401 020a 0200     		.2byte	0x2
+ 2402 020c 30       		.byte	0x30
+ 2403 020d 9F       		.byte	0x9f
+ 2404 020e 58000000 		.4byte	.LVL18
+ 2405 0212 5C000000 		.4byte	.LVL19
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 58
+
+
+ 2406 0216 0900     		.2byte	0x9
+ 2407 0218 72       		.byte	0x72
+ 2408 0219 00       		.sleb128 0
+ 2409 021a F3       		.byte	0xf3
+ 2410 021b 01       		.uleb128 0x1
+ 2411 021c 52       		.byte	0x52
+ 2412 021d 31       		.byte	0x31
+ 2413 021e 1C       		.byte	0x1c
+ 2414 021f 1C       		.byte	0x1c
+ 2415 0220 9F       		.byte	0x9f
+ 2416 0221 60000000 		.4byte	.LVL20
+ 2417 0225 62000000 		.4byte	.LVL21
+ 2418 0229 0900     		.2byte	0x9
+ 2419 022b 72       		.byte	0x72
+ 2420 022c 00       		.sleb128 0
+ 2421 022d F3       		.byte	0xf3
+ 2422 022e 01       		.uleb128 0x1
+ 2423 022f 52       		.byte	0x52
+ 2424 0230 31       		.byte	0x31
+ 2425 0231 1C       		.byte	0x1c
+ 2426 0232 1C       		.byte	0x1c
+ 2427 0233 9F       		.byte	0x9f
+ 2428 0234 00000000 		.4byte	0
+ 2429 0238 00000000 		.4byte	0
+ 2430              	.LLST11:
+ 2431 023c 00000000 		.4byte	.LVL23
+ 2432 0240 24000000 		.4byte	.LVL26
+ 2433 0244 0100     		.2byte	0x1
+ 2434 0246 50       		.byte	0x50
+ 2435 0247 24000000 		.4byte	.LVL26
+ 2436 024b 2C000000 		.4byte	.LVL28
+ 2437 024f 0200     		.2byte	0x2
+ 2438 0251 70       		.byte	0x70
+ 2439 0252 00       		.sleb128 0
+ 2440 0253 2C000000 		.4byte	.LVL28
+ 2441 0257 3C000000 		.4byte	.LVL33
+ 2442 025b 0400     		.2byte	0x4
+ 2443 025d F3       		.byte	0xf3
+ 2444 025e 01       		.uleb128 0x1
+ 2445 025f 50       		.byte	0x50
+ 2446 0260 9F       		.byte	0x9f
+ 2447 0261 3C000000 		.4byte	.LVL33
+ 2448 0265 3E000000 		.4byte	.LVL34
+ 2449 0269 0100     		.2byte	0x1
+ 2450 026b 50       		.byte	0x50
+ 2451 026c 3E000000 		.4byte	.LVL34
+ 2452 0270 42000000 		.4byte	.LVL35
+ 2453 0274 0400     		.2byte	0x4
+ 2454 0276 F3       		.byte	0xf3
+ 2455 0277 01       		.uleb128 0x1
+ 2456 0278 50       		.byte	0x50
+ 2457 0279 9F       		.byte	0x9f
+ 2458 027a 42000000 		.4byte	.LVL35
+ 2459 027e 44000000 		.4byte	.LVL36
+ 2460 0282 0100     		.2byte	0x1
+ 2461 0284 50       		.byte	0x50
+ 2462 0285 44000000 		.4byte	.LVL36
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 59
+
+
+ 2463 0289 50000000 		.4byte	.LFE4
+ 2464 028d 0400     		.2byte	0x4
+ 2465 028f F3       		.byte	0xf3
+ 2466 0290 01       		.uleb128 0x1
+ 2467 0291 50       		.byte	0x50
+ 2468 0292 9F       		.byte	0x9f
+ 2469 0293 00000000 		.4byte	0
+ 2470 0297 00000000 		.4byte	0
+ 2471              	.LLST12:
+ 2472 029b 00000000 		.4byte	.LVL23
+ 2473 029f 2C000000 		.4byte	.LVL28
+ 2474 02a3 0100     		.2byte	0x1
+ 2475 02a5 51       		.byte	0x51
+ 2476 02a6 2C000000 		.4byte	.LVL28
+ 2477 02aa 3C000000 		.4byte	.LVL33
+ 2478 02ae 0400     		.2byte	0x4
+ 2479 02b0 F3       		.byte	0xf3
+ 2480 02b1 01       		.uleb128 0x1
+ 2481 02b2 51       		.byte	0x51
+ 2482 02b3 9F       		.byte	0x9f
+ 2483 02b4 3C000000 		.4byte	.LVL33
+ 2484 02b8 50000000 		.4byte	.LFE4
+ 2485 02bc 0100     		.2byte	0x1
+ 2486 02be 51       		.byte	0x51
+ 2487 02bf 00000000 		.4byte	0
+ 2488 02c3 00000000 		.4byte	0
+ 2489              	.LLST13:
+ 2490 02c7 00000000 		.4byte	.LVL23
+ 2491 02cb 26000000 		.4byte	.LVL27
+ 2492 02cf 0100     		.2byte	0x1
+ 2493 02d1 52       		.byte	0x52
+ 2494 02d2 26000000 		.4byte	.LVL27
+ 2495 02d6 3C000000 		.4byte	.LVL33
+ 2496 02da 0400     		.2byte	0x4
+ 2497 02dc F3       		.byte	0xf3
+ 2498 02dd 01       		.uleb128 0x1
+ 2499 02de 52       		.byte	0x52
+ 2500 02df 9F       		.byte	0x9f
+ 2501 02e0 3C000000 		.4byte	.LVL33
+ 2502 02e4 50000000 		.4byte	.LFE4
+ 2503 02e8 0100     		.2byte	0x1
+ 2504 02ea 52       		.byte	0x52
+ 2505 02eb 00000000 		.4byte	0
+ 2506 02ef 00000000 		.4byte	0
+ 2507              	.LLST14:
+ 2508 02f3 04000000 		.4byte	.LVL24
+ 2509 02f7 38000000 		.4byte	.LVL32
+ 2510 02fb 0200     		.2byte	0x2
+ 2511 02fd 37       		.byte	0x37
+ 2512 02fe 9F       		.byte	0x9f
+ 2513 02ff 38000000 		.4byte	.LVL32
+ 2514 0303 3C000000 		.4byte	.LVL33
+ 2515 0307 0100     		.2byte	0x1
+ 2516 0309 50       		.byte	0x50
+ 2517 030a 3C000000 		.4byte	.LVL33
+ 2518 030e 3E000000 		.4byte	.LVL34
+ 2519 0312 0200     		.2byte	0x2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 60
+
+
+ 2520 0314 37       		.byte	0x37
+ 2521 0315 9F       		.byte	0x9f
+ 2522 0316 3E000000 		.4byte	.LVL34
+ 2523 031a 42000000 		.4byte	.LVL35
+ 2524 031e 0100     		.2byte	0x1
+ 2525 0320 50       		.byte	0x50
+ 2526 0321 42000000 		.4byte	.LVL35
+ 2527 0325 44000000 		.4byte	.LVL36
+ 2528 0329 0200     		.2byte	0x2
+ 2529 032b 37       		.byte	0x37
+ 2530 032c 9F       		.byte	0x9f
+ 2531 032d 44000000 		.4byte	.LVL36
+ 2532 0331 50000000 		.4byte	.LFE4
+ 2533 0335 0100     		.2byte	0x1
+ 2534 0337 50       		.byte	0x50
+ 2535 0338 00000000 		.4byte	0
+ 2536 033c 00000000 		.4byte	0
+ 2537              	.LLST15:
+ 2538 0340 20000000 		.4byte	.LVL25
+ 2539 0344 2C000000 		.4byte	.LVL28
+ 2540 0348 0200     		.2byte	0x2
+ 2541 034a 30       		.byte	0x30
+ 2542 034b 9F       		.byte	0x9f
+ 2543 034c 2C000000 		.4byte	.LVL28
+ 2544 0350 30000000 		.4byte	.LVL29
+ 2545 0354 0900     		.2byte	0x9
+ 2546 0356 71       		.byte	0x71
+ 2547 0357 00       		.sleb128 0
+ 2548 0358 F3       		.byte	0xf3
+ 2549 0359 01       		.uleb128 0x1
+ 2550 035a 51       		.byte	0x51
+ 2551 035b 31       		.byte	0x31
+ 2552 035c 1C       		.byte	0x1c
+ 2553 035d 1C       		.byte	0x1c
+ 2554 035e 9F       		.byte	0x9f
+ 2555 035f 34000000 		.4byte	.LVL30
+ 2556 0363 36000000 		.4byte	.LVL31
+ 2557 0367 0900     		.2byte	0x9
+ 2558 0369 71       		.byte	0x71
+ 2559 036a 00       		.sleb128 0
+ 2560 036b F3       		.byte	0xf3
+ 2561 036c 01       		.uleb128 0x1
+ 2562 036d 51       		.byte	0x51
+ 2563 036e 31       		.byte	0x31
+ 2564 036f 1C       		.byte	0x1c
+ 2565 0370 1C       		.byte	0x1c
+ 2566 0371 9F       		.byte	0x9f
+ 2567 0372 00000000 		.4byte	0
+ 2568 0376 00000000 		.4byte	0
+ 2569              	.LLST16:
+ 2570 037a 00000000 		.4byte	.LVL37
+ 2571 037e 3A000000 		.4byte	.LVL43
+ 2572 0382 0100     		.2byte	0x1
+ 2573 0384 50       		.byte	0x50
+ 2574 0385 3A000000 		.4byte	.LVL43
+ 2575 0389 40000000 		.4byte	.LVL45
+ 2576 038d 0400     		.2byte	0x4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 61
+
+
+ 2577 038f F3       		.byte	0xf3
+ 2578 0390 01       		.uleb128 0x1
+ 2579 0391 50       		.byte	0x50
+ 2580 0392 9F       		.byte	0x9f
+ 2581 0393 40000000 		.4byte	.LVL45
+ 2582 0397 42000000 		.4byte	.LVL46
+ 2583 039b 0100     		.2byte	0x1
+ 2584 039d 50       		.byte	0x50
+ 2585 039e 42000000 		.4byte	.LVL46
+ 2586 03a2 46000000 		.4byte	.LVL47
+ 2587 03a6 0400     		.2byte	0x4
+ 2588 03a8 F3       		.byte	0xf3
+ 2589 03a9 01       		.uleb128 0x1
+ 2590 03aa 50       		.byte	0x50
+ 2591 03ab 9F       		.byte	0x9f
+ 2592 03ac 46000000 		.4byte	.LVL47
+ 2593 03b0 48000000 		.4byte	.LVL48
+ 2594 03b4 0100     		.2byte	0x1
+ 2595 03b6 50       		.byte	0x50
+ 2596 03b7 48000000 		.4byte	.LVL48
+ 2597 03bb 4C000000 		.4byte	.LVL49
+ 2598 03bf 0400     		.2byte	0x4
+ 2599 03c1 F3       		.byte	0xf3
+ 2600 03c2 01       		.uleb128 0x1
+ 2601 03c3 50       		.byte	0x50
+ 2602 03c4 9F       		.byte	0x9f
+ 2603 03c5 4C000000 		.4byte	.LVL49
+ 2604 03c9 54000000 		.4byte	.LVL50
+ 2605 03cd 0100     		.2byte	0x1
+ 2606 03cf 50       		.byte	0x50
+ 2607 03d0 54000000 		.4byte	.LVL50
+ 2608 03d4 78000000 		.4byte	.LFE5
+ 2609 03d8 0400     		.2byte	0x4
+ 2610 03da F3       		.byte	0xf3
+ 2611 03db 01       		.uleb128 0x1
+ 2612 03dc 50       		.byte	0x50
+ 2613 03dd 9F       		.byte	0x9f
+ 2614 03de 00000000 		.4byte	0
+ 2615 03e2 00000000 		.4byte	0
+ 2616              	.LLST17:
+ 2617 03e6 00000000 		.4byte	.LVL37
+ 2618 03ea 3A000000 		.4byte	.LVL43
+ 2619 03ee 0100     		.2byte	0x1
+ 2620 03f0 51       		.byte	0x51
+ 2621 03f1 3A000000 		.4byte	.LVL43
+ 2622 03f5 40000000 		.4byte	.LVL45
+ 2623 03f9 0400     		.2byte	0x4
+ 2624 03fb F3       		.byte	0xf3
+ 2625 03fc 01       		.uleb128 0x1
+ 2626 03fd 51       		.byte	0x51
+ 2627 03fe 9F       		.byte	0x9f
+ 2628 03ff 40000000 		.4byte	.LVL45
+ 2629 0403 58000000 		.4byte	.LVL51
+ 2630 0407 0100     		.2byte	0x1
+ 2631 0409 51       		.byte	0x51
+ 2632 040a 58000000 		.4byte	.LVL51
+ 2633 040e 78000000 		.4byte	.LFE5
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 62
+
+
+ 2634 0412 0400     		.2byte	0x4
+ 2635 0414 F3       		.byte	0xf3
+ 2636 0415 01       		.uleb128 0x1
+ 2637 0416 51       		.byte	0x51
+ 2638 0417 9F       		.byte	0x9f
+ 2639 0418 00000000 		.4byte	0
+ 2640 041c 00000000 		.4byte	0
+ 2641              	.LLST18:
+ 2642 0420 00000000 		.4byte	.LVL37
+ 2643 0424 2A000000 		.4byte	.LVL40
+ 2644 0428 0100     		.2byte	0x1
+ 2645 042a 52       		.byte	0x52
+ 2646 042b 2A000000 		.4byte	.LVL40
+ 2647 042f 40000000 		.4byte	.LVL45
+ 2648 0433 0400     		.2byte	0x4
+ 2649 0435 F3       		.byte	0xf3
+ 2650 0436 01       		.uleb128 0x1
+ 2651 0437 52       		.byte	0x52
+ 2652 0438 9F       		.byte	0x9f
+ 2653 0439 40000000 		.4byte	.LVL45
+ 2654 043d 4C000000 		.4byte	.LVL49
+ 2655 0441 0100     		.2byte	0x1
+ 2656 0443 52       		.byte	0x52
+ 2657 0444 4C000000 		.4byte	.LVL49
+ 2658 0448 78000000 		.4byte	.LFE5
+ 2659 044c 0400     		.2byte	0x4
+ 2660 044e F3       		.byte	0xf3
+ 2661 044f 01       		.uleb128 0x1
+ 2662 0450 52       		.byte	0x52
+ 2663 0451 9F       		.byte	0x9f
+ 2664 0452 00000000 		.4byte	0
+ 2665 0456 00000000 		.4byte	0
+ 2666              	.LLST19:
+ 2667 045a 00000000 		.4byte	.LVL37
+ 2668 045e 3A000000 		.4byte	.LVL43
+ 2669 0462 0100     		.2byte	0x1
+ 2670 0464 53       		.byte	0x53
+ 2671 0465 3A000000 		.4byte	.LVL43
+ 2672 0469 40000000 		.4byte	.LVL45
+ 2673 046d 0400     		.2byte	0x4
+ 2674 046f F3       		.byte	0xf3
+ 2675 0470 01       		.uleb128 0x1
+ 2676 0471 53       		.byte	0x53
+ 2677 0472 9F       		.byte	0x9f
+ 2678 0473 40000000 		.4byte	.LVL45
+ 2679 0477 60000000 		.4byte	.LVL53
+ 2680 047b 0100     		.2byte	0x1
+ 2681 047d 53       		.byte	0x53
+ 2682 047e 60000000 		.4byte	.LVL53
+ 2683 0482 78000000 		.4byte	.LFE5
+ 2684 0486 0400     		.2byte	0x4
+ 2685 0488 F3       		.byte	0xf3
+ 2686 0489 01       		.uleb128 0x1
+ 2687 048a 53       		.byte	0x53
+ 2688 048b 9F       		.byte	0x9f
+ 2689 048c 00000000 		.4byte	0
+ 2690 0490 00000000 		.4byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 63
+
+
+ 2691              	.LLST20:
+ 2692 0494 06000000 		.4byte	.LVL38
+ 2693 0498 3E000000 		.4byte	.LVL44
+ 2694 049c 0200     		.2byte	0x2
+ 2695 049e 37       		.byte	0x37
+ 2696 049f 9F       		.byte	0x9f
+ 2697 04a0 3E000000 		.4byte	.LVL44
+ 2698 04a4 40000000 		.4byte	.LVL45
+ 2699 04a8 0100     		.2byte	0x1
+ 2700 04aa 50       		.byte	0x50
+ 2701 04ab 40000000 		.4byte	.LVL45
+ 2702 04af 42000000 		.4byte	.LVL46
+ 2703 04b3 0200     		.2byte	0x2
+ 2704 04b5 37       		.byte	0x37
+ 2705 04b6 9F       		.byte	0x9f
+ 2706 04b7 42000000 		.4byte	.LVL46
+ 2707 04bb 46000000 		.4byte	.LVL47
+ 2708 04bf 0100     		.2byte	0x1
+ 2709 04c1 50       		.byte	0x50
+ 2710 04c2 46000000 		.4byte	.LVL47
+ 2711 04c6 48000000 		.4byte	.LVL48
+ 2712 04ca 0200     		.2byte	0x2
+ 2713 04cc 37       		.byte	0x37
+ 2714 04cd 9F       		.byte	0x9f
+ 2715 04ce 48000000 		.4byte	.LVL48
+ 2716 04d2 4C000000 		.4byte	.LVL49
+ 2717 04d6 0100     		.2byte	0x1
+ 2718 04d8 50       		.byte	0x50
+ 2719 04d9 4C000000 		.4byte	.LVL49
+ 2720 04dd 78000000 		.4byte	.LFE5
+ 2721 04e1 0200     		.2byte	0x2
+ 2722 04e3 37       		.byte	0x37
+ 2723 04e4 9F       		.byte	0x9f
+ 2724 04e5 00000000 		.4byte	0
+ 2725 04e9 00000000 		.4byte	0
+ 2726              	.LLST21:
+ 2727 04ed 20000000 		.4byte	.LVL39
+ 2728 04f1 2A000000 		.4byte	.LVL40
+ 2729 04f5 0200     		.2byte	0x2
+ 2730 04f7 30       		.byte	0x30
+ 2731 04f8 9F       		.byte	0x9f
+ 2732 04f9 2A000000 		.4byte	.LVL40
+ 2733 04fd 2E000000 		.4byte	.LVL41
+ 2734 0501 0900     		.2byte	0x9
+ 2735 0503 72       		.byte	0x72
+ 2736 0504 00       		.sleb128 0
+ 2737 0505 F3       		.byte	0xf3
+ 2738 0506 01       		.uleb128 0x1
+ 2739 0507 52       		.byte	0x52
+ 2740 0508 31       		.byte	0x31
+ 2741 0509 1C       		.byte	0x1c
+ 2742 050a 1C       		.byte	0x1c
+ 2743 050b 9F       		.byte	0x9f
+ 2744 050c 32000000 		.4byte	.LVL42
+ 2745 0510 3A000000 		.4byte	.LVL43
+ 2746 0514 0900     		.2byte	0x9
+ 2747 0516 72       		.byte	0x72
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 64
+
+
+ 2748 0517 00       		.sleb128 0
+ 2749 0518 F3       		.byte	0xf3
+ 2750 0519 01       		.uleb128 0x1
+ 2751 051a 52       		.byte	0x52
+ 2752 051b 31       		.byte	0x31
+ 2753 051c 1C       		.byte	0x1c
+ 2754 051d 1C       		.byte	0x1c
+ 2755 051e 9F       		.byte	0x9f
+ 2756 051f 4C000000 		.4byte	.LVL49
+ 2757 0523 5A000000 		.4byte	.LVL52
+ 2758 0527 0900     		.2byte	0x9
+ 2759 0529 72       		.byte	0x72
+ 2760 052a 00       		.sleb128 0
+ 2761 052b F3       		.byte	0xf3
+ 2762 052c 01       		.uleb128 0x1
+ 2763 052d 52       		.byte	0x52
+ 2764 052e 31       		.byte	0x31
+ 2765 052f 1C       		.byte	0x1c
+ 2766 0530 1C       		.byte	0x1c
+ 2767 0531 9F       		.byte	0x9f
+ 2768 0532 5A000000 		.4byte	.LVL52
+ 2769 0536 60000000 		.4byte	.LVL53
+ 2770 053a 0200     		.2byte	0x2
+ 2771 053c 30       		.byte	0x30
+ 2772 053d 9F       		.byte	0x9f
+ 2773 053e 60000000 		.4byte	.LVL53
+ 2774 0542 64000000 		.4byte	.LVL54
+ 2775 0546 0600     		.2byte	0x6
+ 2776 0548 72       		.byte	0x72
+ 2777 0549 00       		.sleb128 0
+ 2778 054a 71       		.byte	0x71
+ 2779 054b 60       		.sleb128 -32
+ 2780 054c 1C       		.byte	0x1c
+ 2781 054d 9F       		.byte	0x9f
+ 2782 054e 6A000000 		.4byte	.LVL55
+ 2783 0552 78000000 		.4byte	.LFE5
+ 2784 0556 0800     		.2byte	0x8
+ 2785 0558 72       		.byte	0x72
+ 2786 0559 00       		.sleb128 0
+ 2787 055a 71       		.byte	0x71
+ 2788 055b 60       		.sleb128 -32
+ 2789 055c 1C       		.byte	0x1c
+ 2790 055d 23       		.byte	0x23
+ 2791 055e 01       		.uleb128 0x1
+ 2792 055f 9F       		.byte	0x9f
+ 2793 0560 00000000 		.4byte	0
+ 2794 0564 00000000 		.4byte	0
+ 2795              	.LLST22:
+ 2796 0568 5A000000 		.4byte	.LVL52
+ 2797 056c 60000000 		.4byte	.LVL53
+ 2798 0570 0100     		.2byte	0x1
+ 2799 0572 51       		.byte	0x51
+ 2800 0573 60000000 		.4byte	.LVL53
+ 2801 0577 78000000 		.4byte	.LFE5
+ 2802 057b 0300     		.2byte	0x3
+ 2803 057d 71       		.byte	0x71
+ 2804 057e 60       		.sleb128 -32
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 65
+
+
+ 2805 057f 9F       		.byte	0x9f
+ 2806 0580 00000000 		.4byte	0
+ 2807 0584 00000000 		.4byte	0
+ 2808              	.LLST23:
+ 2809 0588 00000000 		.4byte	.LVL56
+ 2810 058c 2E000000 		.4byte	.LVL58
+ 2811 0590 0100     		.2byte	0x1
+ 2812 0592 50       		.byte	0x50
+ 2813 0593 2E000000 		.4byte	.LVL58
+ 2814 0597 32000000 		.4byte	.LVL59
+ 2815 059b 0400     		.2byte	0x4
+ 2816 059d F3       		.byte	0xf3
+ 2817 059e 01       		.uleb128 0x1
+ 2818 059f 50       		.byte	0x50
+ 2819 05a0 9F       		.byte	0x9f
+ 2820 05a1 32000000 		.4byte	.LVL59
+ 2821 05a5 34000000 		.4byte	.LVL60
+ 2822 05a9 0100     		.2byte	0x1
+ 2823 05ab 50       		.byte	0x50
+ 2824 05ac 34000000 		.4byte	.LVL60
+ 2825 05b0 38000000 		.4byte	.LVL61
+ 2826 05b4 0400     		.2byte	0x4
+ 2827 05b6 F3       		.byte	0xf3
+ 2828 05b7 01       		.uleb128 0x1
+ 2829 05b8 50       		.byte	0x50
+ 2830 05b9 9F       		.byte	0x9f
+ 2831 05ba 38000000 		.4byte	.LVL61
+ 2832 05be 3A000000 		.4byte	.LVL62
+ 2833 05c2 0100     		.2byte	0x1
+ 2834 05c4 50       		.byte	0x50
+ 2835 05c5 3A000000 		.4byte	.LVL62
+ 2836 05c9 48000000 		.4byte	.LFE6
+ 2837 05cd 0400     		.2byte	0x4
+ 2838 05cf F3       		.byte	0xf3
+ 2839 05d0 01       		.uleb128 0x1
+ 2840 05d1 50       		.byte	0x50
+ 2841 05d2 9F       		.byte	0x9f
+ 2842 05d3 00000000 		.4byte	0
+ 2843 05d7 00000000 		.4byte	0
+ 2844              	.LLST24:
+ 2845 05db 00000000 		.4byte	.LVL56
+ 2846 05df 22000000 		.4byte	.LVL57
+ 2847 05e3 0100     		.2byte	0x1
+ 2848 05e5 51       		.byte	0x51
+ 2849 05e6 22000000 		.4byte	.LVL57
+ 2850 05ea 32000000 		.4byte	.LVL59
+ 2851 05ee 0400     		.2byte	0x4
+ 2852 05f0 F3       		.byte	0xf3
+ 2853 05f1 01       		.uleb128 0x1
+ 2854 05f2 51       		.byte	0x51
+ 2855 05f3 9F       		.byte	0x9f
+ 2856 05f4 32000000 		.4byte	.LVL59
+ 2857 05f8 48000000 		.4byte	.LFE6
+ 2858 05fc 0100     		.2byte	0x1
+ 2859 05fe 51       		.byte	0x51
+ 2860 05ff 00000000 		.4byte	0
+ 2861 0603 00000000 		.4byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 66
+
+
+ 2862              	.LLST25:
+ 2863 0607 00000000 		.4byte	.LVL56
+ 2864 060b 2E000000 		.4byte	.LVL58
+ 2865 060f 0200     		.2byte	0x2
+ 2866 0611 37       		.byte	0x37
+ 2867 0612 9F       		.byte	0x9f
+ 2868 0613 2E000000 		.4byte	.LVL58
+ 2869 0617 32000000 		.4byte	.LVL59
+ 2870 061b 0100     		.2byte	0x1
+ 2871 061d 50       		.byte	0x50
+ 2872 061e 32000000 		.4byte	.LVL59
+ 2873 0622 34000000 		.4byte	.LVL60
+ 2874 0626 0200     		.2byte	0x2
+ 2875 0628 37       		.byte	0x37
+ 2876 0629 9F       		.byte	0x9f
+ 2877 062a 34000000 		.4byte	.LVL60
+ 2878 062e 38000000 		.4byte	.LVL61
+ 2879 0632 0100     		.2byte	0x1
+ 2880 0634 50       		.byte	0x50
+ 2881 0635 38000000 		.4byte	.LVL61
+ 2882 0639 3A000000 		.4byte	.LVL62
+ 2883 063d 0200     		.2byte	0x2
+ 2884 063f 37       		.byte	0x37
+ 2885 0640 9F       		.byte	0x9f
+ 2886 0641 3A000000 		.4byte	.LVL62
+ 2887 0645 48000000 		.4byte	.LFE6
+ 2888 0649 0100     		.2byte	0x1
+ 2889 064b 50       		.byte	0x50
+ 2890 064c 00000000 		.4byte	0
+ 2891 0650 00000000 		.4byte	0
+ 2892              	.LLST26:
+ 2893 0654 00000000 		.4byte	.LVL63
+ 2894 0658 24000000 		.4byte	.LVL64
+ 2895 065c 0100     		.2byte	0x1
+ 2896 065e 50       		.byte	0x50
+ 2897 065f 24000000 		.4byte	.LVL64
+ 2898 0663 28000000 		.4byte	.LVL65
+ 2899 0667 0400     		.2byte	0x4
+ 2900 0669 F3       		.byte	0xf3
+ 2901 066a 01       		.uleb128 0x1
+ 2902 066b 50       		.byte	0x50
+ 2903 066c 9F       		.byte	0x9f
+ 2904 066d 28000000 		.4byte	.LVL65
+ 2905 0671 2A000000 		.4byte	.LVL66
+ 2906 0675 0100     		.2byte	0x1
+ 2907 0677 50       		.byte	0x50
+ 2908 0678 2A000000 		.4byte	.LVL66
+ 2909 067c 2E000000 		.4byte	.LVL67
+ 2910 0680 0400     		.2byte	0x4
+ 2911 0682 F3       		.byte	0xf3
+ 2912 0683 01       		.uleb128 0x1
+ 2913 0684 50       		.byte	0x50
+ 2914 0685 9F       		.byte	0x9f
+ 2915 0686 2E000000 		.4byte	.LVL67
+ 2916 068a 30000000 		.4byte	.LVL68
+ 2917 068e 0100     		.2byte	0x1
+ 2918 0690 50       		.byte	0x50
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 67
+
+
+ 2919 0691 30000000 		.4byte	.LVL68
+ 2920 0695 3C000000 		.4byte	.LFE7
+ 2921 0699 0400     		.2byte	0x4
+ 2922 069b F3       		.byte	0xf3
+ 2923 069c 01       		.uleb128 0x1
+ 2924 069d 50       		.byte	0x50
+ 2925 069e 9F       		.byte	0x9f
+ 2926 069f 00000000 		.4byte	0
+ 2927 06a3 00000000 		.4byte	0
+ 2928              	.LLST27:
+ 2929 06a7 00000000 		.4byte	.LVL63
+ 2930 06ab 24000000 		.4byte	.LVL64
+ 2931 06af 0200     		.2byte	0x2
+ 2932 06b1 37       		.byte	0x37
+ 2933 06b2 9F       		.byte	0x9f
+ 2934 06b3 24000000 		.4byte	.LVL64
+ 2935 06b7 28000000 		.4byte	.LVL65
+ 2936 06bb 0100     		.2byte	0x1
+ 2937 06bd 50       		.byte	0x50
+ 2938 06be 28000000 		.4byte	.LVL65
+ 2939 06c2 2A000000 		.4byte	.LVL66
+ 2940 06c6 0200     		.2byte	0x2
+ 2941 06c8 37       		.byte	0x37
+ 2942 06c9 9F       		.byte	0x9f
+ 2943 06ca 2A000000 		.4byte	.LVL66
+ 2944 06ce 2E000000 		.4byte	.LVL67
+ 2945 06d2 0100     		.2byte	0x1
+ 2946 06d4 50       		.byte	0x50
+ 2947 06d5 2E000000 		.4byte	.LVL67
+ 2948 06d9 30000000 		.4byte	.LVL68
+ 2949 06dd 0200     		.2byte	0x2
+ 2950 06df 37       		.byte	0x37
+ 2951 06e0 9F       		.byte	0x9f
+ 2952 06e1 30000000 		.4byte	.LVL68
+ 2953 06e5 3C000000 		.4byte	.LFE7
+ 2954 06e9 0100     		.2byte	0x1
+ 2955 06eb 50       		.byte	0x50
+ 2956 06ec 00000000 		.4byte	0
+ 2957 06f0 00000000 		.4byte	0
+ 2958              	.LLST28:
+ 2959 06f4 00000000 		.4byte	.LVL69
+ 2960 06f8 2E000000 		.4byte	.LVL71
+ 2961 06fc 0100     		.2byte	0x1
+ 2962 06fe 50       		.byte	0x50
+ 2963 06ff 2E000000 		.4byte	.LVL71
+ 2964 0703 32000000 		.4byte	.LVL72
+ 2965 0707 0400     		.2byte	0x4
+ 2966 0709 F3       		.byte	0xf3
+ 2967 070a 01       		.uleb128 0x1
+ 2968 070b 50       		.byte	0x50
+ 2969 070c 9F       		.byte	0x9f
+ 2970 070d 32000000 		.4byte	.LVL72
+ 2971 0711 34000000 		.4byte	.LVL73
+ 2972 0715 0100     		.2byte	0x1
+ 2973 0717 50       		.byte	0x50
+ 2974 0718 34000000 		.4byte	.LVL73
+ 2975 071c 38000000 		.4byte	.LVL74
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 68
+
+
+ 2976 0720 0400     		.2byte	0x4
+ 2977 0722 F3       		.byte	0xf3
+ 2978 0723 01       		.uleb128 0x1
+ 2979 0724 50       		.byte	0x50
+ 2980 0725 9F       		.byte	0x9f
+ 2981 0726 38000000 		.4byte	.LVL74
+ 2982 072a 3A000000 		.4byte	.LVL75
+ 2983 072e 0100     		.2byte	0x1
+ 2984 0730 50       		.byte	0x50
+ 2985 0731 3A000000 		.4byte	.LVL75
+ 2986 0735 48000000 		.4byte	.LFE8
+ 2987 0739 0400     		.2byte	0x4
+ 2988 073b F3       		.byte	0xf3
+ 2989 073c 01       		.uleb128 0x1
+ 2990 073d 50       		.byte	0x50
+ 2991 073e 9F       		.byte	0x9f
+ 2992 073f 00000000 		.4byte	0
+ 2993 0743 00000000 		.4byte	0
+ 2994              	.LLST29:
+ 2995 0747 00000000 		.4byte	.LVL69
+ 2996 074b 22000000 		.4byte	.LVL70
+ 2997 074f 0100     		.2byte	0x1
+ 2998 0751 51       		.byte	0x51
+ 2999 0752 22000000 		.4byte	.LVL70
+ 3000 0756 32000000 		.4byte	.LVL72
+ 3001 075a 0400     		.2byte	0x4
+ 3002 075c F3       		.byte	0xf3
+ 3003 075d 01       		.uleb128 0x1
+ 3004 075e 51       		.byte	0x51
+ 3005 075f 9F       		.byte	0x9f
+ 3006 0760 32000000 		.4byte	.LVL72
+ 3007 0764 48000000 		.4byte	.LFE8
+ 3008 0768 0100     		.2byte	0x1
+ 3009 076a 51       		.byte	0x51
+ 3010 076b 00000000 		.4byte	0
+ 3011 076f 00000000 		.4byte	0
+ 3012              	.LLST30:
+ 3013 0773 00000000 		.4byte	.LVL69
+ 3014 0777 2E000000 		.4byte	.LVL71
+ 3015 077b 0200     		.2byte	0x2
+ 3016 077d 37       		.byte	0x37
+ 3017 077e 9F       		.byte	0x9f
+ 3018 077f 2E000000 		.4byte	.LVL71
+ 3019 0783 32000000 		.4byte	.LVL72
+ 3020 0787 0100     		.2byte	0x1
+ 3021 0789 50       		.byte	0x50
+ 3022 078a 32000000 		.4byte	.LVL72
+ 3023 078e 34000000 		.4byte	.LVL73
+ 3024 0792 0200     		.2byte	0x2
+ 3025 0794 37       		.byte	0x37
+ 3026 0795 9F       		.byte	0x9f
+ 3027 0796 34000000 		.4byte	.LVL73
+ 3028 079a 38000000 		.4byte	.LVL74
+ 3029 079e 0100     		.2byte	0x1
+ 3030 07a0 50       		.byte	0x50
+ 3031 07a1 38000000 		.4byte	.LVL74
+ 3032 07a5 3A000000 		.4byte	.LVL75
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 69
+
+
+ 3033 07a9 0200     		.2byte	0x2
+ 3034 07ab 37       		.byte	0x37
+ 3035 07ac 9F       		.byte	0x9f
+ 3036 07ad 3A000000 		.4byte	.LVL75
+ 3037 07b1 48000000 		.4byte	.LFE8
+ 3038 07b5 0100     		.2byte	0x1
+ 3039 07b7 50       		.byte	0x50
+ 3040 07b8 00000000 		.4byte	0
+ 3041 07bc 00000000 		.4byte	0
+ 3042              	.LLST31:
+ 3043 07c0 00000000 		.4byte	.LVL76
+ 3044 07c4 24000000 		.4byte	.LVL77
+ 3045 07c8 0100     		.2byte	0x1
+ 3046 07ca 50       		.byte	0x50
+ 3047 07cb 24000000 		.4byte	.LVL77
+ 3048 07cf 26000000 		.4byte	.LVL78
+ 3049 07d3 0200     		.2byte	0x2
+ 3050 07d5 73       		.byte	0x73
+ 3051 07d6 00       		.sleb128 0
+ 3052 07d7 26000000 		.4byte	.LVL78
+ 3053 07db 28000000 		.4byte	.LVL79
+ 3054 07df 0100     		.2byte	0x1
+ 3055 07e1 50       		.byte	0x50
+ 3056 07e2 28000000 		.4byte	.LVL79
+ 3057 07e6 2C000000 		.4byte	.LVL80
+ 3058 07ea 0400     		.2byte	0x4
+ 3059 07ec F3       		.byte	0xf3
+ 3060 07ed 01       		.uleb128 0x1
+ 3061 07ee 50       		.byte	0x50
+ 3062 07ef 9F       		.byte	0x9f
+ 3063 07f0 2C000000 		.4byte	.LVL80
+ 3064 07f4 2E000000 		.4byte	.LVL81
+ 3065 07f8 0100     		.2byte	0x1
+ 3066 07fa 50       		.byte	0x50
+ 3067 07fb 2E000000 		.4byte	.LVL81
+ 3068 07ff 38000000 		.4byte	.LFE9
+ 3069 0803 0400     		.2byte	0x4
+ 3070 0805 F3       		.byte	0xf3
+ 3071 0806 01       		.uleb128 0x1
+ 3072 0807 50       		.byte	0x50
+ 3073 0808 9F       		.byte	0x9f
+ 3074 0809 00000000 		.4byte	0
+ 3075 080d 00000000 		.4byte	0
+ 3076              	.LLST32:
+ 3077 0811 00000000 		.4byte	.LVL76
+ 3078 0815 24000000 		.4byte	.LVL77
+ 3079 0819 0200     		.2byte	0x2
+ 3080 081b 37       		.byte	0x37
+ 3081 081c 9F       		.byte	0x9f
+ 3082 081d 24000000 		.4byte	.LVL77
+ 3083 0821 26000000 		.4byte	.LVL78
+ 3084 0825 0100     		.2byte	0x1
+ 3085 0827 50       		.byte	0x50
+ 3086 0828 26000000 		.4byte	.LVL78
+ 3087 082c 28000000 		.4byte	.LVL79
+ 3088 0830 0200     		.2byte	0x2
+ 3089 0832 37       		.byte	0x37
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 70
+
+
+ 3090 0833 9F       		.byte	0x9f
+ 3091 0834 28000000 		.4byte	.LVL79
+ 3092 0838 2C000000 		.4byte	.LVL80
+ 3093 083c 0100     		.2byte	0x1
+ 3094 083e 50       		.byte	0x50
+ 3095 083f 2C000000 		.4byte	.LVL80
+ 3096 0843 2E000000 		.4byte	.LVL81
+ 3097 0847 0200     		.2byte	0x2
+ 3098 0849 37       		.byte	0x37
+ 3099 084a 9F       		.byte	0x9f
+ 3100 084b 2E000000 		.4byte	.LVL81
+ 3101 084f 38000000 		.4byte	.LFE9
+ 3102 0853 0100     		.2byte	0x1
+ 3103 0855 50       		.byte	0x50
+ 3104 0856 00000000 		.4byte	0
+ 3105 085a 00000000 		.4byte	0
+ 3106              	.LLST33:
+ 3107 085e 00000000 		.4byte	.LVL82
+ 3108 0862 0E000000 		.4byte	.LVL84
+ 3109 0866 0200     		.2byte	0x2
+ 3110 0868 34       		.byte	0x34
+ 3111 0869 9F       		.byte	0x9f
+ 3112 086a 0E000000 		.4byte	.LVL84
+ 3113 086e 16000000 		.4byte	.LVL86
+ 3114 0872 0100     		.2byte	0x1
+ 3115 0874 54       		.byte	0x54
+ 3116 0875 16000000 		.4byte	.LVL86
+ 3117 0879 1C000000 		.4byte	.LVL87
+ 3118 087d 0200     		.2byte	0x2
+ 3119 087f 34       		.byte	0x34
+ 3120 0880 9F       		.byte	0x9f
+ 3121 0881 1C000000 		.4byte	.LVL87
+ 3122 0885 32000000 		.4byte	.LVL88
+ 3123 0889 0200     		.2byte	0x2
+ 3124 088b 30       		.byte	0x30
+ 3125 088c 9F       		.byte	0x9f
+ 3126 088d 32000000 		.4byte	.LVL88
+ 3127 0891 3C000000 		.4byte	.LVL90
+ 3128 0895 0100     		.2byte	0x1
+ 3129 0897 54       		.byte	0x54
+ 3130 0898 3C000000 		.4byte	.LVL90
+ 3131 089c 44000000 		.4byte	.LFE10
+ 3132 08a0 0100     		.2byte	0x1
+ 3133 08a2 50       		.byte	0x50
+ 3134 08a3 00000000 		.4byte	0
+ 3135 08a7 00000000 		.4byte	0
+ 3136              	.LLST34:
+ 3137 08ab 06000000 		.4byte	.LVL83
+ 3138 08af 11000000 		.4byte	.LVL85-1
+ 3139 08b3 0100     		.2byte	0x1
+ 3140 08b5 50       		.byte	0x50
+ 3141 08b6 16000000 		.4byte	.LVL86
+ 3142 08ba 37000000 		.4byte	.LVL89-1
+ 3143 08be 0100     		.2byte	0x1
+ 3144 08c0 50       		.byte	0x50
+ 3145 08c1 00000000 		.4byte	0
+ 3146 08c5 00000000 		.4byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 71
+
+
+ 3147              	.LLST35:
+ 3148 08c9 06000000 		.4byte	.LVL91
+ 3149 08cd 2B000000 		.4byte	.LVL92-1
+ 3150 08d1 0100     		.2byte	0x1
+ 3151 08d3 50       		.byte	0x50
+ 3152 08d4 00000000 		.4byte	0
+ 3153 08d8 00000000 		.4byte	0
+ 3154              	.LLST36:
+ 3155 08dc 00000000 		.4byte	.LVL93
+ 3156 08e0 1C000000 		.4byte	.LVL94
+ 3157 08e4 0200     		.2byte	0x2
+ 3158 08e6 37       		.byte	0x37
+ 3159 08e7 9F       		.byte	0x9f
+ 3160 08e8 1C000000 		.4byte	.LVL94
+ 3161 08ec 28000000 		.4byte	.LFE12
+ 3162 08f0 0100     		.2byte	0x1
+ 3163 08f2 50       		.byte	0x50
+ 3164 08f3 00000000 		.4byte	0
+ 3165 08f7 00000000 		.4byte	0
+ 3166              		.section	.debug_aranges,"",%progbits
+ 3167 0000 7C000000 		.4byte	0x7c
+ 3168 0004 0200     		.2byte	0x2
+ 3169 0006 00000000 		.4byte	.Ldebug_info0
+ 3170 000a 04       		.byte	0x4
+ 3171 000b 00       		.byte	0
+ 3172 000c 0000     		.2byte	0
+ 3173 000e 0000     		.2byte	0
+ 3174 0010 00000000 		.4byte	.LFB0
+ 3175 0014 2C000000 		.4byte	.LFE0-.LFB0
+ 3176 0018 00000000 		.4byte	.LFB1
+ 3177 001c 2C000000 		.4byte	.LFE1-.LFB1
+ 3178 0020 00000000 		.4byte	.LFB2
+ 3179 0024 40000000 		.4byte	.LFE2-.LFB2
+ 3180 0028 00000000 		.4byte	.LFB3
+ 3181 002c 70000000 		.4byte	.LFE3-.LFB3
+ 3182 0030 00000000 		.4byte	.LFB4
+ 3183 0034 50000000 		.4byte	.LFE4-.LFB4
+ 3184 0038 00000000 		.4byte	.LFB5
+ 3185 003c 78000000 		.4byte	.LFE5-.LFB5
+ 3186 0040 00000000 		.4byte	.LFB6
+ 3187 0044 48000000 		.4byte	.LFE6-.LFB6
+ 3188 0048 00000000 		.4byte	.LFB7
+ 3189 004c 3C000000 		.4byte	.LFE7-.LFB7
+ 3190 0050 00000000 		.4byte	.LFB8
+ 3191 0054 48000000 		.4byte	.LFE8-.LFB8
+ 3192 0058 00000000 		.4byte	.LFB9
+ 3193 005c 38000000 		.4byte	.LFE9-.LFB9
+ 3194 0060 00000000 		.4byte	.LFB10
+ 3195 0064 44000000 		.4byte	.LFE10-.LFB10
+ 3196 0068 00000000 		.4byte	.LFB11
+ 3197 006c 34000000 		.4byte	.LFE11-.LFB11
+ 3198 0070 00000000 		.4byte	.LFB12
+ 3199 0074 28000000 		.4byte	.LFE12-.LFB12
+ 3200 0078 00000000 		.4byte	0
+ 3201 007c 00000000 		.4byte	0
+ 3202              		.section	.debug_ranges,"",%progbits
+ 3203              	.Ldebug_ranges0:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 72
+
+
+ 3204 0000 00000000 		.4byte	.LFB0
+ 3205 0004 2C000000 		.4byte	.LFE0
+ 3206 0008 00000000 		.4byte	.LFB1
+ 3207 000c 2C000000 		.4byte	.LFE1
+ 3208 0010 00000000 		.4byte	.LFB2
+ 3209 0014 40000000 		.4byte	.LFE2
+ 3210 0018 00000000 		.4byte	.LFB3
+ 3211 001c 70000000 		.4byte	.LFE3
+ 3212 0020 00000000 		.4byte	.LFB4
+ 3213 0024 50000000 		.4byte	.LFE4
+ 3214 0028 00000000 		.4byte	.LFB5
+ 3215 002c 78000000 		.4byte	.LFE5
+ 3216 0030 00000000 		.4byte	.LFB6
+ 3217 0034 48000000 		.4byte	.LFE6
+ 3218 0038 00000000 		.4byte	.LFB7
+ 3219 003c 3C000000 		.4byte	.LFE7
+ 3220 0040 00000000 		.4byte	.LFB8
+ 3221 0044 48000000 		.4byte	.LFE8
+ 3222 0048 00000000 		.4byte	.LFB9
+ 3223 004c 38000000 		.4byte	.LFE9
+ 3224 0050 00000000 		.4byte	.LFB10
+ 3225 0054 44000000 		.4byte	.LFE10
+ 3226 0058 00000000 		.4byte	.LFB11
+ 3227 005c 34000000 		.4byte	.LFE11
+ 3228 0060 00000000 		.4byte	.LFB12
+ 3229 0064 28000000 		.4byte	.LFE12
+ 3230 0068 00000000 		.4byte	0
+ 3231 006c 00000000 		.4byte	0
+ 3232              		.section	.debug_line,"",%progbits
+ 3233              	.Ldebug_line0:
+ 3234 0000 B5020000 		.section	.debug_str,"MS",%progbits,1
+ 3234      02004D00 
+ 3234      00000201 
+ 3234      FB0E0D00 
+ 3234      01010101 
+ 3235              	.LASF26:
+ 3236 0000 43795370 		.ascii	"CySpcLoadMultiByte\000"
+ 3236      634C6F61 
+ 3236      644D756C 
+ 3236      74694279 
+ 3236      746500
+ 3237              	.LASF15:
+ 3238 0013 63797374 		.ascii	"cystatus\000"
+ 3238      61747573 
+ 3238      00
+ 3239              	.LASF17:
+ 3240 001c 72656733 		.ascii	"reg32\000"
+ 3240      3200
+ 3241              	.LASF20:
+ 3242 0022 43795370 		.ascii	"CySpcStart\000"
+ 3242      63537461 
+ 3242      727400
+ 3243              	.LASF33:
+ 3244 002d 43795370 		.ascii	"CySpcWriteRow\000"
+ 3244      63577269 
+ 3244      7465526F 
+ 3244      7700
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 73
+
+
+ 3245              	.LASF50:
+ 3246 003b 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 3246      726F7062 
+ 3246      6F785C44 
+ 3246      4556454C 
+ 3246      4F504D45 
+ 3247 006a 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 3247      70656374 
+ 3247      72756D20 
+ 3247      616E616C 
+ 3247      797A6572 
+ 3248 009b 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 3248      416E616C 
+ 3248      797A6572 
+ 3248      5C617564 
+ 3248      696F5370 
+ 3249              	.LASF28:
+ 3250 00c4 61646472 		.ascii	"address\000"
+ 3250      65737300 
+ 3251              	.LASF21:
+ 3252 00cc 43795370 		.ascii	"CySpcStop\000"
+ 3252      6353746F 
+ 3252      7000
+ 3253              	.LASF3:
+ 3254 00d6 73686F72 		.ascii	"short unsigned int\000"
+ 3254      7420756E 
+ 3254      7369676E 
+ 3254      65642069 
+ 3254      6E7400
+ 3255              	.LASF25:
+ 3256 00e9 43795370 		.ascii	"CySpcReadData\000"
+ 3256      63526561 
+ 3256      64446174 
+ 3256      6100
+ 3257              	.LASF29:
+ 3258 00f7 73746174 		.ascii	"status\000"
+ 3258      757300
+ 3259              	.LASF12:
+ 3260 00fe 666C6F61 		.ascii	"float\000"
+ 3260      7400
+ 3261              	.LASF7:
+ 3262 0104 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3262      206C6F6E 
+ 3262      6720756E 
+ 3262      7369676E 
+ 3262      65642069 
+ 3263              	.LASF24:
+ 3264 011b 73697A65 		.ascii	"size\000"
+ 3264      00
+ 3265              	.LASF16:
+ 3266 0120 72656738 		.ascii	"reg8\000"
+ 3266      00
+ 3267              	.LASF22:
+ 3268 0125 696E7465 		.ascii	"interruptState\000"
+ 3268      72727570 
+ 3268      74537461 
+ 3268      746500
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 74
+
+
+ 3269              	.LASF5:
+ 3270 0134 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3270      20756E73 
+ 3270      69676E65 
+ 3270      6420696E 
+ 3270      7400
+ 3271              	.LASF9:
+ 3272 0146 75696E74 		.ascii	"uint8\000"
+ 3272      3800
+ 3273              	.LASF51:
+ 3274 014c 5370634C 		.ascii	"SpcLockState\000"
+ 3274      6F636B53 
+ 3274      74617465 
+ 3274      00
+ 3275              	.LASF34:
+ 3276 0159 74656D70 		.ascii	"tempPolarity\000"
+ 3276      506F6C61 
+ 3276      72697479 
+ 3276      00
+ 3277              	.LASF27:
+ 3278 0166 61727261 		.ascii	"array\000"
+ 3278      7900
+ 3279              	.LASF1:
+ 3280 016c 756E7369 		.ascii	"unsigned char\000"
+ 3280      676E6564 
+ 3280      20636861 
+ 3280      7200
+ 3281              	.LASF13:
+ 3282 017a 646F7562 		.ascii	"double\000"
+ 3282      6C6500
+ 3283              	.LASF39:
+ 3284 0181 43795370 		.ascii	"CySpcGetTemp\000"
+ 3284      63476574 
+ 3284      54656D70 
+ 3284      00
+ 3285              	.LASF10:
+ 3286 018e 75696E74 		.ascii	"uint16\000"
+ 3286      313600
+ 3287              	.LASF41:
+ 3288 0195 43795370 		.ascii	"CySpcLock\000"
+ 3288      634C6F63 
+ 3288      6B00
+ 3289              	.LASF11:
+ 3290 019f 75696E74 		.ascii	"uint32\000"
+ 3290      333200
+ 3291              	.LASF45:
+ 3292 01a6 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ 3292      74657243 
+ 3292      72697469 
+ 3292      63616C53 
+ 3292      65637469 
+ 3293              	.LASF49:
+ 3294 01bd 47656E65 		.ascii	"Generated_Source\\PSoC5\\CySpc.c\000"
+ 3294      72617465 
+ 3294      645F536F 
+ 3294      75726365 
+ 3294      5C50536F 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 75
+
+
+ 3295              	.LASF8:
+ 3296 01dc 756E7369 		.ascii	"unsigned int\000"
+ 3296      676E6564 
+ 3296      20696E74 
+ 3296      00
+ 3297              	.LASF48:
+ 3298 01e9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 3298      43313120 
+ 3298      352E342E 
+ 3298      31203230 
+ 3298      31363036 
+ 3299 021c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 3299      20726576 
+ 3299      6973696F 
+ 3299      6E203233 
+ 3299      37373135 
+ 3300 024f 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 3300      66756E63 
+ 3300      74696F6E 
+ 3300      2D736563 
+ 3300      74696F6E 
+ 3301 0282 6E637469 		.ascii	"nctions\000"
+ 3301      6F6E7300 
+ 3302              	.LASF46:
+ 3303 028a 43794578 		.ascii	"CyExitCriticalSection\000"
+ 3303      69744372 
+ 3303      69746963 
+ 3303      616C5365 
+ 3303      6374696F 
+ 3304              	.LASF35:
+ 3305 02a0 74656D70 		.ascii	"tempMagnitude\000"
+ 3305      4D61676E 
+ 3305      69747564 
+ 3305      6500
+ 3306              	.LASF23:
+ 3307 02ae 62756666 		.ascii	"buffer\000"
+ 3307      657200
+ 3308              	.LASF44:
+ 3309 02b5 73706357 		.ascii	"spcWaitPipeBypass\000"
+ 3309      61697450 
+ 3309      69706542 
+ 3309      79706173 
+ 3309      7300
+ 3310              	.LASF30:
+ 3311 02c7 43795370 		.ascii	"CySpcLoadRow\000"
+ 3311      634C6F61 
+ 3311      64526F77 
+ 3311      00
+ 3312              	.LASF19:
+ 3313 02d4 73697A65 		.ascii	"sizetype\000"
+ 3313      74797065 
+ 3313      00
+ 3314              	.LASF42:
+ 3315 02dd 43795370 		.ascii	"CySpcUnlock\000"
+ 3315      63556E6C 
+ 3315      6F636B00 
+ 3316              	.LASF36:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 76
+
+
+ 3317 02e9 43795370 		.ascii	"CySpcEraseSector\000"
+ 3317      63457261 
+ 3317      73655365 
+ 3317      63746F72 
+ 3317      00
+ 3318              	.LASF6:
+ 3319 02fa 6C6F6E67 		.ascii	"long long int\000"
+ 3319      206C6F6E 
+ 3319      6720696E 
+ 3319      7400
+ 3320              	.LASF47:
+ 3321 0308 43794465 		.ascii	"CyDelayUs\000"
+ 3321      6C617955 
+ 3321      7300
+ 3322              	.LASF14:
+ 3323 0312 63686172 		.ascii	"char\000"
+ 3323      00
+ 3324              	.LASF43:
+ 3325 0317 43795370 		.ascii	"CySpcGetAlgorithm\000"
+ 3325      63476574 
+ 3325      416C676F 
+ 3325      72697468 
+ 3325      6D00
+ 3326              	.LASF32:
+ 3327 0329 6F666673 		.ascii	"offset\000"
+ 3327      657400
+ 3328              	.LASF2:
+ 3329 0330 73686F72 		.ascii	"short int\000"
+ 3329      7420696E 
+ 3329      7400
+ 3330              	.LASF38:
+ 3331 033a 43795370 		.ascii	"CySpcEraseRow\000"
+ 3331      63457261 
+ 3331      7365526F 
+ 3331      7700
+ 3332              	.LASF37:
+ 3333 0348 73656374 		.ascii	"sectorNumber\000"
+ 3333      6F724E75 
+ 3333      6D626572 
+ 3333      00
+ 3334              	.LASF4:
+ 3335 0355 6C6F6E67 		.ascii	"long int\000"
+ 3335      20696E74 
+ 3335      00
+ 3336              	.LASF18:
+ 3337 035e 6C6F6E67 		.ascii	"long double\000"
+ 3337      20646F75 
+ 3337      626C6500 
+ 3338              	.LASF0:
+ 3339 036a 7369676E 		.ascii	"signed char\000"
+ 3339      65642063 
+ 3339      68617200 
+ 3340              	.LASF31:
+ 3341 0376 43795370 		.ascii	"CySpcLoadRowFull\000"
+ 3341      634C6F61 
+ 3341      64526F77 
+ 3341      46756C6C 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9jLpwY.s 			page 77
+
+
+ 3341      00
+ 3342              	.LASF40:
+ 3343 0387 6E756D53 		.ascii	"numSamples\000"
+ 3343      616D706C 
+ 3343      657300
+ 3344              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

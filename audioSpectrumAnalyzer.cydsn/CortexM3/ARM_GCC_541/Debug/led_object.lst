@@ -1,0 +1,1239 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"led_object.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.led_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	led_init
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	led_init, %function
+  25              	led_init:
+  26              	.LFB0:
+  27              		.file 1 "led_object.c"
+   1:led_object.c  **** /* ========================================
+   2:led_object.c  ****  *
+   3:led_object.c  ****  * Copyright YOUR COMPANY, THE YEAR
+   4:led_object.c  ****  * All Rights Reserved
+   5:led_object.c  ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:led_object.c  ****  *
+   7:led_object.c  ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:led_object.c  ****  * WHICH IS THE PROPERTY OF your company.
+   9:led_object.c  ****  *
+  10:led_object.c  ****  * ========================================
+  11:led_object.c  **** */
+  12:led_object.c  **** #include    <led_object.h>
+  13:led_object.c  **** 
+  14:led_object.c  **** // define the functions
+  15:led_object.c  **** void led_init(led *data, char brightness, char blue, char green, char red)
+  16:led_object.c  **** {
+  28              		.loc 1 16 0
+  29              		.cfi_startproc
+  30              		@ args = 4, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34 0000 10B4     		push	{r4}
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 4, -4
+  37              		.loc 1 16 0
+  38 0002 9DF80440 		ldrb	r4, [sp, #4]	@ zero_extendqisi2
+  17:led_object.c  ****     data->brightness = 0xe0 | brightness;
+  39              		.loc 1 17 0
+  40 0006 61F01F01 		orn	r1, r1, #31
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 2
+
+
+  41              	.LVL1:
+  18:led_object.c  ****     data->blue = blue;
+  19:led_object.c  ****     data->green = green;
+  20:led_object.c  ****     data->red = red;
+  42              		.loc 1 20 0
+  43 000a 0471     		strb	r4, [r0, #4]
+  18:led_object.c  ****     data->blue = blue;
+  44              		.loc 1 18 0
+  45 000c 8270     		strb	r2, [r0, #2]
+  19:led_object.c  ****     data->red = red;
+  46              		.loc 1 19 0
+  47 000e C370     		strb	r3, [r0, #3]
+  17:led_object.c  ****     data->brightness = 0xe0 | brightness;
+  48              		.loc 1 17 0
+  49 0010 4170     		strb	r1, [r0, #1]
+  21:led_object.c  **** }
+  50              		.loc 1 21 0
+  51 0012 10BC     		pop	{r4}
+  52              		.cfi_restore 4
+  53              		.cfi_def_cfa_offset 0
+  54              	.LVL2:
+  55 0014 7047     		bx	lr
+  56              		.cfi_endproc
+  57              	.LFE0:
+  58              		.size	led_init, .-led_init
+  59 0016 00BF     		.section	.text.led_id_read,"ax",%progbits
+  60              		.align	2
+  61              		.global	led_id_read
+  62              		.thumb
+  63              		.thumb_func
+  64              		.type	led_id_read, %function
+  65              	led_id_read:
+  66              	.LFB1:
+  22:led_object.c  **** 
+  23:led_object.c  **** 
+  24:led_object.c  **** char led_id_read(led *data)
+  25:led_object.c  **** {
+  67              		.loc 1 25 0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71              		@ link register save eliminated.
+  72              	.LVL3:
+  26:led_object.c  ****     return data-> id;
+  27:led_object.c  **** }
+  73              		.loc 1 27 0
+  74 0000 0078     		ldrb	r0, [r0]	@ zero_extendqisi2
+  75              	.LVL4:
+  76 0002 7047     		bx	lr
+  77              		.cfi_endproc
+  78              	.LFE1:
+  79              		.size	led_id_read, .-led_id_read
+  80              		.section	.text.led_id_write,"ax",%progbits
+  81              		.align	2
+  82              		.global	led_id_write
+  83              		.thumb
+  84              		.thumb_func
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 3
+
+
+  85              		.type	led_id_write, %function
+  86              	led_id_write:
+  87              	.LFB2:
+  28:led_object.c  **** 
+  29:led_object.c  **** void led_id_write(led *data, char id)
+  30:led_object.c  **** {
+  88              		.loc 1 30 0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+  93              	.LVL5:
+  31:led_object.c  ****     data->id = id;
+  94              		.loc 1 31 0
+  95 0000 0170     		strb	r1, [r0]
+  96 0002 7047     		bx	lr
+  97              		.cfi_endproc
+  98              	.LFE2:
+  99              		.size	led_id_write, .-led_id_write
+ 100              		.section	.text.led_brightness_read,"ax",%progbits
+ 101              		.align	2
+ 102              		.global	led_brightness_read
+ 103              		.thumb
+ 104              		.thumb_func
+ 105              		.type	led_brightness_read, %function
+ 106              	led_brightness_read:
+ 107              	.LFB3:
+  32:led_object.c  **** }
+  33:led_object.c  **** 
+  34:led_object.c  **** char led_brightness_read(led *data)
+  35:led_object.c  **** {
+ 108              		.loc 1 35 0
+ 109              		.cfi_startproc
+ 110              		@ args = 0, pretend = 0, frame = 0
+ 111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112              		@ link register save eliminated.
+ 113              	.LVL6:
+  36:led_object.c  ****     return (data->brightness & 0x1f);
+ 114              		.loc 1 36 0
+ 115 0000 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 116              	.LVL7:
+  37:led_object.c  **** }
+ 117              		.loc 1 37 0
+ 118 0002 00F01F00 		and	r0, r0, #31
+ 119 0006 7047     		bx	lr
+ 120              		.cfi_endproc
+ 121              	.LFE3:
+ 122              		.size	led_brightness_read, .-led_brightness_read
+ 123              		.section	.text.led_brightness_write,"ax",%progbits
+ 124              		.align	2
+ 125              		.global	led_brightness_write
+ 126              		.thumb
+ 127              		.thumb_func
+ 128              		.type	led_brightness_write, %function
+ 129              	led_brightness_write:
+ 130              	.LFB4:
+  38:led_object.c  **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 4
+
+
+  39:led_object.c  **** void led_brightness_write(led *data, char brightness)
+  40:led_object.c  **** {
+ 131              		.loc 1 40 0
+ 132              		.cfi_startproc
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135              		@ link register save eliminated.
+ 136              	.LVL8:
+  41:led_object.c  ****     data->brightness = 0xe0 | brightness;
+ 137              		.loc 1 41 0
+ 138 0000 61F01F01 		orn	r1, r1, #31
+ 139              	.LVL9:
+ 140 0004 4170     		strb	r1, [r0, #1]
+ 141 0006 7047     		bx	lr
+ 142              		.cfi_endproc
+ 143              	.LFE4:
+ 144              		.size	led_brightness_write, .-led_brightness_write
+ 145              		.section	.text.led_blue_read,"ax",%progbits
+ 146              		.align	2
+ 147              		.global	led_blue_read
+ 148              		.thumb
+ 149              		.thumb_func
+ 150              		.type	led_blue_read, %function
+ 151              	led_blue_read:
+ 152              	.LFB5:
+  42:led_object.c  **** }
+  43:led_object.c  **** 
+  44:led_object.c  **** char led_blue_read(led *data)
+  45:led_object.c  **** {
+ 153              		.loc 1 45 0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157              		@ link register save eliminated.
+ 158              	.LVL10:
+  46:led_object.c  ****     return data->blue;
+  47:led_object.c  **** }
+ 159              		.loc 1 47 0
+ 160 0000 8078     		ldrb	r0, [r0, #2]	@ zero_extendqisi2
+ 161              	.LVL11:
+ 162 0002 7047     		bx	lr
+ 163              		.cfi_endproc
+ 164              	.LFE5:
+ 165              		.size	led_blue_read, .-led_blue_read
+ 166              		.section	.text.led_blue_write,"ax",%progbits
+ 167              		.align	2
+ 168              		.global	led_blue_write
+ 169              		.thumb
+ 170              		.thumb_func
+ 171              		.type	led_blue_write, %function
+ 172              	led_blue_write:
+ 173              	.LFB6:
+  48:led_object.c  **** 
+  49:led_object.c  **** void led_blue_write(led *data, char value)
+  50:led_object.c  **** {
+ 174              		.loc 1 50 0
+ 175              		.cfi_startproc
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 5
+
+
+ 176              		@ args = 0, pretend = 0, frame = 0
+ 177              		@ frame_needed = 0, uses_anonymous_args = 0
+ 178              		@ link register save eliminated.
+ 179              	.LVL12:
+  51:led_object.c  ****     data->blue = value;
+ 180              		.loc 1 51 0
+ 181 0000 8170     		strb	r1, [r0, #2]
+ 182 0002 7047     		bx	lr
+ 183              		.cfi_endproc
+ 184              	.LFE6:
+ 185              		.size	led_blue_write, .-led_blue_write
+ 186              		.section	.text.led_green_read,"ax",%progbits
+ 187              		.align	2
+ 188              		.global	led_green_read
+ 189              		.thumb
+ 190              		.thumb_func
+ 191              		.type	led_green_read, %function
+ 192              	led_green_read:
+ 193              	.LFB7:
+  52:led_object.c  **** }
+  53:led_object.c  **** 
+  54:led_object.c  **** char led_green_read(led *data)
+  55:led_object.c  **** {
+ 194              		.loc 1 55 0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 0
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 198              		@ link register save eliminated.
+ 199              	.LVL13:
+  56:led_object.c  ****     return data->green;
+  57:led_object.c  **** }
+ 200              		.loc 1 57 0
+ 201 0000 C078     		ldrb	r0, [r0, #3]	@ zero_extendqisi2
+ 202              	.LVL14:
+ 203 0002 7047     		bx	lr
+ 204              		.cfi_endproc
+ 205              	.LFE7:
+ 206              		.size	led_green_read, .-led_green_read
+ 207              		.section	.text.led_green_write,"ax",%progbits
+ 208              		.align	2
+ 209              		.global	led_green_write
+ 210              		.thumb
+ 211              		.thumb_func
+ 212              		.type	led_green_write, %function
+ 213              	led_green_write:
+ 214              	.LFB8:
+  58:led_object.c  **** 
+  59:led_object.c  **** void led_green_write(led *data, char value)
+  60:led_object.c  **** {
+ 215              		.loc 1 60 0
+ 216              		.cfi_startproc
+ 217              		@ args = 0, pretend = 0, frame = 0
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219              		@ link register save eliminated.
+ 220              	.LVL15:
+  61:led_object.c  ****      data->green = value;
+ 221              		.loc 1 61 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 6
+
+
+ 222 0000 C170     		strb	r1, [r0, #3]
+ 223 0002 7047     		bx	lr
+ 224              		.cfi_endproc
+ 225              	.LFE8:
+ 226              		.size	led_green_write, .-led_green_write
+ 227              		.section	.text.led_red_read,"ax",%progbits
+ 228              		.align	2
+ 229              		.global	led_red_read
+ 230              		.thumb
+ 231              		.thumb_func
+ 232              		.type	led_red_read, %function
+ 233              	led_red_read:
+ 234              	.LFB9:
+  62:led_object.c  **** }
+  63:led_object.c  **** 
+  64:led_object.c  **** char led_red_read(led *data)
+  65:led_object.c  **** {
+ 235              		.loc 1 65 0
+ 236              		.cfi_startproc
+ 237              		@ args = 0, pretend = 0, frame = 0
+ 238              		@ frame_needed = 0, uses_anonymous_args = 0
+ 239              		@ link register save eliminated.
+ 240              	.LVL16:
+  66:led_object.c  ****     return data->red;
+  67:led_object.c  **** }
+ 241              		.loc 1 67 0
+ 242 0000 0079     		ldrb	r0, [r0, #4]	@ zero_extendqisi2
+ 243              	.LVL17:
+ 244 0002 7047     		bx	lr
+ 245              		.cfi_endproc
+ 246              	.LFE9:
+ 247              		.size	led_red_read, .-led_red_read
+ 248              		.section	.text.led_red_write,"ax",%progbits
+ 249              		.align	2
+ 250              		.global	led_red_write
+ 251              		.thumb
+ 252              		.thumb_func
+ 253              		.type	led_red_write, %function
+ 254              	led_red_write:
+ 255              	.LFB10:
+  68:led_object.c  **** 
+  69:led_object.c  **** void led_red_write(led *data, char value)
+  70:led_object.c  **** {
+ 256              		.loc 1 70 0
+ 257              		.cfi_startproc
+ 258              		@ args = 0, pretend = 0, frame = 0
+ 259              		@ frame_needed = 0, uses_anonymous_args = 0
+ 260              		@ link register save eliminated.
+ 261              	.LVL18:
+  71:led_object.c  ****     data->red = value;
+ 262              		.loc 1 71 0
+ 263 0000 0171     		strb	r1, [r0, #4]
+ 264 0002 7047     		bx	lr
+ 265              		.cfi_endproc
+ 266              	.LFE10:
+ 267              		.size	led_red_write, .-led_red_write
+ 268              		.text
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 7
+
+
+ 269              	.Letext0:
+ 270              		.file 2 "./led_object.h"
+ 271              		.section	.debug_info,"",%progbits
+ 272              	.Ldebug_info0:
+ 273 0000 93020000 		.4byte	0x293
+ 274 0004 0400     		.2byte	0x4
+ 275 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 276 000a 04       		.byte	0x4
+ 277 000b 01       		.uleb128 0x1
+ 278 000c 82000000 		.4byte	.LASF15
+ 279 0010 0C       		.byte	0xc
+ 280 0011 75000000 		.4byte	.LASF16
+ 281 0015 31010000 		.4byte	.LASF17
+ 282 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 283 001d 00000000 		.4byte	0
+ 284 0021 00000000 		.4byte	.Ldebug_line0
+ 285 0025 02       		.uleb128 0x2
+ 286 0026 05       		.byte	0x5
+ 287 0027 02       		.byte	0x2
+ 288 0028 10       		.byte	0x10
+ 289 0029 69000000 		.4byte	0x69
+ 290 002d 03       		.uleb128 0x3
+ 291 002e 696400   		.ascii	"id\000"
+ 292 0031 02       		.byte	0x2
+ 293 0032 10       		.byte	0x10
+ 294 0033 69000000 		.4byte	0x69
+ 295 0037 00       		.byte	0
+ 296 0038 04       		.uleb128 0x4
+ 297 0039 D0010000 		.4byte	.LASF0
+ 298 003d 02       		.byte	0x2
+ 299 003e 11       		.byte	0x11
+ 300 003f 69000000 		.4byte	0x69
+ 301 0043 01       		.byte	0x1
+ 302 0044 04       		.uleb128 0x4
+ 303 0045 CB010000 		.4byte	.LASF1
+ 304 0049 02       		.byte	0x2
+ 305 004a 12       		.byte	0x12
+ 306 004b 69000000 		.4byte	0x69
+ 307 004f 02       		.byte	0x2
+ 308 0050 04       		.uleb128 0x4
+ 309 0051 C5010000 		.4byte	.LASF2
+ 310 0055 02       		.byte	0x2
+ 311 0056 13       		.byte	0x13
+ 312 0057 69000000 		.4byte	0x69
+ 313 005b 03       		.byte	0x3
+ 314 005c 03       		.uleb128 0x3
+ 315 005d 72656400 		.ascii	"red\000"
+ 316 0061 02       		.byte	0x2
+ 317 0062 14       		.byte	0x14
+ 318 0063 69000000 		.4byte	0x69
+ 319 0067 04       		.byte	0x4
+ 320 0068 00       		.byte	0
+ 321 0069 05       		.uleb128 0x5
+ 322 006a 01       		.byte	0x1
+ 323 006b 08       		.byte	0x8
+ 324 006c DB010000 		.4byte	.LASF18
+ 325 0070 06       		.uleb128 0x6
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 8
+
+
+ 326 0071 6C656400 		.ascii	"led\000"
+ 327 0075 02       		.byte	0x2
+ 328 0076 14       		.byte	0x14
+ 329 0077 25000000 		.4byte	0x25
+ 330 007b 07       		.uleb128 0x7
+ 331 007c 29000000 		.4byte	.LASF4
+ 332 0080 01       		.byte	0x1
+ 333 0081 0F       		.byte	0xf
+ 334 0082 00000000 		.4byte	.LFB0
+ 335 0086 16000000 		.4byte	.LFE0-.LFB0
+ 336 008a 01       		.uleb128 0x1
+ 337 008b 9C       		.byte	0x9c
+ 338 008c D6000000 		.4byte	0xd6
+ 339 0090 08       		.uleb128 0x8
+ 340 0091 C0010000 		.4byte	.LASF3
+ 341 0095 01       		.byte	0x1
+ 342 0096 0F       		.byte	0xf
+ 343 0097 D6000000 		.4byte	0xd6
+ 344 009b 01       		.uleb128 0x1
+ 345 009c 50       		.byte	0x50
+ 346 009d 09       		.uleb128 0x9
+ 347 009e D0010000 		.4byte	.LASF0
+ 348 00a2 01       		.byte	0x1
+ 349 00a3 0F       		.byte	0xf
+ 350 00a4 69000000 		.4byte	0x69
+ 351 00a8 00000000 		.4byte	.LLST0
+ 352 00ac 08       		.uleb128 0x8
+ 353 00ad CB010000 		.4byte	.LASF1
+ 354 00b1 01       		.byte	0x1
+ 355 00b2 0F       		.byte	0xf
+ 356 00b3 69000000 		.4byte	0x69
+ 357 00b7 01       		.uleb128 0x1
+ 358 00b8 52       		.byte	0x52
+ 359 00b9 08       		.uleb128 0x8
+ 360 00ba C5010000 		.4byte	.LASF2
+ 361 00be 01       		.byte	0x1
+ 362 00bf 0F       		.byte	0xf
+ 363 00c0 69000000 		.4byte	0x69
+ 364 00c4 01       		.uleb128 0x1
+ 365 00c5 53       		.byte	0x53
+ 366 00c6 0A       		.uleb128 0xa
+ 367 00c7 72656400 		.ascii	"red\000"
+ 368 00cb 01       		.byte	0x1
+ 369 00cc 0F       		.byte	0xf
+ 370 00cd 69000000 		.4byte	0x69
+ 371 00d1 21000000 		.4byte	.LLST1
+ 372 00d5 00       		.byte	0
+ 373 00d6 0B       		.uleb128 0xb
+ 374 00d7 04       		.byte	0x4
+ 375 00d8 70000000 		.4byte	0x70
+ 376 00dc 0C       		.uleb128 0xc
+ 377 00dd 69000000 		.4byte	.LASF6
+ 378 00e1 01       		.byte	0x1
+ 379 00e2 18       		.byte	0x18
+ 380 00e3 69000000 		.4byte	0x69
+ 381 00e7 00000000 		.4byte	.LFB1
+ 382 00eb 04000000 		.4byte	.LFE1-.LFB1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 9
+
+
+ 383 00ef 01       		.uleb128 0x1
+ 384 00f0 9C       		.byte	0x9c
+ 385 00f1 05010000 		.4byte	0x105
+ 386 00f5 09       		.uleb128 0x9
+ 387 00f6 C0010000 		.4byte	.LASF3
+ 388 00fa 01       		.byte	0x1
+ 389 00fb 18       		.byte	0x18
+ 390 00fc D6000000 		.4byte	0xd6
+ 391 0100 41000000 		.4byte	.LLST2
+ 392 0104 00       		.byte	0
+ 393 0105 07       		.uleb128 0x7
+ 394 0106 00000000 		.4byte	.LASF5
+ 395 010a 01       		.byte	0x1
+ 396 010b 1D       		.byte	0x1d
+ 397 010c 00000000 		.4byte	.LFB2
+ 398 0110 04000000 		.4byte	.LFE2-.LFB2
+ 399 0114 01       		.uleb128 0x1
+ 400 0115 9C       		.byte	0x9c
+ 401 0116 34010000 		.4byte	0x134
+ 402 011a 08       		.uleb128 0x8
+ 403 011b C0010000 		.4byte	.LASF3
+ 404 011f 01       		.byte	0x1
+ 405 0120 1D       		.byte	0x1d
+ 406 0121 D6000000 		.4byte	0xd6
+ 407 0125 01       		.uleb128 0x1
+ 408 0126 50       		.byte	0x50
+ 409 0127 0D       		.uleb128 0xd
+ 410 0128 696400   		.ascii	"id\000"
+ 411 012b 01       		.byte	0x1
+ 412 012c 1D       		.byte	0x1d
+ 413 012d 69000000 		.4byte	0x69
+ 414 0131 01       		.uleb128 0x1
+ 415 0132 51       		.byte	0x51
+ 416 0133 00       		.byte	0
+ 417 0134 0C       		.uleb128 0xc
+ 418 0135 41000000 		.4byte	.LASF7
+ 419 0139 01       		.byte	0x1
+ 420 013a 22       		.byte	0x22
+ 421 013b 69000000 		.4byte	0x69
+ 422 013f 00000000 		.4byte	.LFB3
+ 423 0143 08000000 		.4byte	.LFE3-.LFB3
+ 424 0147 01       		.uleb128 0x1
+ 425 0148 9C       		.byte	0x9c
+ 426 0149 5D010000 		.4byte	0x15d
+ 427 014d 09       		.uleb128 0x9
+ 428 014e C0010000 		.4byte	.LASF3
+ 429 0152 01       		.byte	0x1
+ 430 0153 22       		.byte	0x22
+ 431 0154 D6000000 		.4byte	0xd6
+ 432 0158 62000000 		.4byte	.LLST3
+ 433 015c 00       		.byte	0
+ 434 015d 07       		.uleb128 0x7
+ 435 015e AB010000 		.4byte	.LASF8
+ 436 0162 01       		.byte	0x1
+ 437 0163 27       		.byte	0x27
+ 438 0164 00000000 		.4byte	.LFB4
+ 439 0168 08000000 		.4byte	.LFE4-.LFB4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 10
+
+
+ 440 016c 01       		.uleb128 0x1
+ 441 016d 9C       		.byte	0x9c
+ 442 016e 8F010000 		.4byte	0x18f
+ 443 0172 08       		.uleb128 0x8
+ 444 0173 C0010000 		.4byte	.LASF3
+ 445 0177 01       		.byte	0x1
+ 446 0178 27       		.byte	0x27
+ 447 0179 D6000000 		.4byte	0xd6
+ 448 017d 01       		.uleb128 0x1
+ 449 017e 50       		.byte	0x50
+ 450 017f 09       		.uleb128 0x9
+ 451 0180 D0010000 		.4byte	.LASF0
+ 452 0184 01       		.byte	0x1
+ 453 0185 27       		.byte	0x27
+ 454 0186 69000000 		.4byte	0x69
+ 455 018a 83000000 		.4byte	.LLST4
+ 456 018e 00       		.byte	0
+ 457 018f 0C       		.uleb128 0xc
+ 458 0190 23010000 		.4byte	.LASF9
+ 459 0194 01       		.byte	0x1
+ 460 0195 2C       		.byte	0x2c
+ 461 0196 69000000 		.4byte	0x69
+ 462 019a 00000000 		.4byte	.LFB5
+ 463 019e 04000000 		.4byte	.LFE5-.LFB5
+ 464 01a2 01       		.uleb128 0x1
+ 465 01a3 9C       		.byte	0x9c
+ 466 01a4 B8010000 		.4byte	0x1b8
+ 467 01a8 09       		.uleb128 0x9
+ 468 01a9 C0010000 		.4byte	.LASF3
+ 469 01ad 01       		.byte	0x1
+ 470 01ae 2C       		.byte	0x2c
+ 471 01af D6000000 		.4byte	0xd6
+ 472 01b3 A4000000 		.4byte	.LLST5
+ 473 01b7 00       		.byte	0
+ 474 01b8 07       		.uleb128 0x7
+ 475 01b9 0D000000 		.4byte	.LASF10
+ 476 01bd 01       		.byte	0x1
+ 477 01be 31       		.byte	0x31
+ 478 01bf 00000000 		.4byte	.LFB6
+ 479 01c3 04000000 		.4byte	.LFE6-.LFB6
+ 480 01c7 01       		.uleb128 0x1
+ 481 01c8 9C       		.byte	0x9c
+ 482 01c9 E8010000 		.4byte	0x1e8
+ 483 01cd 08       		.uleb128 0x8
+ 484 01ce C0010000 		.4byte	.LASF3
+ 485 01d2 01       		.byte	0x1
+ 486 01d3 31       		.byte	0x31
+ 487 01d4 D6000000 		.4byte	0xd6
+ 488 01d8 01       		.uleb128 0x1
+ 489 01d9 50       		.byte	0x50
+ 490 01da 08       		.uleb128 0x8
+ 491 01db 63000000 		.4byte	.LASF11
+ 492 01df 01       		.byte	0x1
+ 493 01e0 31       		.byte	0x31
+ 494 01e1 69000000 		.4byte	0x69
+ 495 01e5 01       		.uleb128 0x1
+ 496 01e6 51       		.byte	0x51
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 11
+
+
+ 497 01e7 00       		.byte	0
+ 498 01e8 0C       		.uleb128 0xc
+ 499 01e9 32000000 		.4byte	.LASF12
+ 500 01ed 01       		.byte	0x1
+ 501 01ee 36       		.byte	0x36
+ 502 01ef 69000000 		.4byte	0x69
+ 503 01f3 00000000 		.4byte	.LFB7
+ 504 01f7 04000000 		.4byte	.LFE7-.LFB7
+ 505 01fb 01       		.uleb128 0x1
+ 506 01fc 9C       		.byte	0x9c
+ 507 01fd 11020000 		.4byte	0x211
+ 508 0201 09       		.uleb128 0x9
+ 509 0202 C0010000 		.4byte	.LASF3
+ 510 0206 01       		.byte	0x1
+ 511 0207 36       		.byte	0x36
+ 512 0208 D6000000 		.4byte	0xd6
+ 513 020c C5000000 		.4byte	.LLST6
+ 514 0210 00       		.byte	0
+ 515 0211 07       		.uleb128 0x7
+ 516 0212 9B010000 		.4byte	.LASF13
+ 517 0216 01       		.byte	0x1
+ 518 0217 3B       		.byte	0x3b
+ 519 0218 00000000 		.4byte	.LFB8
+ 520 021c 04000000 		.4byte	.LFE8-.LFB8
+ 521 0220 01       		.uleb128 0x1
+ 522 0221 9C       		.byte	0x9c
+ 523 0222 41020000 		.4byte	0x241
+ 524 0226 08       		.uleb128 0x8
+ 525 0227 C0010000 		.4byte	.LASF3
+ 526 022b 01       		.byte	0x1
+ 527 022c 3B       		.byte	0x3b
+ 528 022d D6000000 		.4byte	0xd6
+ 529 0231 01       		.uleb128 0x1
+ 530 0232 50       		.byte	0x50
+ 531 0233 08       		.uleb128 0x8
+ 532 0234 63000000 		.4byte	.LASF11
+ 533 0238 01       		.byte	0x1
+ 534 0239 3B       		.byte	0x3b
+ 535 023a 69000000 		.4byte	0x69
+ 536 023e 01       		.uleb128 0x1
+ 537 023f 51       		.byte	0x51
+ 538 0240 00       		.byte	0
+ 539 0241 0C       		.uleb128 0xc
+ 540 0242 1C000000 		.4byte	.LASF14
+ 541 0246 01       		.byte	0x1
+ 542 0247 40       		.byte	0x40
+ 543 0248 69000000 		.4byte	0x69
+ 544 024c 00000000 		.4byte	.LFB9
+ 545 0250 04000000 		.4byte	.LFE9-.LFB9
+ 546 0254 01       		.uleb128 0x1
+ 547 0255 9C       		.byte	0x9c
+ 548 0256 6A020000 		.4byte	0x26a
+ 549 025a 09       		.uleb128 0x9
+ 550 025b C0010000 		.4byte	.LASF3
+ 551 025f 01       		.byte	0x1
+ 552 0260 40       		.byte	0x40
+ 553 0261 D6000000 		.4byte	0xd6
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 12
+
+
+ 554 0265 E6000000 		.4byte	.LLST7
+ 555 0269 00       		.byte	0
+ 556 026a 0E       		.uleb128 0xe
+ 557 026b 55000000 		.4byte	.LASF19
+ 558 026f 01       		.byte	0x1
+ 559 0270 45       		.byte	0x45
+ 560 0271 00000000 		.4byte	.LFB10
+ 561 0275 04000000 		.4byte	.LFE10-.LFB10
+ 562 0279 01       		.uleb128 0x1
+ 563 027a 9C       		.byte	0x9c
+ 564 027b 08       		.uleb128 0x8
+ 565 027c C0010000 		.4byte	.LASF3
+ 566 0280 01       		.byte	0x1
+ 567 0281 45       		.byte	0x45
+ 568 0282 D6000000 		.4byte	0xd6
+ 569 0286 01       		.uleb128 0x1
+ 570 0287 50       		.byte	0x50
+ 571 0288 08       		.uleb128 0x8
+ 572 0289 63000000 		.4byte	.LASF11
+ 573 028d 01       		.byte	0x1
+ 574 028e 45       		.byte	0x45
+ 575 028f 69000000 		.4byte	0x69
+ 576 0293 01       		.uleb128 0x1
+ 577 0294 51       		.byte	0x51
+ 578 0295 00       		.byte	0
+ 579 0296 00       		.byte	0
+ 580              		.section	.debug_abbrev,"",%progbits
+ 581              	.Ldebug_abbrev0:
+ 582 0000 01       		.uleb128 0x1
+ 583 0001 11       		.uleb128 0x11
+ 584 0002 01       		.byte	0x1
+ 585 0003 25       		.uleb128 0x25
+ 586 0004 0E       		.uleb128 0xe
+ 587 0005 13       		.uleb128 0x13
+ 588 0006 0B       		.uleb128 0xb
+ 589 0007 03       		.uleb128 0x3
+ 590 0008 0E       		.uleb128 0xe
+ 591 0009 1B       		.uleb128 0x1b
+ 592 000a 0E       		.uleb128 0xe
+ 593 000b 55       		.uleb128 0x55
+ 594 000c 17       		.uleb128 0x17
+ 595 000d 11       		.uleb128 0x11
+ 596 000e 01       		.uleb128 0x1
+ 597 000f 10       		.uleb128 0x10
+ 598 0010 17       		.uleb128 0x17
+ 599 0011 00       		.byte	0
+ 600 0012 00       		.byte	0
+ 601 0013 02       		.uleb128 0x2
+ 602 0014 13       		.uleb128 0x13
+ 603 0015 01       		.byte	0x1
+ 604 0016 0B       		.uleb128 0xb
+ 605 0017 0B       		.uleb128 0xb
+ 606 0018 3A       		.uleb128 0x3a
+ 607 0019 0B       		.uleb128 0xb
+ 608 001a 3B       		.uleb128 0x3b
+ 609 001b 0B       		.uleb128 0xb
+ 610 001c 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 13
+
+
+ 611 001d 13       		.uleb128 0x13
+ 612 001e 00       		.byte	0
+ 613 001f 00       		.byte	0
+ 614 0020 03       		.uleb128 0x3
+ 615 0021 0D       		.uleb128 0xd
+ 616 0022 00       		.byte	0
+ 617 0023 03       		.uleb128 0x3
+ 618 0024 08       		.uleb128 0x8
+ 619 0025 3A       		.uleb128 0x3a
+ 620 0026 0B       		.uleb128 0xb
+ 621 0027 3B       		.uleb128 0x3b
+ 622 0028 0B       		.uleb128 0xb
+ 623 0029 49       		.uleb128 0x49
+ 624 002a 13       		.uleb128 0x13
+ 625 002b 38       		.uleb128 0x38
+ 626 002c 0B       		.uleb128 0xb
+ 627 002d 00       		.byte	0
+ 628 002e 00       		.byte	0
+ 629 002f 04       		.uleb128 0x4
+ 630 0030 0D       		.uleb128 0xd
+ 631 0031 00       		.byte	0
+ 632 0032 03       		.uleb128 0x3
+ 633 0033 0E       		.uleb128 0xe
+ 634 0034 3A       		.uleb128 0x3a
+ 635 0035 0B       		.uleb128 0xb
+ 636 0036 3B       		.uleb128 0x3b
+ 637 0037 0B       		.uleb128 0xb
+ 638 0038 49       		.uleb128 0x49
+ 639 0039 13       		.uleb128 0x13
+ 640 003a 38       		.uleb128 0x38
+ 641 003b 0B       		.uleb128 0xb
+ 642 003c 00       		.byte	0
+ 643 003d 00       		.byte	0
+ 644 003e 05       		.uleb128 0x5
+ 645 003f 24       		.uleb128 0x24
+ 646 0040 00       		.byte	0
+ 647 0041 0B       		.uleb128 0xb
+ 648 0042 0B       		.uleb128 0xb
+ 649 0043 3E       		.uleb128 0x3e
+ 650 0044 0B       		.uleb128 0xb
+ 651 0045 03       		.uleb128 0x3
+ 652 0046 0E       		.uleb128 0xe
+ 653 0047 00       		.byte	0
+ 654 0048 00       		.byte	0
+ 655 0049 06       		.uleb128 0x6
+ 656 004a 16       		.uleb128 0x16
+ 657 004b 00       		.byte	0
+ 658 004c 03       		.uleb128 0x3
+ 659 004d 08       		.uleb128 0x8
+ 660 004e 3A       		.uleb128 0x3a
+ 661 004f 0B       		.uleb128 0xb
+ 662 0050 3B       		.uleb128 0x3b
+ 663 0051 0B       		.uleb128 0xb
+ 664 0052 49       		.uleb128 0x49
+ 665 0053 13       		.uleb128 0x13
+ 666 0054 00       		.byte	0
+ 667 0055 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 14
+
+
+ 668 0056 07       		.uleb128 0x7
+ 669 0057 2E       		.uleb128 0x2e
+ 670 0058 01       		.byte	0x1
+ 671 0059 3F       		.uleb128 0x3f
+ 672 005a 19       		.uleb128 0x19
+ 673 005b 03       		.uleb128 0x3
+ 674 005c 0E       		.uleb128 0xe
+ 675 005d 3A       		.uleb128 0x3a
+ 676 005e 0B       		.uleb128 0xb
+ 677 005f 3B       		.uleb128 0x3b
+ 678 0060 0B       		.uleb128 0xb
+ 679 0061 27       		.uleb128 0x27
+ 680 0062 19       		.uleb128 0x19
+ 681 0063 11       		.uleb128 0x11
+ 682 0064 01       		.uleb128 0x1
+ 683 0065 12       		.uleb128 0x12
+ 684 0066 06       		.uleb128 0x6
+ 685 0067 40       		.uleb128 0x40
+ 686 0068 18       		.uleb128 0x18
+ 687 0069 9742     		.uleb128 0x2117
+ 688 006b 19       		.uleb128 0x19
+ 689 006c 01       		.uleb128 0x1
+ 690 006d 13       		.uleb128 0x13
+ 691 006e 00       		.byte	0
+ 692 006f 00       		.byte	0
+ 693 0070 08       		.uleb128 0x8
+ 694 0071 05       		.uleb128 0x5
+ 695 0072 00       		.byte	0
+ 696 0073 03       		.uleb128 0x3
+ 697 0074 0E       		.uleb128 0xe
+ 698 0075 3A       		.uleb128 0x3a
+ 699 0076 0B       		.uleb128 0xb
+ 700 0077 3B       		.uleb128 0x3b
+ 701 0078 0B       		.uleb128 0xb
+ 702 0079 49       		.uleb128 0x49
+ 703 007a 13       		.uleb128 0x13
+ 704 007b 02       		.uleb128 0x2
+ 705 007c 18       		.uleb128 0x18
+ 706 007d 00       		.byte	0
+ 707 007e 00       		.byte	0
+ 708 007f 09       		.uleb128 0x9
+ 709 0080 05       		.uleb128 0x5
+ 710 0081 00       		.byte	0
+ 711 0082 03       		.uleb128 0x3
+ 712 0083 0E       		.uleb128 0xe
+ 713 0084 3A       		.uleb128 0x3a
+ 714 0085 0B       		.uleb128 0xb
+ 715 0086 3B       		.uleb128 0x3b
+ 716 0087 0B       		.uleb128 0xb
+ 717 0088 49       		.uleb128 0x49
+ 718 0089 13       		.uleb128 0x13
+ 719 008a 02       		.uleb128 0x2
+ 720 008b 17       		.uleb128 0x17
+ 721 008c 00       		.byte	0
+ 722 008d 00       		.byte	0
+ 723 008e 0A       		.uleb128 0xa
+ 724 008f 05       		.uleb128 0x5
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 15
+
+
+ 725 0090 00       		.byte	0
+ 726 0091 03       		.uleb128 0x3
+ 727 0092 08       		.uleb128 0x8
+ 728 0093 3A       		.uleb128 0x3a
+ 729 0094 0B       		.uleb128 0xb
+ 730 0095 3B       		.uleb128 0x3b
+ 731 0096 0B       		.uleb128 0xb
+ 732 0097 49       		.uleb128 0x49
+ 733 0098 13       		.uleb128 0x13
+ 734 0099 02       		.uleb128 0x2
+ 735 009a 17       		.uleb128 0x17
+ 736 009b 00       		.byte	0
+ 737 009c 00       		.byte	0
+ 738 009d 0B       		.uleb128 0xb
+ 739 009e 0F       		.uleb128 0xf
+ 740 009f 00       		.byte	0
+ 741 00a0 0B       		.uleb128 0xb
+ 742 00a1 0B       		.uleb128 0xb
+ 743 00a2 49       		.uleb128 0x49
+ 744 00a3 13       		.uleb128 0x13
+ 745 00a4 00       		.byte	0
+ 746 00a5 00       		.byte	0
+ 747 00a6 0C       		.uleb128 0xc
+ 748 00a7 2E       		.uleb128 0x2e
+ 749 00a8 01       		.byte	0x1
+ 750 00a9 3F       		.uleb128 0x3f
+ 751 00aa 19       		.uleb128 0x19
+ 752 00ab 03       		.uleb128 0x3
+ 753 00ac 0E       		.uleb128 0xe
+ 754 00ad 3A       		.uleb128 0x3a
+ 755 00ae 0B       		.uleb128 0xb
+ 756 00af 3B       		.uleb128 0x3b
+ 757 00b0 0B       		.uleb128 0xb
+ 758 00b1 27       		.uleb128 0x27
+ 759 00b2 19       		.uleb128 0x19
+ 760 00b3 49       		.uleb128 0x49
+ 761 00b4 13       		.uleb128 0x13
+ 762 00b5 11       		.uleb128 0x11
+ 763 00b6 01       		.uleb128 0x1
+ 764 00b7 12       		.uleb128 0x12
+ 765 00b8 06       		.uleb128 0x6
+ 766 00b9 40       		.uleb128 0x40
+ 767 00ba 18       		.uleb128 0x18
+ 768 00bb 9742     		.uleb128 0x2117
+ 769 00bd 19       		.uleb128 0x19
+ 770 00be 01       		.uleb128 0x1
+ 771 00bf 13       		.uleb128 0x13
+ 772 00c0 00       		.byte	0
+ 773 00c1 00       		.byte	0
+ 774 00c2 0D       		.uleb128 0xd
+ 775 00c3 05       		.uleb128 0x5
+ 776 00c4 00       		.byte	0
+ 777 00c5 03       		.uleb128 0x3
+ 778 00c6 08       		.uleb128 0x8
+ 779 00c7 3A       		.uleb128 0x3a
+ 780 00c8 0B       		.uleb128 0xb
+ 781 00c9 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 16
+
+
+ 782 00ca 0B       		.uleb128 0xb
+ 783 00cb 49       		.uleb128 0x49
+ 784 00cc 13       		.uleb128 0x13
+ 785 00cd 02       		.uleb128 0x2
+ 786 00ce 18       		.uleb128 0x18
+ 787 00cf 00       		.byte	0
+ 788 00d0 00       		.byte	0
+ 789 00d1 0E       		.uleb128 0xe
+ 790 00d2 2E       		.uleb128 0x2e
+ 791 00d3 01       		.byte	0x1
+ 792 00d4 3F       		.uleb128 0x3f
+ 793 00d5 19       		.uleb128 0x19
+ 794 00d6 03       		.uleb128 0x3
+ 795 00d7 0E       		.uleb128 0xe
+ 796 00d8 3A       		.uleb128 0x3a
+ 797 00d9 0B       		.uleb128 0xb
+ 798 00da 3B       		.uleb128 0x3b
+ 799 00db 0B       		.uleb128 0xb
+ 800 00dc 27       		.uleb128 0x27
+ 801 00dd 19       		.uleb128 0x19
+ 802 00de 11       		.uleb128 0x11
+ 803 00df 01       		.uleb128 0x1
+ 804 00e0 12       		.uleb128 0x12
+ 805 00e1 06       		.uleb128 0x6
+ 806 00e2 40       		.uleb128 0x40
+ 807 00e3 18       		.uleb128 0x18
+ 808 00e4 9742     		.uleb128 0x2117
+ 809 00e6 19       		.uleb128 0x19
+ 810 00e7 00       		.byte	0
+ 811 00e8 00       		.byte	0
+ 812 00e9 00       		.byte	0
+ 813              		.section	.debug_loc,"",%progbits
+ 814              	.Ldebug_loc0:
+ 815              	.LLST0:
+ 816 0000 00000000 		.4byte	.LVL0
+ 817 0004 0A000000 		.4byte	.LVL1
+ 818 0008 0100     		.2byte	0x1
+ 819 000a 51       		.byte	0x51
+ 820 000b 0A000000 		.4byte	.LVL1
+ 821 000f 16000000 		.4byte	.LFE0
+ 822 0013 0400     		.2byte	0x4
+ 823 0015 F3       		.byte	0xf3
+ 824 0016 01       		.uleb128 0x1
+ 825 0017 51       		.byte	0x51
+ 826 0018 9F       		.byte	0x9f
+ 827 0019 00000000 		.4byte	0
+ 828 001d 00000000 		.4byte	0
+ 829              	.LLST1:
+ 830 0021 00000000 		.4byte	.LVL0
+ 831 0025 14000000 		.4byte	.LVL2
+ 832 0029 0200     		.2byte	0x2
+ 833 002b 91       		.byte	0x91
+ 834 002c 00       		.sleb128 0
+ 835 002d 14000000 		.4byte	.LVL2
+ 836 0031 16000000 		.4byte	.LFE0
+ 837 0035 0200     		.2byte	0x2
+ 838 0037 7D       		.byte	0x7d
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 17
+
+
+ 839 0038 00       		.sleb128 0
+ 840 0039 00000000 		.4byte	0
+ 841 003d 00000000 		.4byte	0
+ 842              	.LLST2:
+ 843 0041 00000000 		.4byte	.LVL3
+ 844 0045 02000000 		.4byte	.LVL4
+ 845 0049 0100     		.2byte	0x1
+ 846 004b 50       		.byte	0x50
+ 847 004c 02000000 		.4byte	.LVL4
+ 848 0050 04000000 		.4byte	.LFE1
+ 849 0054 0400     		.2byte	0x4
+ 850 0056 F3       		.byte	0xf3
+ 851 0057 01       		.uleb128 0x1
+ 852 0058 50       		.byte	0x50
+ 853 0059 9F       		.byte	0x9f
+ 854 005a 00000000 		.4byte	0
+ 855 005e 00000000 		.4byte	0
+ 856              	.LLST3:
+ 857 0062 00000000 		.4byte	.LVL6
+ 858 0066 02000000 		.4byte	.LVL7
+ 859 006a 0100     		.2byte	0x1
+ 860 006c 50       		.byte	0x50
+ 861 006d 02000000 		.4byte	.LVL7
+ 862 0071 08000000 		.4byte	.LFE3
+ 863 0075 0400     		.2byte	0x4
+ 864 0077 F3       		.byte	0xf3
+ 865 0078 01       		.uleb128 0x1
+ 866 0079 50       		.byte	0x50
+ 867 007a 9F       		.byte	0x9f
+ 868 007b 00000000 		.4byte	0
+ 869 007f 00000000 		.4byte	0
+ 870              	.LLST4:
+ 871 0083 00000000 		.4byte	.LVL8
+ 872 0087 04000000 		.4byte	.LVL9
+ 873 008b 0100     		.2byte	0x1
+ 874 008d 51       		.byte	0x51
+ 875 008e 04000000 		.4byte	.LVL9
+ 876 0092 08000000 		.4byte	.LFE4
+ 877 0096 0400     		.2byte	0x4
+ 878 0098 F3       		.byte	0xf3
+ 879 0099 01       		.uleb128 0x1
+ 880 009a 51       		.byte	0x51
+ 881 009b 9F       		.byte	0x9f
+ 882 009c 00000000 		.4byte	0
+ 883 00a0 00000000 		.4byte	0
+ 884              	.LLST5:
+ 885 00a4 00000000 		.4byte	.LVL10
+ 886 00a8 02000000 		.4byte	.LVL11
+ 887 00ac 0100     		.2byte	0x1
+ 888 00ae 50       		.byte	0x50
+ 889 00af 02000000 		.4byte	.LVL11
+ 890 00b3 04000000 		.4byte	.LFE5
+ 891 00b7 0400     		.2byte	0x4
+ 892 00b9 F3       		.byte	0xf3
+ 893 00ba 01       		.uleb128 0x1
+ 894 00bb 50       		.byte	0x50
+ 895 00bc 9F       		.byte	0x9f
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 18
+
+
+ 896 00bd 00000000 		.4byte	0
+ 897 00c1 00000000 		.4byte	0
+ 898              	.LLST6:
+ 899 00c5 00000000 		.4byte	.LVL13
+ 900 00c9 02000000 		.4byte	.LVL14
+ 901 00cd 0100     		.2byte	0x1
+ 902 00cf 50       		.byte	0x50
+ 903 00d0 02000000 		.4byte	.LVL14
+ 904 00d4 04000000 		.4byte	.LFE7
+ 905 00d8 0400     		.2byte	0x4
+ 906 00da F3       		.byte	0xf3
+ 907 00db 01       		.uleb128 0x1
+ 908 00dc 50       		.byte	0x50
+ 909 00dd 9F       		.byte	0x9f
+ 910 00de 00000000 		.4byte	0
+ 911 00e2 00000000 		.4byte	0
+ 912              	.LLST7:
+ 913 00e6 00000000 		.4byte	.LVL16
+ 914 00ea 02000000 		.4byte	.LVL17
+ 915 00ee 0100     		.2byte	0x1
+ 916 00f0 50       		.byte	0x50
+ 917 00f1 02000000 		.4byte	.LVL17
+ 918 00f5 04000000 		.4byte	.LFE9
+ 919 00f9 0400     		.2byte	0x4
+ 920 00fb F3       		.byte	0xf3
+ 921 00fc 01       		.uleb128 0x1
+ 922 00fd 50       		.byte	0x50
+ 923 00fe 9F       		.byte	0x9f
+ 924 00ff 00000000 		.4byte	0
+ 925 0103 00000000 		.4byte	0
+ 926              		.section	.debug_aranges,"",%progbits
+ 927 0000 6C000000 		.4byte	0x6c
+ 928 0004 0200     		.2byte	0x2
+ 929 0006 00000000 		.4byte	.Ldebug_info0
+ 930 000a 04       		.byte	0x4
+ 931 000b 00       		.byte	0
+ 932 000c 0000     		.2byte	0
+ 933 000e 0000     		.2byte	0
+ 934 0010 00000000 		.4byte	.LFB0
+ 935 0014 16000000 		.4byte	.LFE0-.LFB0
+ 936 0018 00000000 		.4byte	.LFB1
+ 937 001c 04000000 		.4byte	.LFE1-.LFB1
+ 938 0020 00000000 		.4byte	.LFB2
+ 939 0024 04000000 		.4byte	.LFE2-.LFB2
+ 940 0028 00000000 		.4byte	.LFB3
+ 941 002c 08000000 		.4byte	.LFE3-.LFB3
+ 942 0030 00000000 		.4byte	.LFB4
+ 943 0034 08000000 		.4byte	.LFE4-.LFB4
+ 944 0038 00000000 		.4byte	.LFB5
+ 945 003c 04000000 		.4byte	.LFE5-.LFB5
+ 946 0040 00000000 		.4byte	.LFB6
+ 947 0044 04000000 		.4byte	.LFE6-.LFB6
+ 948 0048 00000000 		.4byte	.LFB7
+ 949 004c 04000000 		.4byte	.LFE7-.LFB7
+ 950 0050 00000000 		.4byte	.LFB8
+ 951 0054 04000000 		.4byte	.LFE8-.LFB8
+ 952 0058 00000000 		.4byte	.LFB9
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 19
+
+
+ 953 005c 04000000 		.4byte	.LFE9-.LFB9
+ 954 0060 00000000 		.4byte	.LFB10
+ 955 0064 04000000 		.4byte	.LFE10-.LFB10
+ 956 0068 00000000 		.4byte	0
+ 957 006c 00000000 		.4byte	0
+ 958              		.section	.debug_ranges,"",%progbits
+ 959              	.Ldebug_ranges0:
+ 960 0000 00000000 		.4byte	.LFB0
+ 961 0004 16000000 		.4byte	.LFE0
+ 962 0008 00000000 		.4byte	.LFB1
+ 963 000c 04000000 		.4byte	.LFE1
+ 964 0010 00000000 		.4byte	.LFB2
+ 965 0014 04000000 		.4byte	.LFE2
+ 966 0018 00000000 		.4byte	.LFB3
+ 967 001c 08000000 		.4byte	.LFE3
+ 968 0020 00000000 		.4byte	.LFB4
+ 969 0024 08000000 		.4byte	.LFE4
+ 970 0028 00000000 		.4byte	.LFB5
+ 971 002c 04000000 		.4byte	.LFE5
+ 972 0030 00000000 		.4byte	.LFB6
+ 973 0034 04000000 		.4byte	.LFE6
+ 974 0038 00000000 		.4byte	.LFB7
+ 975 003c 04000000 		.4byte	.LFE7
+ 976 0040 00000000 		.4byte	.LFB8
+ 977 0044 04000000 		.4byte	.LFE8
+ 978 0048 00000000 		.4byte	.LFB9
+ 979 004c 04000000 		.4byte	.LFE9
+ 980 0050 00000000 		.4byte	.LFB10
+ 981 0054 04000000 		.4byte	.LFE10
+ 982 0058 00000000 		.4byte	0
+ 983 005c 00000000 		.4byte	0
+ 984              		.section	.debug_line,"",%progbits
+ 985              	.Ldebug_line0:
+ 986 0000 F4000000 		.section	.debug_str,"MS",%progbits,1
+ 986      02003500 
+ 986      00000201 
+ 986      FB0E0D00 
+ 986      01010101 
+ 987              	.LASF5:
+ 988 0000 6C65645F 		.ascii	"led_id_write\000"
+ 988      69645F77 
+ 988      72697465 
+ 988      00
+ 989              	.LASF10:
+ 990 000d 6C65645F 		.ascii	"led_blue_write\000"
+ 990      626C7565 
+ 990      5F777269 
+ 990      746500
+ 991              	.LASF14:
+ 992 001c 6C65645F 		.ascii	"led_red_read\000"
+ 992      7265645F 
+ 992      72656164 
+ 992      00
+ 993              	.LASF4:
+ 994 0029 6C65645F 		.ascii	"led_init\000"
+ 994      696E6974 
+ 994      00
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 20
+
+
+ 995              	.LASF12:
+ 996 0032 6C65645F 		.ascii	"led_green_read\000"
+ 996      67726565 
+ 996      6E5F7265 
+ 996      616400
+ 997              	.LASF7:
+ 998 0041 6C65645F 		.ascii	"led_brightness_read\000"
+ 998      62726967 
+ 998      68746E65 
+ 998      73735F72 
+ 998      65616400 
+ 999              	.LASF19:
+ 1000 0055 6C65645F 		.ascii	"led_red_write\000"
+ 1000      7265645F 
+ 1000      77726974 
+ 1000      6500
+ 1001              	.LASF11:
+ 1002 0063 76616C75 		.ascii	"value\000"
+ 1002      6500
+ 1003              	.LASF6:
+ 1004 0069 6C65645F 		.ascii	"led_id_read\000"
+ 1004      69645F72 
+ 1004      65616400 
+ 1005              	.LASF16:
+ 1006 0075 6C65645F 		.ascii	"led_object.c\000"
+ 1006      6F626A65 
+ 1006      63742E63 
+ 1006      00
+ 1007              	.LASF15:
+ 1008 0082 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1008      43313120 
+ 1008      352E342E 
+ 1008      31203230 
+ 1008      31363036 
+ 1009 00b5 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1009      20726576 
+ 1009      6973696F 
+ 1009      6E203233 
+ 1009      37373135 
+ 1010 00e8 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 1010      66756E63 
+ 1010      74696F6E 
+ 1010      2D736563 
+ 1010      74696F6E 
+ 1011 011b 6E637469 		.ascii	"nctions\000"
+ 1011      6F6E7300 
+ 1012              	.LASF9:
+ 1013 0123 6C65645F 		.ascii	"led_blue_read\000"
+ 1013      626C7565 
+ 1013      5F726561 
+ 1013      6400
+ 1014              	.LASF17:
+ 1015 0131 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio spectrum analyzer\\"
+ 1015      726F7062 
+ 1015      6F785C44 
+ 1015      4556454C 
+ 1015      4F504D45 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccNDjgfx.s 			page 21
+
+
+ 1016 0160 4669726D 		.ascii	"Firmware\\audioSpectrumAnalyzer\\audioSpectrumAnaly"
+ 1016      77617265 
+ 1016      5C617564 
+ 1016      696F5370 
+ 1016      65637472 
+ 1017 0191 7A65722E 		.ascii	"zer.cydsn\000"
+ 1017      63796473 
+ 1017      6E00
+ 1018              	.LASF13:
+ 1019 019b 6C65645F 		.ascii	"led_green_write\000"
+ 1019      67726565 
+ 1019      6E5F7772 
+ 1019      69746500 
+ 1020              	.LASF8:
+ 1021 01ab 6C65645F 		.ascii	"led_brightness_write\000"
+ 1021      62726967 
+ 1021      68746E65 
+ 1021      73735F77 
+ 1021      72697465 
+ 1022              	.LASF3:
+ 1023 01c0 64617461 		.ascii	"data\000"
+ 1023      00
+ 1024              	.LASF2:
+ 1025 01c5 67726565 		.ascii	"green\000"
+ 1025      6E00
+ 1026              	.LASF1:
+ 1027 01cb 626C7565 		.ascii	"blue\000"
+ 1027      00
+ 1028              	.LASF0:
+ 1029 01d0 62726967 		.ascii	"brightness\000"
+ 1029      68746E65 
+ 1029      737300
+ 1030              	.LASF18:
+ 1031 01db 63686172 		.ascii	"char\000"
+ 1031      00
+ 1032              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

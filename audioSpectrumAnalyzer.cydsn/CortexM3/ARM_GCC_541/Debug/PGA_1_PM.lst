@@ -1,0 +1,893 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"PGA_1_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.PGA_1_SaveConfig,"ax",%progbits
+  20              		.align	2
+  21              		.global	PGA_1_SaveConfig
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	PGA_1_SaveConfig, %function
+  25              	PGA_1_SaveConfig:
+  26              	.LFB5:
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  31 0000 7047     		bx	lr
+  32              		.cfi_endproc
+  33              	.LFE5:
+  34              		.size	PGA_1_SaveConfig, .-PGA_1_SaveConfig
+  35 0002 00BF     		.section	.text.PGA_1_RestoreConfig,"ax",%progbits
+  36              		.align	2
+  37              		.global	PGA_1_RestoreConfig
+  38              		.thumb
+  39              		.thumb_func
+  40              		.type	PGA_1_RestoreConfig, %function
+  41              	PGA_1_RestoreConfig:
+  42              	.LFB1:
+  43              		.file 1 "Generated_Source\\PSoC5\\PGA_1_PM.c"
+   1:Generated_Source\PSoC5/PGA_1_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/PGA_1_PM.c **** * File Name: PGA_1_PM.c  
+   3:Generated_Source\PSoC5/PGA_1_PM.c **** * Version 2.0
+   4:Generated_Source\PSoC5/PGA_1_PM.c **** *
+   5:Generated_Source\PSoC5/PGA_1_PM.c **** * Description:
+   6:Generated_Source\PSoC5/PGA_1_PM.c **** *  This file provides the power manager source code to the API for PGA 
+   7:Generated_Source\PSoC5/PGA_1_PM.c **** *  Component.
+   8:Generated_Source\PSoC5/PGA_1_PM.c **** *
+   9:Generated_Source\PSoC5/PGA_1_PM.c **** * Note:
+  10:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  11:Generated_Source\PSoC5/PGA_1_PM.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/PGA_1_PM.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/PGA_1_PM.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  14:Generated_Source\PSoC5/PGA_1_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 2
+
+
+  15:Generated_Source\PSoC5/PGA_1_PM.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/PGA_1_PM.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/PGA_1_PM.c **** 
+  18:Generated_Source\PSoC5/PGA_1_PM.c **** #include "PGA_1.h"
+  19:Generated_Source\PSoC5/PGA_1_PM.c **** 
+  20:Generated_Source\PSoC5/PGA_1_PM.c **** static PGA_1_BACKUP_STRUCT  PGA_1_backup;
+  21:Generated_Source\PSoC5/PGA_1_PM.c **** 
+  22:Generated_Source\PSoC5/PGA_1_PM.c **** 
+  23:Generated_Source\PSoC5/PGA_1_PM.c **** /*******************************************************************************
+  24:Generated_Source\PSoC5/PGA_1_PM.c **** * Function Name: PGA_1_SaveConfig
+  25:Generated_Source\PSoC5/PGA_1_PM.c **** ********************************************************************************
+  26:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  27:Generated_Source\PSoC5/PGA_1_PM.c **** * Summary:
+  28:Generated_Source\PSoC5/PGA_1_PM.c **** *  Save the current user register configuration.
+  29:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  30:Generated_Source\PSoC5/PGA_1_PM.c **** * Parameters:
+  31:Generated_Source\PSoC5/PGA_1_PM.c **** *  void
+  32:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  33:Generated_Source\PSoC5/PGA_1_PM.c **** * Return:
+  34:Generated_Source\PSoC5/PGA_1_PM.c **** *  void
+  35:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  36:Generated_Source\PSoC5/PGA_1_PM.c **** *******************************************************************************/
+  37:Generated_Source\PSoC5/PGA_1_PM.c **** void PGA_1_SaveConfig(void) 
+  38:Generated_Source\PSoC5/PGA_1_PM.c **** {
+  39:Generated_Source\PSoC5/PGA_1_PM.c ****     /* Nothing to save as registers are System reset on retention flops */
+  40:Generated_Source\PSoC5/PGA_1_PM.c **** }
+  41:Generated_Source\PSoC5/PGA_1_PM.c **** 
+  42:Generated_Source\PSoC5/PGA_1_PM.c **** 
+  43:Generated_Source\PSoC5/PGA_1_PM.c **** /*******************************************************************************  
+  44:Generated_Source\PSoC5/PGA_1_PM.c **** * Function Name: PGA_1_RestoreConfig
+  45:Generated_Source\PSoC5/PGA_1_PM.c **** ********************************************************************************
+  46:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  47:Generated_Source\PSoC5/PGA_1_PM.c **** * Summary:
+  48:Generated_Source\PSoC5/PGA_1_PM.c **** *  Restore the register configurations.
+  49:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  50:Generated_Source\PSoC5/PGA_1_PM.c **** * Parameters:
+  51:Generated_Source\PSoC5/PGA_1_PM.c **** *  void
+  52:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  53:Generated_Source\PSoC5/PGA_1_PM.c **** * Return:
+  54:Generated_Source\PSoC5/PGA_1_PM.c **** *  void
+  55:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  56:Generated_Source\PSoC5/PGA_1_PM.c **** *******************************************************************************/
+  57:Generated_Source\PSoC5/PGA_1_PM.c **** void PGA_1_RestoreConfig(void) 
+  58:Generated_Source\PSoC5/PGA_1_PM.c **** {
+  44              		.loc 1 58 0
+  45              		.cfi_startproc
+  46              		@ args = 0, pretend = 0, frame = 0
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48              		@ link register save eliminated.
+  49 0000 7047     		bx	lr
+  50              		.cfi_endproc
+  51              	.LFE1:
+  52              		.size	PGA_1_RestoreConfig, .-PGA_1_RestoreConfig
+  53 0002 00BF     		.section	.text.PGA_1_Sleep,"ax",%progbits
+  54              		.align	2
+  55              		.global	PGA_1_Sleep
+  56              		.thumb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 3
+
+
+  57              		.thumb_func
+  58              		.type	PGA_1_Sleep, %function
+  59              	PGA_1_Sleep:
+  60              	.LFB2:
+  59:Generated_Source\PSoC5/PGA_1_PM.c ****     /* Nothing to restore */
+  60:Generated_Source\PSoC5/PGA_1_PM.c **** }
+  61:Generated_Source\PSoC5/PGA_1_PM.c **** 
+  62:Generated_Source\PSoC5/PGA_1_PM.c **** 
+  63:Generated_Source\PSoC5/PGA_1_PM.c **** /*******************************************************************************   
+  64:Generated_Source\PSoC5/PGA_1_PM.c **** * Function Name: PGA_1_Sleep
+  65:Generated_Source\PSoC5/PGA_1_PM.c **** ********************************************************************************
+  66:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  67:Generated_Source\PSoC5/PGA_1_PM.c **** * Summary:
+  68:Generated_Source\PSoC5/PGA_1_PM.c **** *  Disables block's operation and saves its configuration. Should be called 
+  69:Generated_Source\PSoC5/PGA_1_PM.c **** *  just prior to entering sleep.
+  70:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  71:Generated_Source\PSoC5/PGA_1_PM.c **** * Parameters:
+  72:Generated_Source\PSoC5/PGA_1_PM.c **** *  None
+  73:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  74:Generated_Source\PSoC5/PGA_1_PM.c **** * Return:
+  75:Generated_Source\PSoC5/PGA_1_PM.c **** *  None
+  76:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  77:Generated_Source\PSoC5/PGA_1_PM.c **** * Global variables:
+  78:Generated_Source\PSoC5/PGA_1_PM.c **** *  PGA_1_backup: The structure field 'enableState' is modified 
+  79:Generated_Source\PSoC5/PGA_1_PM.c **** *  depending on the enable state of the block before entering to sleep mode.
+  80:Generated_Source\PSoC5/PGA_1_PM.c **** *
+  81:Generated_Source\PSoC5/PGA_1_PM.c **** *******************************************************************************/
+  82:Generated_Source\PSoC5/PGA_1_PM.c **** void PGA_1_Sleep(void) 
+  83:Generated_Source\PSoC5/PGA_1_PM.c **** {
+  61              		.loc 1 83 0
+  62              		.cfi_startproc
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  84:Generated_Source\PSoC5/PGA_1_PM.c ****     /* Save PGA enable state */
+  85:Generated_Source\PSoC5/PGA_1_PM.c ****     if((PGA_1_PM_ACT_CFG_REG & PGA_1_ACT_PWR_EN) != 0u)
+  66              		.loc 1 85 0
+  67 0000 074B     		ldr	r3, .L7
+  68 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  69 0004 03F00203 		and	r3, r3, #2
+  70 0008 03F0FF02 		and	r2, r3, #255
+  71 000c 13B9     		cbnz	r3, .L6
+  86:Generated_Source\PSoC5/PGA_1_PM.c ****     {
+  87:Generated_Source\PSoC5/PGA_1_PM.c ****         /* Component is enabled */
+  88:Generated_Source\PSoC5/PGA_1_PM.c ****         PGA_1_backup.enableState = 1u;
+  89:Generated_Source\PSoC5/PGA_1_PM.c ****         /* Stop the configuration */
+  90:Generated_Source\PSoC5/PGA_1_PM.c ****         PGA_1_Stop();
+  91:Generated_Source\PSoC5/PGA_1_PM.c ****     }
+  92:Generated_Source\PSoC5/PGA_1_PM.c ****     else
+  93:Generated_Source\PSoC5/PGA_1_PM.c ****     {
+  94:Generated_Source\PSoC5/PGA_1_PM.c ****         /* Component is disabled */
+  95:Generated_Source\PSoC5/PGA_1_PM.c ****         PGA_1_backup.enableState = 0u;
+  72              		.loc 1 95 0
+  73 000e 054B     		ldr	r3, .L7+4
+  74 0010 1A70     		strb	r2, [r3]
+  75 0012 7047     		bx	lr
+  76              	.L6:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 4
+
+
+  88:Generated_Source\PSoC5/PGA_1_PM.c ****         /* Stop the configuration */
+  77              		.loc 1 88 0
+  78 0014 034B     		ldr	r3, .L7+4
+  79 0016 0122     		movs	r2, #1
+  80 0018 1A70     		strb	r2, [r3]
+  90:Generated_Source\PSoC5/PGA_1_PM.c ****     }
+  81              		.loc 1 90 0
+  82 001a FFF7FEBF 		b	PGA_1_Stop
+  83              	.LVL0:
+  84              	.L8:
+  85 001e 00BF     		.align	2
+  86              	.L7:
+  87 0020 A9430040 		.word	1073759145
+  88 0024 00000000 		.word	.LANCHOR0
+  89              		.cfi_endproc
+  90              	.LFE2:
+  91              		.size	PGA_1_Sleep, .-PGA_1_Sleep
+  92              		.section	.text.PGA_1_Wakeup,"ax",%progbits
+  93              		.align	2
+  94              		.global	PGA_1_Wakeup
+  95              		.thumb
+  96              		.thumb_func
+  97              		.type	PGA_1_Wakeup, %function
+  98              	PGA_1_Wakeup:
+  99              	.LFB3:
+  96:Generated_Source\PSoC5/PGA_1_PM.c ****     }
+  97:Generated_Source\PSoC5/PGA_1_PM.c ****     /* Save the configuration */
+  98:Generated_Source\PSoC5/PGA_1_PM.c ****     PGA_1_SaveConfig();
+  99:Generated_Source\PSoC5/PGA_1_PM.c **** }
+ 100:Generated_Source\PSoC5/PGA_1_PM.c **** 
+ 101:Generated_Source\PSoC5/PGA_1_PM.c **** 
+ 102:Generated_Source\PSoC5/PGA_1_PM.c **** /*******************************************************************************
+ 103:Generated_Source\PSoC5/PGA_1_PM.c **** * Function Name: PGA_1_Wakeup
+ 104:Generated_Source\PSoC5/PGA_1_PM.c **** ********************************************************************************
+ 105:Generated_Source\PSoC5/PGA_1_PM.c **** *
+ 106:Generated_Source\PSoC5/PGA_1_PM.c **** * Summary:
+ 107:Generated_Source\PSoC5/PGA_1_PM.c **** *  Enables block's operation and restores its configuration. Should be called
+ 108:Generated_Source\PSoC5/PGA_1_PM.c **** *  just after awaking from sleep.
+ 109:Generated_Source\PSoC5/PGA_1_PM.c **** *
+ 110:Generated_Source\PSoC5/PGA_1_PM.c **** * Parameters:
+ 111:Generated_Source\PSoC5/PGA_1_PM.c **** *  None
+ 112:Generated_Source\PSoC5/PGA_1_PM.c **** *
+ 113:Generated_Source\PSoC5/PGA_1_PM.c **** * Return:
+ 114:Generated_Source\PSoC5/PGA_1_PM.c **** *  void
+ 115:Generated_Source\PSoC5/PGA_1_PM.c **** *
+ 116:Generated_Source\PSoC5/PGA_1_PM.c **** * Global variables:
+ 117:Generated_Source\PSoC5/PGA_1_PM.c **** *  PGA_1_backup: The structure field 'enableState' is used to 
+ 118:Generated_Source\PSoC5/PGA_1_PM.c **** *  restore the enable state of block after wakeup from sleep mode.
+ 119:Generated_Source\PSoC5/PGA_1_PM.c **** * 
+ 120:Generated_Source\PSoC5/PGA_1_PM.c **** *******************************************************************************/
+ 121:Generated_Source\PSoC5/PGA_1_PM.c **** void PGA_1_Wakeup(void) 
+ 122:Generated_Source\PSoC5/PGA_1_PM.c **** {
+ 100              		.loc 1 122 0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104              		@ link register save eliminated.
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 5
+
+
+ 123:Generated_Source\PSoC5/PGA_1_PM.c ****     /* Restore the configurations */
+ 124:Generated_Source\PSoC5/PGA_1_PM.c ****     PGA_1_RestoreConfig();
+ 125:Generated_Source\PSoC5/PGA_1_PM.c ****      /* Enables the component operation */
+ 126:Generated_Source\PSoC5/PGA_1_PM.c ****     if(PGA_1_backup.enableState == 1u)
+ 105              		.loc 1 126 0
+ 106 0000 034B     		ldr	r3, .L12
+ 107 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 108 0004 012B     		cmp	r3, #1
+ 109 0006 00D0     		beq	.L11
+ 110 0008 7047     		bx	lr
+ 111              	.L11:
+ 127:Generated_Source\PSoC5/PGA_1_PM.c ****     {
+ 128:Generated_Source\PSoC5/PGA_1_PM.c ****         PGA_1_Enable();
+ 112              		.loc 1 128 0
+ 113 000a FFF7FEBF 		b	PGA_1_Enable
+ 114              	.LVL1:
+ 115              	.L13:
+ 116 000e 00BF     		.align	2
+ 117              	.L12:
+ 118 0010 00000000 		.word	.LANCHOR0
+ 119              		.cfi_endproc
+ 120              	.LFE3:
+ 121              		.size	PGA_1_Wakeup, .-PGA_1_Wakeup
+ 122              		.bss
+ 123              		.align	2
+ 124              		.set	.LANCHOR0,. + 0
+ 125              		.type	PGA_1_backup, %object
+ 126              		.size	PGA_1_backup, 4
+ 127              	PGA_1_backup:
+ 128 0000 00000000 		.space	4
+ 129              		.text
+ 130              	.Letext0:
+ 131              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 132              		.file 3 "Generated_Source\\PSoC5\\PGA_1.h"
+ 133              		.section	.debug_info,"",%progbits
+ 134              	.Ldebug_info0:
+ 135 0000 70010000 		.4byte	0x170
+ 136 0004 0400     		.2byte	0x4
+ 137 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 138 000a 04       		.byte	0x4
+ 139 000b 01       		.uleb128 0x1
+ 140 000c 1C010000 		.4byte	.LASF27
+ 141 0010 0C       		.byte	0xc
+ 142 0011 7E020000 		.4byte	.LASF28
+ 143 0015 1F000000 		.4byte	.LASF29
+ 144 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 145 001d 00000000 		.4byte	0
+ 146 0021 00000000 		.4byte	.Ldebug_line0
+ 147 0025 02       		.uleb128 0x2
+ 148 0026 01       		.byte	0x1
+ 149 0027 06       		.byte	0x6
+ 150 0028 56020000 		.4byte	.LASF0
+ 151 002c 02       		.uleb128 0x2
+ 152 002d 01       		.byte	0x1
+ 153 002e 08       		.byte	0x8
+ 154 002f D1000000 		.4byte	.LASF1
+ 155 0033 02       		.uleb128 0x2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 6
+
+
+ 156 0034 02       		.byte	0x2
+ 157 0035 05       		.byte	0x5
+ 158 0036 17020000 		.4byte	.LASF2
+ 159 003a 02       		.uleb128 0x2
+ 160 003b 02       		.byte	0x2
+ 161 003c 07       		.byte	0x7
+ 162 003d 62020000 		.4byte	.LASF3
+ 163 0041 02       		.uleb128 0x2
+ 164 0042 04       		.byte	0x4
+ 165 0043 05       		.byte	0x5
+ 166 0044 21020000 		.4byte	.LASF4
+ 167 0048 02       		.uleb128 0x2
+ 168 0049 04       		.byte	0x4
+ 169 004a 07       		.byte	0x7
+ 170 004b E4000000 		.4byte	.LASF5
+ 171 004f 02       		.uleb128 0x2
+ 172 0050 08       		.byte	0x8
+ 173 0051 05       		.byte	0x5
+ 174 0052 FB010000 		.4byte	.LASF6
+ 175 0056 02       		.uleb128 0x2
+ 176 0057 08       		.byte	0x8
+ 177 0058 07       		.byte	0x7
+ 178 0059 BD010000 		.4byte	.LASF7
+ 179 005d 03       		.uleb128 0x3
+ 180 005e 04       		.byte	0x4
+ 181 005f 05       		.byte	0x5
+ 182 0060 696E7400 		.ascii	"int\000"
+ 183 0064 02       		.uleb128 0x2
+ 184 0065 04       		.byte	0x4
+ 185 0066 07       		.byte	0x7
+ 186 0067 0F010000 		.4byte	.LASF8
+ 187 006b 04       		.uleb128 0x4
+ 188 006c F6000000 		.4byte	.LASF12
+ 189 0070 02       		.byte	0x2
+ 190 0071 E401     		.2byte	0x1e4
+ 191 0073 2C000000 		.4byte	0x2c
+ 192 0077 02       		.uleb128 0x2
+ 193 0078 04       		.byte	0x4
+ 194 0079 04       		.byte	0x4
+ 195 007a CB000000 		.4byte	.LASF9
+ 196 007e 02       		.uleb128 0x2
+ 197 007f 08       		.byte	0x8
+ 198 0080 04       		.byte	0x4
+ 199 0081 FC000000 		.4byte	.LASF10
+ 200 0085 02       		.uleb128 0x2
+ 201 0086 01       		.byte	0x1
+ 202 0087 08       		.byte	0x8
+ 203 0088 12020000 		.4byte	.LASF11
+ 204 008c 04       		.uleb128 0x4
+ 205 008d DF000000 		.4byte	.LASF13
+ 206 0091 02       		.byte	0x2
+ 207 0092 8E02     		.2byte	0x28e
+ 208 0094 98000000 		.4byte	0x98
+ 209 0098 05       		.uleb128 0x5
+ 210 0099 6B000000 		.4byte	0x6b
+ 211 009d 02       		.uleb128 0x2
+ 212 009e 08       		.byte	0x8
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 7
+
+
+ 213 009f 04       		.byte	0x4
+ 214 00a0 36020000 		.4byte	.LASF14
+ 215 00a4 02       		.uleb128 0x2
+ 216 00a5 04       		.byte	0x4
+ 217 00a6 07       		.byte	0x7
+ 218 00a7 F2010000 		.4byte	.LASF15
+ 219 00ab 06       		.uleb128 0x6
+ 220 00ac 04       		.byte	0x4
+ 221 00ad 03       		.byte	0x3
+ 222 00ae 2D       		.byte	0x2d
+ 223 00af E4000000 		.4byte	0xe4
+ 224 00b3 07       		.uleb128 0x7
+ 225 00b4 2A020000 		.4byte	.LASF16
+ 226 00b8 03       		.byte	0x3
+ 227 00b9 2F       		.byte	0x2f
+ 228 00ba 6B000000 		.4byte	0x6b
+ 229 00be 00       		.byte	0
+ 230 00bf 07       		.uleb128 0x7
+ 231 00c0 09020000 		.4byte	.LASF17
+ 232 00c4 03       		.byte	0x3
+ 233 00c5 30       		.byte	0x30
+ 234 00c6 6B000000 		.4byte	0x6b
+ 235 00ca 01       		.byte	0x1
+ 236 00cb 07       		.uleb128 0x7
+ 237 00cc 75020000 		.4byte	.LASF18
+ 238 00d0 03       		.byte	0x3
+ 239 00d1 31       		.byte	0x31
+ 240 00d2 6B000000 		.4byte	0x6b
+ 241 00d6 02       		.byte	0x2
+ 242 00d7 07       		.uleb128 0x7
+ 243 00d8 A8000000 		.4byte	.LASF19
+ 244 00dc 03       		.byte	0x3
+ 245 00dd 32       		.byte	0x32
+ 246 00de 6B000000 		.4byte	0x6b
+ 247 00e2 03       		.byte	0x3
+ 248 00e3 00       		.byte	0
+ 249 00e4 08       		.uleb128 0x8
+ 250 00e5 42020000 		.4byte	.LASF20
+ 251 00e9 03       		.byte	0x3
+ 252 00ea 33       		.byte	0x33
+ 253 00eb AB000000 		.4byte	0xab
+ 254 00ef 09       		.uleb128 0x9
+ 255 00f0 E1010000 		.4byte	.LASF21
+ 256 00f4 01       		.byte	0x1
+ 257 00f5 25       		.byte	0x25
+ 258 00f6 01       		.byte	0x1
+ 259 00f7 09       		.uleb128 0x9
+ 260 00f8 0B000000 		.4byte	.LASF22
+ 261 00fc 01       		.byte	0x1
+ 262 00fd 39       		.byte	0x39
+ 263 00fe 01       		.byte	0x1
+ 264 00ff 0A       		.uleb128 0xa
+ 265 0100 F7000000 		.4byte	0xf7
+ 266 0104 00000000 		.4byte	.LFB1
+ 267 0108 02000000 		.4byte	.LFE1-.LFB1
+ 268 010c 01       		.uleb128 0x1
+ 269 010d 9C       		.byte	0x9c
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 8
+
+
+ 270 010e 0B       		.uleb128 0xb
+ 271 010f 03010000 		.4byte	.LASF23
+ 272 0113 01       		.byte	0x1
+ 273 0114 52       		.byte	0x52
+ 274 0115 00000000 		.4byte	.LFB2
+ 275 0119 28000000 		.4byte	.LFE2-.LFB2
+ 276 011d 01       		.uleb128 0x1
+ 277 011e 9C       		.byte	0x9c
+ 278 011f 2D010000 		.4byte	0x12d
+ 279 0123 0C       		.uleb128 0xc
+ 280 0124 1E000000 		.4byte	.LVL0
+ 281 0128 5D010000 		.4byte	0x15d
+ 282 012c 00       		.byte	0
+ 283 012d 0B       		.uleb128 0xb
+ 284 012e B1000000 		.4byte	.LASF24
+ 285 0132 01       		.byte	0x1
+ 286 0133 79       		.byte	0x79
+ 287 0134 00000000 		.4byte	.LFB3
+ 288 0138 14000000 		.4byte	.LFE3-.LFB3
+ 289 013c 01       		.uleb128 0x1
+ 290 013d 9C       		.byte	0x9c
+ 291 013e 4C010000 		.4byte	0x14c
+ 292 0142 0C       		.uleb128 0xc
+ 293 0143 0E000000 		.4byte	.LVL1
+ 294 0147 68010000 		.4byte	0x168
+ 295 014b 00       		.byte	0
+ 296 014c 0D       		.uleb128 0xd
+ 297 014d BE000000 		.4byte	.LASF30
+ 298 0151 01       		.byte	0x1
+ 299 0152 14       		.byte	0x14
+ 300 0153 E4000000 		.4byte	0xe4
+ 301 0157 05       		.uleb128 0x5
+ 302 0158 03       		.byte	0x3
+ 303 0159 00000000 		.4byte	PGA_1_backup
+ 304 015d 0E       		.uleb128 0xe
+ 305 015e 00000000 		.4byte	.LASF25
+ 306 0162 00000000 		.4byte	.LASF25
+ 307 0166 03       		.byte	0x3
+ 308 0167 3F       		.byte	0x3f
+ 309 0168 0E       		.uleb128 0xe
+ 310 0169 D4010000 		.4byte	.LASF26
+ 311 016d D4010000 		.4byte	.LASF26
+ 312 0171 03       		.byte	0x3
+ 313 0172 47       		.byte	0x47
+ 314 0173 00       		.byte	0
+ 315              		.section	.debug_abbrev,"",%progbits
+ 316              	.Ldebug_abbrev0:
+ 317 0000 01       		.uleb128 0x1
+ 318 0001 11       		.uleb128 0x11
+ 319 0002 01       		.byte	0x1
+ 320 0003 25       		.uleb128 0x25
+ 321 0004 0E       		.uleb128 0xe
+ 322 0005 13       		.uleb128 0x13
+ 323 0006 0B       		.uleb128 0xb
+ 324 0007 03       		.uleb128 0x3
+ 325 0008 0E       		.uleb128 0xe
+ 326 0009 1B       		.uleb128 0x1b
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 9
+
+
+ 327 000a 0E       		.uleb128 0xe
+ 328 000b 55       		.uleb128 0x55
+ 329 000c 17       		.uleb128 0x17
+ 330 000d 11       		.uleb128 0x11
+ 331 000e 01       		.uleb128 0x1
+ 332 000f 10       		.uleb128 0x10
+ 333 0010 17       		.uleb128 0x17
+ 334 0011 00       		.byte	0
+ 335 0012 00       		.byte	0
+ 336 0013 02       		.uleb128 0x2
+ 337 0014 24       		.uleb128 0x24
+ 338 0015 00       		.byte	0
+ 339 0016 0B       		.uleb128 0xb
+ 340 0017 0B       		.uleb128 0xb
+ 341 0018 3E       		.uleb128 0x3e
+ 342 0019 0B       		.uleb128 0xb
+ 343 001a 03       		.uleb128 0x3
+ 344 001b 0E       		.uleb128 0xe
+ 345 001c 00       		.byte	0
+ 346 001d 00       		.byte	0
+ 347 001e 03       		.uleb128 0x3
+ 348 001f 24       		.uleb128 0x24
+ 349 0020 00       		.byte	0
+ 350 0021 0B       		.uleb128 0xb
+ 351 0022 0B       		.uleb128 0xb
+ 352 0023 3E       		.uleb128 0x3e
+ 353 0024 0B       		.uleb128 0xb
+ 354 0025 03       		.uleb128 0x3
+ 355 0026 08       		.uleb128 0x8
+ 356 0027 00       		.byte	0
+ 357 0028 00       		.byte	0
+ 358 0029 04       		.uleb128 0x4
+ 359 002a 16       		.uleb128 0x16
+ 360 002b 00       		.byte	0
+ 361 002c 03       		.uleb128 0x3
+ 362 002d 0E       		.uleb128 0xe
+ 363 002e 3A       		.uleb128 0x3a
+ 364 002f 0B       		.uleb128 0xb
+ 365 0030 3B       		.uleb128 0x3b
+ 366 0031 05       		.uleb128 0x5
+ 367 0032 49       		.uleb128 0x49
+ 368 0033 13       		.uleb128 0x13
+ 369 0034 00       		.byte	0
+ 370 0035 00       		.byte	0
+ 371 0036 05       		.uleb128 0x5
+ 372 0037 35       		.uleb128 0x35
+ 373 0038 00       		.byte	0
+ 374 0039 49       		.uleb128 0x49
+ 375 003a 13       		.uleb128 0x13
+ 376 003b 00       		.byte	0
+ 377 003c 00       		.byte	0
+ 378 003d 06       		.uleb128 0x6
+ 379 003e 13       		.uleb128 0x13
+ 380 003f 01       		.byte	0x1
+ 381 0040 0B       		.uleb128 0xb
+ 382 0041 0B       		.uleb128 0xb
+ 383 0042 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 10
+
+
+ 384 0043 0B       		.uleb128 0xb
+ 385 0044 3B       		.uleb128 0x3b
+ 386 0045 0B       		.uleb128 0xb
+ 387 0046 01       		.uleb128 0x1
+ 388 0047 13       		.uleb128 0x13
+ 389 0048 00       		.byte	0
+ 390 0049 00       		.byte	0
+ 391 004a 07       		.uleb128 0x7
+ 392 004b 0D       		.uleb128 0xd
+ 393 004c 00       		.byte	0
+ 394 004d 03       		.uleb128 0x3
+ 395 004e 0E       		.uleb128 0xe
+ 396 004f 3A       		.uleb128 0x3a
+ 397 0050 0B       		.uleb128 0xb
+ 398 0051 3B       		.uleb128 0x3b
+ 399 0052 0B       		.uleb128 0xb
+ 400 0053 49       		.uleb128 0x49
+ 401 0054 13       		.uleb128 0x13
+ 402 0055 38       		.uleb128 0x38
+ 403 0056 0B       		.uleb128 0xb
+ 404 0057 00       		.byte	0
+ 405 0058 00       		.byte	0
+ 406 0059 08       		.uleb128 0x8
+ 407 005a 16       		.uleb128 0x16
+ 408 005b 00       		.byte	0
+ 409 005c 03       		.uleb128 0x3
+ 410 005d 0E       		.uleb128 0xe
+ 411 005e 3A       		.uleb128 0x3a
+ 412 005f 0B       		.uleb128 0xb
+ 413 0060 3B       		.uleb128 0x3b
+ 414 0061 0B       		.uleb128 0xb
+ 415 0062 49       		.uleb128 0x49
+ 416 0063 13       		.uleb128 0x13
+ 417 0064 00       		.byte	0
+ 418 0065 00       		.byte	0
+ 419 0066 09       		.uleb128 0x9
+ 420 0067 2E       		.uleb128 0x2e
+ 421 0068 00       		.byte	0
+ 422 0069 3F       		.uleb128 0x3f
+ 423 006a 19       		.uleb128 0x19
+ 424 006b 03       		.uleb128 0x3
+ 425 006c 0E       		.uleb128 0xe
+ 426 006d 3A       		.uleb128 0x3a
+ 427 006e 0B       		.uleb128 0xb
+ 428 006f 3B       		.uleb128 0x3b
+ 429 0070 0B       		.uleb128 0xb
+ 430 0071 27       		.uleb128 0x27
+ 431 0072 19       		.uleb128 0x19
+ 432 0073 20       		.uleb128 0x20
+ 433 0074 0B       		.uleb128 0xb
+ 434 0075 00       		.byte	0
+ 435 0076 00       		.byte	0
+ 436 0077 0A       		.uleb128 0xa
+ 437 0078 2E       		.uleb128 0x2e
+ 438 0079 00       		.byte	0
+ 439 007a 31       		.uleb128 0x31
+ 440 007b 13       		.uleb128 0x13
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 11
+
+
+ 441 007c 11       		.uleb128 0x11
+ 442 007d 01       		.uleb128 0x1
+ 443 007e 12       		.uleb128 0x12
+ 444 007f 06       		.uleb128 0x6
+ 445 0080 40       		.uleb128 0x40
+ 446 0081 18       		.uleb128 0x18
+ 447 0082 9742     		.uleb128 0x2117
+ 448 0084 19       		.uleb128 0x19
+ 449 0085 00       		.byte	0
+ 450 0086 00       		.byte	0
+ 451 0087 0B       		.uleb128 0xb
+ 452 0088 2E       		.uleb128 0x2e
+ 453 0089 01       		.byte	0x1
+ 454 008a 3F       		.uleb128 0x3f
+ 455 008b 19       		.uleb128 0x19
+ 456 008c 03       		.uleb128 0x3
+ 457 008d 0E       		.uleb128 0xe
+ 458 008e 3A       		.uleb128 0x3a
+ 459 008f 0B       		.uleb128 0xb
+ 460 0090 3B       		.uleb128 0x3b
+ 461 0091 0B       		.uleb128 0xb
+ 462 0092 27       		.uleb128 0x27
+ 463 0093 19       		.uleb128 0x19
+ 464 0094 11       		.uleb128 0x11
+ 465 0095 01       		.uleb128 0x1
+ 466 0096 12       		.uleb128 0x12
+ 467 0097 06       		.uleb128 0x6
+ 468 0098 40       		.uleb128 0x40
+ 469 0099 18       		.uleb128 0x18
+ 470 009a 9742     		.uleb128 0x2117
+ 471 009c 19       		.uleb128 0x19
+ 472 009d 01       		.uleb128 0x1
+ 473 009e 13       		.uleb128 0x13
+ 474 009f 00       		.byte	0
+ 475 00a0 00       		.byte	0
+ 476 00a1 0C       		.uleb128 0xc
+ 477 00a2 898201   		.uleb128 0x4109
+ 478 00a5 00       		.byte	0
+ 479 00a6 11       		.uleb128 0x11
+ 480 00a7 01       		.uleb128 0x1
+ 481 00a8 9542     		.uleb128 0x2115
+ 482 00aa 19       		.uleb128 0x19
+ 483 00ab 31       		.uleb128 0x31
+ 484 00ac 13       		.uleb128 0x13
+ 485 00ad 00       		.byte	0
+ 486 00ae 00       		.byte	0
+ 487 00af 0D       		.uleb128 0xd
+ 488 00b0 34       		.uleb128 0x34
+ 489 00b1 00       		.byte	0
+ 490 00b2 03       		.uleb128 0x3
+ 491 00b3 0E       		.uleb128 0xe
+ 492 00b4 3A       		.uleb128 0x3a
+ 493 00b5 0B       		.uleb128 0xb
+ 494 00b6 3B       		.uleb128 0x3b
+ 495 00b7 0B       		.uleb128 0xb
+ 496 00b8 49       		.uleb128 0x49
+ 497 00b9 13       		.uleb128 0x13
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 12
+
+
+ 498 00ba 02       		.uleb128 0x2
+ 499 00bb 18       		.uleb128 0x18
+ 500 00bc 00       		.byte	0
+ 501 00bd 00       		.byte	0
+ 502 00be 0E       		.uleb128 0xe
+ 503 00bf 2E       		.uleb128 0x2e
+ 504 00c0 00       		.byte	0
+ 505 00c1 3F       		.uleb128 0x3f
+ 506 00c2 19       		.uleb128 0x19
+ 507 00c3 3C       		.uleb128 0x3c
+ 508 00c4 19       		.uleb128 0x19
+ 509 00c5 6E       		.uleb128 0x6e
+ 510 00c6 0E       		.uleb128 0xe
+ 511 00c7 03       		.uleb128 0x3
+ 512 00c8 0E       		.uleb128 0xe
+ 513 00c9 3A       		.uleb128 0x3a
+ 514 00ca 0B       		.uleb128 0xb
+ 515 00cb 3B       		.uleb128 0x3b
+ 516 00cc 0B       		.uleb128 0xb
+ 517 00cd 00       		.byte	0
+ 518 00ce 00       		.byte	0
+ 519 00cf 00       		.byte	0
+ 520              		.section	.debug_aranges,"",%progbits
+ 521 0000 2C000000 		.4byte	0x2c
+ 522 0004 0200     		.2byte	0x2
+ 523 0006 00000000 		.4byte	.Ldebug_info0
+ 524 000a 04       		.byte	0x4
+ 525 000b 00       		.byte	0
+ 526 000c 0000     		.2byte	0
+ 527 000e 0000     		.2byte	0
+ 528 0010 00000000 		.4byte	.LFB1
+ 529 0014 02000000 		.4byte	.LFE1-.LFB1
+ 530 0018 00000000 		.4byte	.LFB2
+ 531 001c 28000000 		.4byte	.LFE2-.LFB2
+ 532 0020 00000000 		.4byte	.LFB3
+ 533 0024 14000000 		.4byte	.LFE3-.LFB3
+ 534 0028 00000000 		.4byte	0
+ 535 002c 00000000 		.4byte	0
+ 536              		.section	.debug_ranges,"",%progbits
+ 537              	.Ldebug_ranges0:
+ 538 0000 00000000 		.4byte	.LFB1
+ 539 0004 02000000 		.4byte	.LFE1
+ 540 0008 00000000 		.4byte	.LFB2
+ 541 000c 28000000 		.4byte	.LFE2
+ 542 0010 00000000 		.4byte	.LFB3
+ 543 0014 14000000 		.4byte	.LFE3
+ 544 0018 00000000 		.4byte	0
+ 545 001c 00000000 		.4byte	0
+ 546              		.section	.debug_line,"",%progbits
+ 547              	.Ldebug_line0:
+ 548 0000 8F000000 		.section	.debug_str,"MS",%progbits,1
+ 548      02005000 
+ 548      00000201 
+ 548      FB0E0D00 
+ 548      01010101 
+ 549              	.LASF25:
+ 550 0000 5047415F 		.ascii	"PGA_1_Stop\000"
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 13
+
+
+ 550      315F5374 
+ 550      6F7000
+ 551              	.LASF22:
+ 552 000b 5047415F 		.ascii	"PGA_1_RestoreConfig\000"
+ 552      315F5265 
+ 552      73746F72 
+ 552      65436F6E 
+ 552      66696700 
+ 553              	.LASF29:
+ 554 001f 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 554      726F7062 
+ 554      6F785C44 
+ 554      4556454C 
+ 554      4F504D45 
+ 555 004e 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 555      70656374 
+ 555      72756D20 
+ 555      616E616C 
+ 555      797A6572 
+ 556 007f 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 556      416E616C 
+ 556      797A6572 
+ 556      5C617564 
+ 556      696F5370 
+ 557              	.LASF19:
+ 558 00a8 73634352 		.ascii	"scCR3Reg\000"
+ 558      33526567 
+ 558      00
+ 559              	.LASF24:
+ 560 00b1 5047415F 		.ascii	"PGA_1_Wakeup\000"
+ 560      315F5761 
+ 560      6B657570 
+ 560      00
+ 561              	.LASF30:
+ 562 00be 5047415F 		.ascii	"PGA_1_backup\000"
+ 562      315F6261 
+ 562      636B7570 
+ 562      00
+ 563              	.LASF9:
+ 564 00cb 666C6F61 		.ascii	"float\000"
+ 564      7400
+ 565              	.LASF1:
+ 566 00d1 756E7369 		.ascii	"unsigned char\000"
+ 566      676E6564 
+ 566      20636861 
+ 566      7200
+ 567              	.LASF13:
+ 568 00df 72656738 		.ascii	"reg8\000"
+ 568      00
+ 569              	.LASF5:
+ 570 00e4 6C6F6E67 		.ascii	"long unsigned int\000"
+ 570      20756E73 
+ 570      69676E65 
+ 570      6420696E 
+ 570      7400
+ 571              	.LASF12:
+ 572 00f6 75696E74 		.ascii	"uint8\000"
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 14
+
+
+ 572      3800
+ 573              	.LASF10:
+ 574 00fc 646F7562 		.ascii	"double\000"
+ 574      6C6500
+ 575              	.LASF23:
+ 576 0103 5047415F 		.ascii	"PGA_1_Sleep\000"
+ 576      315F536C 
+ 576      65657000 
+ 577              	.LASF8:
+ 578 010f 756E7369 		.ascii	"unsigned int\000"
+ 578      676E6564 
+ 578      20696E74 
+ 578      00
+ 579              	.LASF27:
+ 580 011c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 580      43313120 
+ 580      352E342E 
+ 580      31203230 
+ 580      31363036 
+ 581 014f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 581      20726576 
+ 581      6973696F 
+ 581      6E203233 
+ 581      37373135 
+ 582 0182 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 582      66756E63 
+ 582      74696F6E 
+ 582      2D736563 
+ 582      74696F6E 
+ 583 01b5 6E637469 		.ascii	"nctions\000"
+ 583      6F6E7300 
+ 584              	.LASF7:
+ 585 01bd 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 585      206C6F6E 
+ 585      6720756E 
+ 585      7369676E 
+ 585      65642069 
+ 586              	.LASF26:
+ 587 01d4 5047415F 		.ascii	"PGA_1_Enable\000"
+ 587      315F456E 
+ 587      61626C65 
+ 587      00
+ 588              	.LASF21:
+ 589 01e1 5047415F 		.ascii	"PGA_1_SaveConfig\000"
+ 589      315F5361 
+ 589      7665436F 
+ 589      6E666967 
+ 589      00
+ 590              	.LASF15:
+ 591 01f2 73697A65 		.ascii	"sizetype\000"
+ 591      74797065 
+ 591      00
+ 592              	.LASF6:
+ 593 01fb 6C6F6E67 		.ascii	"long long int\000"
+ 593      206C6F6E 
+ 593      6720696E 
+ 593      7400
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cccrBihu.s 			page 15
+
+
+ 594              	.LASF17:
+ 595 0209 73634352 		.ascii	"scCR1Reg\000"
+ 595      31526567 
+ 595      00
+ 596              	.LASF11:
+ 597 0212 63686172 		.ascii	"char\000"
+ 597      00
+ 598              	.LASF2:
+ 599 0217 73686F72 		.ascii	"short int\000"
+ 599      7420696E 
+ 599      7400
+ 600              	.LASF4:
+ 601 0221 6C6F6E67 		.ascii	"long int\000"
+ 601      20696E74 
+ 601      00
+ 602              	.LASF16:
+ 603 022a 656E6162 		.ascii	"enableState\000"
+ 603      6C655374 
+ 603      61746500 
+ 604              	.LASF14:
+ 605 0236 6C6F6E67 		.ascii	"long double\000"
+ 605      20646F75 
+ 605      626C6500 
+ 606              	.LASF20:
+ 607 0242 5047415F 		.ascii	"PGA_1_BACKUP_STRUCT\000"
+ 607      315F4241 
+ 607      434B5550 
+ 607      5F535452 
+ 607      55435400 
+ 608              	.LASF0:
+ 609 0256 7369676E 		.ascii	"signed char\000"
+ 609      65642063 
+ 609      68617200 
+ 610              	.LASF3:
+ 611 0262 73686F72 		.ascii	"short unsigned int\000"
+ 611      7420756E 
+ 611      7369676E 
+ 611      65642069 
+ 611      6E7400
+ 612              	.LASF18:
+ 613 0275 73634352 		.ascii	"scCR2Reg\000"
+ 613      32526567 
+ 613      00
+ 614              	.LASF28:
+ 615 027e 47656E65 		.ascii	"Generated_Source\\PSoC5\\PGA_1_PM.c\000"
+ 615      72617465 
+ 615      645F536F 
+ 615      75726365 
+ 615      5C50536F 
+ 616              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

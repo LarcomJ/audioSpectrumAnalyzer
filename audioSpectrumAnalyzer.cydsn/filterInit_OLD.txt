@@ -1,0 +1,78 @@
+// initialize filters
+    short signed int x1_filt1[2] = {0};
+	short signed int x2_filt1[2] = {0};
+	short signed int y1_filt1[2] = {0};
+	short signed int y2_filt1[2] = {0};
+	short signed int input_scaling_filt1[ 2 ] = { 128, 128 };
+	reg_struct temp_reg_filt1 = { x1_filt1, x2_filt1, y1_filt1, y2_filt1, input_scaling_filt1 };
+	
+	// create filter coeff
+    short signed int coeff_filt1[ 12 ] = { 64, 128, 64, 16288, 227, 
+                                           64, 128, 64, 16157, 93    }; // signed fixed point coeff Q14
+    
+    short signed int x1_filt2[2] = {0};
+	short signed int x2_filt2[2] = {0};
+	short signed int y1_filt2[2] = {0};
+	short signed int y2_filt2[2] = {0};
+	short signed int input_scaling_filt2[ 2 ] = { 160, 160 };
+	reg_struct temp_reg_filt2 = { x1_filt2, x2_filt2, y1_filt2, y2_filt2, input_scaling_filt2 };
+	
+	// create filter coeff
+    short signed int coeff_filt2[ 12 ] = { 6861, 0, -6861, 16144, 863, 
+										   6861, 0, -6861, 16245, 521   }; // signed fixed point coeff Q14
+    
+    short signed int x1_filt3[2] = {0};
+	short signed int x2_filt3[2] = {0};
+	short signed int y1_filt3[2] = {0};
+	short signed int y2_filt3[2] = {0};
+	short signed int input_scaling_filt3[ 2 ] = { 160, 160 };
+	reg_struct temp_reg_filt3 = { x1_filt3, x2_filt3, y1_filt3, y2_filt3, input_scaling_filt3 };
+	
+	// create filter coeff
+    short signed int coeff_filt3[ 12 ] = { 5792, 0, -5792, 15847, 1953, 
+										   5792, 0, -5792, 16059, 1286   }; // signed fixed point coeff Q14
+    
+    short signed int x1_filt4[2] = {0};
+	short signed int x2_filt4[2] = {0};
+	short signed int y1_filt4[2] = {0};
+	short signed int y2_filt4[2] = {0};
+	short signed int input_scaling_filt4[ 2 ] = { 160, 160 };
+	reg_struct temp_reg_filt4 = { x1_filt4, x2_filt4, y1_filt4, y2_filt4, input_scaling_filt4 };
+	
+	// create filter coeff
+    short signed int coeff_filt4[ 12 ] = { 5734, 0, -5734, 15095, 3781, 
+										   5734, 0, -5734, 15638, 2522   }; // signed fixed point coeff Q14
+    
+    short signed int x1_filt5[2] = {0};
+	short signed int x2_filt5[2] = {0};
+	short signed int y1_filt5[2] = {0};
+	short signed int y2_filt5[2] = {0};
+	short signed int input_scaling_filt5[ 2 ] = { 160, 160 };
+	reg_struct temp_reg_filt5 = { x1_filt5, x2_filt5, y1_filt5, y2_filt5, input_scaling_filt5 };
+	
+	// create filter coeff
+    short signed int coeff_filt5[ 12 ] = { 6083, 0, -6083, 13132, 6779, 
+										   6083, 0, -6083, 14612, 4589   }; // signed fixed point coeff Q14
+    
+    short signed int x1_filt6[2] = {0};
+	short signed int x2_filt6[2] = {0};
+	short signed int y1_filt6[2] = {0};
+	short signed int y2_filt6[2] = {0};
+	short signed int input_scaling_filt6[ 2 ] = { 160, 160 };
+	reg_struct temp_reg_filt6 = { x1_filt6, x2_filt6, y1_filt6, y2_filt6, input_scaling_filt6 };
+	
+	// create filter coeff
+    short signed int coeff_filt6[ 12 ] = { 7209, 0, -7209, 11947, 7800, 
+										   7209, 0, -7209, 7966, 10752   }; // signed fixed point coeff Q14
+    
+    short signed int x1_filt7[2] = {0};
+	short signed int x2_filt7[2] = {0};
+	short signed int y1_filt7[2] = {0};
+	short signed int y2_filt7[2] = {0};
+	short signed int input_scaling_filt7[ 2 ] = { 160, 160 };
+	reg_struct temp_reg_filt7 = { x1_filt7, x2_filt7, y1_filt7, y2_filt7, input_scaling_filt7 };
+	
+	// create filter coeff
+    short signed int coeff_filt7[ 12 ] = { 8920, 0, -8920, 5152, 10656, 
+										   8920, 0, -8920, -3952, 10980   }; // signed fixed point coeff Q14
+    

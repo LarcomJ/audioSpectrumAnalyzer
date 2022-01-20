@@ -1,0 +1,7 @@
+D:\Dropbox\DEVELOPMENT\Audio visualizations\Audio spectrum analyzer zebrawood\Firmware\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydsn\audioSpectrumAnalyzer.cyprj|223302f0-644a-48fc-95e4-85d2dfc4f7c5
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|c0cd3f78-3a4c-4f8a-a654-585775c44cc7
+C:\Users\larco\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|95bc9614-3ba3-40b0-ba17-680a604ca71a
+C:\Users\larco\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|ab8d8ee0-def2-423e-a251-000249160858
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|d0e7e77e-b525-40b8-a35b-22c01a914ab7
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|39a9fc43-db4f-4389-b0fc-8486867ce591
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|02193b29-a632-4998-875c-eb91db285103

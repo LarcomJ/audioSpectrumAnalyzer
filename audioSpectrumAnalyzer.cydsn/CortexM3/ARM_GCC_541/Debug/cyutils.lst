@@ -1,0 +1,537 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9551sd.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cyutils.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.CySetReg24,"ax",%progbits
+  20              		.align	2
+  21              		.global	CySetReg24
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	CySetReg24, %function
+  25              	CySetReg24:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\cyutils.c"
+   1:Generated_Source\PSoC5/cyutils.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC5/cyutils.c **** * \file cyutils.c
+   3:Generated_Source\PSoC5/cyutils.c **** * \version 5.70
+   4:Generated_Source\PSoC5/cyutils.c **** *
+   5:Generated_Source\PSoC5/cyutils.c **** * \brief Provides a function to handle 24-bit value writes.
+   6:Generated_Source\PSoC5/cyutils.c **** *
+   7:Generated_Source\PSoC5/cyutils.c **** ********************************************************************************
+   8:Generated_Source\PSoC5/cyutils.c **** * \copyright
+   9:Generated_Source\PSoC5/cyutils.c **** * Copyright 2008-2018, Cypress Semiconductor Corporation.  All rights reserved.
+  10:Generated_Source\PSoC5/cyutils.c **** * You may use this file only in accordance with the license, terms, conditions,
+  11:Generated_Source\PSoC5/cyutils.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:Generated_Source\PSoC5/cyutils.c **** * the software package with which this file was provided.
+  13:Generated_Source\PSoC5/cyutils.c **** *******************************************************************************/
+  14:Generated_Source\PSoC5/cyutils.c **** 
+  15:Generated_Source\PSoC5/cyutils.c **** #include "cytypes.h"
+  16:Generated_Source\PSoC5/cyutils.c **** 
+  17:Generated_Source\PSoC5/cyutils.c **** #if (!CY_PSOC3)
+  18:Generated_Source\PSoC5/cyutils.c **** 
+  19:Generated_Source\PSoC5/cyutils.c ****     /***************************************************************************
+  20:Generated_Source\PSoC5/cyutils.c ****     * Function Name: CySetReg24
+  21:Generated_Source\PSoC5/cyutils.c ****     ************************************************************************//**
+  22:Generated_Source\PSoC5/cyutils.c ****     *
+  23:Generated_Source\PSoC5/cyutils.c ****     * Writes a 24-bit value to the specified register.
+  24:Generated_Source\PSoC5/cyutils.c ****     *
+  25:Generated_Source\PSoC5/cyutils.c ****     * \param add The address where data must be written.
+  26:Generated_Source\PSoC5/cyutils.c ****     * \param value The data that must be written.
+  27:Generated_Source\PSoC5/cyutils.c ****     *
+  28:Generated_Source\PSoC5/cyutils.c ****     * Reentrant:
+  29:Generated_Source\PSoC5/cyutils.c ****     *  No
+  30:Generated_Source\PSoC5/cyutils.c ****     *
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9551sd.s 			page 2
+
+
+  31:Generated_Source\PSoC5/cyutils.c ****     ***************************************************************************/
+  32:Generated_Source\PSoC5/cyutils.c ****     void CySetReg24(uint32 volatile * addr, uint32 value)
+  33:Generated_Source\PSoC5/cyutils.c ****     {
+  28              		.loc 1 33 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34:Generated_Source\PSoC5/cyutils.c ****         uint8 volatile *tmpAddr;
+  35:Generated_Source\PSoC5/cyutils.c **** 
+  36:Generated_Source\PSoC5/cyutils.c ****         tmpAddr = (uint8 volatile *) addr;
+  37:Generated_Source\PSoC5/cyutils.c **** 
+  38:Generated_Source\PSoC5/cyutils.c ****         tmpAddr[0u] = (uint8) value;
+  34              		.loc 1 38 0
+  35 0000 CAB2     		uxtb	r2, r1
+  39:Generated_Source\PSoC5/cyutils.c ****         tmpAddr[1u] = (uint8) (value >> 8u);
+  36              		.loc 1 39 0
+  37 0002 C1F30723 		ubfx	r3, r1, #8, #8
+  40:Generated_Source\PSoC5/cyutils.c ****         tmpAddr[2u] = (uint8) (value >> 16u);
+  38              		.loc 1 40 0
+  39 0006 C1F30741 		ubfx	r1, r1, #16, #8
+  40              	.LVL1:
+  38:Generated_Source\PSoC5/cyutils.c ****         tmpAddr[1u] = (uint8) (value >> 8u);
+  41              		.loc 1 38 0
+  42 000a 0270     		strb	r2, [r0]
+  39:Generated_Source\PSoC5/cyutils.c ****         tmpAddr[1u] = (uint8) (value >> 8u);
+  43              		.loc 1 39 0
+  44 000c 4370     		strb	r3, [r0, #1]
+  45              		.loc 1 40 0
+  46 000e 8170     		strb	r1, [r0, #2]
+  47 0010 7047     		bx	lr
+  48              		.cfi_endproc
+  49              	.LFE0:
+  50              		.size	CySetReg24, .-CySetReg24
+  51 0012 00BF     		.text
+  52              	.Letext0:
+  53              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+  54              		.section	.debug_info,"",%progbits
+  55              	.Ldebug_info0:
+  56 0000 EA000000 		.4byte	0xea
+  57 0004 0400     		.2byte	0x4
+  58 0006 00000000 		.4byte	.Ldebug_abbrev0
+  59 000a 04       		.byte	0x4
+  60 000b 01       		.uleb128 0x1
+  61 000c 1C010000 		.4byte	.LASF16
+  62 0010 0C       		.byte	0xc
+  63 0011 64000000 		.4byte	.LASF17
+  64 0015 93000000 		.4byte	.LASF18
+  65 0019 00000000 		.4byte	.Ldebug_ranges0+0
+  66 001d 00000000 		.4byte	0
+  67 0021 00000000 		.4byte	.Ldebug_line0
+  68 0025 02       		.uleb128 0x2
+  69 0026 01       		.byte	0x1
+  70 0027 06       		.byte	0x6
+  71 0028 00020000 		.4byte	.LASF0
+  72 002c 02       		.uleb128 0x2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9551sd.s 			page 3
+
+
+  73 002d 01       		.byte	0x1
+  74 002e 08       		.byte	0x8
+  75 002f 29000000 		.4byte	.LASF1
+  76 0033 02       		.uleb128 0x2
+  77 0034 02       		.byte	0x2
+  78 0035 05       		.byte	0x5
+  79 0036 E7010000 		.4byte	.LASF2
+  80 003a 02       		.uleb128 0x2
+  81 003b 02       		.byte	0x2
+  82 003c 07       		.byte	0x7
+  83 003d 51000000 		.4byte	.LASF3
+  84 0041 02       		.uleb128 0x2
+  85 0042 04       		.byte	0x4
+  86 0043 05       		.byte	0x5
+  87 0044 F7010000 		.4byte	.LASF4
+  88 0048 02       		.uleb128 0x2
+  89 0049 04       		.byte	0x4
+  90 004a 07       		.byte	0x7
+  91 004b 3F000000 		.4byte	.LASF5
+  92 004f 02       		.uleb128 0x2
+  93 0050 08       		.byte	0x8
+  94 0051 05       		.byte	0x5
+  95 0052 D4010000 		.4byte	.LASF6
+  96 0056 02       		.uleb128 0x2
+  97 0057 08       		.byte	0x8
+  98 0058 07       		.byte	0x7
+  99 0059 BD010000 		.4byte	.LASF7
+ 100 005d 03       		.uleb128 0x3
+ 101 005e 04       		.byte	0x4
+ 102 005f 05       		.byte	0x5
+ 103 0060 696E7400 		.ascii	"int\000"
+ 104 0064 02       		.uleb128 0x2
+ 105 0065 04       		.byte	0x4
+ 106 0066 07       		.byte	0x7
+ 107 0067 11000000 		.4byte	.LASF8
+ 108 006b 04       		.uleb128 0x4
+ 109 006c F1010000 		.4byte	.LASF9
+ 110 0070 02       		.byte	0x2
+ 111 0071 E401     		.2byte	0x1e4
+ 112 0073 2C000000 		.4byte	0x2c
+ 113 0077 04       		.uleb128 0x4
+ 114 0078 8C000000 		.4byte	.LASF10
+ 115 007c 02       		.byte	0x2
+ 116 007d E601     		.2byte	0x1e6
+ 117 007f 48000000 		.4byte	0x48
+ 118 0083 02       		.uleb128 0x2
+ 119 0084 04       		.byte	0x4
+ 120 0085 04       		.byte	0x4
+ 121 0086 23000000 		.4byte	.LASF11
+ 122 008a 02       		.uleb128 0x2
+ 123 008b 08       		.byte	0x8
+ 124 008c 04       		.byte	0x4
+ 125 008d 85000000 		.4byte	.LASF12
+ 126 0091 02       		.uleb128 0x2
+ 127 0092 01       		.byte	0x1
+ 128 0093 08       		.byte	0x8
+ 129 0094 E2010000 		.4byte	.LASF13
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9551sd.s 			page 4
+
+
+ 130 0098 05       		.uleb128 0x5
+ 131 0099 6B000000 		.4byte	0x6b
+ 132 009d 05       		.uleb128 0x5
+ 133 009e 77000000 		.4byte	0x77
+ 134 00a2 06       		.uleb128 0x6
+ 135 00a3 06000000 		.4byte	.LASF19
+ 136 00a7 01       		.byte	0x1
+ 137 00a8 20       		.byte	0x20
+ 138 00a9 00000000 		.4byte	.LFB0
+ 139 00ad 12000000 		.4byte	.LFE0-.LFB0
+ 140 00b1 01       		.uleb128 0x1
+ 141 00b2 9C       		.byte	0x9c
+ 142 00b3 E1000000 		.4byte	0xe1
+ 143 00b7 07       		.uleb128 0x7
+ 144 00b8 1E000000 		.4byte	.LASF14
+ 145 00bc 01       		.byte	0x1
+ 146 00bd 20       		.byte	0x20
+ 147 00be E1000000 		.4byte	0xe1
+ 148 00c2 01       		.uleb128 0x1
+ 149 00c3 50       		.byte	0x50
+ 150 00c4 08       		.uleb128 0x8
+ 151 00c5 00000000 		.4byte	.LASF15
+ 152 00c9 01       		.byte	0x1
+ 153 00ca 20       		.byte	0x20
+ 154 00cb 77000000 		.4byte	0x77
+ 155 00cf 00000000 		.4byte	.LLST0
+ 156 00d3 09       		.uleb128 0x9
+ 157 00d4 37000000 		.4byte	.LASF20
+ 158 00d8 01       		.byte	0x1
+ 159 00d9 22       		.byte	0x22
+ 160 00da E7000000 		.4byte	0xe7
+ 161 00de 01       		.uleb128 0x1
+ 162 00df 50       		.byte	0x50
+ 163 00e0 00       		.byte	0
+ 164 00e1 0A       		.uleb128 0xa
+ 165 00e2 04       		.byte	0x4
+ 166 00e3 9D000000 		.4byte	0x9d
+ 167 00e7 0A       		.uleb128 0xa
+ 168 00e8 04       		.byte	0x4
+ 169 00e9 98000000 		.4byte	0x98
+ 170 00ed 00       		.byte	0
+ 171              		.section	.debug_abbrev,"",%progbits
+ 172              	.Ldebug_abbrev0:
+ 173 0000 01       		.uleb128 0x1
+ 174 0001 11       		.uleb128 0x11
+ 175 0002 01       		.byte	0x1
+ 176 0003 25       		.uleb128 0x25
+ 177 0004 0E       		.uleb128 0xe
+ 178 0005 13       		.uleb128 0x13
+ 179 0006 0B       		.uleb128 0xb
+ 180 0007 03       		.uleb128 0x3
+ 181 0008 0E       		.uleb128 0xe
+ 182 0009 1B       		.uleb128 0x1b
+ 183 000a 0E       		.uleb128 0xe
+ 184 000b 55       		.uleb128 0x55
+ 185 000c 17       		.uleb128 0x17
+ 186 000d 11       		.uleb128 0x11
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9551sd.s 			page 5
+
+
+ 187 000e 01       		.uleb128 0x1
+ 188 000f 10       		.uleb128 0x10
+ 189 0010 17       		.uleb128 0x17
+ 190 0011 00       		.byte	0
+ 191 0012 00       		.byte	0
+ 192 0013 02       		.uleb128 0x2
+ 193 0014 24       		.uleb128 0x24
+ 194 0015 00       		.byte	0
+ 195 0016 0B       		.uleb128 0xb
+ 196 0017 0B       		.uleb128 0xb
+ 197 0018 3E       		.uleb128 0x3e
+ 198 0019 0B       		.uleb128 0xb
+ 199 001a 03       		.uleb128 0x3
+ 200 001b 0E       		.uleb128 0xe
+ 201 001c 00       		.byte	0
+ 202 001d 00       		.byte	0
+ 203 001e 03       		.uleb128 0x3
+ 204 001f 24       		.uleb128 0x24
+ 205 0020 00       		.byte	0
+ 206 0021 0B       		.uleb128 0xb
+ 207 0022 0B       		.uleb128 0xb
+ 208 0023 3E       		.uleb128 0x3e
+ 209 0024 0B       		.uleb128 0xb
+ 210 0025 03       		.uleb128 0x3
+ 211 0026 08       		.uleb128 0x8
+ 212 0027 00       		.byte	0
+ 213 0028 00       		.byte	0
+ 214 0029 04       		.uleb128 0x4
+ 215 002a 16       		.uleb128 0x16
+ 216 002b 00       		.byte	0
+ 217 002c 03       		.uleb128 0x3
+ 218 002d 0E       		.uleb128 0xe
+ 219 002e 3A       		.uleb128 0x3a
+ 220 002f 0B       		.uleb128 0xb
+ 221 0030 3B       		.uleb128 0x3b
+ 222 0031 05       		.uleb128 0x5
+ 223 0032 49       		.uleb128 0x49
+ 224 0033 13       		.uleb128 0x13
+ 225 0034 00       		.byte	0
+ 226 0035 00       		.byte	0
+ 227 0036 05       		.uleb128 0x5
+ 228 0037 35       		.uleb128 0x35
+ 229 0038 00       		.byte	0
+ 230 0039 49       		.uleb128 0x49
+ 231 003a 13       		.uleb128 0x13
+ 232 003b 00       		.byte	0
+ 233 003c 00       		.byte	0
+ 234 003d 06       		.uleb128 0x6
+ 235 003e 2E       		.uleb128 0x2e
+ 236 003f 01       		.byte	0x1
+ 237 0040 3F       		.uleb128 0x3f
+ 238 0041 19       		.uleb128 0x19
+ 239 0042 03       		.uleb128 0x3
+ 240 0043 0E       		.uleb128 0xe
+ 241 0044 3A       		.uleb128 0x3a
+ 242 0045 0B       		.uleb128 0xb
+ 243 0046 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9551sd.s 			page 6
+
+
+ 244 0047 0B       		.uleb128 0xb
+ 245 0048 27       		.uleb128 0x27
+ 246 0049 19       		.uleb128 0x19
+ 247 004a 11       		.uleb128 0x11
+ 248 004b 01       		.uleb128 0x1
+ 249 004c 12       		.uleb128 0x12
+ 250 004d 06       		.uleb128 0x6
+ 251 004e 40       		.uleb128 0x40
+ 252 004f 18       		.uleb128 0x18
+ 253 0050 9742     		.uleb128 0x2117
+ 254 0052 19       		.uleb128 0x19
+ 255 0053 01       		.uleb128 0x1
+ 256 0054 13       		.uleb128 0x13
+ 257 0055 00       		.byte	0
+ 258 0056 00       		.byte	0
+ 259 0057 07       		.uleb128 0x7
+ 260 0058 05       		.uleb128 0x5
+ 261 0059 00       		.byte	0
+ 262 005a 03       		.uleb128 0x3
+ 263 005b 0E       		.uleb128 0xe
+ 264 005c 3A       		.uleb128 0x3a
+ 265 005d 0B       		.uleb128 0xb
+ 266 005e 3B       		.uleb128 0x3b
+ 267 005f 0B       		.uleb128 0xb
+ 268 0060 49       		.uleb128 0x49
+ 269 0061 13       		.uleb128 0x13
+ 270 0062 02       		.uleb128 0x2
+ 271 0063 18       		.uleb128 0x18
+ 272 0064 00       		.byte	0
+ 273 0065 00       		.byte	0
+ 274 0066 08       		.uleb128 0x8
+ 275 0067 05       		.uleb128 0x5
+ 276 0068 00       		.byte	0
+ 277 0069 03       		.uleb128 0x3
+ 278 006a 0E       		.uleb128 0xe
+ 279 006b 3A       		.uleb128 0x3a
+ 280 006c 0B       		.uleb128 0xb
+ 281 006d 3B       		.uleb128 0x3b
+ 282 006e 0B       		.uleb128 0xb
+ 283 006f 49       		.uleb128 0x49
+ 284 0070 13       		.uleb128 0x13
+ 285 0071 02       		.uleb128 0x2
+ 286 0072 17       		.uleb128 0x17
+ 287 0073 00       		.byte	0
+ 288 0074 00       		.byte	0
+ 289 0075 09       		.uleb128 0x9
+ 290 0076 34       		.uleb128 0x34
+ 291 0077 00       		.byte	0
+ 292 0078 03       		.uleb128 0x3
+ 293 0079 0E       		.uleb128 0xe
+ 294 007a 3A       		.uleb128 0x3a
+ 295 007b 0B       		.uleb128 0xb
+ 296 007c 3B       		.uleb128 0x3b
+ 297 007d 0B       		.uleb128 0xb
+ 298 007e 49       		.uleb128 0x49
+ 299 007f 13       		.uleb128 0x13
+ 300 0080 02       		.uleb128 0x2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9551sd.s 			page 7
+
+
+ 301 0081 18       		.uleb128 0x18
+ 302 0082 00       		.byte	0
+ 303 0083 00       		.byte	0
+ 304 0084 0A       		.uleb128 0xa
+ 305 0085 0F       		.uleb128 0xf
+ 306 0086 00       		.byte	0
+ 307 0087 0B       		.uleb128 0xb
+ 308 0088 0B       		.uleb128 0xb
+ 309 0089 49       		.uleb128 0x49
+ 310 008a 13       		.uleb128 0x13
+ 311 008b 00       		.byte	0
+ 312 008c 00       		.byte	0
+ 313 008d 00       		.byte	0
+ 314              		.section	.debug_loc,"",%progbits
+ 315              	.Ldebug_loc0:
+ 316              	.LLST0:
+ 317 0000 00000000 		.4byte	.LVL0
+ 318 0004 0A000000 		.4byte	.LVL1
+ 319 0008 0100     		.2byte	0x1
+ 320 000a 51       		.byte	0x51
+ 321 000b 0A000000 		.4byte	.LVL1
+ 322 000f 12000000 		.4byte	.LFE0
+ 323 0013 0400     		.2byte	0x4
+ 324 0015 F3       		.byte	0xf3
+ 325 0016 01       		.uleb128 0x1
+ 326 0017 51       		.byte	0x51
+ 327 0018 9F       		.byte	0x9f
+ 328 0019 00000000 		.4byte	0
+ 329 001d 00000000 		.4byte	0
+ 330              		.section	.debug_aranges,"",%progbits
+ 331 0000 1C000000 		.4byte	0x1c
+ 332 0004 0200     		.2byte	0x2
+ 333 0006 00000000 		.4byte	.Ldebug_info0
+ 334 000a 04       		.byte	0x4
+ 335 000b 00       		.byte	0
+ 336 000c 0000     		.2byte	0
+ 337 000e 0000     		.2byte	0
+ 338 0010 00000000 		.4byte	.LFB0
+ 339 0014 12000000 		.4byte	.LFE0-.LFB0
+ 340 0018 00000000 		.4byte	0
+ 341 001c 00000000 		.4byte	0
+ 342              		.section	.debug_ranges,"",%progbits
+ 343              	.Ldebug_ranges0:
+ 344 0000 00000000 		.4byte	.LFB0
+ 345 0004 12000000 		.4byte	.LFE0
+ 346 0008 00000000 		.4byte	0
+ 347 000c 00000000 		.4byte	0
+ 348              		.section	.debug_line,"",%progbits
+ 349              	.Ldebug_line0:
+ 350 0000 5F000000 		.section	.debug_str,"MS",%progbits,1
+ 350      02004400 
+ 350      00000201 
+ 350      FB0E0D00 
+ 350      01010101 
+ 351              	.LASF15:
+ 352 0000 76616C75 		.ascii	"value\000"
+ 352      6500
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9551sd.s 			page 8
+
+
+ 353              	.LASF19:
+ 354 0006 43795365 		.ascii	"CySetReg24\000"
+ 354      74526567 
+ 354      323400
+ 355              	.LASF8:
+ 356 0011 756E7369 		.ascii	"unsigned int\000"
+ 356      676E6564 
+ 356      20696E74 
+ 356      00
+ 357              	.LASF14:
+ 358 001e 61646472 		.ascii	"addr\000"
+ 358      00
+ 359              	.LASF11:
+ 360 0023 666C6F61 		.ascii	"float\000"
+ 360      7400
+ 361              	.LASF1:
+ 362 0029 756E7369 		.ascii	"unsigned char\000"
+ 362      676E6564 
+ 362      20636861 
+ 362      7200
+ 363              	.LASF20:
+ 364 0037 746D7041 		.ascii	"tmpAddr\000"
+ 364      64647200 
+ 365              	.LASF5:
+ 366 003f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 366      20756E73 
+ 366      69676E65 
+ 366      6420696E 
+ 366      7400
+ 367              	.LASF3:
+ 368 0051 73686F72 		.ascii	"short unsigned int\000"
+ 368      7420756E 
+ 368      7369676E 
+ 368      65642069 
+ 368      6E7400
+ 369              	.LASF17:
+ 370 0064 47656E65 		.ascii	"Generated_Source\\PSoC5\\cyutils.c\000"
+ 370      72617465 
+ 370      645F536F 
+ 370      75726365 
+ 370      5C50536F 
+ 371              	.LASF12:
+ 372 0085 646F7562 		.ascii	"double\000"
+ 372      6C6500
+ 373              	.LASF10:
+ 374 008c 75696E74 		.ascii	"uint32\000"
+ 374      333200
+ 375              	.LASF18:
+ 376 0093 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 376      726F7062 
+ 376      6F785C44 
+ 376      4556454C 
+ 376      4F504D45 
+ 377 00c2 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 377      70656374 
+ 377      72756D20 
+ 377      616E616C 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc9551sd.s 			page 9
+
+
+ 377      797A6572 
+ 378 00f3 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 378      416E616C 
+ 378      797A6572 
+ 378      5C617564 
+ 378      696F5370 
+ 379              	.LASF16:
+ 380 011c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 380      43313120 
+ 380      352E342E 
+ 380      31203230 
+ 380      31363036 
+ 381 014f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 381      20726576 
+ 381      6973696F 
+ 381      6E203233 
+ 381      37373135 
+ 382 0182 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 382      66756E63 
+ 382      74696F6E 
+ 382      2D736563 
+ 382      74696F6E 
+ 383 01b5 6E637469 		.ascii	"nctions\000"
+ 383      6F6E7300 
+ 384              	.LASF7:
+ 385 01bd 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 385      206C6F6E 
+ 385      6720756E 
+ 385      7369676E 
+ 385      65642069 
+ 386              	.LASF6:
+ 387 01d4 6C6F6E67 		.ascii	"long long int\000"
+ 387      206C6F6E 
+ 387      6720696E 
+ 387      7400
+ 388              	.LASF13:
+ 389 01e2 63686172 		.ascii	"char\000"
+ 389      00
+ 390              	.LASF2:
+ 391 01e7 73686F72 		.ascii	"short int\000"
+ 391      7420696E 
+ 391      7400
+ 392              	.LASF9:
+ 393 01f1 75696E74 		.ascii	"uint8\000"
+ 393      3800
+ 394              	.LASF4:
+ 395 01f7 6C6F6E67 		.ascii	"long int\000"
+ 395      20696E74 
+ 395      00
+ 396              	.LASF0:
+ 397 0200 7369676E 		.ascii	"signed char\000"
+ 397      65642063 
+ 397      68617200 
+ 398              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

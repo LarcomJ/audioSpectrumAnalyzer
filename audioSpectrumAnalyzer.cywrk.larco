@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="audioSpectrumAnalyzer\audioSpectrumAnalyzer">
+<ExpandedNodeIds>
+<v>audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\TopDesign</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Pins</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Analog</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Clocks</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Interrupts</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\DMA</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\System</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Directives</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Flash Security</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\EEPROM</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\blackman.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\buffer.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\cyapicallbacks.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\display.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\FFT_Q.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\filters.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\led_object.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\led_thesholds.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\twiddleFactors.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\display.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\FFT_Q.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\filters.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\led_object.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\main.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Generated_Source\PSoC5</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Generated_Source\PSoC5\isr_adc_eoc</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Generated_Source\PSoC5\isr_Pin_buttDown</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Generated_Source\PSoC5\isr_Pin_buttUp</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\TopDesign</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Pins</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Analog</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Clocks</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Interrupts</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\DMA</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\System</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Directives</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\Flash Security</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.cydwr\EEPROM</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\blackman.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\buffer.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\cyapicallbacks.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\display.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\FFT_Q.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\filters.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\led_object.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\led_thesholds.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Header Files\twiddleFactors.h</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\display.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\FFT_Q.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\filters.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\led_object.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Source Files\main.c</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Generated_Source</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="audioSpectrumAnalyzer\audioSpectrumAnalyzer\TopDesign">
+<ExpandedNodeIds>
+<v>audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\TopDesign</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\TopDesign</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_debounce.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\display.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_DMA_dma.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_IntClock.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_VDAC8.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_VDAC8_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\FFT_Q.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\filters.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_adc_eoc.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Pin_buttDown.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Pin_buttUp.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\led_object.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\miso.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\miso_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\mosi.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\mosi_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\pga_in.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\pga_out.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\pga_ref.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_adc_eoc.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_buttDown.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_Button.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_buttUp.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_dac.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_debug1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_LE.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_Led.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_OE.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\sclk.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\sclk_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_adc.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_adc_INT.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_adc_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_led.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_led_INT.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\SPI_led_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\SS.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\SS_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_BOOT.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_INT.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_IntClock.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Uart_Rx.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\audioSpectrumAnalyzer.elf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\audioSpectrumAnalyzer.hex</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\audioSpectrumAnalyzer.map</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.gpdsc</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer.rpt</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\audioSpectrumAnalyzer_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_debounce.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\display.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_DMA_dma.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_IntClock.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_VDAC8.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\DVDAC_1_VDAC8_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\FFT_Q.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\filters.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_adc_eoc.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Pin_buttDown.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_Pin_buttUp.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\led_object.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\miso.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\miso_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\mosi.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\mosi_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1_PM.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\pga_in.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\pga_out.lst</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CortexM3\ARM_GCC_541\Debug\Listing Files\pga_ref.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="audioSpectrumAnalyzer">
+<ExpandedNodeIds>
+<v>audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\PSoC 5LP Architecture TRM</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CY8C58LP Family Datasheet</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\System Reference Guides</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\System Reference Guides\cy_boot_v5_70</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\ADC_DelSig_v3_30.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_clock_v2_20</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_isr_v1_70</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_pins_v2_20</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_vref_v1_70.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Debouncer_v1_0</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Debouncer_v1_0\Debouncer_v1_0.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\DVDAC_v2_10.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\PGA_v2_0.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\SPI_Master_v2_50</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\SPI_Master_v2_50\SPI_Master_v2_50.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\UART_v2_50.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\PSoC 5LP Architecture TRM</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\CY8C58LP Family Datasheet</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\System Reference Guides</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\System Reference Guides\cy_boot_v5_70</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\ADC_DelSig_v3_30.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_clock_v2_20</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_isr_v1_70</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_pins_v2_20</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\cy_vref_v1_70.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Debouncer_v1_0</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\Debouncer_v1_0\Debouncer_v1_0.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\DVDAC_v2_10.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\PGA_v2_0.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\SPI_Master_v2_50</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\SPI_Master_v2_50\SPI_Master_v2_50.pdf</v>
+<v>audioSpectrumAnalyzer\audioSpectrumAnalyzer\UART_v2_50.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs />
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1596, 711" SelectedTabbedMdiWindow="0c47f24f-96bf-4f8b-9d80-a0e6817a0e6e"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="0c47f24f-96bf-4f8b-9d80-a0e6817a0e6e" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

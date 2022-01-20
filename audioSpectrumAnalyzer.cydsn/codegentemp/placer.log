@@ -1,0 +1,297 @@
+#***************************************************************************
+
+#sjplacer
+
+#Version:            1.1
+
+#Build Date:         Sep  9 2019 11:47:43
+
+#File Generated:     Dec 21 2021 20:09:03
+
+#Purpose:            
+
+#Copyright (C) 2010-2011 by Softjin Technologies Pvt Ltd. All rights reserved.
+
+#***************************************************************************
+
+Executing : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\bin/sjplacer.exe --proj-name audioSpectrumAnalyzer --netlist-vh2 audioSpectrumAnalyzer_p.vh2 --arch p35_udb4x6 --arch-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\arch/udbdsi_4x6_24.cydata --ip-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc5/psoc5lp/ip_blocks.cydata --rrg-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc5/psoc5lp/route_arch-rrg.cydata --irq-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc5/psoc5lp/irqconn.cydata --drq-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc5/psoc5lp/dmaconn.cydata --dsi-conn-file C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc5/psoc5lp/dsiconn.cydata --pins-file pins_68-QFN.xml --lib-file audioSpectrumAnalyzer_p.lib --sdc-file audioSpectrumAnalyzer.sdc --io-pcf audioSpectrumAnalyzer.pci --outdir .
+
+		Softjin Techologies Placer, Version 1.1
+
+Build Date : Sep  9 2019	11:45:12
+
+D2004: Option and Settings Summary
+=============================================================
+Netlist vh2 file          - audioSpectrumAnalyzer_p.vh2
+Architecture file         - C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\arch/udbdsi_4x6_24.cydata
+Package                   - 
+Defparam file             - 
+SDC file                  - audioSpectrumAnalyzer.sdc
+Output directory          - .
+Timing library            - audioSpectrumAnalyzer_p.lib
+IO Placement file         - audioSpectrumAnalyzer.pci
+
+D2050: Starting reading inputs for placer
+=============================================================
+D2065: Reading netlist file : "audioSpectrumAnalyzer_p.vh2"
+D2065: Reading arch file : "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\arch/udbdsi_4x6_24.cydata"
+D2051: Reading of inputs for placer completed successfully
+
+D2053: Starting placement of the design
+=============================================================
+
+Phase 2
+Phase 3
+
+Design Statistics after Packing
+    Number of Combinational MCs 	:	13
+    Number of Sequential MCs    	:	29
+    Number of DPs               	:	4
+    Number of Controls          	:	2
+    Number of Status            	:	5
+    Number of SyncCells         	:	0
+    Number of count7cells       	:	2
+
+Device Utilization Summary after Packing
+    Macrocells                  :	42/192
+    UDBS                        :	8/24
+    IOs                         :	22/72
+
+
+D2088: Phase 3, elapsed time : 0.0 (sec)
+
+Phase 4
+D2088: Phase 4, elapsed time : 0.0 (sec)
+
+Phase 5
+D2088: Phase 5, elapsed time : 0.0 (sec)
+
+Phase 6
+
+######################################################################
+Placement Timing Summary
+
+The timing summary is based on estimated routing delays after
+placement. For final timing report, please carry out the timing
+analysis after routing.
+======================================================================
+
+######################################################################
+                     Clock Summary 
+======================================================================
+Number of clocks: 15
+Clock: ADC_DelSig_1_Ext_CP_Clk | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_Ext_CP_Clk(routed) | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_theACLK | Frequency: N/A       | Target:   2.6 MHz
+Clock: ADC_DelSig_1_theACLK(fixed-function) | Frequency: N/A       | Target:   2.6 MHz
+Clock: Clock_1              | Frequency:  65.0 MHz | Target:   3.9 MHz
+Clock: Clock_debounce       | Frequency: 142.8 MHz | Target:   0.0 MHz
+Clock: CyBUS_CLK            | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyIMO                | Frequency: N/A       | Target:   3.0 MHz
+Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyPLL_OUT            | Frequency: N/A       | Target:  78.0 MHz
+Clock: DVDAC_1_IntClock     | Frequency: N/A       | Target:   1.0 MHz
+Clock: DVDAC_1_IntClock(routed) | Frequency: N/A       | Target:   1.0 MHz
+Clock: UART_1_IntClock      | Frequency:  53.6 MHz | Target:   0.9 MHz
+Clock: \ADC_DelSig_1:DSM\/dec_clock | Frequency: N/A       | Target:   0.1 MHz
+
+======================================================================
+                     End of Clock Summary
+######################################################################
+
+D2088: Phase 6, elapsed time : 0.0 (sec)
+
+Phase 7
+######################################################################
+                     Clock Summary 
+======================================================================
+Number of clocks: 15
+Clock: ADC_DelSig_1_Ext_CP_Clk | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_Ext_CP_Clk(routed) | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_theACLK | Frequency: N/A       | Target:   2.6 MHz
+Clock: ADC_DelSig_1_theACLK(fixed-function) | Frequency: N/A       | Target:   2.6 MHz
+Clock: Clock_1              | Frequency:  65.0 MHz | Target:   3.9 MHz
+Clock: Clock_debounce       | Frequency: 142.8 MHz | Target:   0.0 MHz
+Clock: CyBUS_CLK            | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyIMO                | Frequency: N/A       | Target:   3.0 MHz
+Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyPLL_OUT            | Frequency: N/A       | Target:  78.0 MHz
+Clock: DVDAC_1_IntClock     | Frequency: N/A       | Target:   1.0 MHz
+Clock: DVDAC_1_IntClock(routed) | Frequency: N/A       | Target:   1.0 MHz
+Clock: UART_1_IntClock      | Frequency:  49.3 MHz | Target:   0.9 MHz
+Clock: \ADC_DelSig_1:DSM\/dec_clock | Frequency: N/A       | Target:   0.1 MHz
+
+======================================================================
+                     End of Clock Summary
+######################################################################
+D2088: Phase 7, elapsed time : 0.1 (sec)
+
+Final Design Statistics
+    Number of Combinational MCs 	:	13
+    Number of Sequential MCs    	:	29
+    Number of DPs               	:	4
+    Number of Controls          	:	2
+    Number of Status            	:	5
+    Number of SyncCells         	:	0
+    Number of count7cells       	:	2
+    Number of IOs       	:	22
+
+Device Utilization Summary
+    Macrocells                  :	42/192
+    IOs                         :	22/72
+
+
+
+######################################################################
+Placement Timing Summary
+
+The timing summary is based on estimated routing delays after
+placement. For final timing report, please carry out the timing
+analysis after routing.
+======================================================================
+
+
+######################################################################
+                     Clock Summary 
+======================================================================
+Number of clocks: 15
+Clock: ADC_DelSig_1_Ext_CP_Clk | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_Ext_CP_Clk(routed) | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_theACLK | Frequency: N/A       | Target:   2.6 MHz
+Clock: ADC_DelSig_1_theACLK(fixed-function) | Frequency: N/A       | Target:   2.6 MHz
+Clock: Clock_1              | Frequency:  65.0 MHz | Target:   4.3 MHz
+Clock: Clock_debounce       | Frequency: 142.8 MHz | Target:   0.0 MHz
+Clock: CyBUS_CLK            | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyIMO                | Frequency: N/A       | Target:   3.0 MHz
+Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyPLL_OUT            | Frequency: N/A       | Target:  78.0 MHz
+Clock: DVDAC_1_IntClock     | Frequency: N/A       | Target:   1.0 MHz
+Clock: DVDAC_1_IntClock(routed) | Frequency: N/A       | Target:   1.0 MHz
+Clock: UART_1_IntClock      | Frequency:  49.3 MHz | Target:   1.0 MHz
+Clock: \ADC_DelSig_1:DSM\/dec_clock | Frequency: N/A       | Target:   0.1 MHz
+
+======================================================================
+                     End of Clock Summary
+######################################################################
+
+Phase 6
+
+######################################################################
+Placement Timing Summary
+
+The timing summary is based on estimated routing delays after
+placement. For final timing report, please carry out the timing
+analysis after routing.
+======================================================================
+
+######################################################################
+                     Clock Summary 
+======================================================================
+Number of clocks: 15
+Clock: ADC_DelSig_1_Ext_CP_Clk | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_Ext_CP_Clk(routed) | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_theACLK | Frequency: N/A       | Target:   2.6 MHz
+Clock: ADC_DelSig_1_theACLK(fixed-function) | Frequency: N/A       | Target:   2.6 MHz
+Clock: Clock_1              | Frequency:  65.0 MHz | Target:   4.3 MHz
+Clock: Clock_debounce       | Frequency: 142.8 MHz | Target:   0.0 MHz
+Clock: CyBUS_CLK            | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyIMO                | Frequency: N/A       | Target:   3.0 MHz
+Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyPLL_OUT            | Frequency: N/A       | Target:  78.0 MHz
+Clock: DVDAC_1_IntClock     | Frequency: N/A       | Target:   1.0 MHz
+Clock: DVDAC_1_IntClock(routed) | Frequency: N/A       | Target:   1.0 MHz
+Clock: UART_1_IntClock      | Frequency:  53.6 MHz | Target:   1.0 MHz
+Clock: \ADC_DelSig_1:DSM\/dec_clock | Frequency: N/A       | Target:   0.1 MHz
+
+======================================================================
+                     End of Clock Summary
+######################################################################
+
+D2088: Phase 6, elapsed time : 0.0 (sec)
+
+Phase 7
+######################################################################
+                     Clock Summary 
+======================================================================
+Number of clocks: 15
+Clock: ADC_DelSig_1_Ext_CP_Clk | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_Ext_CP_Clk(routed) | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_theACLK | Frequency: N/A       | Target:   2.6 MHz
+Clock: ADC_DelSig_1_theACLK(fixed-function) | Frequency: N/A       | Target:   2.6 MHz
+Clock: Clock_1              | Frequency:  63.4 MHz | Target:   4.7 MHz
+Clock: Clock_debounce       | Frequency: 142.8 MHz | Target:   0.0 MHz
+Clock: CyBUS_CLK            | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyIMO                | Frequency: N/A       | Target:   3.0 MHz
+Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyPLL_OUT            | Frequency: N/A       | Target:  78.0 MHz
+Clock: DVDAC_1_IntClock     | Frequency: N/A       | Target:   1.0 MHz
+Clock: DVDAC_1_IntClock(routed) | Frequency: N/A       | Target:   1.0 MHz
+Clock: UART_1_IntClock      | Frequency:  51.4 MHz | Target:   1.1 MHz
+Clock: \ADC_DelSig_1:DSM\/dec_clock | Frequency: N/A       | Target:   0.1 MHz
+
+======================================================================
+                     End of Clock Summary
+######################################################################
+D2088: Phase 7, elapsed time : 0.3 (sec)
+
+Final Design Statistics
+    Number of Combinational MCs 	:	13
+    Number of Sequential MCs    	:	29
+    Number of DPs               	:	4
+    Number of Controls          	:	2
+    Number of Status            	:	5
+    Number of SyncCells         	:	0
+    Number of count7cells       	:	2
+    Number of IOs       	:	22
+
+Device Utilization Summary
+    Macrocells                  :	42/192
+    IOs                         :	22/72
+
+
+
+######################################################################
+Placement Timing Summary
+
+The timing summary is based on estimated routing delays after
+placement. For final timing report, please carry out the timing
+analysis after routing.
+======================================================================
+
+
+######################################################################
+                     Clock Summary 
+======================================================================
+Number of clocks: 15
+Clock: ADC_DelSig_1_Ext_CP_Clk | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_Ext_CP_Clk(routed) | Frequency: N/A       | Target:  78.0 MHz
+Clock: ADC_DelSig_1_theACLK | Frequency: N/A       | Target:   2.6 MHz
+Clock: ADC_DelSig_1_theACLK(fixed-function) | Frequency: N/A       | Target:   2.6 MHz
+Clock: Clock_1              | Frequency:  65.0 MHz | Target:   5.2 MHz
+Clock: Clock_debounce       | Frequency: 104.8 MHz | Target:   0.0 MHz
+Clock: CyBUS_CLK            | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
+Clock: CyIMO                | Frequency: N/A       | Target:   3.0 MHz
+Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  78.0 MHz
+Clock: CyPLL_OUT            | Frequency: N/A       | Target:  78.0 MHz
+Clock: DVDAC_1_IntClock     | Frequency: N/A       | Target:   1.0 MHz
+Clock: DVDAC_1_IntClock(routed) | Frequency: N/A       | Target:   1.0 MHz
+Clock: UART_1_IntClock      | Frequency:  57.2 MHz | Target:   1.2 MHz
+Clock: \ADC_DelSig_1:DSM\/dec_clock | Frequency: N/A       | Target:   0.1 MHz
+
+======================================================================
+                     End of Clock Summary
+######################################################################
+
+Phase 8
+D2088: Phase 8, elapsed time : 0.0 (sec)
+
+D2054: Placement of the design completed successfully
+
+I2076: Total run-time: 1.1 sec.
+

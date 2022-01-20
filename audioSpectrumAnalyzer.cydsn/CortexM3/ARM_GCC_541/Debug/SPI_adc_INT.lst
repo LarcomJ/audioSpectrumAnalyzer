@@ -1,0 +1,520 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc4NYDd1.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"SPI_adc_INT.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.SPI_adc_TX_ISR,"ax",%progbits
+  20              		.align	2
+  21              		.global	SPI_adc_TX_ISR
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	SPI_adc_TX_ISR, %function
+  25              	SPI_adc_TX_ISR:
+  26              	.LFB3:
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  31 0000 7047     		bx	lr
+  32              		.cfi_endproc
+  33              	.LFE3:
+  34              		.size	SPI_adc_TX_ISR, .-SPI_adc_TX_ISR
+  35 0002 00BF     		.section	.text.SPI_adc_RX_ISR,"ax",%progbits
+  36              		.align	2
+  37              		.global	SPI_adc_RX_ISR
+  38              		.thumb
+  39              		.thumb_func
+  40              		.type	SPI_adc_RX_ISR, %function
+  41              	SPI_adc_RX_ISR:
+  42              	.LFB1:
+  43              		.file 1 "Generated_Source\\PSoC5\\SPI_adc_INT.c"
+   1:Generated_Source\PSoC5/SPI_adc_INT.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/SPI_adc_INT.c **** * File Name: SPI_adc_INT.c
+   3:Generated_Source\PSoC5/SPI_adc_INT.c **** * Version 2.50
+   4:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+   5:Generated_Source\PSoC5/SPI_adc_INT.c **** * Description:
+   6:Generated_Source\PSoC5/SPI_adc_INT.c **** *  This file provides all Interrupt Service Routine (ISR) for the SPI Master
+   7:Generated_Source\PSoC5/SPI_adc_INT.c **** *  component.
+   8:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+   9:Generated_Source\PSoC5/SPI_adc_INT.c **** * Note:
+  10:Generated_Source\PSoC5/SPI_adc_INT.c **** *  None.
+  11:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+  12:Generated_Source\PSoC5/SPI_adc_INT.c **** ********************************************************************************
+  13:Generated_Source\PSoC5/SPI_adc_INT.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  14:Generated_Source\PSoC5/SPI_adc_INT.c **** * You may use this file only in accordance with the license, terms, conditions,
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc4NYDd1.s 			page 2
+
+
+  15:Generated_Source\PSoC5/SPI_adc_INT.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  16:Generated_Source\PSoC5/SPI_adc_INT.c **** * the software package with which this file was provided.
+  17:Generated_Source\PSoC5/SPI_adc_INT.c **** *******************************************************************************/
+  18:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  19:Generated_Source\PSoC5/SPI_adc_INT.c **** #include "SPI_adc_PVT.h"
+  20:Generated_Source\PSoC5/SPI_adc_INT.c **** #include "cyapicallbacks.h"
+  21:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  22:Generated_Source\PSoC5/SPI_adc_INT.c **** /* User code required at start of ISR */
+  23:Generated_Source\PSoC5/SPI_adc_INT.c **** /* `#START SPI_adc_ISR_START_DEF` */
+  24:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  25:Generated_Source\PSoC5/SPI_adc_INT.c **** /* `#END` */
+  26:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  27:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  28:Generated_Source\PSoC5/SPI_adc_INT.c **** /*******************************************************************************
+  29:Generated_Source\PSoC5/SPI_adc_INT.c **** * Function Name: SPI_adc_TX_ISR
+  30:Generated_Source\PSoC5/SPI_adc_INT.c **** ********************************************************************************
+  31:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+  32:Generated_Source\PSoC5/SPI_adc_INT.c **** * Summary:
+  33:Generated_Source\PSoC5/SPI_adc_INT.c **** *  Interrupt Service Routine for TX portion of the SPI Master.
+  34:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+  35:Generated_Source\PSoC5/SPI_adc_INT.c **** * Parameters:
+  36:Generated_Source\PSoC5/SPI_adc_INT.c **** *  None.
+  37:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+  38:Generated_Source\PSoC5/SPI_adc_INT.c **** * Return:
+  39:Generated_Source\PSoC5/SPI_adc_INT.c **** *  None.
+  40:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+  41:Generated_Source\PSoC5/SPI_adc_INT.c **** * Global variables:
+  42:Generated_Source\PSoC5/SPI_adc_INT.c **** *  SPI_adc_txBufferWrite - used for the account of the bytes which
+  43:Generated_Source\PSoC5/SPI_adc_INT.c **** *  have been written down in the TX software buffer.
+  44:Generated_Source\PSoC5/SPI_adc_INT.c **** *  SPI_adc_txBufferRead - used for the account of the bytes which
+  45:Generated_Source\PSoC5/SPI_adc_INT.c **** *  have been read from the TX software buffer, modified when exist data to
+  46:Generated_Source\PSoC5/SPI_adc_INT.c **** *  sending and FIFO Not Full.
+  47:Generated_Source\PSoC5/SPI_adc_INT.c **** *  SPI_adc_txBuffer[SPI_adc_TX_BUFFER_SIZE] - used to store
+  48:Generated_Source\PSoC5/SPI_adc_INT.c **** *  data to sending.
+  49:Generated_Source\PSoC5/SPI_adc_INT.c **** *  All described above Global variables are used when Software Buffer is used.
+  50:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+  51:Generated_Source\PSoC5/SPI_adc_INT.c **** *******************************************************************************/
+  52:Generated_Source\PSoC5/SPI_adc_INT.c **** CY_ISR(SPI_adc_TX_ISR)
+  53:Generated_Source\PSoC5/SPI_adc_INT.c **** {
+  54:Generated_Source\PSoC5/SPI_adc_INT.c ****     #if(SPI_adc_TX_SOFTWARE_BUF_ENABLED)
+  55:Generated_Source\PSoC5/SPI_adc_INT.c ****         uint8 tmpStatus;
+  56:Generated_Source\PSoC5/SPI_adc_INT.c ****     #endif /* (SPI_adc_TX_SOFTWARE_BUF_ENABLED) */
+  57:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  58:Generated_Source\PSoC5/SPI_adc_INT.c ****     #ifdef SPI_adc_TX_ISR_ENTRY_CALLBACK
+  59:Generated_Source\PSoC5/SPI_adc_INT.c ****         SPI_adc_TX_ISR_EntryCallback();
+  60:Generated_Source\PSoC5/SPI_adc_INT.c ****     #endif /* SPI_adc_TX_ISR_ENTRY_CALLBACK */
+  61:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  62:Generated_Source\PSoC5/SPI_adc_INT.c ****     /* User code required at start of ISR */
+  63:Generated_Source\PSoC5/SPI_adc_INT.c ****     /* `#START SPI_adc_TX_ISR_START` */
+  64:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  65:Generated_Source\PSoC5/SPI_adc_INT.c ****     /* `#END` */
+  66:Generated_Source\PSoC5/SPI_adc_INT.c ****     
+  67:Generated_Source\PSoC5/SPI_adc_INT.c ****     #if(SPI_adc_TX_SOFTWARE_BUF_ENABLED)
+  68:Generated_Source\PSoC5/SPI_adc_INT.c ****         /* Check if TX data buffer is not empty and there is space in TX FIFO */
+  69:Generated_Source\PSoC5/SPI_adc_INT.c ****         while(SPI_adc_txBufferRead != SPI_adc_txBufferWrite)
+  70:Generated_Source\PSoC5/SPI_adc_INT.c ****         {
+  71:Generated_Source\PSoC5/SPI_adc_INT.c ****             tmpStatus = SPI_adc_GET_STATUS_TX(SPI_adc_swStatusTx);
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc4NYDd1.s 			page 3
+
+
+  72:Generated_Source\PSoC5/SPI_adc_INT.c ****             SPI_adc_swStatusTx = tmpStatus;
+  73:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  74:Generated_Source\PSoC5/SPI_adc_INT.c ****             if(0u != (SPI_adc_swStatusTx & SPI_adc_STS_TX_FIFO_NOT_FULL))
+  75:Generated_Source\PSoC5/SPI_adc_INT.c ****             {
+  76:Generated_Source\PSoC5/SPI_adc_INT.c ****                 if(0u == SPI_adc_txBufferFull)
+  77:Generated_Source\PSoC5/SPI_adc_INT.c ****                 {
+  78:Generated_Source\PSoC5/SPI_adc_INT.c ****                    SPI_adc_txBufferRead++;
+  79:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  80:Generated_Source\PSoC5/SPI_adc_INT.c ****                     if(SPI_adc_txBufferRead >= SPI_adc_TX_BUFFER_SIZE)
+  81:Generated_Source\PSoC5/SPI_adc_INT.c ****                     {
+  82:Generated_Source\PSoC5/SPI_adc_INT.c ****                         SPI_adc_txBufferRead = 0u;
+  83:Generated_Source\PSoC5/SPI_adc_INT.c ****                     }
+  84:Generated_Source\PSoC5/SPI_adc_INT.c ****                 }
+  85:Generated_Source\PSoC5/SPI_adc_INT.c ****                 else
+  86:Generated_Source\PSoC5/SPI_adc_INT.c ****                 {
+  87:Generated_Source\PSoC5/SPI_adc_INT.c ****                     SPI_adc_txBufferFull = 0u;
+  88:Generated_Source\PSoC5/SPI_adc_INT.c ****                 }
+  89:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+  90:Generated_Source\PSoC5/SPI_adc_INT.c ****                 /* Put data element into the TX FIFO */
+  91:Generated_Source\PSoC5/SPI_adc_INT.c ****                 CY_SET_REG8(SPI_adc_TXDATA_PTR, 
+  92:Generated_Source\PSoC5/SPI_adc_INT.c ****                                              SPI_adc_txBuffer[SPI_adc_txBufferRead]);
+  93:Generated_Source\PSoC5/SPI_adc_INT.c ****             }
+  94:Generated_Source\PSoC5/SPI_adc_INT.c ****             else
+  95:Generated_Source\PSoC5/SPI_adc_INT.c ****             {
+  96:Generated_Source\PSoC5/SPI_adc_INT.c ****                 break;
+  97:Generated_Source\PSoC5/SPI_adc_INT.c ****             }
+  98:Generated_Source\PSoC5/SPI_adc_INT.c ****         }
+  99:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+ 100:Generated_Source\PSoC5/SPI_adc_INT.c ****         if(SPI_adc_txBufferRead == SPI_adc_txBufferWrite)
+ 101:Generated_Source\PSoC5/SPI_adc_INT.c ****         {
+ 102:Generated_Source\PSoC5/SPI_adc_INT.c ****             /* TX Buffer is EMPTY: disable interrupt on TX NOT FULL */
+ 103:Generated_Source\PSoC5/SPI_adc_INT.c ****             SPI_adc_TX_STATUS_MASK_REG &= ((uint8) ~SPI_adc_STS_TX_FIFO_NOT_FULL);
+ 104:Generated_Source\PSoC5/SPI_adc_INT.c ****         }
+ 105:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+ 106:Generated_Source\PSoC5/SPI_adc_INT.c ****     #endif /* (SPI_adc_TX_SOFTWARE_BUF_ENABLED) */
+ 107:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+ 108:Generated_Source\PSoC5/SPI_adc_INT.c ****     /* User code required at end of ISR (Optional) */
+ 109:Generated_Source\PSoC5/SPI_adc_INT.c ****     /* `#START SPI_adc_TX_ISR_END` */
+ 110:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+ 111:Generated_Source\PSoC5/SPI_adc_INT.c ****     /* `#END` */
+ 112:Generated_Source\PSoC5/SPI_adc_INT.c ****     
+ 113:Generated_Source\PSoC5/SPI_adc_INT.c ****     #ifdef SPI_adc_TX_ISR_EXIT_CALLBACK
+ 114:Generated_Source\PSoC5/SPI_adc_INT.c ****         SPI_adc_TX_ISR_ExitCallback();
+ 115:Generated_Source\PSoC5/SPI_adc_INT.c ****     #endif /* SPI_adc_TX_ISR_EXIT_CALLBACK */
+ 116:Generated_Source\PSoC5/SPI_adc_INT.c **** }
+ 117:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+ 118:Generated_Source\PSoC5/SPI_adc_INT.c **** 
+ 119:Generated_Source\PSoC5/SPI_adc_INT.c **** /*******************************************************************************
+ 120:Generated_Source\PSoC5/SPI_adc_INT.c **** * Function Name: SPI_adc_RX_ISR
+ 121:Generated_Source\PSoC5/SPI_adc_INT.c **** ********************************************************************************
+ 122:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+ 123:Generated_Source\PSoC5/SPI_adc_INT.c **** * Summary:
+ 124:Generated_Source\PSoC5/SPI_adc_INT.c **** *  Interrupt Service Routine for RX portion of the SPI Master.
+ 125:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+ 126:Generated_Source\PSoC5/SPI_adc_INT.c **** * Parameters:
+ 127:Generated_Source\PSoC5/SPI_adc_INT.c **** *  None.
+ 128:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc4NYDd1.s 			page 4
+
+
+ 129:Generated_Source\PSoC5/SPI_adc_INT.c **** * Return:
+ 130:Generated_Source\PSoC5/SPI_adc_INT.c **** *  None.
+ 131:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+ 132:Generated_Source\PSoC5/SPI_adc_INT.c **** * Global variables:
+ 133:Generated_Source\PSoC5/SPI_adc_INT.c **** *  SPI_adc_rxBufferWrite - used for the account of the bytes which
+ 134:Generated_Source\PSoC5/SPI_adc_INT.c **** *  have been written down in the RX software buffer modified when FIFO contains
+ 135:Generated_Source\PSoC5/SPI_adc_INT.c **** *  new data.
+ 136:Generated_Source\PSoC5/SPI_adc_INT.c **** *  SPI_adc_rxBufferRead - used for the account of the bytes which
+ 137:Generated_Source\PSoC5/SPI_adc_INT.c **** *  have been read from the RX software buffer, modified when overflow occurred.
+ 138:Generated_Source\PSoC5/SPI_adc_INT.c **** *  SPI_adc_rxBuffer[SPI_adc_RX_BUFFER_SIZE] - used to store
+ 139:Generated_Source\PSoC5/SPI_adc_INT.c **** *  received data, modified when FIFO contains new data.
+ 140:Generated_Source\PSoC5/SPI_adc_INT.c **** *  All described above Global variables are used when Software Buffer is used.
+ 141:Generated_Source\PSoC5/SPI_adc_INT.c **** *
+ 142:Generated_Source\PSoC5/SPI_adc_INT.c **** *******************************************************************************/
+ 143:Generated_Source\PSoC5/SPI_adc_INT.c **** CY_ISR(SPI_adc_RX_ISR)
+ 144:Generated_Source\PSoC5/SPI_adc_INT.c **** {
+  44              		.loc 1 144 0
+  45              		.cfi_startproc
+  46              		@ args = 0, pretend = 0, frame = 0
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48              		@ link register save eliminated.
+  49 0000 7047     		bx	lr
+  50              		.cfi_endproc
+  51              	.LFE1:
+  52              		.size	SPI_adc_RX_ISR, .-SPI_adc_RX_ISR
+  53 0002 00BF     		.text
+  54              	.Letext0:
+  55              		.section	.debug_info,"",%progbits
+  56              	.Ldebug_info0:
+  57 0000 A2000000 		.4byte	0xa2
+  58 0004 0400     		.2byte	0x4
+  59 0006 00000000 		.4byte	.Ldebug_abbrev0
+  60 000a 04       		.byte	0x4
+  61 000b 01       		.uleb128 0x1
+  62 000c F6000000 		.4byte	.LASF14
+  63 0010 0C       		.byte	0xc
+  64 0011 97010000 		.4byte	.LASF15
+  65 0015 1B000000 		.4byte	.LASF16
+  66 0019 00000000 		.4byte	.Ldebug_ranges0+0
+  67 001d 00000000 		.4byte	0
+  68 0021 00000000 		.4byte	.Ldebug_line0
+  69 0025 02       		.uleb128 0x2
+  70 0026 01       		.byte	0x1
+  71 0027 06       		.byte	0x6
+  72 0028 CF010000 		.4byte	.LASF0
+  73 002c 02       		.uleb128 0x2
+  74 002d 01       		.byte	0x1
+  75 002e 08       		.byte	0x8
+  76 002f D3000000 		.4byte	.LASF1
+  77 0033 02       		.uleb128 0x2
+  78 0034 02       		.byte	0x2
+  79 0035 05       		.byte	0x5
+  80 0036 F6010000 		.4byte	.LASF2
+  81 003a 02       		.uleb128 0x2
+  82 003b 02       		.byte	0x2
+  83 003c 07       		.byte	0x7
+  84 003d BC010000 		.4byte	.LASF3
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc4NYDd1.s 			page 5
+
+
+  85 0041 02       		.uleb128 0x2
+  86 0042 04       		.byte	0x4
+  87 0043 05       		.byte	0x5
+  88 0044 E6000000 		.4byte	.LASF4
+  89 0048 02       		.uleb128 0x2
+  90 0049 04       		.byte	0x4
+  91 004a 07       		.byte	0x7
+  92 004b A4000000 		.4byte	.LASF5
+  93 004f 02       		.uleb128 0x2
+  94 0050 08       		.byte	0x8
+  95 0051 05       		.byte	0x5
+  96 0052 00000000 		.4byte	.LASF6
+  97 0056 02       		.uleb128 0x2
+  98 0057 08       		.byte	0x8
+  99 0058 07       		.byte	0x7
+ 100 0059 B6000000 		.4byte	.LASF7
+ 101 005d 03       		.uleb128 0x3
+ 102 005e 04       		.byte	0x4
+ 103 005f 05       		.byte	0x5
+ 104 0060 696E7400 		.ascii	"int\000"
+ 105 0064 02       		.uleb128 0x2
+ 106 0065 04       		.byte	0x4
+ 107 0066 07       		.byte	0x7
+ 108 0067 0E000000 		.4byte	.LASF8
+ 109 006b 02       		.uleb128 0x2
+ 110 006c 04       		.byte	0x4
+ 111 006d 04       		.byte	0x4
+ 112 006e CD000000 		.4byte	.LASF9
+ 113 0072 02       		.uleb128 0x2
+ 114 0073 08       		.byte	0x8
+ 115 0074 04       		.byte	0x4
+ 116 0075 EF000000 		.4byte	.LASF10
+ 117 0079 02       		.uleb128 0x2
+ 118 007a 01       		.byte	0x1
+ 119 007b 08       		.byte	0x8
+ 120 007c E1000000 		.4byte	.LASF11
+ 121 0080 02       		.uleb128 0x2
+ 122 0081 08       		.byte	0x8
+ 123 0082 04       		.byte	0x4
+ 124 0083 DB010000 		.4byte	.LASF12
+ 125 0087 02       		.uleb128 0x2
+ 126 0088 04       		.byte	0x4
+ 127 0089 07       		.byte	0x7
+ 128 008a 00020000 		.4byte	.LASF13
+ 129 008e 04       		.uleb128 0x4
+ 130 008f E7010000 		.4byte	.LASF17
+ 131 0093 01       		.byte	0x1
+ 132 0094 8F       		.byte	0x8f
+ 133 0095 01       		.byte	0x1
+ 134 0096 05       		.uleb128 0x5
+ 135 0097 8E000000 		.4byte	0x8e
+ 136 009b 00000000 		.4byte	.LFB1
+ 137 009f 02000000 		.4byte	.LFE1-.LFB1
+ 138 00a3 01       		.uleb128 0x1
+ 139 00a4 9C       		.byte	0x9c
+ 140 00a5 00       		.byte	0
+ 141              		.section	.debug_abbrev,"",%progbits
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc4NYDd1.s 			page 6
+
+
+ 142              	.Ldebug_abbrev0:
+ 143 0000 01       		.uleb128 0x1
+ 144 0001 11       		.uleb128 0x11
+ 145 0002 01       		.byte	0x1
+ 146 0003 25       		.uleb128 0x25
+ 147 0004 0E       		.uleb128 0xe
+ 148 0005 13       		.uleb128 0x13
+ 149 0006 0B       		.uleb128 0xb
+ 150 0007 03       		.uleb128 0x3
+ 151 0008 0E       		.uleb128 0xe
+ 152 0009 1B       		.uleb128 0x1b
+ 153 000a 0E       		.uleb128 0xe
+ 154 000b 55       		.uleb128 0x55
+ 155 000c 17       		.uleb128 0x17
+ 156 000d 11       		.uleb128 0x11
+ 157 000e 01       		.uleb128 0x1
+ 158 000f 10       		.uleb128 0x10
+ 159 0010 17       		.uleb128 0x17
+ 160 0011 00       		.byte	0
+ 161 0012 00       		.byte	0
+ 162 0013 02       		.uleb128 0x2
+ 163 0014 24       		.uleb128 0x24
+ 164 0015 00       		.byte	0
+ 165 0016 0B       		.uleb128 0xb
+ 166 0017 0B       		.uleb128 0xb
+ 167 0018 3E       		.uleb128 0x3e
+ 168 0019 0B       		.uleb128 0xb
+ 169 001a 03       		.uleb128 0x3
+ 170 001b 0E       		.uleb128 0xe
+ 171 001c 00       		.byte	0
+ 172 001d 00       		.byte	0
+ 173 001e 03       		.uleb128 0x3
+ 174 001f 24       		.uleb128 0x24
+ 175 0020 00       		.byte	0
+ 176 0021 0B       		.uleb128 0xb
+ 177 0022 0B       		.uleb128 0xb
+ 178 0023 3E       		.uleb128 0x3e
+ 179 0024 0B       		.uleb128 0xb
+ 180 0025 03       		.uleb128 0x3
+ 181 0026 08       		.uleb128 0x8
+ 182 0027 00       		.byte	0
+ 183 0028 00       		.byte	0
+ 184 0029 04       		.uleb128 0x4
+ 185 002a 2E       		.uleb128 0x2e
+ 186 002b 00       		.byte	0
+ 187 002c 3F       		.uleb128 0x3f
+ 188 002d 19       		.uleb128 0x19
+ 189 002e 03       		.uleb128 0x3
+ 190 002f 0E       		.uleb128 0xe
+ 191 0030 3A       		.uleb128 0x3a
+ 192 0031 0B       		.uleb128 0xb
+ 193 0032 3B       		.uleb128 0x3b
+ 194 0033 0B       		.uleb128 0xb
+ 195 0034 27       		.uleb128 0x27
+ 196 0035 19       		.uleb128 0x19
+ 197 0036 20       		.uleb128 0x20
+ 198 0037 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc4NYDd1.s 			page 7
+
+
+ 199 0038 00       		.byte	0
+ 200 0039 00       		.byte	0
+ 201 003a 05       		.uleb128 0x5
+ 202 003b 2E       		.uleb128 0x2e
+ 203 003c 00       		.byte	0
+ 204 003d 31       		.uleb128 0x31
+ 205 003e 13       		.uleb128 0x13
+ 206 003f 11       		.uleb128 0x11
+ 207 0040 01       		.uleb128 0x1
+ 208 0041 12       		.uleb128 0x12
+ 209 0042 06       		.uleb128 0x6
+ 210 0043 40       		.uleb128 0x40
+ 211 0044 18       		.uleb128 0x18
+ 212 0045 9742     		.uleb128 0x2117
+ 213 0047 19       		.uleb128 0x19
+ 214 0048 00       		.byte	0
+ 215 0049 00       		.byte	0
+ 216 004a 00       		.byte	0
+ 217              		.section	.debug_aranges,"",%progbits
+ 218 0000 1C000000 		.4byte	0x1c
+ 219 0004 0200     		.2byte	0x2
+ 220 0006 00000000 		.4byte	.Ldebug_info0
+ 221 000a 04       		.byte	0x4
+ 222 000b 00       		.byte	0
+ 223 000c 0000     		.2byte	0
+ 224 000e 0000     		.2byte	0
+ 225 0010 00000000 		.4byte	.LFB1
+ 226 0014 02000000 		.4byte	.LFE1-.LFB1
+ 227 0018 00000000 		.4byte	0
+ 228 001c 00000000 		.4byte	0
+ 229              		.section	.debug_ranges,"",%progbits
+ 230              	.Ldebug_ranges0:
+ 231 0000 00000000 		.4byte	.LFB1
+ 232 0004 02000000 		.4byte	.LFE1
+ 233 0008 00000000 		.4byte	0
+ 234 000c 00000000 		.4byte	0
+ 235              		.section	.debug_line,"",%progbits
+ 236              	.Ldebug_line0:
+ 237 0000 51000000 		.section	.debug_str,"MS",%progbits,1
+ 237      02003B00 
+ 237      00000201 
+ 237      FB0E0D00 
+ 237      01010101 
+ 238              	.LASF6:
+ 239 0000 6C6F6E67 		.ascii	"long long int\000"
+ 239      206C6F6E 
+ 239      6720696E 
+ 239      7400
+ 240              	.LASF8:
+ 241 000e 756E7369 		.ascii	"unsigned int\000"
+ 241      676E6564 
+ 241      20696E74 
+ 241      00
+ 242              	.LASF16:
+ 243 001b 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 243      726F7062 
+ 243      6F785C44 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc4NYDd1.s 			page 8
+
+
+ 243      4556454C 
+ 243      4F504D45 
+ 244 004a 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 244      70656374 
+ 244      72756D20 
+ 244      616E616C 
+ 244      797A6572 
+ 245 007b 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 245      416E616C 
+ 245      797A6572 
+ 245      5C617564 
+ 245      696F5370 
+ 246              	.LASF5:
+ 247 00a4 6C6F6E67 		.ascii	"long unsigned int\000"
+ 247      20756E73 
+ 247      69676E65 
+ 247      6420696E 
+ 247      7400
+ 248              	.LASF7:
+ 249 00b6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 249      206C6F6E 
+ 249      6720756E 
+ 249      7369676E 
+ 249      65642069 
+ 250              	.LASF9:
+ 251 00cd 666C6F61 		.ascii	"float\000"
+ 251      7400
+ 252              	.LASF1:
+ 253 00d3 756E7369 		.ascii	"unsigned char\000"
+ 253      676E6564 
+ 253      20636861 
+ 253      7200
+ 254              	.LASF11:
+ 255 00e1 63686172 		.ascii	"char\000"
+ 255      00
+ 256              	.LASF4:
+ 257 00e6 6C6F6E67 		.ascii	"long int\000"
+ 257      20696E74 
+ 257      00
+ 258              	.LASF10:
+ 259 00ef 646F7562 		.ascii	"double\000"
+ 259      6C6500
+ 260              	.LASF14:
+ 261 00f6 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 261      43313120 
+ 261      352E342E 
+ 261      31203230 
+ 261      31363036 
+ 262 0129 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 262      20726576 
+ 262      6973696F 
+ 262      6E203233 
+ 262      37373135 
+ 263 015c 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 263      66756E63 
+ 263      74696F6E 
+ 263      2D736563 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cc4NYDd1.s 			page 9
+
+
+ 263      74696F6E 
+ 264 018f 6E637469 		.ascii	"nctions\000"
+ 264      6F6E7300 
+ 265              	.LASF15:
+ 266 0197 47656E65 		.ascii	"Generated_Source\\PSoC5\\SPI_adc_INT.c\000"
+ 266      72617465 
+ 266      645F536F 
+ 266      75726365 
+ 266      5C50536F 
+ 267              	.LASF3:
+ 268 01bc 73686F72 		.ascii	"short unsigned int\000"
+ 268      7420756E 
+ 268      7369676E 
+ 268      65642069 
+ 268      6E7400
+ 269              	.LASF0:
+ 270 01cf 7369676E 		.ascii	"signed char\000"
+ 270      65642063 
+ 270      68617200 
+ 271              	.LASF12:
+ 272 01db 6C6F6E67 		.ascii	"long double\000"
+ 272      20646F75 
+ 272      626C6500 
+ 273              	.LASF17:
+ 274 01e7 5350495F 		.ascii	"SPI_adc_RX_ISR\000"
+ 274      6164635F 
+ 274      52585F49 
+ 274      535200
+ 275              	.LASF2:
+ 276 01f6 73686F72 		.ascii	"short int\000"
+ 276      7420696E 
+ 276      7400
+ 277              	.LASF13:
+ 278 0200 73697A65 		.ascii	"sizetype\000"
+ 278      74797065 
+ 278      00
+ 279              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,1094 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"ADC_DelSig_1_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ADC_DelSig_1_SaveConfig,"ax",%progbits
+  20              		.align	2
+  21              		.global	ADC_DelSig_1_SaveConfig
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	ADC_DelSig_1_SaveConfig, %function
+  25              	ADC_DelSig_1_SaveConfig:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\ADC_DelSig_1_PM.c"
+   1:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * File Name: ADC_DelSig_1_PM.c
+   3:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Version 3.30
+   4:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+   5:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Description:
+   6:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  This file provides the power manager source code to the API for the
+   7:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  Delta-Sigma ADC Component.
+   8:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+   9:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Note:
+  10:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  11:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Copyright 2008-2017, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+  18:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** #include "ADC_DelSig_1.h"
+  19:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+  20:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** static ADC_DelSig_1_BACKUP_STRUCT ADC_DelSig_1_backup =
+  21:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** {
+  22:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     ADC_DelSig_1_DISABLED,
+  23:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     ADC_DelSig_1_CFG1_DEC_CR
+  24:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** };
+  25:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+  26:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+  27:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** /*******************************************************************************
+  28:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Function Name: ADC_DelSig_1_SaveConfig
+  29:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** ********************************************************************************
+  30:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 2
+
+
+  31:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Summary:
+  32:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  Save the register configuration which are not retention.
+  33:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  34:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Parameters:
+  35:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  None
+  36:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  37:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Return:
+  38:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  None
+  39:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  40:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Global variables:
+  41:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  ADC_DelSig_1_backup:  This global structure variable is used to store
+  42:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  configuration registers which are non retention whenever user wants to go
+  43:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  sleep mode by calling Sleep() API.
+  44:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  45:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *******************************************************************************/
+  46:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** void ADC_DelSig_1_SaveConfig(void) 
+  47:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** {
+  28              		.loc 1 47 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  48:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     ADC_DelSig_1_backup.deccr = ADC_DelSig_1_DEC_CR_REG;
+  33              		.loc 1 48 0
+  34 0000 024A     		ldr	r2, .L2
+  35 0002 034B     		ldr	r3, .L2+4
+  36 0004 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+  37 0006 5A70     		strb	r2, [r3, #1]
+  38 0008 7047     		bx	lr
+  39              	.L3:
+  40 000a 00BF     		.align	2
+  41              	.L2:
+  42 000c 004E0040 		.word	1073761792
+  43 0010 00000000 		.word	.LANCHOR0
+  44              		.cfi_endproc
+  45              	.LFE0:
+  46              		.size	ADC_DelSig_1_SaveConfig, .-ADC_DelSig_1_SaveConfig
+  47              		.section	.text.ADC_DelSig_1_RestoreConfig,"ax",%progbits
+  48              		.align	2
+  49              		.global	ADC_DelSig_1_RestoreConfig
+  50              		.thumb
+  51              		.thumb_func
+  52              		.type	ADC_DelSig_1_RestoreConfig, %function
+  53              	ADC_DelSig_1_RestoreConfig:
+  54              	.LFB1:
+  49:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** }
+  50:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+  51:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+  52:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** /*******************************************************************************
+  53:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Function Name: ADC_DelSig_1_RestoreConfig
+  54:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** ********************************************************************************
+  55:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  56:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Summary:
+  57:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  Restore the register configurations which are not retention.
+  58:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  59:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Parameters:
+  60:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  None
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 3
+
+
+  61:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  62:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Return:
+  63:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  None
+  64:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  65:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Global variables:
+  66:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  ADC_DelSig_1_backup:  This global structure variable is used to restore
+  67:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  configuration registers which are non retention whenever user wants to switch
+  68:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  to active power mode by calling Wakeup() API.
+  69:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  70:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *******************************************************************************/
+  71:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** void ADC_DelSig_1_RestoreConfig(void) 
+  72:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** {
+  55              		.loc 1 72 0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59              		@ link register save eliminated.
+  73:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     ADC_DelSig_1_DEC_CR_REG = ADC_DelSig_1_backup.deccr;
+  60              		.loc 1 73 0
+  61 0000 024A     		ldr	r2, .L5
+  62 0002 034B     		ldr	r3, .L5+4
+  63 0004 5278     		ldrb	r2, [r2, #1]	@ zero_extendqisi2
+  64 0006 1A70     		strb	r2, [r3]
+  65 0008 7047     		bx	lr
+  66              	.L6:
+  67 000a 00BF     		.align	2
+  68              	.L5:
+  69 000c 00000000 		.word	.LANCHOR0
+  70 0010 004E0040 		.word	1073761792
+  71              		.cfi_endproc
+  72              	.LFE1:
+  73              		.size	ADC_DelSig_1_RestoreConfig, .-ADC_DelSig_1_RestoreConfig
+  74              		.section	.text.ADC_DelSig_1_Sleep,"ax",%progbits
+  75              		.align	2
+  76              		.global	ADC_DelSig_1_Sleep
+  77              		.thumb
+  78              		.thumb_func
+  79              		.type	ADC_DelSig_1_Sleep, %function
+  80              	ADC_DelSig_1_Sleep:
+  81              	.LFB2:
+  74:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** }
+  75:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+  76:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+  77:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** /*******************************************************************************
+  78:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Function Name: ADC_DelSig_1_Sleep
+  79:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** ********************************************************************************
+  80:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  81:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Summary:
+  82:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  Stops the operation of the block and saves the user configuration.
+  83:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  84:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Parameters:
+  85:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  None
+  86:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  87:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Return:
+  88:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  None
+  89:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  90:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Global variables:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 4
+
+
+  91:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  ADC_DelSig_1_backup:  The structure field 'enableState' is modified
+  92:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  depending on the enable state of the block before entering to sleep mode.
+  93:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+  94:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *******************************************************************************/
+  95:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** void ADC_DelSig_1_Sleep(void) 
+  96:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** {
+  82              		.loc 1 96 0
+  83              		.cfi_startproc
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 10B5     		push	{r4, lr}
+  87              		.cfi_def_cfa_offset 8
+  88              		.cfi_offset 4, -8
+  89              		.cfi_offset 14, -4
+  97:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     /* Save ADC enable state */
+  98:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     if((ADC_DelSig_1_ACT_PWR_DEC_EN == (ADC_DelSig_1_PWRMGR_DEC_REG & ADC_DelSig_1_ACT_PWR_DEC_EN))
+  90              		.loc 1 98 0
+  91 0002 0E4B     		ldr	r3, .L23
+  99:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****        (ADC_DelSig_1_ACT_PWR_DSM_EN == (ADC_DelSig_1_PWRMGR_DSM_REG & ADC_DelSig_1_ACT_PWR_DSM_EN))
+ 100:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     {
+ 101:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         /* Component is enabled */
+ 102:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         ADC_DelSig_1_backup.enableState = ADC_DelSig_1_ENABLED;
+  92              		.loc 1 102 0
+  93 0004 0E4C     		ldr	r4, .L23+4
+  98:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****        (ADC_DelSig_1_ACT_PWR_DSM_EN == (ADC_DelSig_1_PWRMGR_DSM_REG & ADC_DelSig_1_ACT_PWR_DSM_EN))
+  94              		.loc 1 98 0
+  95 0006 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  96 0008 D107     		lsls	r1, r2, #31
+  97 000a 02D5     		bpl	.L8
+  99:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****        (ADC_DelSig_1_ACT_PWR_DSM_EN == (ADC_DelSig_1_PWRMGR_DSM_REG & ADC_DelSig_1_ACT_PWR_DSM_EN))
+  98              		.loc 1 99 0 discriminator 1
+  99 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  98:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****        (ADC_DelSig_1_ACT_PWR_DSM_EN == (ADC_DelSig_1_PWRMGR_DSM_REG & ADC_DelSig_1_ACT_PWR_DSM_EN))
+ 100              		.loc 1 98 0 discriminator 1
+ 101 000e DA06     		lsls	r2, r3, #27
+ 102 0010 05D4     		bmi	.L22
+ 103              	.L8:
+ 103:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         if((ADC_DelSig_1_DEC_CR_REG & ADC_DelSig_1_DEC_START_CONV) != 0u)
+ 104:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         {   
+ 105:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****             /* Conversion is started */
+ 106:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****             ADC_DelSig_1_backup.enableState |= ADC_DelSig_1_STARTED;
+ 107:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         }
+ 108:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 		
+ 109:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         /* Stop the configuration */
+ 110:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         ADC_DelSig_1_Stop();
+ 111:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     }
+ 112:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     else
+ 113:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     {
+ 114:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         /* Component is disabled */
+ 115:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         ADC_DelSig_1_backup.enableState = ADC_DelSig_1_DISABLED;
+ 104              		.loc 1 115 0
+ 105 0012 0023     		movs	r3, #0
+ 106 0014 2370     		strb	r3, [r4]
+ 107              	.LBB6:
+ 108              	.LBB7:
+  48:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** }
+ 109              		.loc 1 48 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 5
+
+
+ 110 0016 0B4B     		ldr	r3, .L23+8
+ 111 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 112 001a 6370     		strb	r3, [r4, #1]
+ 113 001c 10BD     		pop	{r4, pc}
+ 114              	.L22:
+ 115              	.LBE7:
+ 116              	.LBE6:
+ 102:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         if((ADC_DelSig_1_DEC_CR_REG & ADC_DelSig_1_DEC_START_CONV) != 0u)
+ 117              		.loc 1 102 0
+ 118 001e 0122     		movs	r2, #1
+ 103:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         if((ADC_DelSig_1_DEC_CR_REG & ADC_DelSig_1_DEC_START_CONV) != 0u)
+ 119              		.loc 1 103 0
+ 120 0020 084B     		ldr	r3, .L23+8
+ 102:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         if((ADC_DelSig_1_DEC_CR_REG & ADC_DelSig_1_DEC_START_CONV) != 0u)
+ 121              		.loc 1 102 0
+ 122 0022 2270     		strb	r2, [r4]
+ 103:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         if((ADC_DelSig_1_DEC_CR_REG & ADC_DelSig_1_DEC_START_CONV) != 0u)
+ 123              		.loc 1 103 0
+ 124 0024 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 125 0026 DB07     		lsls	r3, r3, #31
+ 106:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         }
+ 126              		.loc 1 106 0
+ 127 0028 44BF     		itt	mi
+ 128 002a 0323     		movmi	r3, #3
+ 129 002c 2370     		strbmi	r3, [r4]
+ 110:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     }
+ 130              		.loc 1 110 0
+ 131 002e FFF7FEFF 		bl	ADC_DelSig_1_Stop
+ 132              	.LVL0:
+ 133              	.LBB9:
+ 134              	.LBB8:
+  48:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** }
+ 135              		.loc 1 48 0
+ 136 0032 044B     		ldr	r3, .L23+8
+ 137 0034 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 138 0036 6370     		strb	r3, [r4, #1]
+ 139 0038 10BD     		pop	{r4, pc}
+ 140              	.L24:
+ 141 003a 00BF     		.align	2
+ 142              	.L23:
+ 143 003c AA430040 		.word	1073759146
+ 144 0040 00000000 		.word	.LANCHOR0
+ 145 0044 004E0040 		.word	1073761792
+ 146              	.LBE8:
+ 147              	.LBE9:
+ 148              		.cfi_endproc
+ 149              	.LFE2:
+ 150              		.size	ADC_DelSig_1_Sleep, .-ADC_DelSig_1_Sleep
+ 151              		.section	.text.ADC_DelSig_1_Wakeup,"ax",%progbits
+ 152              		.align	2
+ 153              		.global	ADC_DelSig_1_Wakeup
+ 154              		.thumb
+ 155              		.thumb_func
+ 156              		.type	ADC_DelSig_1_Wakeup, %function
+ 157              	ADC_DelSig_1_Wakeup:
+ 158              	.LFB3:
+ 116:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     }
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 6
+
+
+ 117:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+ 118:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     /* Save the user configuration */
+ 119:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     ADC_DelSig_1_SaveConfig();
+ 120:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** }
+ 121:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+ 122:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+ 123:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** /*******************************************************************************
+ 124:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Function Name: ADC_DelSig_1_Wakeup
+ 125:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** ********************************************************************************
+ 126:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+ 127:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Summary:
+ 128:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  Restores the user configuration and enables the power to the block.
+ 129:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+ 130:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Parameters:
+ 131:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  None
+ 132:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+ 133:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Return:
+ 134:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  None
+ 135:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+ 136:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** * Global variables:
+ 137:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  ADC_DelSig_1_backup:  The structure field 'enableState' is used to
+ 138:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *  restore the enable state of block after wakeup from sleep mode.
+ 139:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *
+ 140:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** *******************************************************************************/
+ 141:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** void ADC_DelSig_1_Wakeup(void) 
+ 142:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** {
+ 159              		.loc 1 142 0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163 0000 10B5     		push	{r4, lr}
+ 164              		.cfi_def_cfa_offset 8
+ 165              		.cfi_offset 4, -8
+ 166              		.cfi_offset 14, -4
+ 167              	.LBB10:
+ 168              	.LBB11:
+  73:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** }
+ 169              		.loc 1 73 0
+ 170 0002 084C     		ldr	r4, .L34
+ 171 0004 084B     		ldr	r3, .L34+4
+ 172 0006 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
+ 173 0008 1A70     		strb	r2, [r3]
+ 174              	.LBE11:
+ 175              	.LBE10:
+ 143:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     /* Restore the configuration */
+ 144:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     ADC_DelSig_1_RestoreConfig();
+ 145:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** 
+ 146:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     /* Enables the component operation */
+ 147:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     if(ADC_DelSig_1_backup.enableState != ADC_DelSig_1_DISABLED)
+ 176              		.loc 1 147 0
+ 177 000a 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 178 000c 03B9     		cbnz	r3, .L33
+ 179              	.L25:
+ 180 000e 10BD     		pop	{r4, pc}
+ 181              	.L33:
+ 148:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     {
+ 149:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         ADC_DelSig_1_Enable();
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 7
+
+
+ 182              		.loc 1 149 0
+ 183 0010 FFF7FEFF 		bl	ADC_DelSig_1_Enable
+ 184              	.LVL1:
+ 150:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         if((ADC_DelSig_1_backup.enableState & ADC_DelSig_1_STARTED) != 0u)
+ 185              		.loc 1 150 0
+ 186 0014 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 187 0016 9B07     		lsls	r3, r3, #30
+ 188 0018 F9D5     		bpl	.L25
+ 151:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         {
+ 152:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****             ADC_DelSig_1_StartConvert();
+ 153:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         }
+ 154:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****     } /* Do nothing if component was disable before */
+ 155:Generated_Source\PSoC5/ADC_DelSig_1_PM.c **** }
+ 189              		.loc 1 155 0
+ 190 001a BDE81040 		pop	{r4, lr}
+ 191              		.cfi_restore 14
+ 192              		.cfi_restore 4
+ 193              		.cfi_def_cfa_offset 0
+ 152:Generated_Source\PSoC5/ADC_DelSig_1_PM.c ****         }
+ 194              		.loc 1 152 0
+ 195 001e FFF7FEBF 		b	ADC_DelSig_1_StartConvert
+ 196              	.LVL2:
+ 197              	.L35:
+ 198 0022 00BF     		.align	2
+ 199              	.L34:
+ 200 0024 00000000 		.word	.LANCHOR0
+ 201 0028 004E0040 		.word	1073761792
+ 202              		.cfi_endproc
+ 203              	.LFE3:
+ 204              		.size	ADC_DelSig_1_Wakeup, .-ADC_DelSig_1_Wakeup
+ 205              		.data
+ 206              		.align	2
+ 207              		.set	.LANCHOR0,. + 0
+ 208              		.type	ADC_DelSig_1_backup, %object
+ 209              		.size	ADC_DelSig_1_backup, 2
+ 210              	ADC_DelSig_1_backup:
+ 211 0000 00       		.byte	0
+ 212 0001 38       		.byte	56
+ 213              		.text
+ 214              	.Letext0:
+ 215              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 216              		.file 3 "Generated_Source\\PSoC5\\ADC_DelSig_1.h"
+ 217              		.section	.debug_info,"",%progbits
+ 218              	.Ldebug_info0:
+ 219 0000 99010000 		.4byte	0x199
+ 220 0004 0400     		.2byte	0x4
+ 221 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 222 000a 04       		.byte	0x4
+ 223 000b 01       		.uleb128 0x1
+ 224 000c 73010000 		.4byte	.LASF26
+ 225 0010 0C       		.byte	0xc
+ 226 0011 BB020000 		.4byte	.LASF27
+ 227 0015 12000000 		.4byte	.LASF28
+ 228 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 229 001d 00000000 		.4byte	0
+ 230 0021 00000000 		.4byte	.Ldebug_line0
+ 231 0025 02       		.uleb128 0x2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 8
+
+
+ 232 0026 01       		.byte	0x1
+ 233 0027 06       		.byte	0x6
+ 234 0028 AF020000 		.4byte	.LASF0
+ 235 002c 02       		.uleb128 0x2
+ 236 002d 01       		.byte	0x1
+ 237 002e 08       		.byte	0x8
+ 238 002f E0000000 		.4byte	.LASF1
+ 239 0033 02       		.uleb128 0x2
+ 240 0034 02       		.byte	0x2
+ 241 0035 05       		.byte	0x5
+ 242 0036 76020000 		.4byte	.LASF2
+ 243 003a 02       		.uleb128 0x2
+ 244 003b 02       		.byte	0x2
+ 245 003c 07       		.byte	0x7
+ 246 003d 9B000000 		.4byte	.LASF3
+ 247 0041 02       		.uleb128 0x2
+ 248 0042 04       		.byte	0x4
+ 249 0043 05       		.byte	0x5
+ 250 0044 80020000 		.4byte	.LASF4
+ 251 0048 02       		.uleb128 0x2
+ 252 0049 04       		.byte	0x4
+ 253 004a 07       		.byte	0x7
+ 254 004b 39010000 		.4byte	.LASF5
+ 255 004f 02       		.uleb128 0x2
+ 256 0050 08       		.byte	0x8
+ 257 0051 05       		.byte	0x5
+ 258 0052 48020000 		.4byte	.LASF6
+ 259 0056 02       		.uleb128 0x2
+ 260 0057 08       		.byte	0x8
+ 261 0058 07       		.byte	0x7
+ 262 0059 14020000 		.4byte	.LASF7
+ 263 005d 03       		.uleb128 0x3
+ 264 005e 04       		.byte	0x4
+ 265 005f 05       		.byte	0x5
+ 266 0060 696E7400 		.ascii	"int\000"
+ 267 0064 02       		.uleb128 0x2
+ 268 0065 04       		.byte	0x4
+ 269 0066 07       		.byte	0x7
+ 270 0067 4B010000 		.4byte	.LASF8
+ 271 006b 04       		.uleb128 0x4
+ 272 006c 06010000 		.4byte	.LASF12
+ 273 0070 02       		.byte	0x2
+ 274 0071 E401     		.2byte	0x1e4
+ 275 0073 2C000000 		.4byte	0x2c
+ 276 0077 02       		.uleb128 0x2
+ 277 0078 04       		.byte	0x4
+ 278 0079 04       		.byte	0x4
+ 279 007a DA000000 		.4byte	.LASF9
+ 280 007e 02       		.uleb128 0x2
+ 281 007f 08       		.byte	0x8
+ 282 0080 04       		.byte	0x4
+ 283 0081 12010000 		.4byte	.LASF10
+ 284 0085 02       		.uleb128 0x2
+ 285 0086 01       		.byte	0x1
+ 286 0087 08       		.byte	0x8
+ 287 0088 56020000 		.4byte	.LASF11
+ 288 008c 04       		.uleb128 0x4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 9
+
+
+ 289 008d EE000000 		.4byte	.LASF13
+ 290 0091 02       		.byte	0x2
+ 291 0092 8E02     		.2byte	0x28e
+ 292 0094 98000000 		.4byte	0x98
+ 293 0098 05       		.uleb128 0x5
+ 294 0099 6B000000 		.4byte	0x6b
+ 295 009d 02       		.uleb128 0x2
+ 296 009e 08       		.byte	0x8
+ 297 009f 04       		.byte	0x4
+ 298 00a0 A3020000 		.4byte	.LASF14
+ 299 00a4 02       		.uleb128 0x2
+ 300 00a5 04       		.byte	0x4
+ 301 00a6 07       		.byte	0x7
+ 302 00a7 3F020000 		.4byte	.LASF15
+ 303 00ab 06       		.uleb128 0x6
+ 304 00ac 02       		.byte	0x2
+ 305 00ad 03       		.byte	0x3
+ 306 00ae 28       		.byte	0x28
+ 307 00af CC000000 		.4byte	0xcc
+ 308 00b3 07       		.uleb128 0x7
+ 309 00b4 2D010000 		.4byte	.LASF16
+ 310 00b8 03       		.byte	0x3
+ 311 00b9 2A       		.byte	0x2a
+ 312 00ba 6B000000 		.4byte	0x6b
+ 313 00be 00       		.byte	0
+ 314 00bf 07       		.uleb128 0x7
+ 315 00c0 0C010000 		.4byte	.LASF17
+ 316 00c4 03       		.byte	0x3
+ 317 00c5 2B       		.byte	0x2b
+ 318 00c6 6B000000 		.4byte	0x6b
+ 319 00ca 01       		.byte	0x1
+ 320 00cb 00       		.byte	0
+ 321 00cc 08       		.uleb128 0x8
+ 322 00cd 58010000 		.4byte	.LASF18
+ 323 00d1 03       		.byte	0x3
+ 324 00d2 2C       		.byte	0x2c
+ 325 00d3 AB000000 		.4byte	0xab
+ 326 00d7 09       		.uleb128 0x9
+ 327 00d8 C2000000 		.4byte	.LASF19
+ 328 00dc 01       		.byte	0x1
+ 329 00dd 2E       		.byte	0x2e
+ 330 00de 01       		.byte	0x1
+ 331 00df 09       		.uleb128 0x9
+ 332 00e0 5B020000 		.4byte	.LASF20
+ 333 00e4 01       		.byte	0x1
+ 334 00e5 47       		.byte	0x47
+ 335 00e6 01       		.byte	0x1
+ 336 00e7 0A       		.uleb128 0xa
+ 337 00e8 D7000000 		.4byte	0xd7
+ 338 00ec 00000000 		.4byte	.LFB0
+ 339 00f0 14000000 		.4byte	.LFE0-.LFB0
+ 340 00f4 01       		.uleb128 0x1
+ 341 00f5 9C       		.byte	0x9c
+ 342 00f6 0A       		.uleb128 0xa
+ 343 00f7 DF000000 		.4byte	0xdf
+ 344 00fb 00000000 		.4byte	.LFB1
+ 345 00ff 14000000 		.4byte	.LFE1-.LFB1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 10
+
+
+ 346 0103 01       		.uleb128 0x1
+ 347 0104 9C       		.byte	0x9c
+ 348 0105 0B       		.uleb128 0xb
+ 349 0106 F3000000 		.4byte	.LASF21
+ 350 010a 01       		.byte	0x1
+ 351 010b 5F       		.byte	0x5f
+ 352 010c 00000000 		.4byte	.LFB2
+ 353 0110 48000000 		.4byte	.LFE2-.LFB2
+ 354 0114 01       		.uleb128 0x1
+ 355 0115 9C       		.byte	0x9c
+ 356 0116 33010000 		.4byte	0x133
+ 357 011a 0C       		.uleb128 0xc
+ 358 011b D7000000 		.4byte	0xd7
+ 359 011f 16000000 		.4byte	.LBB6
+ 360 0123 00000000 		.4byte	.Ldebug_ranges0+0
+ 361 0127 01       		.byte	0x1
+ 362 0128 77       		.byte	0x77
+ 363 0129 0D       		.uleb128 0xd
+ 364 012a 32000000 		.4byte	.LVL0
+ 365 012e 7B010000 		.4byte	0x17b
+ 366 0132 00       		.byte	0
+ 367 0133 0B       		.uleb128 0xb
+ 368 0134 2B020000 		.4byte	.LASF22
+ 369 0138 01       		.byte	0x1
+ 370 0139 8D       		.byte	0x8d
+ 371 013a 00000000 		.4byte	.LFB3
+ 372 013e 2C000000 		.4byte	.LFE3-.LFB3
+ 373 0142 01       		.uleb128 0x1
+ 374 0143 9C       		.byte	0x9c
+ 375 0144 6A010000 		.4byte	0x16a
+ 376 0148 0E       		.uleb128 0xe
+ 377 0149 DF000000 		.4byte	0xdf
+ 378 014d 02000000 		.4byte	.LBB10
+ 379 0151 08000000 		.4byte	.LBE10-.LBB10
+ 380 0155 01       		.byte	0x1
+ 381 0156 90       		.byte	0x90
+ 382 0157 0D       		.uleb128 0xd
+ 383 0158 14000000 		.4byte	.LVL1
+ 384 015c 86010000 		.4byte	0x186
+ 385 0160 0F       		.uleb128 0xf
+ 386 0161 22000000 		.4byte	.LVL2
+ 387 0165 91010000 		.4byte	0x191
+ 388 0169 00       		.byte	0
+ 389 016a 10       		.uleb128 0x10
+ 390 016b 19010000 		.4byte	.LASF29
+ 391 016f 01       		.byte	0x1
+ 392 0170 14       		.byte	0x14
+ 393 0171 CC000000 		.4byte	0xcc
+ 394 0175 05       		.uleb128 0x5
+ 395 0176 03       		.byte	0x3
+ 396 0177 00000000 		.4byte	ADC_DelSig_1_backup
+ 397 017b 11       		.uleb128 0x11
+ 398 017c 00000000 		.4byte	.LASF23
+ 399 0180 00000000 		.4byte	.LASF23
+ 400 0184 03       		.byte	0x3
+ 401 0185 3B       		.byte	0x3b
+ 402 0186 11       		.uleb128 0x11
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 11
+
+
+ 403 0187 AE000000 		.4byte	.LASF24
+ 404 018b AE000000 		.4byte	.LASF24
+ 405 018f 03       		.byte	0x3
+ 406 0190 4D       		.byte	0x4d
+ 407 0191 11       		.uleb128 0x11
+ 408 0192 89020000 		.4byte	.LASF25
+ 409 0196 89020000 		.4byte	.LASF25
+ 410 019a 03       		.byte	0x3
+ 411 019b 3D       		.byte	0x3d
+ 412 019c 00       		.byte	0
+ 413              		.section	.debug_abbrev,"",%progbits
+ 414              	.Ldebug_abbrev0:
+ 415 0000 01       		.uleb128 0x1
+ 416 0001 11       		.uleb128 0x11
+ 417 0002 01       		.byte	0x1
+ 418 0003 25       		.uleb128 0x25
+ 419 0004 0E       		.uleb128 0xe
+ 420 0005 13       		.uleb128 0x13
+ 421 0006 0B       		.uleb128 0xb
+ 422 0007 03       		.uleb128 0x3
+ 423 0008 0E       		.uleb128 0xe
+ 424 0009 1B       		.uleb128 0x1b
+ 425 000a 0E       		.uleb128 0xe
+ 426 000b 55       		.uleb128 0x55
+ 427 000c 17       		.uleb128 0x17
+ 428 000d 11       		.uleb128 0x11
+ 429 000e 01       		.uleb128 0x1
+ 430 000f 10       		.uleb128 0x10
+ 431 0010 17       		.uleb128 0x17
+ 432 0011 00       		.byte	0
+ 433 0012 00       		.byte	0
+ 434 0013 02       		.uleb128 0x2
+ 435 0014 24       		.uleb128 0x24
+ 436 0015 00       		.byte	0
+ 437 0016 0B       		.uleb128 0xb
+ 438 0017 0B       		.uleb128 0xb
+ 439 0018 3E       		.uleb128 0x3e
+ 440 0019 0B       		.uleb128 0xb
+ 441 001a 03       		.uleb128 0x3
+ 442 001b 0E       		.uleb128 0xe
+ 443 001c 00       		.byte	0
+ 444 001d 00       		.byte	0
+ 445 001e 03       		.uleb128 0x3
+ 446 001f 24       		.uleb128 0x24
+ 447 0020 00       		.byte	0
+ 448 0021 0B       		.uleb128 0xb
+ 449 0022 0B       		.uleb128 0xb
+ 450 0023 3E       		.uleb128 0x3e
+ 451 0024 0B       		.uleb128 0xb
+ 452 0025 03       		.uleb128 0x3
+ 453 0026 08       		.uleb128 0x8
+ 454 0027 00       		.byte	0
+ 455 0028 00       		.byte	0
+ 456 0029 04       		.uleb128 0x4
+ 457 002a 16       		.uleb128 0x16
+ 458 002b 00       		.byte	0
+ 459 002c 03       		.uleb128 0x3
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 12
+
+
+ 460 002d 0E       		.uleb128 0xe
+ 461 002e 3A       		.uleb128 0x3a
+ 462 002f 0B       		.uleb128 0xb
+ 463 0030 3B       		.uleb128 0x3b
+ 464 0031 05       		.uleb128 0x5
+ 465 0032 49       		.uleb128 0x49
+ 466 0033 13       		.uleb128 0x13
+ 467 0034 00       		.byte	0
+ 468 0035 00       		.byte	0
+ 469 0036 05       		.uleb128 0x5
+ 470 0037 35       		.uleb128 0x35
+ 471 0038 00       		.byte	0
+ 472 0039 49       		.uleb128 0x49
+ 473 003a 13       		.uleb128 0x13
+ 474 003b 00       		.byte	0
+ 475 003c 00       		.byte	0
+ 476 003d 06       		.uleb128 0x6
+ 477 003e 13       		.uleb128 0x13
+ 478 003f 01       		.byte	0x1
+ 479 0040 0B       		.uleb128 0xb
+ 480 0041 0B       		.uleb128 0xb
+ 481 0042 3A       		.uleb128 0x3a
+ 482 0043 0B       		.uleb128 0xb
+ 483 0044 3B       		.uleb128 0x3b
+ 484 0045 0B       		.uleb128 0xb
+ 485 0046 01       		.uleb128 0x1
+ 486 0047 13       		.uleb128 0x13
+ 487 0048 00       		.byte	0
+ 488 0049 00       		.byte	0
+ 489 004a 07       		.uleb128 0x7
+ 490 004b 0D       		.uleb128 0xd
+ 491 004c 00       		.byte	0
+ 492 004d 03       		.uleb128 0x3
+ 493 004e 0E       		.uleb128 0xe
+ 494 004f 3A       		.uleb128 0x3a
+ 495 0050 0B       		.uleb128 0xb
+ 496 0051 3B       		.uleb128 0x3b
+ 497 0052 0B       		.uleb128 0xb
+ 498 0053 49       		.uleb128 0x49
+ 499 0054 13       		.uleb128 0x13
+ 500 0055 38       		.uleb128 0x38
+ 501 0056 0B       		.uleb128 0xb
+ 502 0057 00       		.byte	0
+ 503 0058 00       		.byte	0
+ 504 0059 08       		.uleb128 0x8
+ 505 005a 16       		.uleb128 0x16
+ 506 005b 00       		.byte	0
+ 507 005c 03       		.uleb128 0x3
+ 508 005d 0E       		.uleb128 0xe
+ 509 005e 3A       		.uleb128 0x3a
+ 510 005f 0B       		.uleb128 0xb
+ 511 0060 3B       		.uleb128 0x3b
+ 512 0061 0B       		.uleb128 0xb
+ 513 0062 49       		.uleb128 0x49
+ 514 0063 13       		.uleb128 0x13
+ 515 0064 00       		.byte	0
+ 516 0065 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 13
+
+
+ 517 0066 09       		.uleb128 0x9
+ 518 0067 2E       		.uleb128 0x2e
+ 519 0068 00       		.byte	0
+ 520 0069 3F       		.uleb128 0x3f
+ 521 006a 19       		.uleb128 0x19
+ 522 006b 03       		.uleb128 0x3
+ 523 006c 0E       		.uleb128 0xe
+ 524 006d 3A       		.uleb128 0x3a
+ 525 006e 0B       		.uleb128 0xb
+ 526 006f 3B       		.uleb128 0x3b
+ 527 0070 0B       		.uleb128 0xb
+ 528 0071 27       		.uleb128 0x27
+ 529 0072 19       		.uleb128 0x19
+ 530 0073 20       		.uleb128 0x20
+ 531 0074 0B       		.uleb128 0xb
+ 532 0075 00       		.byte	0
+ 533 0076 00       		.byte	0
+ 534 0077 0A       		.uleb128 0xa
+ 535 0078 2E       		.uleb128 0x2e
+ 536 0079 00       		.byte	0
+ 537 007a 31       		.uleb128 0x31
+ 538 007b 13       		.uleb128 0x13
+ 539 007c 11       		.uleb128 0x11
+ 540 007d 01       		.uleb128 0x1
+ 541 007e 12       		.uleb128 0x12
+ 542 007f 06       		.uleb128 0x6
+ 543 0080 40       		.uleb128 0x40
+ 544 0081 18       		.uleb128 0x18
+ 545 0082 9742     		.uleb128 0x2117
+ 546 0084 19       		.uleb128 0x19
+ 547 0085 00       		.byte	0
+ 548 0086 00       		.byte	0
+ 549 0087 0B       		.uleb128 0xb
+ 550 0088 2E       		.uleb128 0x2e
+ 551 0089 01       		.byte	0x1
+ 552 008a 3F       		.uleb128 0x3f
+ 553 008b 19       		.uleb128 0x19
+ 554 008c 03       		.uleb128 0x3
+ 555 008d 0E       		.uleb128 0xe
+ 556 008e 3A       		.uleb128 0x3a
+ 557 008f 0B       		.uleb128 0xb
+ 558 0090 3B       		.uleb128 0x3b
+ 559 0091 0B       		.uleb128 0xb
+ 560 0092 27       		.uleb128 0x27
+ 561 0093 19       		.uleb128 0x19
+ 562 0094 11       		.uleb128 0x11
+ 563 0095 01       		.uleb128 0x1
+ 564 0096 12       		.uleb128 0x12
+ 565 0097 06       		.uleb128 0x6
+ 566 0098 40       		.uleb128 0x40
+ 567 0099 18       		.uleb128 0x18
+ 568 009a 9742     		.uleb128 0x2117
+ 569 009c 19       		.uleb128 0x19
+ 570 009d 01       		.uleb128 0x1
+ 571 009e 13       		.uleb128 0x13
+ 572 009f 00       		.byte	0
+ 573 00a0 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 14
+
+
+ 574 00a1 0C       		.uleb128 0xc
+ 575 00a2 1D       		.uleb128 0x1d
+ 576 00a3 00       		.byte	0
+ 577 00a4 31       		.uleb128 0x31
+ 578 00a5 13       		.uleb128 0x13
+ 579 00a6 52       		.uleb128 0x52
+ 580 00a7 01       		.uleb128 0x1
+ 581 00a8 55       		.uleb128 0x55
+ 582 00a9 17       		.uleb128 0x17
+ 583 00aa 58       		.uleb128 0x58
+ 584 00ab 0B       		.uleb128 0xb
+ 585 00ac 59       		.uleb128 0x59
+ 586 00ad 0B       		.uleb128 0xb
+ 587 00ae 00       		.byte	0
+ 588 00af 00       		.byte	0
+ 589 00b0 0D       		.uleb128 0xd
+ 590 00b1 898201   		.uleb128 0x4109
+ 591 00b4 00       		.byte	0
+ 592 00b5 11       		.uleb128 0x11
+ 593 00b6 01       		.uleb128 0x1
+ 594 00b7 31       		.uleb128 0x31
+ 595 00b8 13       		.uleb128 0x13
+ 596 00b9 00       		.byte	0
+ 597 00ba 00       		.byte	0
+ 598 00bb 0E       		.uleb128 0xe
+ 599 00bc 1D       		.uleb128 0x1d
+ 600 00bd 00       		.byte	0
+ 601 00be 31       		.uleb128 0x31
+ 602 00bf 13       		.uleb128 0x13
+ 603 00c0 11       		.uleb128 0x11
+ 604 00c1 01       		.uleb128 0x1
+ 605 00c2 12       		.uleb128 0x12
+ 606 00c3 06       		.uleb128 0x6
+ 607 00c4 58       		.uleb128 0x58
+ 608 00c5 0B       		.uleb128 0xb
+ 609 00c6 59       		.uleb128 0x59
+ 610 00c7 0B       		.uleb128 0xb
+ 611 00c8 00       		.byte	0
+ 612 00c9 00       		.byte	0
+ 613 00ca 0F       		.uleb128 0xf
+ 614 00cb 898201   		.uleb128 0x4109
+ 615 00ce 00       		.byte	0
+ 616 00cf 11       		.uleb128 0x11
+ 617 00d0 01       		.uleb128 0x1
+ 618 00d1 9542     		.uleb128 0x2115
+ 619 00d3 19       		.uleb128 0x19
+ 620 00d4 31       		.uleb128 0x31
+ 621 00d5 13       		.uleb128 0x13
+ 622 00d6 00       		.byte	0
+ 623 00d7 00       		.byte	0
+ 624 00d8 10       		.uleb128 0x10
+ 625 00d9 34       		.uleb128 0x34
+ 626 00da 00       		.byte	0
+ 627 00db 03       		.uleb128 0x3
+ 628 00dc 0E       		.uleb128 0xe
+ 629 00dd 3A       		.uleb128 0x3a
+ 630 00de 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 15
+
+
+ 631 00df 3B       		.uleb128 0x3b
+ 632 00e0 0B       		.uleb128 0xb
+ 633 00e1 49       		.uleb128 0x49
+ 634 00e2 13       		.uleb128 0x13
+ 635 00e3 02       		.uleb128 0x2
+ 636 00e4 18       		.uleb128 0x18
+ 637 00e5 00       		.byte	0
+ 638 00e6 00       		.byte	0
+ 639 00e7 11       		.uleb128 0x11
+ 640 00e8 2E       		.uleb128 0x2e
+ 641 00e9 00       		.byte	0
+ 642 00ea 3F       		.uleb128 0x3f
+ 643 00eb 19       		.uleb128 0x19
+ 644 00ec 3C       		.uleb128 0x3c
+ 645 00ed 19       		.uleb128 0x19
+ 646 00ee 6E       		.uleb128 0x6e
+ 647 00ef 0E       		.uleb128 0xe
+ 648 00f0 03       		.uleb128 0x3
+ 649 00f1 0E       		.uleb128 0xe
+ 650 00f2 3A       		.uleb128 0x3a
+ 651 00f3 0B       		.uleb128 0xb
+ 652 00f4 3B       		.uleb128 0x3b
+ 653 00f5 0B       		.uleb128 0xb
+ 654 00f6 00       		.byte	0
+ 655 00f7 00       		.byte	0
+ 656 00f8 00       		.byte	0
+ 657              		.section	.debug_aranges,"",%progbits
+ 658 0000 34000000 		.4byte	0x34
+ 659 0004 0200     		.2byte	0x2
+ 660 0006 00000000 		.4byte	.Ldebug_info0
+ 661 000a 04       		.byte	0x4
+ 662 000b 00       		.byte	0
+ 663 000c 0000     		.2byte	0
+ 664 000e 0000     		.2byte	0
+ 665 0010 00000000 		.4byte	.LFB0
+ 666 0014 14000000 		.4byte	.LFE0-.LFB0
+ 667 0018 00000000 		.4byte	.LFB1
+ 668 001c 14000000 		.4byte	.LFE1-.LFB1
+ 669 0020 00000000 		.4byte	.LFB2
+ 670 0024 48000000 		.4byte	.LFE2-.LFB2
+ 671 0028 00000000 		.4byte	.LFB3
+ 672 002c 2C000000 		.4byte	.LFE3-.LFB3
+ 673 0030 00000000 		.4byte	0
+ 674 0034 00000000 		.4byte	0
+ 675              		.section	.debug_ranges,"",%progbits
+ 676              	.Ldebug_ranges0:
+ 677 0000 16000000 		.4byte	.LBB6
+ 678 0004 1E000000 		.4byte	.LBE6
+ 679 0008 32000000 		.4byte	.LBB9
+ 680 000c 48000000 		.4byte	.LBE9
+ 681 0010 00000000 		.4byte	0
+ 682 0014 00000000 		.4byte	0
+ 683 0018 00000000 		.4byte	.LFB0
+ 684 001c 14000000 		.4byte	.LFE0
+ 685 0020 00000000 		.4byte	.LFB1
+ 686 0024 14000000 		.4byte	.LFE1
+ 687 0028 00000000 		.4byte	.LFB2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 16
+
+
+ 688 002c 48000000 		.4byte	.LFE2
+ 689 0030 00000000 		.4byte	.LFB3
+ 690 0034 2C000000 		.4byte	.LFE3
+ 691 0038 00000000 		.4byte	0
+ 692 003c 00000000 		.4byte	0
+ 693              		.section	.debug_line,"",%progbits
+ 694              	.Ldebug_line0:
+ 695 0000 D0000000 		.section	.debug_str,"MS",%progbits,1
+ 695      02005E00 
+ 695      00000201 
+ 695      FB0E0D00 
+ 695      01010101 
+ 696              	.LASF23:
+ 697 0000 4144435F 		.ascii	"ADC_DelSig_1_Stop\000"
+ 697      44656C53 
+ 697      69675F31 
+ 697      5F53746F 
+ 697      7000
+ 698              	.LASF28:
+ 699 0012 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 699      726F7062 
+ 699      6F785C44 
+ 699      4556454C 
+ 699      4F504D45 
+ 700 0041 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 700      70656374 
+ 700      72756D20 
+ 700      616E616C 
+ 700      797A6572 
+ 701 0072 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 701      416E616C 
+ 701      797A6572 
+ 701      5C617564 
+ 701      696F5370 
+ 702              	.LASF3:
+ 703 009b 73686F72 		.ascii	"short unsigned int\000"
+ 703      7420756E 
+ 703      7369676E 
+ 703      65642069 
+ 703      6E7400
+ 704              	.LASF24:
+ 705 00ae 4144435F 		.ascii	"ADC_DelSig_1_Enable\000"
+ 705      44656C53 
+ 705      69675F31 
+ 705      5F456E61 
+ 705      626C6500 
+ 706              	.LASF19:
+ 707 00c2 4144435F 		.ascii	"ADC_DelSig_1_SaveConfig\000"
+ 707      44656C53 
+ 707      69675F31 
+ 707      5F536176 
+ 707      65436F6E 
+ 708              	.LASF9:
+ 709 00da 666C6F61 		.ascii	"float\000"
+ 709      7400
+ 710              	.LASF1:
+ 711 00e0 756E7369 		.ascii	"unsigned char\000"
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 17
+
+
+ 711      676E6564 
+ 711      20636861 
+ 711      7200
+ 712              	.LASF13:
+ 713 00ee 72656738 		.ascii	"reg8\000"
+ 713      00
+ 714              	.LASF21:
+ 715 00f3 4144435F 		.ascii	"ADC_DelSig_1_Sleep\000"
+ 715      44656C53 
+ 715      69675F31 
+ 715      5F536C65 
+ 715      657000
+ 716              	.LASF12:
+ 717 0106 75696E74 		.ascii	"uint8\000"
+ 717      3800
+ 718              	.LASF17:
+ 719 010c 64656363 		.ascii	"deccr\000"
+ 719      7200
+ 720              	.LASF10:
+ 721 0112 646F7562 		.ascii	"double\000"
+ 721      6C6500
+ 722              	.LASF29:
+ 723 0119 4144435F 		.ascii	"ADC_DelSig_1_backup\000"
+ 723      44656C53 
+ 723      69675F31 
+ 723      5F626163 
+ 723      6B757000 
+ 724              	.LASF16:
+ 725 012d 656E6162 		.ascii	"enableState\000"
+ 725      6C655374 
+ 725      61746500 
+ 726              	.LASF5:
+ 727 0139 6C6F6E67 		.ascii	"long unsigned int\000"
+ 727      20756E73 
+ 727      69676E65 
+ 727      6420696E 
+ 727      7400
+ 728              	.LASF8:
+ 729 014b 756E7369 		.ascii	"unsigned int\000"
+ 729      676E6564 
+ 729      20696E74 
+ 729      00
+ 730              	.LASF18:
+ 731 0158 4144435F 		.ascii	"ADC_DelSig_1_BACKUP_STRUCT\000"
+ 731      44656C53 
+ 731      69675F31 
+ 731      5F424143 
+ 731      4B55505F 
+ 732              	.LASF26:
+ 733 0173 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 733      43313120 
+ 733      352E342E 
+ 733      31203230 
+ 733      31363036 
+ 734 01a6 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 734      20726576 
+ 734      6973696F 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 18
+
+
+ 734      6E203233 
+ 734      37373135 
+ 735 01d9 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 735      66756E63 
+ 735      74696F6E 
+ 735      2D736563 
+ 735      74696F6E 
+ 736 020c 6E637469 		.ascii	"nctions\000"
+ 736      6F6E7300 
+ 737              	.LASF7:
+ 738 0214 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 738      206C6F6E 
+ 738      6720756E 
+ 738      7369676E 
+ 738      65642069 
+ 739              	.LASF22:
+ 740 022b 4144435F 		.ascii	"ADC_DelSig_1_Wakeup\000"
+ 740      44656C53 
+ 740      69675F31 
+ 740      5F57616B 
+ 740      65757000 
+ 741              	.LASF15:
+ 742 023f 73697A65 		.ascii	"sizetype\000"
+ 742      74797065 
+ 742      00
+ 743              	.LASF6:
+ 744 0248 6C6F6E67 		.ascii	"long long int\000"
+ 744      206C6F6E 
+ 744      6720696E 
+ 744      7400
+ 745              	.LASF11:
+ 746 0256 63686172 		.ascii	"char\000"
+ 746      00
+ 747              	.LASF20:
+ 748 025b 4144435F 		.ascii	"ADC_DelSig_1_RestoreConfig\000"
+ 748      44656C53 
+ 748      69675F31 
+ 748      5F526573 
+ 748      746F7265 
+ 749              	.LASF2:
+ 750 0276 73686F72 		.ascii	"short int\000"
+ 750      7420696E 
+ 750      7400
+ 751              	.LASF4:
+ 752 0280 6C6F6E67 		.ascii	"long int\000"
+ 752      20696E74 
+ 752      00
+ 753              	.LASF25:
+ 754 0289 4144435F 		.ascii	"ADC_DelSig_1_StartConvert\000"
+ 754      44656C53 
+ 754      69675F31 
+ 754      5F537461 
+ 754      7274436F 
+ 755              	.LASF14:
+ 756 02a3 6C6F6E67 		.ascii	"long double\000"
+ 756      20646F75 
+ 756      626C6500 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cchvRlP1.s 			page 19
+
+
+ 757              	.LASF0:
+ 758 02af 7369676E 		.ascii	"signed char\000"
+ 758      65642063 
+ 758      68617200 
+ 759              	.LASF27:
+ 760 02bb 47656E65 		.ascii	"Generated_Source\\PSoC5\\ADC_DelSig_1_PM.c\000"
+ 760      72617465 
+ 760      645F536F 
+ 760      75726365 
+ 760      5C50536F 
+ 761              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,2210 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"DVDAC_1.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.DVDAC_1_Init,"ax",%progbits
+  20              		.align	2
+  21              		.global	DVDAC_1_Init
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	DVDAC_1_Init, %function
+  25              	DVDAC_1_Init:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\DVDAC_1.c"
+   1:Generated_Source\PSoC5/DVDAC_1.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/DVDAC_1.c **** * File Name: DVDAC_1.c
+   3:Generated_Source\PSoC5/DVDAC_1.c **** * Version 2.10
+   4:Generated_Source\PSoC5/DVDAC_1.c **** *
+   5:Generated_Source\PSoC5/DVDAC_1.c **** * Description:
+   6:Generated_Source\PSoC5/DVDAC_1.c **** *  This file provides the source code of APIs for the DVDAC component.
+   7:Generated_Source\PSoC5/DVDAC_1.c **** *
+   8:Generated_Source\PSoC5/DVDAC_1.c **** ********************************************************************************
+   9:Generated_Source\PSoC5/DVDAC_1.c **** * Copyright 2013, Cypress Semiconductor Corporation.  All rights reserved.
+  10:Generated_Source\PSoC5/DVDAC_1.c **** * You may use this file only in accordance with the license, terms, conditions,
+  11:Generated_Source\PSoC5/DVDAC_1.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:Generated_Source\PSoC5/DVDAC_1.c **** * the software package with which this file was provided.
+  13:Generated_Source\PSoC5/DVDAC_1.c **** *******************************************************************************/
+  14:Generated_Source\PSoC5/DVDAC_1.c **** 
+  15:Generated_Source\PSoC5/DVDAC_1.c **** #include "DVDAC_1.h"
+  16:Generated_Source\PSoC5/DVDAC_1.c **** #include "DVDAC_1_VDAC8.h"
+  17:Generated_Source\PSoC5/DVDAC_1.c **** #include "CyDmac.h"
+  18:Generated_Source\PSoC5/DVDAC_1.c **** #include "DVDAC_1_DMA_dma.H"
+  19:Generated_Source\PSoC5/DVDAC_1.c **** 
+  20:Generated_Source\PSoC5/DVDAC_1.c **** #if(DVDAC_1_INTERNAL_CLOCK_USED)
+  21:Generated_Source\PSoC5/DVDAC_1.c ****     #include "DVDAC_1_IntClock.h"
+  22:Generated_Source\PSoC5/DVDAC_1.c **** #endif /* DVDAC_1_INTERNAL_CLOCK_USED */
+  23:Generated_Source\PSoC5/DVDAC_1.c **** 
+  24:Generated_Source\PSoC5/DVDAC_1.c **** 
+  25:Generated_Source\PSoC5/DVDAC_1.c **** static uint8 DVDAC_1_ditheredValues[16u] = {0x80u, 0x80u, 0x80u, 0x80u, 0x80u, 0x80u, 0x80u, 0x80u,
+  26:Generated_Source\PSoC5/DVDAC_1.c ****                                             0x80u, 0x80u, 0x80u, 0x80u, 0x80u, 0x80u};
+  27:Generated_Source\PSoC5/DVDAC_1.c **** 
+  28:Generated_Source\PSoC5/DVDAC_1.c **** 
+  29:Generated_Source\PSoC5/DVDAC_1.c **** uint8 DVDAC_1_initVar = 0u;
+  30:Generated_Source\PSoC5/DVDAC_1.c **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 2
+
+
+  31:Generated_Source\PSoC5/DVDAC_1.c **** static uint8 DVDAC_1_dmaChan;
+  32:Generated_Source\PSoC5/DVDAC_1.c **** static uint8 DVDAC_1_dmaTd = CY_DMA_INVALID_TD;
+  33:Generated_Source\PSoC5/DVDAC_1.c **** 
+  34:Generated_Source\PSoC5/DVDAC_1.c **** static void DVDAC_1_InitDma(void)  ;
+  35:Generated_Source\PSoC5/DVDAC_1.c **** 
+  36:Generated_Source\PSoC5/DVDAC_1.c **** 
+  37:Generated_Source\PSoC5/DVDAC_1.c **** /*******************************************************************************
+  38:Generated_Source\PSoC5/DVDAC_1.c **** * Function Name: DVDAC_1_Init
+  39:Generated_Source\PSoC5/DVDAC_1.c **** ********************************************************************************
+  40:Generated_Source\PSoC5/DVDAC_1.c **** *
+  41:Generated_Source\PSoC5/DVDAC_1.c **** * Summary:
+  42:Generated_Source\PSoC5/DVDAC_1.c **** *  Initializes or restores the component according to the customizer Configure
+  43:Generated_Source\PSoC5/DVDAC_1.c **** *  dialog settings. It is not necessary to call DVDAC_1_Init() because
+  44:Generated_Source\PSoC5/DVDAC_1.c **** *  the DVDAC_1_Start() API calls this function and is the preferred
+  45:Generated_Source\PSoC5/DVDAC_1.c **** *  method to begin component operation.
+  46:Generated_Source\PSoC5/DVDAC_1.c **** *
+  47:Generated_Source\PSoC5/DVDAC_1.c **** * Parameters:
+  48:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+  49:Generated_Source\PSoC5/DVDAC_1.c **** *
+  50:Generated_Source\PSoC5/DVDAC_1.c **** * Return:
+  51:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+  52:Generated_Source\PSoC5/DVDAC_1.c **** *
+  53:Generated_Source\PSoC5/DVDAC_1.c **** * Side Effects:
+  54:Generated_Source\PSoC5/DVDAC_1.c **** *  All registers will be set to values according to the customizer Configure
+  55:Generated_Source\PSoC5/DVDAC_1.c **** *  dialog.
+  56:Generated_Source\PSoC5/DVDAC_1.c **** *
+  57:Generated_Source\PSoC5/DVDAC_1.c **** * Global variables:
+  58:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+  59:Generated_Source\PSoC5/DVDAC_1.c **** *
+  60:Generated_Source\PSoC5/DVDAC_1.c **** *******************************************************************************/
+  61:Generated_Source\PSoC5/DVDAC_1.c **** void DVDAC_1_Init(void) 
+  62:Generated_Source\PSoC5/DVDAC_1.c **** {
+  28              		.loc 1 62 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 70B5     		push	{r4, r5, r6, lr}
+  33              		.cfi_def_cfa_offset 16
+  34              		.cfi_offset 4, -16
+  35              		.cfi_offset 5, -12
+  36              		.cfi_offset 6, -8
+  37              		.cfi_offset 14, -4
+  63:Generated_Source\PSoC5/DVDAC_1.c ****     DVDAC_1_VDAC8_Init();
+  64:Generated_Source\PSoC5/DVDAC_1.c **** 
+  65:Generated_Source\PSoC5/DVDAC_1.c ****     if(CY_DMA_INVALID_TD == DVDAC_1_dmaTd)
+  38              		.loc 1 65 0
+  39 0002 134C     		ldr	r4, .L6
+  63:Generated_Source\PSoC5/DVDAC_1.c ****     DVDAC_1_VDAC8_Init();
+  40              		.loc 1 63 0
+  41 0004 FFF7FEFF 		bl	DVDAC_1_VDAC8_Init
+  42              	.LVL0:
+  43              		.loc 1 65 0
+  44 0008 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  45 000a FF2B     		cmp	r3, #255
+  46 000c 00D0     		beq	.L5
+  47 000e 70BD     		pop	{r4, r5, r6, pc}
+  48              	.L5:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 3
+
+
+  49              	.LBB6:
+  50              	.LBB7:
+  66:Generated_Source\PSoC5/DVDAC_1.c ****     {
+  67:Generated_Source\PSoC5/DVDAC_1.c ****         DVDAC_1_InitDma();
+  68:Generated_Source\PSoC5/DVDAC_1.c ****     }
+  69:Generated_Source\PSoC5/DVDAC_1.c **** }
+  70:Generated_Source\PSoC5/DVDAC_1.c **** 
+  71:Generated_Source\PSoC5/DVDAC_1.c **** 
+  72:Generated_Source\PSoC5/DVDAC_1.c **** /*******************************************************************************
+  73:Generated_Source\PSoC5/DVDAC_1.c **** * Function Name: DVDAC_1_Enable
+  74:Generated_Source\PSoC5/DVDAC_1.c **** ********************************************************************************
+  75:Generated_Source\PSoC5/DVDAC_1.c **** *
+  76:Generated_Source\PSoC5/DVDAC_1.c **** * Summary:
+  77:Generated_Source\PSoC5/DVDAC_1.c **** *  Activates the hardware and begins component operation. It is not necessary to
+  78:Generated_Source\PSoC5/DVDAC_1.c **** *  call DVDAC_1_Enable() because the DVDAC_1_Start() API calls
+  79:Generated_Source\PSoC5/DVDAC_1.c **** *  this function, which is the preferred method to begin component operation.
+  80:Generated_Source\PSoC5/DVDAC_1.c **** *
+  81:Generated_Source\PSoC5/DVDAC_1.c **** * Parameters:
+  82:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+  83:Generated_Source\PSoC5/DVDAC_1.c **** *
+  84:Generated_Source\PSoC5/DVDAC_1.c **** * Return:
+  85:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+  86:Generated_Source\PSoC5/DVDAC_1.c **** *
+  87:Generated_Source\PSoC5/DVDAC_1.c **** * Global variables:
+  88:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+  89:Generated_Source\PSoC5/DVDAC_1.c **** *
+  90:Generated_Source\PSoC5/DVDAC_1.c **** *******************************************************************************/
+  91:Generated_Source\PSoC5/DVDAC_1.c **** void DVDAC_1_Enable(void) 
+  92:Generated_Source\PSoC5/DVDAC_1.c **** {
+  93:Generated_Source\PSoC5/DVDAC_1.c ****     (void) CyDmaChEnable(DVDAC_1_dmaChan, 1u);
+  94:Generated_Source\PSoC5/DVDAC_1.c **** 
+  95:Generated_Source\PSoC5/DVDAC_1.c ****     #if(DVDAC_1_INTERNAL_CLOCK_USED)
+  96:Generated_Source\PSoC5/DVDAC_1.c ****         DVDAC_1_IntClock_Start();
+  97:Generated_Source\PSoC5/DVDAC_1.c ****     #endif /* DVDAC_1_INTERNAL_CLOCK_USED */
+  98:Generated_Source\PSoC5/DVDAC_1.c **** 
+  99:Generated_Source\PSoC5/DVDAC_1.c ****     DVDAC_1_VDAC8_Enable();
+ 100:Generated_Source\PSoC5/DVDAC_1.c **** }
+ 101:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 102:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 103:Generated_Source\PSoC5/DVDAC_1.c **** /*******************************************************************************
+ 104:Generated_Source\PSoC5/DVDAC_1.c **** * Function Name: DVDAC_1_Start
+ 105:Generated_Source\PSoC5/DVDAC_1.c **** ********************************************************************************
+ 106:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 107:Generated_Source\PSoC5/DVDAC_1.c **** * Summary:
+ 108:Generated_Source\PSoC5/DVDAC_1.c **** *  Performs all of the required initialization for the component and enables
+ 109:Generated_Source\PSoC5/DVDAC_1.c **** *  power to the block. The first time the routine is executed, the component is
+ 110:Generated_Source\PSoC5/DVDAC_1.c **** *  initialized to the configured settings. When called to restart the DVDAC
+ 111:Generated_Source\PSoC5/DVDAC_1.c **** *  following a DVDAC_1_Stop() call, the current component parameter
+ 112:Generated_Source\PSoC5/DVDAC_1.c **** *  settings are retained.
+ 113:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 114:Generated_Source\PSoC5/DVDAC_1.c **** * Parameters:
+ 115:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+ 116:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 117:Generated_Source\PSoC5/DVDAC_1.c **** * Return:
+ 118:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+ 119:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 120:Generated_Source\PSoC5/DVDAC_1.c **** * Side Effects:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 4
+
+
+ 121:Generated_Source\PSoC5/DVDAC_1.c **** *  If the DVDAC_1_initVar variable is already set, this function only
+ 122:Generated_Source\PSoC5/DVDAC_1.c **** *  calls the DVDAC_1_Enable() function.
+ 123:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 124:Generated_Source\PSoC5/DVDAC_1.c **** * Global variables:
+ 125:Generated_Source\PSoC5/DVDAC_1.c **** *  DVDAC_1_initVar - indicates whether the DVDAC has been initialized.
+ 126:Generated_Source\PSoC5/DVDAC_1.c **** *  The variable is initialized to 0 and set to 1 the first time DVDAC_Start()
+ 127:Generated_Source\PSoC5/DVDAC_1.c **** *  is called. This allows the component to restart without reinitialization
+ 128:Generated_Source\PSoC5/DVDAC_1.c **** *  after the first call to the DVDAC_1_Start() routine. If
+ 129:Generated_Source\PSoC5/DVDAC_1.c **** *  reinitialization of the component is required, then the
+ 130:Generated_Source\PSoC5/DVDAC_1.c **** *  DVDAC_1_Init() function can be called before the
+ 131:Generated_Source\PSoC5/DVDAC_1.c **** *  DVDAC_1_Start() or DVDAC_1_Enable() function.
+ 132:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 133:Generated_Source\PSoC5/DVDAC_1.c **** *******************************************************************************/
+ 134:Generated_Source\PSoC5/DVDAC_1.c **** void DVDAC_1_Start(void) 
+ 135:Generated_Source\PSoC5/DVDAC_1.c **** {
+ 136:Generated_Source\PSoC5/DVDAC_1.c ****     /* Hardware initiazation only needs to occure the first time */
+ 137:Generated_Source\PSoC5/DVDAC_1.c ****     if(0u == DVDAC_1_initVar)
+ 138:Generated_Source\PSoC5/DVDAC_1.c ****     {
+ 139:Generated_Source\PSoC5/DVDAC_1.c ****         DVDAC_1_Init();
+ 140:Generated_Source\PSoC5/DVDAC_1.c ****         DVDAC_1_initVar = 1u;
+ 141:Generated_Source\PSoC5/DVDAC_1.c ****     }
+ 142:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 143:Generated_Source\PSoC5/DVDAC_1.c ****     DVDAC_1_Enable();
+ 144:Generated_Source\PSoC5/DVDAC_1.c **** }
+ 145:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 146:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 147:Generated_Source\PSoC5/DVDAC_1.c **** /*******************************************************************************
+ 148:Generated_Source\PSoC5/DVDAC_1.c **** * Function Name: DVDAC_1_Stop
+ 149:Generated_Source\PSoC5/DVDAC_1.c **** ********************************************************************************
+ 150:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 151:Generated_Source\PSoC5/DVDAC_1.c **** * Summary:
+ 152:Generated_Source\PSoC5/DVDAC_1.c **** *  Stops the component and turns off the analog blocks in the DVDAC.
+ 153:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 154:Generated_Source\PSoC5/DVDAC_1.c **** * Parameters:
+ 155:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+ 156:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 157:Generated_Source\PSoC5/DVDAC_1.c **** * Return:
+ 158:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+ 159:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 160:Generated_Source\PSoC5/DVDAC_1.c **** * Global variables:
+ 161:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+ 162:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 163:Generated_Source\PSoC5/DVDAC_1.c **** *******************************************************************************/
+ 164:Generated_Source\PSoC5/DVDAC_1.c **** void DVDAC_1_Stop(void) 
+ 165:Generated_Source\PSoC5/DVDAC_1.c **** {
+ 166:Generated_Source\PSoC5/DVDAC_1.c ****     #if(DVDAC_1_INTERNAL_CLOCK_USED)
+ 167:Generated_Source\PSoC5/DVDAC_1.c ****         DVDAC_1_IntClock_Stop();
+ 168:Generated_Source\PSoC5/DVDAC_1.c ****     #endif /* DVDAC_1_INTERNAL_CLOCK_USED */
+ 169:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 170:Generated_Source\PSoC5/DVDAC_1.c ****     (void) CyDmaChDisable(DVDAC_1_dmaChan);
+ 171:Generated_Source\PSoC5/DVDAC_1.c ****     DVDAC_1_VDAC8_Stop();
+ 172:Generated_Source\PSoC5/DVDAC_1.c **** }
+ 173:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 174:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 175:Generated_Source\PSoC5/DVDAC_1.c **** /*******************************************************************************
+ 176:Generated_Source\PSoC5/DVDAC_1.c **** * Function Name: DVDAC_1_SetValue
+ 177:Generated_Source\PSoC5/DVDAC_1.c **** ********************************************************************************
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 5
+
+
+ 178:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 179:Generated_Source\PSoC5/DVDAC_1.c **** * Summary:
+ 180:Generated_Source\PSoC5/DVDAC_1.c **** *  Sets the DVDACs output. The function populates the SRAM array based on the
+ 181:Generated_Source\PSoC5/DVDAC_1.c **** *  value and the resolution setting. That array is then transferred to the
+ 182:Generated_Source\PSoC5/DVDAC_1.c **** *  internal VDAC by DMA.
+ 183:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 184:Generated_Source\PSoC5/DVDAC_1.c **** * Parameters:
+ 185:Generated_Source\PSoC5/DVDAC_1.c **** *  (uint16) value:  The maximum value will be dependent on the resolution
+ 186:Generated_Source\PSoC5/DVDAC_1.c **** *  selected:
+ 187:Generated_Source\PSoC5/DVDAC_1.c **** *   Resolution       Valid range
+ 188:Generated_Source\PSoC5/DVDAC_1.c **** *        9 bits       0x0 - 0x1FE
+ 189:Generated_Source\PSoC5/DVDAC_1.c **** *       10 bits       0x0 - 0x3FC
+ 190:Generated_Source\PSoC5/DVDAC_1.c **** *       11 bits       0x0 - 0x7F8
+ 191:Generated_Source\PSoC5/DVDAC_1.c **** *       12 bits       0x0 - 0xFF0
+ 192:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 193:Generated_Source\PSoC5/DVDAC_1.c **** *  This value includes an integer portion and a fractional portion that varies
+ 194:Generated_Source\PSoC5/DVDAC_1.c **** *  depending on number of bits of resolution:
+ 195:Generated_Source\PSoC5/DVDAC_1.c **** *   - 9-bits:  1 fractional bit
+ 196:Generated_Source\PSoC5/DVDAC_1.c **** *   - 10-bits: 2 fractional bits
+ 197:Generated_Source\PSoC5/DVDAC_1.c **** *   - 11-bits: 3 fractional bits
+ 198:Generated_Source\PSoC5/DVDAC_1.c **** *   - 12-bits: 4 fractional bits
+ 199:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 200:Generated_Source\PSoC5/DVDAC_1.c **** * Return:
+ 201:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+ 202:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 203:Generated_Source\PSoC5/DVDAC_1.c **** * Global variables:
+ 204:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+ 205:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 206:Generated_Source\PSoC5/DVDAC_1.c **** *******************************************************************************/
+ 207:Generated_Source\PSoC5/DVDAC_1.c **** void DVDAC_1_SetValue(uint16 value) 
+ 208:Generated_Source\PSoC5/DVDAC_1.c **** {
+ 209:Generated_Source\PSoC5/DVDAC_1.c ****     uint8  lowCount  = (uint8)(value & DVDAC_1_FRACTIONAL_PORTION_MASK);
+ 210:Generated_Source\PSoC5/DVDAC_1.c ****     uint8 highCount  = (uint8)(value >> DVDAC_1_INTEGER_PORTION_SHIFT);
+ 211:Generated_Source\PSoC5/DVDAC_1.c ****     uint8 i;
+ 212:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 213:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 214:Generated_Source\PSoC5/DVDAC_1.c ****     CYASSERT(value <= DVDAC_1_DVDAC_MAX_VALUE);
+ 215:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 216:Generated_Source\PSoC5/DVDAC_1.c ****     if (DVDAC_1_INTEGER_PORTION_MAX_VALUE == highCount)
+ 217:Generated_Source\PSoC5/DVDAC_1.c ****     {
+ 218:Generated_Source\PSoC5/DVDAC_1.c ****         for (i = 0u; i < DVDAC_1_DITHERED_ARRAY_SIZE; i++)
+ 219:Generated_Source\PSoC5/DVDAC_1.c ****         {
+ 220:Generated_Source\PSoC5/DVDAC_1.c ****             DVDAC_1_ditheredValues[i] = DVDAC_1_INTEGER_PORTION_MAX_VALUE;
+ 221:Generated_Source\PSoC5/DVDAC_1.c ****         }
+ 222:Generated_Source\PSoC5/DVDAC_1.c ****     }
+ 223:Generated_Source\PSoC5/DVDAC_1.c ****     else
+ 224:Generated_Source\PSoC5/DVDAC_1.c ****     {
+ 225:Generated_Source\PSoC5/DVDAC_1.c ****         for(i = 0u; i < DVDAC_1_DITHERED_ARRAY_SIZE; i++)
+ 226:Generated_Source\PSoC5/DVDAC_1.c ****         {
+ 227:Generated_Source\PSoC5/DVDAC_1.c ****             if(i < (DVDAC_1_DITHERED_ARRAY_SIZE - lowCount))
+ 228:Generated_Source\PSoC5/DVDAC_1.c ****             {
+ 229:Generated_Source\PSoC5/DVDAC_1.c ****                 DVDAC_1_ditheredValues[i] = highCount;
+ 230:Generated_Source\PSoC5/DVDAC_1.c ****             }
+ 231:Generated_Source\PSoC5/DVDAC_1.c ****             else
+ 232:Generated_Source\PSoC5/DVDAC_1.c ****             {
+ 233:Generated_Source\PSoC5/DVDAC_1.c ****                 DVDAC_1_ditheredValues[i] = highCount + 1u;
+ 234:Generated_Source\PSoC5/DVDAC_1.c ****             }
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 6
+
+
+ 235:Generated_Source\PSoC5/DVDAC_1.c ****         }
+ 236:Generated_Source\PSoC5/DVDAC_1.c ****     }
+ 237:Generated_Source\PSoC5/DVDAC_1.c **** }
+ 238:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 239:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 240:Generated_Source\PSoC5/DVDAC_1.c **** /*******************************************************************************
+ 241:Generated_Source\PSoC5/DVDAC_1.c **** * Function Name: DVDAC_1_InitDma
+ 242:Generated_Source\PSoC5/DVDAC_1.c **** ********************************************************************************
+ 243:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 244:Generated_Source\PSoC5/DVDAC_1.c **** * Summary:
+ 245:Generated_Source\PSoC5/DVDAC_1.c **** *  Configures a DMA transfer of channel values from memory to VDAC.
+ 246:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 247:Generated_Source\PSoC5/DVDAC_1.c **** * Parameters:
+ 248:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+ 249:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 250:Generated_Source\PSoC5/DVDAC_1.c **** * Return:
+ 251:Generated_Source\PSoC5/DVDAC_1.c **** *  None
+ 252:Generated_Source\PSoC5/DVDAC_1.c **** *
+ 253:Generated_Source\PSoC5/DVDAC_1.c **** *******************************************************************************/
+ 254:Generated_Source\PSoC5/DVDAC_1.c **** static void DVDAC_1_InitDma(void)  
+ 255:Generated_Source\PSoC5/DVDAC_1.c **** {
+ 256:Generated_Source\PSoC5/DVDAC_1.c ****     /***************************************************************************
+ 257:Generated_Source\PSoC5/DVDAC_1.c ****     * Transfers channel values from SRAM to VDAC register. One byte transfer,
+ 258:Generated_Source\PSoC5/DVDAC_1.c ****     * each burst requires a request.
+ 259:Generated_Source\PSoC5/DVDAC_1.c ****     ***************************************************************************/
+ 260:Generated_Source\PSoC5/DVDAC_1.c ****     DVDAC_1_dmaChan = DVDAC_1_DMA_DmaInitialize(
+  51              		.loc 1 260 0
+  52 0010 0121     		movs	r1, #1
+  53 0012 0846     		mov	r0, r1
+  54 0014 4FF48043 		mov	r3, #16384
+  55 0018 41F6FF72 		movw	r2, #8191
+  56 001c FFF7FEFF 		bl	DVDAC_1_DMA_DmaInitialize
+  57              	.LVL1:
+  58 0020 0C4E     		ldr	r6, .L6+4
+ 261:Generated_Source\PSoC5/DVDAC_1.c ****                                     DVDAC_1_DMA_BYTES_PER_BURST,
+ 262:Generated_Source\PSoC5/DVDAC_1.c ****                                     DVDAC_1_DMA_REQUEST_PER_BURST,
+ 263:Generated_Source\PSoC5/DVDAC_1.c ****                                     HI16(DVDAC_1_DMA_SRC_BASE),
+ 264:Generated_Source\PSoC5/DVDAC_1.c ****                                     HI16(DVDAC_1_DMA_DST_BASE));
+ 265:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 266:Generated_Source\PSoC5/DVDAC_1.c ****     DVDAC_1_dmaTd = CyDmaTdAllocate();
+  59              		.loc 1 266 0
+  60 0022 2546     		mov	r5, r4
+ 260:Generated_Source\PSoC5/DVDAC_1.c ****                                     DVDAC_1_DMA_BYTES_PER_BURST,
+  61              		.loc 1 260 0
+  62 0024 3070     		strb	r0, [r6]
+  63              		.loc 1 266 0
+  64 0026 FFF7FEFF 		bl	CyDmaTdAllocate
+  65              	.LVL2:
+ 267:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 268:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 269:Generated_Source\PSoC5/DVDAC_1.c ****     /***************************************************************************
+ 270:Generated_Source\PSoC5/DVDAC_1.c ****     * One TD looping on itself, increment the source address, but not the
+ 271:Generated_Source\PSoC5/DVDAC_1.c ****     * destination address.
+ 272:Generated_Source\PSoC5/DVDAC_1.c ****     ***************************************************************************/
+ 273:Generated_Source\PSoC5/DVDAC_1.c ****     (void) CyDmaTdSetConfiguration( DVDAC_1_dmaTd,
+  66              		.loc 1 273 0
+  67 002a 0123     		movs	r3, #1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 7
+
+
+ 266:Generated_Source\PSoC5/DVDAC_1.c **** 
+  68              		.loc 1 266 0
+  69 002c 05F8040B 		strb	r0, [r5], #4
+  70 0030 0246     		mov	r2, r0
+  71              		.loc 1 273 0
+  72 0032 1021     		movs	r1, #16
+  73 0034 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+  74              	.LVL3:
+ 274:Generated_Source\PSoC5/DVDAC_1.c ****                                     DVDAC_1_DITHERED_ARRAY_SIZE,
+ 275:Generated_Source\PSoC5/DVDAC_1.c ****                                     DVDAC_1_dmaTd,
+ 276:Generated_Source\PSoC5/DVDAC_1.c ****                                     (uint8) CY_DMA_TD_INC_SRC_ADR);
+ 277:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 278:Generated_Source\PSoC5/DVDAC_1.c ****     /* Transfers the value for each channel from memory to VDAC */
+ 279:Generated_Source\PSoC5/DVDAC_1.c ****     (void) CyDmaTdSetAddress(   DVDAC_1_dmaTd,
+  75              		.loc 1 279 0
+  76 0038 A9B2     		uxth	r1, r5
+  77 003a 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+  78 003c 45F68232 		movw	r2, #23426
+  79 0040 FFF7FEFF 		bl	CyDmaTdSetAddress
+  80              	.LVL4:
+ 280:Generated_Source\PSoC5/DVDAC_1.c ****                                 LO16((uint32)DVDAC_1_ditheredValues),
+ 281:Generated_Source\PSoC5/DVDAC_1.c ****                                 LO16((uint32)DVDAC_1_VDAC8_Data_PTR));
+ 282:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 283:Generated_Source\PSoC5/DVDAC_1.c ****     (void) CyDmaChSetInitialTd(DVDAC_1_dmaChan, DVDAC_1_dmaTd);
+  81              		.loc 1 283 0
+  82 0044 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+  83 0046 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+  84              	.LBE7:
+  85              	.LBE6:
+  69:Generated_Source\PSoC5/DVDAC_1.c **** 
+  86              		.loc 1 69 0
+  87 0048 BDE87040 		pop	{r4, r5, r6, lr}
+  88              		.cfi_restore 14
+  89              		.cfi_restore 6
+  90              		.cfi_restore 5
+  91              		.cfi_restore 4
+  92              		.cfi_def_cfa_offset 0
+  93              	.LBB9:
+  94              	.LBB8:
+  95              		.loc 1 283 0
+  96 004c FFF7FEBF 		b	CyDmaChSetInitialTd
+  97              	.LVL5:
+  98              	.L7:
+  99              		.align	2
+ 100              	.L6:
+ 101 0050 00000000 		.word	.LANCHOR0
+ 102 0054 00000000 		.word	.LANCHOR1
+ 103              	.LBE8:
+ 104              	.LBE9:
+ 105              		.cfi_endproc
+ 106              	.LFE0:
+ 107              		.size	DVDAC_1_Init, .-DVDAC_1_Init
+ 108              		.section	.text.DVDAC_1_Enable,"ax",%progbits
+ 109              		.align	2
+ 110              		.global	DVDAC_1_Enable
+ 111              		.thumb
+ 112              		.thumb_func
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 8
+
+
+ 113              		.type	DVDAC_1_Enable, %function
+ 114              	DVDAC_1_Enable:
+ 115              	.LFB1:
+  92:Generated_Source\PSoC5/DVDAC_1.c ****     (void) CyDmaChEnable(DVDAC_1_dmaChan, 1u);
+ 116              		.loc 1 92 0
+ 117              		.cfi_startproc
+ 118              		@ args = 0, pretend = 0, frame = 0
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120 0000 08B5     		push	{r3, lr}
+ 121              		.cfi_def_cfa_offset 8
+ 122              		.cfi_offset 3, -8
+ 123              		.cfi_offset 14, -4
+  93:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 124              		.loc 1 93 0
+ 125 0002 054B     		ldr	r3, .L10
+ 126 0004 0121     		movs	r1, #1
+ 127 0006 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 128 0008 FFF7FEFF 		bl	CyDmaChEnable
+ 129              	.LVL6:
+  96:Generated_Source\PSoC5/DVDAC_1.c ****     #endif /* DVDAC_1_INTERNAL_CLOCK_USED */
+ 130              		.loc 1 96 0
+ 131 000c FFF7FEFF 		bl	DVDAC_1_IntClock_Start
+ 132              	.LVL7:
+ 100:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 133              		.loc 1 100 0
+ 134 0010 BDE80840 		pop	{r3, lr}
+ 135              		.cfi_restore 14
+ 136              		.cfi_restore 3
+ 137              		.cfi_def_cfa_offset 0
+  99:Generated_Source\PSoC5/DVDAC_1.c **** }
+ 138              		.loc 1 99 0
+ 139 0014 FFF7FEBF 		b	DVDAC_1_VDAC8_Enable
+ 140              	.LVL8:
+ 141              	.L11:
+ 142              		.align	2
+ 143              	.L10:
+ 144 0018 00000000 		.word	.LANCHOR1
+ 145              		.cfi_endproc
+ 146              	.LFE1:
+ 147              		.size	DVDAC_1_Enable, .-DVDAC_1_Enable
+ 148              		.section	.text.DVDAC_1_Start,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	DVDAC_1_Start
+ 151              		.thumb
+ 152              		.thumb_func
+ 153              		.type	DVDAC_1_Start, %function
+ 154              	DVDAC_1_Start:
+ 155              	.LFB2:
+ 135:Generated_Source\PSoC5/DVDAC_1.c ****     /* Hardware initiazation only needs to occure the first time */
+ 156              		.loc 1 135 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 0
+ 159              		@ frame_needed = 0, uses_anonymous_args = 0
+ 160 0000 70B5     		push	{r4, r5, r6, lr}
+ 161              		.cfi_def_cfa_offset 16
+ 162              		.cfi_offset 4, -16
+ 163              		.cfi_offset 5, -12
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 9
+
+
+ 164              		.cfi_offset 6, -8
+ 165              		.cfi_offset 14, -4
+ 137:Generated_Source\PSoC5/DVDAC_1.c ****     {
+ 166              		.loc 1 137 0
+ 167 0002 1A4C     		ldr	r4, .L18
+ 168 0004 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 169 0006 4BB1     		cbz	r3, .L16
+ 170              	.L13:
+ 171              	.LBB16:
+ 172              	.LBB17:
+  93:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 173              		.loc 1 93 0
+ 174 0008 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 175 000a 0121     		movs	r1, #1
+ 176 000c FFF7FEFF 		bl	CyDmaChEnable
+ 177              	.LVL9:
+  96:Generated_Source\PSoC5/DVDAC_1.c ****     #endif /* DVDAC_1_INTERNAL_CLOCK_USED */
+ 178              		.loc 1 96 0
+ 179 0010 FFF7FEFF 		bl	DVDAC_1_IntClock_Start
+ 180              	.LVL10:
+ 181              	.LBE17:
+ 182              	.LBE16:
+ 144:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 183              		.loc 1 144 0
+ 184 0014 BDE87040 		pop	{r4, r5, r6, lr}
+ 185              		.cfi_remember_state
+ 186              		.cfi_restore 14
+ 187              		.cfi_restore 6
+ 188              		.cfi_restore 5
+ 189              		.cfi_restore 4
+ 190              		.cfi_def_cfa_offset 0
+ 191              	.LBB19:
+ 192              	.LBB18:
+  99:Generated_Source\PSoC5/DVDAC_1.c **** }
+ 193              		.loc 1 99 0
+ 194 0018 FFF7FEBF 		b	DVDAC_1_VDAC8_Enable
+ 195              	.LVL11:
+ 196              	.L16:
+ 197              		.cfi_restore_state
+ 198              	.LBE18:
+ 199              	.LBE19:
+ 200              	.LBB20:
+ 201              	.LBB21:
+  65:Generated_Source\PSoC5/DVDAC_1.c ****     {
+ 202              		.loc 1 65 0
+ 203 001c 144D     		ldr	r5, .L18+4
+  63:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 204              		.loc 1 63 0
+ 205 001e FFF7FEFF 		bl	DVDAC_1_VDAC8_Init
+ 206              	.LVL12:
+  65:Generated_Source\PSoC5/DVDAC_1.c ****     {
+ 207              		.loc 1 65 0
+ 208 0022 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 209 0024 FF2B     		cmp	r3, #255
+ 210 0026 02D0     		beq	.L17
+ 211              	.L14:
+ 212              	.LBE21:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 10
+
+
+ 213              	.LBE20:
+ 140:Generated_Source\PSoC5/DVDAC_1.c ****     }
+ 214              		.loc 1 140 0
+ 215 0028 0123     		movs	r3, #1
+ 216 002a 6370     		strb	r3, [r4, #1]
+ 217 002c ECE7     		b	.L13
+ 218              	.L17:
+ 219              	.LBB25:
+ 220              	.LBB24:
+ 221              	.LBB22:
+ 222              	.LBB23:
+ 260:Generated_Source\PSoC5/DVDAC_1.c ****                                     DVDAC_1_DMA_BYTES_PER_BURST,
+ 223              		.loc 1 260 0
+ 224 002e 0121     		movs	r1, #1
+ 225 0030 0846     		mov	r0, r1
+ 226 0032 4FF48043 		mov	r3, #16384
+ 227 0036 41F6FF72 		movw	r2, #8191
+ 228 003a FFF7FEFF 		bl	DVDAC_1_DMA_DmaInitialize
+ 229              	.LVL13:
+ 266:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 230              		.loc 1 266 0
+ 231 003e 2E46     		mov	r6, r5
+ 260:Generated_Source\PSoC5/DVDAC_1.c ****                                     DVDAC_1_DMA_BYTES_PER_BURST,
+ 232              		.loc 1 260 0
+ 233 0040 2070     		strb	r0, [r4]
+ 266:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 234              		.loc 1 266 0
+ 235 0042 FFF7FEFF 		bl	CyDmaTdAllocate
+ 236              	.LVL14:
+ 273:Generated_Source\PSoC5/DVDAC_1.c ****                                     DVDAC_1_DITHERED_ARRAY_SIZE,
+ 237              		.loc 1 273 0
+ 238 0046 0123     		movs	r3, #1
+ 266:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 239              		.loc 1 266 0
+ 240 0048 06F8040B 		strb	r0, [r6], #4
+ 241 004c 0246     		mov	r2, r0
+ 273:Generated_Source\PSoC5/DVDAC_1.c ****                                     DVDAC_1_DITHERED_ARRAY_SIZE,
+ 242              		.loc 1 273 0
+ 243 004e 1021     		movs	r1, #16
+ 244 0050 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 245              	.LVL15:
+ 279:Generated_Source\PSoC5/DVDAC_1.c ****                                 LO16((uint32)DVDAC_1_ditheredValues),
+ 246              		.loc 1 279 0
+ 247 0054 B1B2     		uxth	r1, r6
+ 248 0056 45F68232 		movw	r2, #23426
+ 249 005a 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 250 005c FFF7FEFF 		bl	CyDmaTdSetAddress
+ 251              	.LVL16:
+ 252              		.loc 1 283 0
+ 253 0060 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
+ 254 0062 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 255 0064 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 256              	.LVL17:
+ 257 0068 DEE7     		b	.L14
+ 258              	.L19:
+ 259 006a 00BF     		.align	2
+ 260              	.L18:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 11
+
+
+ 261 006c 00000000 		.word	.LANCHOR1
+ 262 0070 00000000 		.word	.LANCHOR0
+ 263              	.LBE23:
+ 264              	.LBE22:
+ 265              	.LBE24:
+ 266              	.LBE25:
+ 267              		.cfi_endproc
+ 268              	.LFE2:
+ 269              		.size	DVDAC_1_Start, .-DVDAC_1_Start
+ 270              		.section	.text.DVDAC_1_Stop,"ax",%progbits
+ 271              		.align	2
+ 272              		.global	DVDAC_1_Stop
+ 273              		.thumb
+ 274              		.thumb_func
+ 275              		.type	DVDAC_1_Stop, %function
+ 276              	DVDAC_1_Stop:
+ 277              	.LFB3:
+ 165:Generated_Source\PSoC5/DVDAC_1.c ****     #if(DVDAC_1_INTERNAL_CLOCK_USED)
+ 278              		.loc 1 165 0
+ 279              		.cfi_startproc
+ 280              		@ args = 0, pretend = 0, frame = 0
+ 281              		@ frame_needed = 0, uses_anonymous_args = 0
+ 282 0000 08B5     		push	{r3, lr}
+ 283              		.cfi_def_cfa_offset 8
+ 284              		.cfi_offset 3, -8
+ 285              		.cfi_offset 14, -4
+ 167:Generated_Source\PSoC5/DVDAC_1.c ****     #endif /* DVDAC_1_INTERNAL_CLOCK_USED */
+ 286              		.loc 1 167 0
+ 287 0002 FFF7FEFF 		bl	DVDAC_1_IntClock_Stop
+ 288              	.LVL18:
+ 170:Generated_Source\PSoC5/DVDAC_1.c ****     DVDAC_1_VDAC8_Stop();
+ 289              		.loc 1 170 0
+ 290 0006 044B     		ldr	r3, .L22
+ 291 0008 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 292 000a FFF7FEFF 		bl	CyDmaChDisable
+ 293              	.LVL19:
+ 172:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 294              		.loc 1 172 0
+ 295 000e BDE80840 		pop	{r3, lr}
+ 296              		.cfi_restore 14
+ 297              		.cfi_restore 3
+ 298              		.cfi_def_cfa_offset 0
+ 171:Generated_Source\PSoC5/DVDAC_1.c **** }
+ 299              		.loc 1 171 0
+ 300 0012 FFF7FEBF 		b	DVDAC_1_VDAC8_Stop
+ 301              	.LVL20:
+ 302              	.L23:
+ 303 0016 00BF     		.align	2
+ 304              	.L22:
+ 305 0018 00000000 		.word	.LANCHOR1
+ 306              		.cfi_endproc
+ 307              	.LFE3:
+ 308              		.size	DVDAC_1_Stop, .-DVDAC_1_Stop
+ 309              		.section	.text.DVDAC_1_SetValue,"ax",%progbits
+ 310              		.align	2
+ 311              		.global	DVDAC_1_SetValue
+ 312              		.thumb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 12
+
+
+ 313              		.thumb_func
+ 314              		.type	DVDAC_1_SetValue, %function
+ 315              	DVDAC_1_SetValue:
+ 316              	.LFB4:
+ 208:Generated_Source\PSoC5/DVDAC_1.c ****     uint8  lowCount  = (uint8)(value & DVDAC_1_FRACTIONAL_PORTION_MASK);
+ 317              		.loc 1 208 0
+ 318              		.cfi_startproc
+ 319              		@ args = 0, pretend = 0, frame = 16
+ 320              		@ frame_needed = 0, uses_anonymous_args = 0
+ 321              	.LVL21:
+ 322 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 323              		.cfi_def_cfa_offset 36
+ 324              		.cfi_offset 4, -36
+ 325              		.cfi_offset 5, -32
+ 326              		.cfi_offset 6, -28
+ 327              		.cfi_offset 7, -24
+ 328              		.cfi_offset 8, -20
+ 329              		.cfi_offset 9, -16
+ 330              		.cfi_offset 10, -12
+ 331              		.cfi_offset 11, -8
+ 332              		.cfi_offset 14, -4
+ 214:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 333              		.loc 1 214 0
+ 334 0004 B0F57F6F 		cmp	r0, #4080
+ 208:Generated_Source\PSoC5/DVDAC_1.c ****     uint8  lowCount  = (uint8)(value & DVDAC_1_FRACTIONAL_PORTION_MASK);
+ 335              		.loc 1 208 0
+ 336 0008 85B0     		sub	sp, sp, #20
+ 337              		.cfi_def_cfa_offset 56
+ 208:Generated_Source\PSoC5/DVDAC_1.c ****     uint8  lowCount  = (uint8)(value & DVDAC_1_FRACTIONAL_PORTION_MASK);
+ 338              		.loc 1 208 0
+ 339 000a 0546     		mov	r5, r0
+ 340              	.LVL22:
+ 210:Generated_Source\PSoC5/DVDAC_1.c ****     uint8 i;
+ 341              		.loc 1 210 0
+ 342 000c C0F30714 		ubfx	r4, r0, #4, #8
+ 343              	.LVL23:
+ 214:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 344              		.loc 1 214 0
+ 345 0010 6DD8     		bhi	.L29
+ 216:Generated_Source\PSoC5/DVDAC_1.c ****     {
+ 346              		.loc 1 216 0
+ 347 0012 FF2C     		cmp	r4, #255
+ 348 0014 70D0     		beq	.L30
+ 349              	.LVL24:
+ 350              	.L26:
+ 351 0016 05F00F03 		and	r3, r5, #15
+ 233:Generated_Source\PSoC5/DVDAC_1.c ****             }
+ 352              		.loc 1 233 0
+ 353 001a 621C     		adds	r2, r4, #1
+ 354 001c D2B2     		uxtb	r2, r2
+ 355 001e C3F11003 		rsb	r3, r3, #16
+ 356 0022 082B     		cmp	r3, #8
+ 357 0024 D4BF     		ite	le
+ 358 0026 1146     		movle	r1, r2
+ 359 0028 2146     		movgt	r1, r4
+ 360 002a 092B     		cmp	r3, #9
+ 361 002c D4BF     		ite	le
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 13
+
+
+ 362 002e 1046     		movle	r0, r2
+ 363 0030 2046     		movgt	r0, r4
+ 364 0032 0A2B     		cmp	r3, #10
+ 365 0034 D4BF     		ite	le
+ 366 0036 1546     		movle	r5, r2
+ 367 0038 2546     		movgt	r5, r4
+ 368 003a 0091     		str	r1, [sp]
+ 369 003c 0B2B     		cmp	r3, #11
+ 370 003e D4BF     		ite	le
+ 371 0040 1146     		movle	r1, r2
+ 372 0042 2146     		movgt	r1, r4
+ 373 0044 002B     		cmp	r3, #0
+ 374 0046 D4BF     		ite	le
+ 375 0048 9346     		movle	fp, r2
+ 376 004a A346     		movgt	fp, r4
+ 377 004c 012B     		cmp	r3, #1
+ 378 004e D4BF     		ite	le
+ 379 0050 9246     		movle	r10, r2
+ 380 0052 A246     		movgt	r10, r4
+ 381 0054 022B     		cmp	r3, #2
+ 382 0056 D4BF     		ite	le
+ 383 0058 9146     		movle	r9, r2
+ 384 005a A146     		movgt	r9, r4
+ 385 005c 032B     		cmp	r3, #3
+ 386 005e D4BF     		ite	le
+ 387 0060 9046     		movle	r8, r2
+ 388 0062 A046     		movgt	r8, r4
+ 389 0064 042B     		cmp	r3, #4
+ 390 0066 D4BF     		ite	le
+ 391 0068 9446     		movle	ip, r2
+ 392 006a A446     		movgt	ip, r4
+ 393 006c 052B     		cmp	r3, #5
+ 394 006e D4BF     		ite	le
+ 395 0070 9646     		movle	lr, r2
+ 396 0072 A646     		movgt	lr, r4
+ 397 0074 062B     		cmp	r3, #6
+ 398 0076 D4BF     		ite	le
+ 399 0078 1746     		movle	r7, r2
+ 400 007a 2746     		movgt	r7, r4
+ 401 007c 072B     		cmp	r3, #7
+ 402 007e D4BF     		ite	le
+ 403 0080 1646     		movle	r6, r2
+ 404 0082 2646     		movgt	r6, r4
+ 405 0084 0190     		str	r0, [sp, #4]
+ 406 0086 0295     		str	r5, [sp, #8]
+ 407 0088 0D2B     		cmp	r3, #13
+ 408 008a D4BF     		ite	le
+ 409 008c 1046     		movle	r0, r2
+ 410 008e 2046     		movgt	r0, r4
+ 411 0090 0C2B     		cmp	r3, #12
+ 412 0092 D4BF     		ite	le
+ 413 0094 1546     		movle	r5, r2
+ 414 0096 2546     		movgt	r5, r4
+ 415 0098 0391     		str	r1, [sp, #12]
+ 416 009a 0E2B     		cmp	r3, #14
+ 417 009c D4BF     		ite	le
+ 418 009e 1146     		movle	r1, r2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 14
+
+
+ 419 00a0 2146     		movgt	r1, r4
+ 420 00a2 0F2B     		cmp	r3, #15
+ 421 00a4 D4BF     		ite	le
+ 422 00a6 1346     		movle	r3, r2
+ 423 00a8 2346     		movgt	r3, r4
+ 424 00aa 184A     		ldr	r2, .L31
+ 425 00ac 9DF80040 		ldrb	r4, [sp]	@ zero_extendqisi2
+ 426              	.LVL25:
+ 427 00b0 82F804B0 		strb	fp, [r2, #4]
+ 428 00b4 1473     		strb	r4, [r2, #12]
+ 429 00b6 9DF80440 		ldrb	r4, [sp, #4]	@ zero_extendqisi2
+ 430 00ba 82F805A0 		strb	r10, [r2, #5]
+ 431 00be 5473     		strb	r4, [r2, #13]
+ 432 00c0 9DF80840 		ldrb	r4, [sp, #8]	@ zero_extendqisi2
+ 433 00c4 82F80690 		strb	r9, [r2, #6]
+ 434 00c8 9473     		strb	r4, [r2, #14]
+ 435 00ca 9DF80C40 		ldrb	r4, [sp, #12]	@ zero_extendqisi2
+ 436 00ce 82F80780 		strb	r8, [r2, #7]
+ 437 00d2 82F808C0 		strb	ip, [r2, #8]
+ 438 00d6 82F809E0 		strb	lr, [r2, #9]
+ 439 00da 9772     		strb	r7, [r2, #10]
+ 440 00dc D672     		strb	r6, [r2, #11]
+ 441 00de D473     		strb	r4, [r2, #15]
+ 442 00e0 1574     		strb	r5, [r2, #16]
+ 443 00e2 5074     		strb	r0, [r2, #17]
+ 444 00e4 9174     		strb	r1, [r2, #18]
+ 445 00e6 D374     		strb	r3, [r2, #19]
+ 446              	.LVL26:
+ 237:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 447              		.loc 1 237 0
+ 448 00e8 05B0     		add	sp, sp, #20
+ 449              		.cfi_remember_state
+ 450              		.cfi_def_cfa_offset 36
+ 451              		@ sp needed
+ 452 00ea BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 453              	.LVL27:
+ 454              	.L29:
+ 455              		.cfi_restore_state
+ 214:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 456              		.loc 1 214 0 discriminator 1
+ 457 00ee 0020     		movs	r0, #0
+ 458              	.LVL28:
+ 459 00f0 FFF7FEFF 		bl	CyHalt
+ 460              	.LVL29:
+ 216:Generated_Source\PSoC5/DVDAC_1.c ****     {
+ 461              		.loc 1 216 0 discriminator 1
+ 462 00f4 FF2C     		cmp	r4, #255
+ 463 00f6 8ED1     		bne	.L26
+ 464              	.L30:
+ 465 00f8 0449     		ldr	r1, .L31
+ 466 00fa 4FF0FF33 		mov	r3, #-1
+ 467 00fe 4B60     		str	r3, [r1, #4]
+ 468 0100 8B60     		str	r3, [r1, #8]
+ 469 0102 CB60     		str	r3, [r1, #12]
+ 470 0104 0B61     		str	r3, [r1, #16]
+ 237:Generated_Source\PSoC5/DVDAC_1.c **** 
+ 471              		.loc 1 237 0 discriminator 3
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 15
+
+
+ 472 0106 05B0     		add	sp, sp, #20
+ 473              		.cfi_def_cfa_offset 36
+ 474              		@ sp needed
+ 475 0108 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 476              	.LVL30:
+ 477              	.L32:
+ 478              		.align	2
+ 479              	.L31:
+ 480 010c 00000000 		.word	.LANCHOR0
+ 481              		.cfi_endproc
+ 482              	.LFE4:
+ 483              		.size	DVDAC_1_SetValue, .-DVDAC_1_SetValue
+ 484              		.global	DVDAC_1_initVar
+ 485              		.data
+ 486              		.align	2
+ 487              		.set	.LANCHOR0,. + 0
+ 488              		.type	DVDAC_1_dmaTd, %object
+ 489              		.size	DVDAC_1_dmaTd, 1
+ 490              	DVDAC_1_dmaTd:
+ 491 0000 FF       		.byte	-1
+ 492 0001 000000   		.space	3
+ 493              		.type	DVDAC_1_ditheredValues, %object
+ 494              		.size	DVDAC_1_ditheredValues, 16
+ 495              	DVDAC_1_ditheredValues:
+ 496 0004 80       		.byte	-128
+ 497 0005 80       		.byte	-128
+ 498 0006 80       		.byte	-128
+ 499 0007 80       		.byte	-128
+ 500 0008 80       		.byte	-128
+ 501 0009 80       		.byte	-128
+ 502 000a 80       		.byte	-128
+ 503 000b 80       		.byte	-128
+ 504 000c 80       		.byte	-128
+ 505 000d 80       		.byte	-128
+ 506 000e 80       		.byte	-128
+ 507 000f 80       		.byte	-128
+ 508 0010 80       		.byte	-128
+ 509 0011 80       		.byte	-128
+ 510 0012 80       		.byte	-128
+ 511 0013 80       		.byte	-128
+ 512              		.bss
+ 513              		.set	.LANCHOR1,. + 0
+ 514              		.type	DVDAC_1_dmaChan, %object
+ 515              		.size	DVDAC_1_dmaChan, 1
+ 516              	DVDAC_1_dmaChan:
+ 517 0000 00       		.space	1
+ 518              		.type	DVDAC_1_initVar, %object
+ 519              		.size	DVDAC_1_initVar, 1
+ 520              	DVDAC_1_initVar:
+ 521 0001 00       		.space	1
+ 522              		.text
+ 523              	.Letext0:
+ 524              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 525              		.file 3 "Generated_Source\\PSoC5\\DVDAC_1_DMA_dma.H"
+ 526              		.file 4 "Generated_Source\\PSoC5\\CyDmac.h"
+ 527              		.file 5 "Generated_Source\\PSoC5\\DVDAC_1_VDAC8.h"
+ 528              		.file 6 "Generated_Source\\PSoC5\\DVDAC_1_IntClock.h"
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 16
+
+
+ 529              		.file 7 "Generated_Source\\PSoC5\\CyLib.h"
+ 530              		.section	.debug_info,"",%progbits
+ 531              	.Ldebug_info0:
+ 532 0000 07040000 		.4byte	0x407
+ 533 0004 0400     		.2byte	0x4
+ 534 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 535 000a 04       		.byte	0x4
+ 536 000b 01       		.uleb128 0x1
+ 537 000c EE010000 		.4byte	.LASF41
+ 538 0010 0C       		.byte	0xc
+ 539 0011 37030000 		.4byte	.LASF42
+ 540 0015 27000000 		.4byte	.LASF43
+ 541 0019 48000000 		.4byte	.Ldebug_ranges0+0x48
+ 542 001d 00000000 		.4byte	0
+ 543 0021 00000000 		.4byte	.Ldebug_line0
+ 544 0025 02       		.uleb128 0x2
+ 545 0026 01       		.byte	0x1
+ 546 0027 06       		.byte	0x6
+ 547 0028 82030000 		.4byte	.LASF0
+ 548 002c 02       		.uleb128 0x2
+ 549 002d 01       		.byte	0x1
+ 550 002e 08       		.byte	0x8
+ 551 002f 75010000 		.4byte	.LASF1
+ 552 0033 02       		.uleb128 0x2
+ 553 0034 02       		.byte	0x2
+ 554 0035 05       		.byte	0x5
+ 555 0036 16030000 		.4byte	.LASF2
+ 556 003a 02       		.uleb128 0x2
+ 557 003b 02       		.byte	0x2
+ 558 003c 07       		.byte	0x7
+ 559 003d C6000000 		.4byte	.LASF3
+ 560 0041 02       		.uleb128 0x2
+ 561 0042 04       		.byte	0x4
+ 562 0043 05       		.byte	0x5
+ 563 0044 6D030000 		.4byte	.LASF4
+ 564 0048 02       		.uleb128 0x2
+ 565 0049 04       		.byte	0x4
+ 566 004a 07       		.byte	0x7
+ 567 004b C5010000 		.4byte	.LASF5
+ 568 004f 02       		.uleb128 0x2
+ 569 0050 08       		.byte	0x8
+ 570 0051 05       		.byte	0x5
+ 571 0052 CC020000 		.4byte	.LASF6
+ 572 0056 02       		.uleb128 0x2
+ 573 0057 08       		.byte	0x8
+ 574 0058 07       		.byte	0x7
+ 575 0059 8F020000 		.4byte	.LASF7
+ 576 005d 03       		.uleb128 0x3
+ 577 005e 04       		.byte	0x4
+ 578 005f 05       		.byte	0x5
+ 579 0060 696E7400 		.ascii	"int\000"
+ 580 0064 02       		.uleb128 0x2
+ 581 0065 04       		.byte	0x4
+ 582 0066 07       		.byte	0x7
+ 583 0067 D7010000 		.4byte	.LASF8
+ 584 006b 04       		.uleb128 0x4
+ 585 006c 6F010000 		.4byte	.LASF9
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 17
+
+
+ 586 0070 02       		.byte	0x2
+ 587 0071 E401     		.2byte	0x1e4
+ 588 0073 2C000000 		.4byte	0x2c
+ 589 0077 04       		.uleb128 0x4
+ 590 0078 A6010000 		.4byte	.LASF10
+ 591 007c 02       		.byte	0x2
+ 592 007d E501     		.2byte	0x1e5
+ 593 007f 3A000000 		.4byte	0x3a
+ 594 0083 04       		.uleb128 0x4
+ 595 0084 AD010000 		.4byte	.LASF11
+ 596 0088 02       		.byte	0x2
+ 597 0089 E601     		.2byte	0x1e6
+ 598 008b 48000000 		.4byte	0x48
+ 599 008f 02       		.uleb128 0x2
+ 600 0090 04       		.byte	0x4
+ 601 0091 04       		.byte	0x4
+ 602 0092 0D010000 		.4byte	.LASF12
+ 603 0096 02       		.uleb128 0x2
+ 604 0097 08       		.byte	0x8
+ 605 0098 04       		.byte	0x4
+ 606 0099 83010000 		.4byte	.LASF13
+ 607 009d 02       		.uleb128 0x2
+ 608 009e 01       		.byte	0x1
+ 609 009f 08       		.byte	0x8
+ 610 00a0 EC020000 		.4byte	.LASF14
+ 611 00a4 04       		.uleb128 0x4
+ 612 00a5 45010000 		.4byte	.LASF15
+ 613 00a9 02       		.byte	0x2
+ 614 00aa 8E02     		.2byte	0x28e
+ 615 00ac B0000000 		.4byte	0xb0
+ 616 00b0 05       		.uleb128 0x5
+ 617 00b1 6B000000 		.4byte	0x6b
+ 618 00b5 02       		.uleb128 0x2
+ 619 00b6 08       		.byte	0x8
+ 620 00b7 04       		.byte	0x4
+ 621 00b8 76030000 		.4byte	.LASF16
+ 622 00bc 02       		.uleb128 0x2
+ 623 00bd 04       		.byte	0x4
+ 624 00be 07       		.byte	0x7
+ 625 00bf C3020000 		.4byte	.LASF17
+ 626 00c3 06       		.uleb128 0x6
+ 627 00c4 00000000 		.4byte	.LASF18
+ 628 00c8 01       		.byte	0x1
+ 629 00c9 3D       		.byte	0x3d
+ 630 00ca 01       		.byte	0x1
+ 631 00cb 07       		.uleb128 0x7
+ 632 00cc 35010000 		.4byte	.LASF44
+ 633 00d0 01       		.byte	0x1
+ 634 00d1 FE       		.byte	0xfe
+ 635 00d2 01       		.byte	0x1
+ 636 00d3 08       		.uleb128 0x8
+ 637 00d4 C3000000 		.4byte	0xc3
+ 638 00d8 00000000 		.4byte	.LFB0
+ 639 00dc 58000000 		.4byte	.LFE0-.LFB0
+ 640 00e0 01       		.uleb128 0x1
+ 641 00e1 9C       		.byte	0x9c
+ 642 00e2 6F010000 		.4byte	0x16f
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 18
+
+
+ 643 00e6 09       		.uleb128 0x9
+ 644 00e7 CB000000 		.4byte	0xcb
+ 645 00eb 10000000 		.4byte	.LBB6
+ 646 00ef 00000000 		.4byte	.Ldebug_ranges0+0
+ 647 00f3 01       		.byte	0x1
+ 648 00f4 43       		.byte	0x43
+ 649 00f5 65010000 		.4byte	0x165
+ 650 00f9 0A       		.uleb128 0xa
+ 651 00fa 20000000 		.4byte	.LVL1
+ 652 00fe 7B030000 		.4byte	0x37b
+ 653 0102 1F010000 		.4byte	0x11f
+ 654 0106 0B       		.uleb128 0xb
+ 655 0107 01       		.uleb128 0x1
+ 656 0108 50       		.byte	0x50
+ 657 0109 01       		.uleb128 0x1
+ 658 010a 31       		.byte	0x31
+ 659 010b 0B       		.uleb128 0xb
+ 660 010c 01       		.uleb128 0x1
+ 661 010d 51       		.byte	0x51
+ 662 010e 01       		.uleb128 0x1
+ 663 010f 31       		.byte	0x31
+ 664 0110 0B       		.uleb128 0xb
+ 665 0111 01       		.uleb128 0x1
+ 666 0112 52       		.byte	0x52
+ 667 0113 03       		.uleb128 0x3
+ 668 0114 0A       		.byte	0xa
+ 669 0115 FF1F     		.2byte	0x1fff
+ 670 0117 0B       		.uleb128 0xb
+ 671 0118 01       		.uleb128 0x1
+ 672 0119 53       		.byte	0x53
+ 673 011a 03       		.uleb128 0x3
+ 674 011b 0A       		.byte	0xa
+ 675 011c 0040     		.2byte	0x4000
+ 676 011e 00       		.byte	0
+ 677 011f 0C       		.uleb128 0xc
+ 678 0120 2A000000 		.4byte	.LVL2
+ 679 0124 86030000 		.4byte	0x386
+ 680 0128 0A       		.uleb128 0xa
+ 681 0129 38000000 		.4byte	.LVL3
+ 682 012d 91030000 		.4byte	0x391
+ 683 0131 40010000 		.4byte	0x140
+ 684 0135 0B       		.uleb128 0xb
+ 685 0136 01       		.uleb128 0x1
+ 686 0137 51       		.byte	0x51
+ 687 0138 01       		.uleb128 0x1
+ 688 0139 40       		.byte	0x40
+ 689 013a 0B       		.uleb128 0xb
+ 690 013b 01       		.uleb128 0x1
+ 691 013c 53       		.byte	0x53
+ 692 013d 01       		.uleb128 0x1
+ 693 013e 31       		.byte	0x31
+ 694 013f 00       		.byte	0
+ 695 0140 0A       		.uleb128 0xa
+ 696 0141 44000000 		.4byte	.LVL4
+ 697 0145 9C030000 		.4byte	0x39c
+ 698 0149 5B010000 		.4byte	0x15b
+ 699 014d 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 19
+
+
+ 700 014e 01       		.uleb128 0x1
+ 701 014f 51       		.byte	0x51
+ 702 0150 02       		.uleb128 0x2
+ 703 0151 75       		.byte	0x75
+ 704 0152 00       		.sleb128 0
+ 705 0153 0B       		.uleb128 0xb
+ 706 0154 01       		.uleb128 0x1
+ 707 0155 52       		.byte	0x52
+ 708 0156 03       		.uleb128 0x3
+ 709 0157 0A       		.byte	0xa
+ 710 0158 825B     		.2byte	0x5b82
+ 711 015a 00       		.byte	0
+ 712 015b 0D       		.uleb128 0xd
+ 713 015c 50000000 		.4byte	.LVL5
+ 714 0160 A7030000 		.4byte	0x3a7
+ 715 0164 00       		.byte	0
+ 716 0165 0C       		.uleb128 0xc
+ 717 0166 08000000 		.4byte	.LVL0
+ 718 016a B2030000 		.4byte	0x3b2
+ 719 016e 00       		.byte	0
+ 720 016f 06       		.uleb128 0x6
+ 721 0170 26010000 		.4byte	.LASF19
+ 722 0174 01       		.byte	0x1
+ 723 0175 5B       		.byte	0x5b
+ 724 0176 01       		.byte	0x1
+ 725 0177 08       		.uleb128 0x8
+ 726 0178 6F010000 		.4byte	0x16f
+ 727 017c 00000000 		.4byte	.LFB1
+ 728 0180 1C000000 		.4byte	.LFE1-.LFB1
+ 729 0184 01       		.uleb128 0x1
+ 730 0185 9C       		.byte	0x9c
+ 731 0186 B0010000 		.4byte	0x1b0
+ 732 018a 0A       		.uleb128 0xa
+ 733 018b 0C000000 		.4byte	.LVL6
+ 734 018f BD030000 		.4byte	0x3bd
+ 735 0193 9D010000 		.4byte	0x19d
+ 736 0197 0B       		.uleb128 0xb
+ 737 0198 01       		.uleb128 0x1
+ 738 0199 51       		.byte	0x51
+ 739 019a 01       		.uleb128 0x1
+ 740 019b 31       		.byte	0x31
+ 741 019c 00       		.byte	0
+ 742 019d 0C       		.uleb128 0xc
+ 743 019e 10000000 		.4byte	.LVL7
+ 744 01a2 C8030000 		.4byte	0x3c8
+ 745 01a6 0D       		.uleb128 0xd
+ 746 01a7 18000000 		.4byte	.LVL8
+ 747 01ab D3030000 		.4byte	0x3d3
+ 748 01af 00       		.byte	0
+ 749 01b0 0E       		.uleb128 0xe
+ 750 01b1 08030000 		.4byte	.LASF20
+ 751 01b5 01       		.byte	0x1
+ 752 01b6 86       		.byte	0x86
+ 753 01b7 00000000 		.4byte	.LFB2
+ 754 01bb 74000000 		.4byte	.LFE2-.LFB2
+ 755 01bf 01       		.uleb128 0x1
+ 756 01c0 9C       		.byte	0x9c
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 20
+
+
+ 757 01c1 97020000 		.4byte	0x297
+ 758 01c5 09       		.uleb128 0x9
+ 759 01c6 6F010000 		.4byte	0x16f
+ 760 01ca 08000000 		.4byte	.LBB16
+ 761 01ce 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 762 01d2 01       		.byte	0x1
+ 763 01d3 8F       		.byte	0x8f
+ 764 01d4 FE010000 		.4byte	0x1fe
+ 765 01d8 0A       		.uleb128 0xa
+ 766 01d9 10000000 		.4byte	.LVL9
+ 767 01dd BD030000 		.4byte	0x3bd
+ 768 01e1 EB010000 		.4byte	0x1eb
+ 769 01e5 0B       		.uleb128 0xb
+ 770 01e6 01       		.uleb128 0x1
+ 771 01e7 51       		.byte	0x51
+ 772 01e8 01       		.uleb128 0x1
+ 773 01e9 31       		.byte	0x31
+ 774 01ea 00       		.byte	0
+ 775 01eb 0C       		.uleb128 0xc
+ 776 01ec 14000000 		.4byte	.LVL10
+ 777 01f0 C8030000 		.4byte	0x3c8
+ 778 01f4 0D       		.uleb128 0xd
+ 779 01f5 1C000000 		.4byte	.LVL11
+ 780 01f9 D3030000 		.4byte	0x3d3
+ 781 01fd 00       		.byte	0
+ 782 01fe 0F       		.uleb128 0xf
+ 783 01ff C3000000 		.4byte	0xc3
+ 784 0203 1C000000 		.4byte	.LBB20
+ 785 0207 30000000 		.4byte	.Ldebug_ranges0+0x30
+ 786 020b 01       		.byte	0x1
+ 787 020c 8B       		.byte	0x8b
+ 788 020d 10       		.uleb128 0x10
+ 789 020e CB000000 		.4byte	0xcb
+ 790 0212 2E000000 		.4byte	.LBB22
+ 791 0216 46000000 		.4byte	.LBE22-.LBB22
+ 792 021a 01       		.byte	0x1
+ 793 021b 43       		.byte	0x43
+ 794 021c 8C020000 		.4byte	0x28c
+ 795 0220 0A       		.uleb128 0xa
+ 796 0221 3E000000 		.4byte	.LVL13
+ 797 0225 7B030000 		.4byte	0x37b
+ 798 0229 46020000 		.4byte	0x246
+ 799 022d 0B       		.uleb128 0xb
+ 800 022e 01       		.uleb128 0x1
+ 801 022f 50       		.byte	0x50
+ 802 0230 01       		.uleb128 0x1
+ 803 0231 31       		.byte	0x31
+ 804 0232 0B       		.uleb128 0xb
+ 805 0233 01       		.uleb128 0x1
+ 806 0234 51       		.byte	0x51
+ 807 0235 01       		.uleb128 0x1
+ 808 0236 31       		.byte	0x31
+ 809 0237 0B       		.uleb128 0xb
+ 810 0238 01       		.uleb128 0x1
+ 811 0239 52       		.byte	0x52
+ 812 023a 03       		.uleb128 0x3
+ 813 023b 0A       		.byte	0xa
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 21
+
+
+ 814 023c FF1F     		.2byte	0x1fff
+ 815 023e 0B       		.uleb128 0xb
+ 816 023f 01       		.uleb128 0x1
+ 817 0240 53       		.byte	0x53
+ 818 0241 03       		.uleb128 0x3
+ 819 0242 0A       		.byte	0xa
+ 820 0243 0040     		.2byte	0x4000
+ 821 0245 00       		.byte	0
+ 822 0246 0C       		.uleb128 0xc
+ 823 0247 46000000 		.4byte	.LVL14
+ 824 024b 86030000 		.4byte	0x386
+ 825 024f 0A       		.uleb128 0xa
+ 826 0250 54000000 		.4byte	.LVL15
+ 827 0254 91030000 		.4byte	0x391
+ 828 0258 67020000 		.4byte	0x267
+ 829 025c 0B       		.uleb128 0xb
+ 830 025d 01       		.uleb128 0x1
+ 831 025e 51       		.byte	0x51
+ 832 025f 01       		.uleb128 0x1
+ 833 0260 40       		.byte	0x40
+ 834 0261 0B       		.uleb128 0xb
+ 835 0262 01       		.uleb128 0x1
+ 836 0263 53       		.byte	0x53
+ 837 0264 01       		.uleb128 0x1
+ 838 0265 31       		.byte	0x31
+ 839 0266 00       		.byte	0
+ 840 0267 0A       		.uleb128 0xa
+ 841 0268 60000000 		.4byte	.LVL16
+ 842 026c 9C030000 		.4byte	0x39c
+ 843 0270 82020000 		.4byte	0x282
+ 844 0274 0B       		.uleb128 0xb
+ 845 0275 01       		.uleb128 0x1
+ 846 0276 51       		.byte	0x51
+ 847 0277 02       		.uleb128 0x2
+ 848 0278 76       		.byte	0x76
+ 849 0279 00       		.sleb128 0
+ 850 027a 0B       		.uleb128 0xb
+ 851 027b 01       		.uleb128 0x1
+ 852 027c 52       		.byte	0x52
+ 853 027d 03       		.uleb128 0x3
+ 854 027e 0A       		.byte	0xa
+ 855 027f 825B     		.2byte	0x5b82
+ 856 0281 00       		.byte	0
+ 857 0282 0C       		.uleb128 0xc
+ 858 0283 68000000 		.4byte	.LVL17
+ 859 0287 A7030000 		.4byte	0x3a7
+ 860 028b 00       		.byte	0
+ 861 028c 0C       		.uleb128 0xc
+ 862 028d 22000000 		.4byte	.LVL12
+ 863 0291 B2030000 		.4byte	0x3b2
+ 864 0295 00       		.byte	0
+ 865 0296 00       		.byte	0
+ 866 0297 0E       		.uleb128 0xe
+ 867 0298 62010000 		.4byte	.LASF21
+ 868 029c 01       		.byte	0x1
+ 869 029d A4       		.byte	0xa4
+ 870 029e 00000000 		.4byte	.LFB3
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 22
+
+
+ 871 02a2 1C000000 		.4byte	.LFE3-.LFB3
+ 872 02a6 01       		.uleb128 0x1
+ 873 02a7 9C       		.byte	0x9c
+ 874 02a8 C8020000 		.4byte	0x2c8
+ 875 02ac 0C       		.uleb128 0xc
+ 876 02ad 06000000 		.4byte	.LVL18
+ 877 02b1 DE030000 		.4byte	0x3de
+ 878 02b5 0C       		.uleb128 0xc
+ 879 02b6 0E000000 		.4byte	.LVL19
+ 880 02ba E9030000 		.4byte	0x3e9
+ 881 02be 0D       		.uleb128 0xd
+ 882 02bf 16000000 		.4byte	.LVL20
+ 883 02c3 F4030000 		.4byte	0x3f4
+ 884 02c7 00       		.byte	0
+ 885 02c8 0E       		.uleb128 0xe
+ 886 02c9 B4010000 		.4byte	.LASF22
+ 887 02cd 01       		.byte	0x1
+ 888 02ce CF       		.byte	0xcf
+ 889 02cf 00000000 		.4byte	.LFB4
+ 890 02d3 10010000 		.4byte	.LFE4-.LFB4
+ 891 02d7 01       		.uleb128 0x1
+ 892 02d8 9C       		.byte	0x9c
+ 893 02d9 27030000 		.4byte	0x327
+ 894 02dd 11       		.uleb128 0x11
+ 895 02de B0000000 		.4byte	.LASF45
+ 896 02e2 01       		.byte	0x1
+ 897 02e3 CF       		.byte	0xcf
+ 898 02e4 77000000 		.4byte	0x77
+ 899 02e8 00000000 		.4byte	.LLST0
+ 900 02ec 12       		.uleb128 0x12
+ 901 02ed B0030000 		.4byte	.LASF23
+ 902 02f1 01       		.byte	0x1
+ 903 02f2 D1       		.byte	0xd1
+ 904 02f3 6B000000 		.4byte	0x6b
+ 905 02f7 3A000000 		.4byte	.LLST1
+ 906 02fb 12       		.uleb128 0x12
+ 907 02fc E4010000 		.4byte	.LASF24
+ 908 0300 01       		.byte	0x1
+ 909 0301 D2       		.byte	0xd2
+ 910 0302 6B000000 		.4byte	0x6b
+ 911 0306 80000000 		.4byte	.LLST2
+ 912 030a 13       		.uleb128 0x13
+ 913 030b 6900     		.ascii	"i\000"
+ 914 030d 01       		.byte	0x1
+ 915 030e D3       		.byte	0xd3
+ 916 030f 6B000000 		.4byte	0x6b
+ 917 0313 9E000000 		.4byte	.LLST3
+ 918 0317 14       		.uleb128 0x14
+ 919 0318 F4000000 		.4byte	.LVL29
+ 920 031c FF030000 		.4byte	0x3ff
+ 921 0320 0B       		.uleb128 0xb
+ 922 0321 01       		.uleb128 0x1
+ 923 0322 50       		.byte	0x50
+ 924 0323 01       		.uleb128 0x1
+ 925 0324 30       		.byte	0x30
+ 926 0325 00       		.byte	0
+ 927 0326 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 23
+
+
+ 928 0327 15       		.uleb128 0x15
+ 929 0328 6B000000 		.4byte	0x6b
+ 930 032c 37030000 		.4byte	0x337
+ 931 0330 16       		.uleb128 0x16
+ 932 0331 BC000000 		.4byte	0xbc
+ 933 0335 0F       		.byte	0xf
+ 934 0336 00       		.byte	0
+ 935 0337 17       		.uleb128 0x17
+ 936 0338 F1020000 		.4byte	.LASF25
+ 937 033c 01       		.byte	0x1
+ 938 033d 19       		.byte	0x19
+ 939 033e 27030000 		.4byte	0x327
+ 940 0342 05       		.uleb128 0x5
+ 941 0343 03       		.byte	0x3
+ 942 0344 04000000 		.4byte	DVDAC_1_ditheredValues
+ 943 0348 17       		.uleb128 0x17
+ 944 0349 FD000000 		.4byte	.LASF26
+ 945 034d 01       		.byte	0x1
+ 946 034e 1F       		.byte	0x1f
+ 947 034f 6B000000 		.4byte	0x6b
+ 948 0353 05       		.uleb128 0x5
+ 949 0354 03       		.byte	0x3
+ 950 0355 00000000 		.4byte	DVDAC_1_dmaChan
+ 951 0359 17       		.uleb128 0x17
+ 952 035a 8A010000 		.4byte	.LASF27
+ 953 035e 01       		.byte	0x1
+ 954 035f 20       		.byte	0x20
+ 955 0360 6B000000 		.4byte	0x6b
+ 956 0364 05       		.uleb128 0x5
+ 957 0365 03       		.byte	0x3
+ 958 0366 00000000 		.4byte	DVDAC_1_dmaTd
+ 959 036a 18       		.uleb128 0x18
+ 960 036b B6000000 		.4byte	.LASF46
+ 961 036f 01       		.byte	0x1
+ 962 0370 1D       		.byte	0x1d
+ 963 0371 6B000000 		.4byte	0x6b
+ 964 0375 05       		.uleb128 0x5
+ 965 0376 03       		.byte	0x3
+ 966 0377 00000000 		.4byte	DVDAC_1_initVar
+ 967 037b 19       		.uleb128 0x19
+ 968 037c 0D000000 		.4byte	.LASF28
+ 969 0380 0D000000 		.4byte	.LASF28
+ 970 0384 03       		.byte	0x3
+ 971 0385 1E       		.byte	0x1e
+ 972 0386 19       		.uleb128 0x19
+ 973 0387 ED000000 		.4byte	.LASF29
+ 974 038b ED000000 		.4byte	.LASF29
+ 975 038f 04       		.byte	0x4
+ 976 0390 38       		.byte	0x38
+ 977 0391 19       		.uleb128 0x19
+ 978 0392 4A010000 		.4byte	.LASF30
+ 979 0396 4A010000 		.4byte	.LASF30
+ 980 039a 04       		.byte	0x4
+ 981 039b 3B       		.byte	0x3b
+ 982 039c 19       		.uleb128 0x19
+ 983 039d DA020000 		.4byte	.LASF31
+ 984 03a1 DA020000 		.4byte	.LASF31
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 24
+
+
+ 985 03a5 04       		.byte	0x4
+ 986 03a6 3F       		.byte	0x3f
+ 987 03a7 19       		.uleb128 0x19
+ 988 03a8 D9000000 		.4byte	.LASF32
+ 989 03ac D9000000 		.4byte	.LASF32
+ 990 03b0 04       		.byte	0x4
+ 991 03b1 2F       		.byte	0x2f
+ 992 03b2 19       		.uleb128 0x19
+ 993 03b3 9D030000 		.4byte	.LASF33
+ 994 03b7 9D030000 		.4byte	.LASF33
+ 995 03bb 05       		.byte	0x5
+ 996 03bc 39       		.byte	0x39
+ 997 03bd 19       		.uleb128 0x19
+ 998 03be 98010000 		.4byte	.LASF34
+ 999 03c2 98010000 		.4byte	.LASF34
+ 1000 03c6 04       		.byte	0x4
+ 1001 03c7 29       		.byte	0x29
+ 1002 03c8 19       		.uleb128 0x19
+ 1003 03c9 20030000 		.4byte	.LASF35
+ 1004 03cd 20030000 		.4byte	.LASF35
+ 1005 03d1 06       		.byte	0x6
+ 1006 03d2 27       		.byte	0x27
+ 1007 03d3 19       		.uleb128 0x19
+ 1008 03d4 58030000 		.4byte	.LASF36
+ 1009 03d8 58030000 		.4byte	.LASF36
+ 1010 03dc 05       		.byte	0x5
+ 1011 03dd 3A       		.byte	0x3a
+ 1012 03de 19       		.uleb128 0x19
+ 1013 03df A6020000 		.4byte	.LASF37
+ 1014 03e3 A6020000 		.4byte	.LASF37
+ 1015 03e7 06       		.byte	0x6
+ 1016 03e8 28       		.byte	0x28
+ 1017 03e9 19       		.uleb128 0x19
+ 1018 03ea 8E030000 		.4byte	.LASF38
+ 1019 03ee 8E030000 		.4byte	.LASF38
+ 1020 03f2 04       		.byte	0x4
+ 1021 03f3 2A       		.byte	0x2a
+ 1022 03f4 19       		.uleb128 0x19
+ 1023 03f5 13010000 		.4byte	.LASF39
+ 1024 03f9 13010000 		.4byte	.LASF39
+ 1025 03fd 05       		.byte	0x5
+ 1026 03fe 34       		.byte	0x34
+ 1027 03ff 19       		.uleb128 0x19
+ 1028 0400 BC020000 		.4byte	.LASF40
+ 1029 0404 BC020000 		.4byte	.LASF40
+ 1030 0408 07       		.byte	0x7
+ 1031 0409 7F       		.byte	0x7f
+ 1032 040a 00       		.byte	0
+ 1033              		.section	.debug_abbrev,"",%progbits
+ 1034              	.Ldebug_abbrev0:
+ 1035 0000 01       		.uleb128 0x1
+ 1036 0001 11       		.uleb128 0x11
+ 1037 0002 01       		.byte	0x1
+ 1038 0003 25       		.uleb128 0x25
+ 1039 0004 0E       		.uleb128 0xe
+ 1040 0005 13       		.uleb128 0x13
+ 1041 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 25
+
+
+ 1042 0007 03       		.uleb128 0x3
+ 1043 0008 0E       		.uleb128 0xe
+ 1044 0009 1B       		.uleb128 0x1b
+ 1045 000a 0E       		.uleb128 0xe
+ 1046 000b 55       		.uleb128 0x55
+ 1047 000c 17       		.uleb128 0x17
+ 1048 000d 11       		.uleb128 0x11
+ 1049 000e 01       		.uleb128 0x1
+ 1050 000f 10       		.uleb128 0x10
+ 1051 0010 17       		.uleb128 0x17
+ 1052 0011 00       		.byte	0
+ 1053 0012 00       		.byte	0
+ 1054 0013 02       		.uleb128 0x2
+ 1055 0014 24       		.uleb128 0x24
+ 1056 0015 00       		.byte	0
+ 1057 0016 0B       		.uleb128 0xb
+ 1058 0017 0B       		.uleb128 0xb
+ 1059 0018 3E       		.uleb128 0x3e
+ 1060 0019 0B       		.uleb128 0xb
+ 1061 001a 03       		.uleb128 0x3
+ 1062 001b 0E       		.uleb128 0xe
+ 1063 001c 00       		.byte	0
+ 1064 001d 00       		.byte	0
+ 1065 001e 03       		.uleb128 0x3
+ 1066 001f 24       		.uleb128 0x24
+ 1067 0020 00       		.byte	0
+ 1068 0021 0B       		.uleb128 0xb
+ 1069 0022 0B       		.uleb128 0xb
+ 1070 0023 3E       		.uleb128 0x3e
+ 1071 0024 0B       		.uleb128 0xb
+ 1072 0025 03       		.uleb128 0x3
+ 1073 0026 08       		.uleb128 0x8
+ 1074 0027 00       		.byte	0
+ 1075 0028 00       		.byte	0
+ 1076 0029 04       		.uleb128 0x4
+ 1077 002a 16       		.uleb128 0x16
+ 1078 002b 00       		.byte	0
+ 1079 002c 03       		.uleb128 0x3
+ 1080 002d 0E       		.uleb128 0xe
+ 1081 002e 3A       		.uleb128 0x3a
+ 1082 002f 0B       		.uleb128 0xb
+ 1083 0030 3B       		.uleb128 0x3b
+ 1084 0031 05       		.uleb128 0x5
+ 1085 0032 49       		.uleb128 0x49
+ 1086 0033 13       		.uleb128 0x13
+ 1087 0034 00       		.byte	0
+ 1088 0035 00       		.byte	0
+ 1089 0036 05       		.uleb128 0x5
+ 1090 0037 35       		.uleb128 0x35
+ 1091 0038 00       		.byte	0
+ 1092 0039 49       		.uleb128 0x49
+ 1093 003a 13       		.uleb128 0x13
+ 1094 003b 00       		.byte	0
+ 1095 003c 00       		.byte	0
+ 1096 003d 06       		.uleb128 0x6
+ 1097 003e 2E       		.uleb128 0x2e
+ 1098 003f 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 26
+
+
+ 1099 0040 3F       		.uleb128 0x3f
+ 1100 0041 19       		.uleb128 0x19
+ 1101 0042 03       		.uleb128 0x3
+ 1102 0043 0E       		.uleb128 0xe
+ 1103 0044 3A       		.uleb128 0x3a
+ 1104 0045 0B       		.uleb128 0xb
+ 1105 0046 3B       		.uleb128 0x3b
+ 1106 0047 0B       		.uleb128 0xb
+ 1107 0048 27       		.uleb128 0x27
+ 1108 0049 19       		.uleb128 0x19
+ 1109 004a 20       		.uleb128 0x20
+ 1110 004b 0B       		.uleb128 0xb
+ 1111 004c 00       		.byte	0
+ 1112 004d 00       		.byte	0
+ 1113 004e 07       		.uleb128 0x7
+ 1114 004f 2E       		.uleb128 0x2e
+ 1115 0050 00       		.byte	0
+ 1116 0051 03       		.uleb128 0x3
+ 1117 0052 0E       		.uleb128 0xe
+ 1118 0053 3A       		.uleb128 0x3a
+ 1119 0054 0B       		.uleb128 0xb
+ 1120 0055 3B       		.uleb128 0x3b
+ 1121 0056 0B       		.uleb128 0xb
+ 1122 0057 27       		.uleb128 0x27
+ 1123 0058 19       		.uleb128 0x19
+ 1124 0059 20       		.uleb128 0x20
+ 1125 005a 0B       		.uleb128 0xb
+ 1126 005b 00       		.byte	0
+ 1127 005c 00       		.byte	0
+ 1128 005d 08       		.uleb128 0x8
+ 1129 005e 2E       		.uleb128 0x2e
+ 1130 005f 01       		.byte	0x1
+ 1131 0060 31       		.uleb128 0x31
+ 1132 0061 13       		.uleb128 0x13
+ 1133 0062 11       		.uleb128 0x11
+ 1134 0063 01       		.uleb128 0x1
+ 1135 0064 12       		.uleb128 0x12
+ 1136 0065 06       		.uleb128 0x6
+ 1137 0066 40       		.uleb128 0x40
+ 1138 0067 18       		.uleb128 0x18
+ 1139 0068 9742     		.uleb128 0x2117
+ 1140 006a 19       		.uleb128 0x19
+ 1141 006b 01       		.uleb128 0x1
+ 1142 006c 13       		.uleb128 0x13
+ 1143 006d 00       		.byte	0
+ 1144 006e 00       		.byte	0
+ 1145 006f 09       		.uleb128 0x9
+ 1146 0070 1D       		.uleb128 0x1d
+ 1147 0071 01       		.byte	0x1
+ 1148 0072 31       		.uleb128 0x31
+ 1149 0073 13       		.uleb128 0x13
+ 1150 0074 52       		.uleb128 0x52
+ 1151 0075 01       		.uleb128 0x1
+ 1152 0076 55       		.uleb128 0x55
+ 1153 0077 17       		.uleb128 0x17
+ 1154 0078 58       		.uleb128 0x58
+ 1155 0079 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 27
+
+
+ 1156 007a 59       		.uleb128 0x59
+ 1157 007b 0B       		.uleb128 0xb
+ 1158 007c 01       		.uleb128 0x1
+ 1159 007d 13       		.uleb128 0x13
+ 1160 007e 00       		.byte	0
+ 1161 007f 00       		.byte	0
+ 1162 0080 0A       		.uleb128 0xa
+ 1163 0081 898201   		.uleb128 0x4109
+ 1164 0084 01       		.byte	0x1
+ 1165 0085 11       		.uleb128 0x11
+ 1166 0086 01       		.uleb128 0x1
+ 1167 0087 31       		.uleb128 0x31
+ 1168 0088 13       		.uleb128 0x13
+ 1169 0089 01       		.uleb128 0x1
+ 1170 008a 13       		.uleb128 0x13
+ 1171 008b 00       		.byte	0
+ 1172 008c 00       		.byte	0
+ 1173 008d 0B       		.uleb128 0xb
+ 1174 008e 8A8201   		.uleb128 0x410a
+ 1175 0091 00       		.byte	0
+ 1176 0092 02       		.uleb128 0x2
+ 1177 0093 18       		.uleb128 0x18
+ 1178 0094 9142     		.uleb128 0x2111
+ 1179 0096 18       		.uleb128 0x18
+ 1180 0097 00       		.byte	0
+ 1181 0098 00       		.byte	0
+ 1182 0099 0C       		.uleb128 0xc
+ 1183 009a 898201   		.uleb128 0x4109
+ 1184 009d 00       		.byte	0
+ 1185 009e 11       		.uleb128 0x11
+ 1186 009f 01       		.uleb128 0x1
+ 1187 00a0 31       		.uleb128 0x31
+ 1188 00a1 13       		.uleb128 0x13
+ 1189 00a2 00       		.byte	0
+ 1190 00a3 00       		.byte	0
+ 1191 00a4 0D       		.uleb128 0xd
+ 1192 00a5 898201   		.uleb128 0x4109
+ 1193 00a8 00       		.byte	0
+ 1194 00a9 11       		.uleb128 0x11
+ 1195 00aa 01       		.uleb128 0x1
+ 1196 00ab 9542     		.uleb128 0x2115
+ 1197 00ad 19       		.uleb128 0x19
+ 1198 00ae 31       		.uleb128 0x31
+ 1199 00af 13       		.uleb128 0x13
+ 1200 00b0 00       		.byte	0
+ 1201 00b1 00       		.byte	0
+ 1202 00b2 0E       		.uleb128 0xe
+ 1203 00b3 2E       		.uleb128 0x2e
+ 1204 00b4 01       		.byte	0x1
+ 1205 00b5 3F       		.uleb128 0x3f
+ 1206 00b6 19       		.uleb128 0x19
+ 1207 00b7 03       		.uleb128 0x3
+ 1208 00b8 0E       		.uleb128 0xe
+ 1209 00b9 3A       		.uleb128 0x3a
+ 1210 00ba 0B       		.uleb128 0xb
+ 1211 00bb 3B       		.uleb128 0x3b
+ 1212 00bc 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 28
+
+
+ 1213 00bd 27       		.uleb128 0x27
+ 1214 00be 19       		.uleb128 0x19
+ 1215 00bf 11       		.uleb128 0x11
+ 1216 00c0 01       		.uleb128 0x1
+ 1217 00c1 12       		.uleb128 0x12
+ 1218 00c2 06       		.uleb128 0x6
+ 1219 00c3 40       		.uleb128 0x40
+ 1220 00c4 18       		.uleb128 0x18
+ 1221 00c5 9742     		.uleb128 0x2117
+ 1222 00c7 19       		.uleb128 0x19
+ 1223 00c8 01       		.uleb128 0x1
+ 1224 00c9 13       		.uleb128 0x13
+ 1225 00ca 00       		.byte	0
+ 1226 00cb 00       		.byte	0
+ 1227 00cc 0F       		.uleb128 0xf
+ 1228 00cd 1D       		.uleb128 0x1d
+ 1229 00ce 01       		.byte	0x1
+ 1230 00cf 31       		.uleb128 0x31
+ 1231 00d0 13       		.uleb128 0x13
+ 1232 00d1 52       		.uleb128 0x52
+ 1233 00d2 01       		.uleb128 0x1
+ 1234 00d3 55       		.uleb128 0x55
+ 1235 00d4 17       		.uleb128 0x17
+ 1236 00d5 58       		.uleb128 0x58
+ 1237 00d6 0B       		.uleb128 0xb
+ 1238 00d7 59       		.uleb128 0x59
+ 1239 00d8 0B       		.uleb128 0xb
+ 1240 00d9 00       		.byte	0
+ 1241 00da 00       		.byte	0
+ 1242 00db 10       		.uleb128 0x10
+ 1243 00dc 1D       		.uleb128 0x1d
+ 1244 00dd 01       		.byte	0x1
+ 1245 00de 31       		.uleb128 0x31
+ 1246 00df 13       		.uleb128 0x13
+ 1247 00e0 11       		.uleb128 0x11
+ 1248 00e1 01       		.uleb128 0x1
+ 1249 00e2 12       		.uleb128 0x12
+ 1250 00e3 06       		.uleb128 0x6
+ 1251 00e4 58       		.uleb128 0x58
+ 1252 00e5 0B       		.uleb128 0xb
+ 1253 00e6 59       		.uleb128 0x59
+ 1254 00e7 0B       		.uleb128 0xb
+ 1255 00e8 01       		.uleb128 0x1
+ 1256 00e9 13       		.uleb128 0x13
+ 1257 00ea 00       		.byte	0
+ 1258 00eb 00       		.byte	0
+ 1259 00ec 11       		.uleb128 0x11
+ 1260 00ed 05       		.uleb128 0x5
+ 1261 00ee 00       		.byte	0
+ 1262 00ef 03       		.uleb128 0x3
+ 1263 00f0 0E       		.uleb128 0xe
+ 1264 00f1 3A       		.uleb128 0x3a
+ 1265 00f2 0B       		.uleb128 0xb
+ 1266 00f3 3B       		.uleb128 0x3b
+ 1267 00f4 0B       		.uleb128 0xb
+ 1268 00f5 49       		.uleb128 0x49
+ 1269 00f6 13       		.uleb128 0x13
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 29
+
+
+ 1270 00f7 02       		.uleb128 0x2
+ 1271 00f8 17       		.uleb128 0x17
+ 1272 00f9 00       		.byte	0
+ 1273 00fa 00       		.byte	0
+ 1274 00fb 12       		.uleb128 0x12
+ 1275 00fc 34       		.uleb128 0x34
+ 1276 00fd 00       		.byte	0
+ 1277 00fe 03       		.uleb128 0x3
+ 1278 00ff 0E       		.uleb128 0xe
+ 1279 0100 3A       		.uleb128 0x3a
+ 1280 0101 0B       		.uleb128 0xb
+ 1281 0102 3B       		.uleb128 0x3b
+ 1282 0103 0B       		.uleb128 0xb
+ 1283 0104 49       		.uleb128 0x49
+ 1284 0105 13       		.uleb128 0x13
+ 1285 0106 02       		.uleb128 0x2
+ 1286 0107 17       		.uleb128 0x17
+ 1287 0108 00       		.byte	0
+ 1288 0109 00       		.byte	0
+ 1289 010a 13       		.uleb128 0x13
+ 1290 010b 34       		.uleb128 0x34
+ 1291 010c 00       		.byte	0
+ 1292 010d 03       		.uleb128 0x3
+ 1293 010e 08       		.uleb128 0x8
+ 1294 010f 3A       		.uleb128 0x3a
+ 1295 0110 0B       		.uleb128 0xb
+ 1296 0111 3B       		.uleb128 0x3b
+ 1297 0112 0B       		.uleb128 0xb
+ 1298 0113 49       		.uleb128 0x49
+ 1299 0114 13       		.uleb128 0x13
+ 1300 0115 02       		.uleb128 0x2
+ 1301 0116 17       		.uleb128 0x17
+ 1302 0117 00       		.byte	0
+ 1303 0118 00       		.byte	0
+ 1304 0119 14       		.uleb128 0x14
+ 1305 011a 898201   		.uleb128 0x4109
+ 1306 011d 01       		.byte	0x1
+ 1307 011e 11       		.uleb128 0x11
+ 1308 011f 01       		.uleb128 0x1
+ 1309 0120 31       		.uleb128 0x31
+ 1310 0121 13       		.uleb128 0x13
+ 1311 0122 00       		.byte	0
+ 1312 0123 00       		.byte	0
+ 1313 0124 15       		.uleb128 0x15
+ 1314 0125 01       		.uleb128 0x1
+ 1315 0126 01       		.byte	0x1
+ 1316 0127 49       		.uleb128 0x49
+ 1317 0128 13       		.uleb128 0x13
+ 1318 0129 01       		.uleb128 0x1
+ 1319 012a 13       		.uleb128 0x13
+ 1320 012b 00       		.byte	0
+ 1321 012c 00       		.byte	0
+ 1322 012d 16       		.uleb128 0x16
+ 1323 012e 21       		.uleb128 0x21
+ 1324 012f 00       		.byte	0
+ 1325 0130 49       		.uleb128 0x49
+ 1326 0131 13       		.uleb128 0x13
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 30
+
+
+ 1327 0132 2F       		.uleb128 0x2f
+ 1328 0133 0B       		.uleb128 0xb
+ 1329 0134 00       		.byte	0
+ 1330 0135 00       		.byte	0
+ 1331 0136 17       		.uleb128 0x17
+ 1332 0137 34       		.uleb128 0x34
+ 1333 0138 00       		.byte	0
+ 1334 0139 03       		.uleb128 0x3
+ 1335 013a 0E       		.uleb128 0xe
+ 1336 013b 3A       		.uleb128 0x3a
+ 1337 013c 0B       		.uleb128 0xb
+ 1338 013d 3B       		.uleb128 0x3b
+ 1339 013e 0B       		.uleb128 0xb
+ 1340 013f 49       		.uleb128 0x49
+ 1341 0140 13       		.uleb128 0x13
+ 1342 0141 02       		.uleb128 0x2
+ 1343 0142 18       		.uleb128 0x18
+ 1344 0143 00       		.byte	0
+ 1345 0144 00       		.byte	0
+ 1346 0145 18       		.uleb128 0x18
+ 1347 0146 34       		.uleb128 0x34
+ 1348 0147 00       		.byte	0
+ 1349 0148 03       		.uleb128 0x3
+ 1350 0149 0E       		.uleb128 0xe
+ 1351 014a 3A       		.uleb128 0x3a
+ 1352 014b 0B       		.uleb128 0xb
+ 1353 014c 3B       		.uleb128 0x3b
+ 1354 014d 0B       		.uleb128 0xb
+ 1355 014e 49       		.uleb128 0x49
+ 1356 014f 13       		.uleb128 0x13
+ 1357 0150 3F       		.uleb128 0x3f
+ 1358 0151 19       		.uleb128 0x19
+ 1359 0152 02       		.uleb128 0x2
+ 1360 0153 18       		.uleb128 0x18
+ 1361 0154 00       		.byte	0
+ 1362 0155 00       		.byte	0
+ 1363 0156 19       		.uleb128 0x19
+ 1364 0157 2E       		.uleb128 0x2e
+ 1365 0158 00       		.byte	0
+ 1366 0159 3F       		.uleb128 0x3f
+ 1367 015a 19       		.uleb128 0x19
+ 1368 015b 3C       		.uleb128 0x3c
+ 1369 015c 19       		.uleb128 0x19
+ 1370 015d 6E       		.uleb128 0x6e
+ 1371 015e 0E       		.uleb128 0xe
+ 1372 015f 03       		.uleb128 0x3
+ 1373 0160 0E       		.uleb128 0xe
+ 1374 0161 3A       		.uleb128 0x3a
+ 1375 0162 0B       		.uleb128 0xb
+ 1376 0163 3B       		.uleb128 0x3b
+ 1377 0164 0B       		.uleb128 0xb
+ 1378 0165 00       		.byte	0
+ 1379 0166 00       		.byte	0
+ 1380 0167 00       		.byte	0
+ 1381              		.section	.debug_loc,"",%progbits
+ 1382              	.Ldebug_loc0:
+ 1383              	.LLST0:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 31
+
+
+ 1384 0000 00000000 		.4byte	.LVL21
+ 1385 0004 16000000 		.4byte	.LVL24
+ 1386 0008 0100     		.2byte	0x1
+ 1387 000a 50       		.byte	0x50
+ 1388 000b 16000000 		.4byte	.LVL24
+ 1389 000f EE000000 		.4byte	.LVL27
+ 1390 0013 0400     		.2byte	0x4
+ 1391 0015 F3       		.byte	0xf3
+ 1392 0016 01       		.uleb128 0x1
+ 1393 0017 50       		.byte	0x50
+ 1394 0018 9F       		.byte	0x9f
+ 1395 0019 EE000000 		.4byte	.LVL27
+ 1396 001d F0000000 		.4byte	.LVL28
+ 1397 0021 0100     		.2byte	0x1
+ 1398 0023 50       		.byte	0x50
+ 1399 0024 F0000000 		.4byte	.LVL28
+ 1400 0028 10010000 		.4byte	.LFE4
+ 1401 002c 0400     		.2byte	0x4
+ 1402 002e F3       		.byte	0xf3
+ 1403 002f 01       		.uleb128 0x1
+ 1404 0030 50       		.byte	0x50
+ 1405 0031 9F       		.byte	0x9f
+ 1406 0032 00000000 		.4byte	0
+ 1407 0036 00000000 		.4byte	0
+ 1408              	.LLST1:
+ 1409 003a 0C000000 		.4byte	.LVL22
+ 1410 003e 16000000 		.4byte	.LVL24
+ 1411 0042 0500     		.2byte	0x5
+ 1412 0044 70       		.byte	0x70
+ 1413 0045 00       		.sleb128 0
+ 1414 0046 3F       		.byte	0x3f
+ 1415 0047 1A       		.byte	0x1a
+ 1416 0048 9F       		.byte	0x9f
+ 1417 0049 16000000 		.4byte	.LVL24
+ 1418 004d EE000000 		.4byte	.LVL27
+ 1419 0051 0600     		.2byte	0x6
+ 1420 0053 F3       		.byte	0xf3
+ 1421 0054 01       		.uleb128 0x1
+ 1422 0055 50       		.byte	0x50
+ 1423 0056 3F       		.byte	0x3f
+ 1424 0057 1A       		.byte	0x1a
+ 1425 0058 9F       		.byte	0x9f
+ 1426 0059 EE000000 		.4byte	.LVL27
+ 1427 005d F0000000 		.4byte	.LVL28
+ 1428 0061 0500     		.2byte	0x5
+ 1429 0063 70       		.byte	0x70
+ 1430 0064 00       		.sleb128 0
+ 1431 0065 3F       		.byte	0x3f
+ 1432 0066 1A       		.byte	0x1a
+ 1433 0067 9F       		.byte	0x9f
+ 1434 0068 F0000000 		.4byte	.LVL28
+ 1435 006c 10010000 		.4byte	.LFE4
+ 1436 0070 0600     		.2byte	0x6
+ 1437 0072 F3       		.byte	0xf3
+ 1438 0073 01       		.uleb128 0x1
+ 1439 0074 50       		.byte	0x50
+ 1440 0075 3F       		.byte	0x3f
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 32
+
+
+ 1441 0076 1A       		.byte	0x1a
+ 1442 0077 9F       		.byte	0x9f
+ 1443 0078 00000000 		.4byte	0
+ 1444 007c 00000000 		.4byte	0
+ 1445              	.LLST2:
+ 1446 0080 10000000 		.4byte	.LVL23
+ 1447 0084 B0000000 		.4byte	.LVL25
+ 1448 0088 0100     		.2byte	0x1
+ 1449 008a 54       		.byte	0x54
+ 1450 008b EE000000 		.4byte	.LVL27
+ 1451 008f 0C010000 		.4byte	.LVL30
+ 1452 0093 0100     		.2byte	0x1
+ 1453 0095 54       		.byte	0x54
+ 1454 0096 00000000 		.4byte	0
+ 1455 009a 00000000 		.4byte	0
+ 1456              	.LLST3:
+ 1457 009e E8000000 		.4byte	.LVL26
+ 1458 00a2 EE000000 		.4byte	.LVL27
+ 1459 00a6 0200     		.2byte	0x2
+ 1460 00a8 40       		.byte	0x40
+ 1461 00a9 9F       		.byte	0x9f
+ 1462 00aa 00000000 		.4byte	0
+ 1463 00ae 00000000 		.4byte	0
+ 1464              		.section	.debug_aranges,"",%progbits
+ 1465 0000 3C000000 		.4byte	0x3c
+ 1466 0004 0200     		.2byte	0x2
+ 1467 0006 00000000 		.4byte	.Ldebug_info0
+ 1468 000a 04       		.byte	0x4
+ 1469 000b 00       		.byte	0
+ 1470 000c 0000     		.2byte	0
+ 1471 000e 0000     		.2byte	0
+ 1472 0010 00000000 		.4byte	.LFB0
+ 1473 0014 58000000 		.4byte	.LFE0-.LFB0
+ 1474 0018 00000000 		.4byte	.LFB1
+ 1475 001c 1C000000 		.4byte	.LFE1-.LFB1
+ 1476 0020 00000000 		.4byte	.LFB2
+ 1477 0024 74000000 		.4byte	.LFE2-.LFB2
+ 1478 0028 00000000 		.4byte	.LFB3
+ 1479 002c 1C000000 		.4byte	.LFE3-.LFB3
+ 1480 0030 00000000 		.4byte	.LFB4
+ 1481 0034 10010000 		.4byte	.LFE4-.LFB4
+ 1482 0038 00000000 		.4byte	0
+ 1483 003c 00000000 		.4byte	0
+ 1484              		.section	.debug_ranges,"",%progbits
+ 1485              	.Ldebug_ranges0:
+ 1486 0000 10000000 		.4byte	.LBB6
+ 1487 0004 48000000 		.4byte	.LBE6
+ 1488 0008 4C000000 		.4byte	.LBB9
+ 1489 000c 58000000 		.4byte	.LBE9
+ 1490 0010 00000000 		.4byte	0
+ 1491 0014 00000000 		.4byte	0
+ 1492 0018 08000000 		.4byte	.LBB16
+ 1493 001c 14000000 		.4byte	.LBE16
+ 1494 0020 18000000 		.4byte	.LBB19
+ 1495 0024 1C000000 		.4byte	.LBE19
+ 1496 0028 00000000 		.4byte	0
+ 1497 002c 00000000 		.4byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 33
+
+
+ 1498 0030 1C000000 		.4byte	.LBB20
+ 1499 0034 28000000 		.4byte	.LBE20
+ 1500 0038 2E000000 		.4byte	.LBB25
+ 1501 003c 74000000 		.4byte	.LBE25
+ 1502 0040 00000000 		.4byte	0
+ 1503 0044 00000000 		.4byte	0
+ 1504 0048 00000000 		.4byte	.LFB0
+ 1505 004c 58000000 		.4byte	.LFE0
+ 1506 0050 00000000 		.4byte	.LFB1
+ 1507 0054 1C000000 		.4byte	.LFE1
+ 1508 0058 00000000 		.4byte	.LFB2
+ 1509 005c 74000000 		.4byte	.LFE2
+ 1510 0060 00000000 		.4byte	.LFB3
+ 1511 0064 1C000000 		.4byte	.LFE3
+ 1512 0068 00000000 		.4byte	.LFB4
+ 1513 006c 10010000 		.4byte	.LFE4
+ 1514 0070 00000000 		.4byte	0
+ 1515 0074 00000000 		.4byte	0
+ 1516              		.section	.debug_line,"",%progbits
+ 1517              	.Ldebug_line0:
+ 1518 0000 56010000 		.section	.debug_str,"MS",%progbits,1
+ 1518      02009900 
+ 1518      00000201 
+ 1518      FB0E0D00 
+ 1518      01010101 
+ 1519              	.LASF18:
+ 1520 0000 44564441 		.ascii	"DVDAC_1_Init\000"
+ 1520      435F315F 
+ 1520      496E6974 
+ 1520      00
+ 1521              	.LASF28:
+ 1522 000d 44564441 		.ascii	"DVDAC_1_DMA_DmaInitialize\000"
+ 1522      435F315F 
+ 1522      444D415F 
+ 1522      446D6149 
+ 1522      6E697469 
+ 1523              	.LASF43:
+ 1524 0027 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 1524      726F7062 
+ 1524      6F785C44 
+ 1524      4556454C 
+ 1524      4F504D45 
+ 1525 0056 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 1525      70656374 
+ 1525      72756D20 
+ 1525      616E616C 
+ 1525      797A6572 
+ 1526 0087 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 1526      416E616C 
+ 1526      797A6572 
+ 1526      5C617564 
+ 1526      696F5370 
+ 1527              	.LASF45:
+ 1528 00b0 76616C75 		.ascii	"value\000"
+ 1528      6500
+ 1529              	.LASF46:
+ 1530 00b6 44564441 		.ascii	"DVDAC_1_initVar\000"
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 34
+
+
+ 1530      435F315F 
+ 1530      696E6974 
+ 1530      56617200 
+ 1531              	.LASF3:
+ 1532 00c6 73686F72 		.ascii	"short unsigned int\000"
+ 1532      7420756E 
+ 1532      7369676E 
+ 1532      65642069 
+ 1532      6E7400
+ 1533              	.LASF32:
+ 1534 00d9 4379446D 		.ascii	"CyDmaChSetInitialTd\000"
+ 1534      61436853 
+ 1534      6574496E 
+ 1534      69746961 
+ 1534      6C546400 
+ 1535              	.LASF29:
+ 1536 00ed 4379446D 		.ascii	"CyDmaTdAllocate\000"
+ 1536      61546441 
+ 1536      6C6C6F63 
+ 1536      61746500 
+ 1537              	.LASF26:
+ 1538 00fd 44564441 		.ascii	"DVDAC_1_dmaChan\000"
+ 1538      435F315F 
+ 1538      646D6143 
+ 1538      68616E00 
+ 1539              	.LASF12:
+ 1540 010d 666C6F61 		.ascii	"float\000"
+ 1540      7400
+ 1541              	.LASF39:
+ 1542 0113 44564441 		.ascii	"DVDAC_1_VDAC8_Stop\000"
+ 1542      435F315F 
+ 1542      56444143 
+ 1542      385F5374 
+ 1542      6F7000
+ 1543              	.LASF19:
+ 1544 0126 44564441 		.ascii	"DVDAC_1_Enable\000"
+ 1544      435F315F 
+ 1544      456E6162 
+ 1544      6C6500
+ 1545              	.LASF44:
+ 1546 0135 44564441 		.ascii	"DVDAC_1_InitDma\000"
+ 1546      435F315F 
+ 1546      496E6974 
+ 1546      446D6100 
+ 1547              	.LASF15:
+ 1548 0145 72656738 		.ascii	"reg8\000"
+ 1548      00
+ 1549              	.LASF30:
+ 1550 014a 4379446D 		.ascii	"CyDmaTdSetConfiguration\000"
+ 1550      61546453 
+ 1550      6574436F 
+ 1550      6E666967 
+ 1550      75726174 
+ 1551              	.LASF21:
+ 1552 0162 44564441 		.ascii	"DVDAC_1_Stop\000"
+ 1552      435F315F 
+ 1552      53746F70 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 35
+
+
+ 1552      00
+ 1553              	.LASF9:
+ 1554 016f 75696E74 		.ascii	"uint8\000"
+ 1554      3800
+ 1555              	.LASF1:
+ 1556 0175 756E7369 		.ascii	"unsigned char\000"
+ 1556      676E6564 
+ 1556      20636861 
+ 1556      7200
+ 1557              	.LASF13:
+ 1558 0183 646F7562 		.ascii	"double\000"
+ 1558      6C6500
+ 1559              	.LASF27:
+ 1560 018a 44564441 		.ascii	"DVDAC_1_dmaTd\000"
+ 1560      435F315F 
+ 1560      646D6154 
+ 1560      6400
+ 1561              	.LASF34:
+ 1562 0198 4379446D 		.ascii	"CyDmaChEnable\000"
+ 1562      61436845 
+ 1562      6E61626C 
+ 1562      6500
+ 1563              	.LASF10:
+ 1564 01a6 75696E74 		.ascii	"uint16\000"
+ 1564      313600
+ 1565              	.LASF11:
+ 1566 01ad 75696E74 		.ascii	"uint32\000"
+ 1566      333200
+ 1567              	.LASF22:
+ 1568 01b4 44564441 		.ascii	"DVDAC_1_SetValue\000"
+ 1568      435F315F 
+ 1568      53657456 
+ 1568      616C7565 
+ 1568      00
+ 1569              	.LASF5:
+ 1570 01c5 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1570      20756E73 
+ 1570      69676E65 
+ 1570      6420696E 
+ 1570      7400
+ 1571              	.LASF8:
+ 1572 01d7 756E7369 		.ascii	"unsigned int\000"
+ 1572      676E6564 
+ 1572      20696E74 
+ 1572      00
+ 1573              	.LASF24:
+ 1574 01e4 68696768 		.ascii	"highCount\000"
+ 1574      436F756E 
+ 1574      7400
+ 1575              	.LASF41:
+ 1576 01ee 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1576      43313120 
+ 1576      352E342E 
+ 1576      31203230 
+ 1576      31363036 
+ 1577 0221 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1577      20726576 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 36
+
+
+ 1577      6973696F 
+ 1577      6E203233 
+ 1577      37373135 
+ 1578 0254 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 1578      66756E63 
+ 1578      74696F6E 
+ 1578      2D736563 
+ 1578      74696F6E 
+ 1579 0287 6E637469 		.ascii	"nctions\000"
+ 1579      6F6E7300 
+ 1580              	.LASF7:
+ 1581 028f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1581      206C6F6E 
+ 1581      6720756E 
+ 1581      7369676E 
+ 1581      65642069 
+ 1582              	.LASF37:
+ 1583 02a6 44564441 		.ascii	"DVDAC_1_IntClock_Stop\000"
+ 1583      435F315F 
+ 1583      496E7443 
+ 1583      6C6F636B 
+ 1583      5F53746F 
+ 1584              	.LASF40:
+ 1585 02bc 43794861 		.ascii	"CyHalt\000"
+ 1585      6C7400
+ 1586              	.LASF17:
+ 1587 02c3 73697A65 		.ascii	"sizetype\000"
+ 1587      74797065 
+ 1587      00
+ 1588              	.LASF6:
+ 1589 02cc 6C6F6E67 		.ascii	"long long int\000"
+ 1589      206C6F6E 
+ 1589      6720696E 
+ 1589      7400
+ 1590              	.LASF31:
+ 1591 02da 4379446D 		.ascii	"CyDmaTdSetAddress\000"
+ 1591      61546453 
+ 1591      65744164 
+ 1591      64726573 
+ 1591      7300
+ 1592              	.LASF14:
+ 1593 02ec 63686172 		.ascii	"char\000"
+ 1593      00
+ 1594              	.LASF25:
+ 1595 02f1 44564441 		.ascii	"DVDAC_1_ditheredValues\000"
+ 1595      435F315F 
+ 1595      64697468 
+ 1595      65726564 
+ 1595      56616C75 
+ 1596              	.LASF20:
+ 1597 0308 44564441 		.ascii	"DVDAC_1_Start\000"
+ 1597      435F315F 
+ 1597      53746172 
+ 1597      7400
+ 1598              	.LASF2:
+ 1599 0316 73686F72 		.ascii	"short int\000"
+ 1599      7420696E 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccASqcKS.s 			page 37
+
+
+ 1599      7400
+ 1600              	.LASF35:
+ 1601 0320 44564441 		.ascii	"DVDAC_1_IntClock_Start\000"
+ 1601      435F315F 
+ 1601      496E7443 
+ 1601      6C6F636B 
+ 1601      5F537461 
+ 1602              	.LASF42:
+ 1603 0337 47656E65 		.ascii	"Generated_Source\\PSoC5\\DVDAC_1.c\000"
+ 1603      72617465 
+ 1603      645F536F 
+ 1603      75726365 
+ 1603      5C50536F 
+ 1604              	.LASF36:
+ 1605 0358 44564441 		.ascii	"DVDAC_1_VDAC8_Enable\000"
+ 1605      435F315F 
+ 1605      56444143 
+ 1605      385F456E 
+ 1605      61626C65 
+ 1606              	.LASF4:
+ 1607 036d 6C6F6E67 		.ascii	"long int\000"
+ 1607      20696E74 
+ 1607      00
+ 1608              	.LASF16:
+ 1609 0376 6C6F6E67 		.ascii	"long double\000"
+ 1609      20646F75 
+ 1609      626C6500 
+ 1610              	.LASF0:
+ 1611 0382 7369676E 		.ascii	"signed char\000"
+ 1611      65642063 
+ 1611      68617200 
+ 1612              	.LASF38:
+ 1613 038e 4379446D 		.ascii	"CyDmaChDisable\000"
+ 1613      61436844 
+ 1613      69736162 
+ 1613      6C6500
+ 1614              	.LASF33:
+ 1615 039d 44564441 		.ascii	"DVDAC_1_VDAC8_Init\000"
+ 1615      435F315F 
+ 1615      56444143 
+ 1615      385F496E 
+ 1615      697400
+ 1616              	.LASF23:
+ 1617 03b0 6C6F7743 		.ascii	"lowCount\000"
+ 1617      6F756E74 
+ 1617      00
+ 1618              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

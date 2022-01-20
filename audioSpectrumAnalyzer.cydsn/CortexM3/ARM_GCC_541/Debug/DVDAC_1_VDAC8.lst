@@ -1,0 +1,2064 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"DVDAC_1_VDAC8.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.DVDAC_1_VDAC8_Init,"ax",%progbits
+  20              		.align	2
+  21              		.global	DVDAC_1_VDAC8_Init
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	DVDAC_1_VDAC8_Init, %function
+  25              	DVDAC_1_VDAC8_Init:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\DVDAC_1_VDAC8.c"
+   1:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * File Name: DVDAC_1_VDAC8.c  
+   3:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Version 1.90
+   4:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+   5:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Description:
+   6:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  This file provides the source code to the API for the 8-bit Voltage DAC 
+   7:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  (VDAC8) User Module.
+   8:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+   9:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Note:
+  10:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Any unusual or non-standard behavior should be noted here. Other-
+  11:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  wise, this section should remain blank.
+  12:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+  13:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** ********************************************************************************
+  14:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  15:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  16:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  17:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * the software package with which this file was provided.
+  18:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *******************************************************************************/
+  19:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  20:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** #include "cytypes.h"
+  21:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** #include "DVDAC_1_VDAC8.h"
+  22:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  23:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** #if (CY_PSOC5A)
+  24:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** #include <CyLib.h>
+  25:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** #endif /* CY_PSOC5A */
+  26:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  27:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** uint8 DVDAC_1_VDAC8_initVar = 0u;
+  28:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  29:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** #if (CY_PSOC5A)
+  30:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     static uint8 DVDAC_1_VDAC8_restoreVal = 0u;
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 2
+
+
+  31:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** #endif /* CY_PSOC5A */
+  32:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  33:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** #if (CY_PSOC5A)
+  34:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     static DVDAC_1_VDAC8_backupStruct DVDAC_1_VDAC8_backup;
+  35:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** #endif /* CY_PSOC5A */
+  36:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  37:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  38:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** /*******************************************************************************
+  39:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Function Name: DVDAC_1_VDAC8_Init
+  40:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** ********************************************************************************
+  41:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Summary:
+  42:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Initialize to the schematic state.
+  43:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * 
+  44:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Parameters:
+  45:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void:
+  46:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+  47:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Return:
+  48:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void
+  49:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+  50:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Theory:
+  51:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+  52:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Side Effects:
+  53:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+  54:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *******************************************************************************/
+  55:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** void DVDAC_1_VDAC8_Init(void) 
+  56:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** {
+  28              		.loc 1 56 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  57:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 = (DVDAC_1_VDAC8_MODE_V );
+  33              		.loc 1 57 0
+  34 0000 134B     		ldr	r3, .L2
+  58:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  59:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Set default data source */
+  60:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #if(DVDAC_1_VDAC8_DEFAULT_DATA_SRC != 0 )
+  61:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         DVDAC_1_VDAC8_CR1 = (DVDAC_1_VDAC8_DEFAULT_CNTL | DVDAC_1_VDAC8_DACBUS_ENABLE) ;
+  62:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #else
+  63:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         DVDAC_1_VDAC8_CR1 = (DVDAC_1_VDAC8_DEFAULT_CNTL | DVDAC_1_VDAC8_DACBUS_DISABLE) ;
+  35              		.loc 1 63 0
+  36 0002 1448     		ldr	r0, .L2+4
+  57:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 = (DVDAC_1_VDAC8_MODE_V );
+  37              		.loc 1 57 0
+  38 0004 0022     		movs	r2, #0
+  64:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif /* (DVDAC_1_VDAC8_DEFAULT_DATA_SRC != 0 ) */
+  65:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  66:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Set default strobe mode */
+  67:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #if(DVDAC_1_VDAC8_DEFAULT_STRB != 0)
+  68:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         DVDAC_1_VDAC8_Strobe |= DVDAC_1_VDAC8_STRB_EN ;
+  39              		.loc 1 68 0
+  40 0006 1449     		ldr	r1, .L2+8
+  57:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  41              		.loc 1 57 0
+  42 0008 1A70     		strb	r2, [r3]
+  63:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif /* (DVDAC_1_VDAC8_DEFAULT_DATA_SRC != 0 ) */
+  43              		.loc 1 63 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 3
+
+
+  44 000a 0270     		strb	r2, [r0]
+  45              		.loc 1 68 0
+  46 000c 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+  47              	.LBB20:
+  48              	.LBB21:
+  49              	.LBB22:
+  50              	.LBB23:
+  69:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif/* (DVDAC_1_VDAC8_DEFAULT_STRB != 0) */
+  70:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  71:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Set default range */
+  72:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_SetRange(DVDAC_1_VDAC8_DEFAULT_RANGE); 
+  73:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  74:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Set default speed */
+  75:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_SetSpeed(DVDAC_1_VDAC8_DEFAULT_SPEED);
+  76:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+  77:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  78:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+  79:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** /*******************************************************************************
+  80:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Function Name: DVDAC_1_VDAC8_Enable
+  81:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** ********************************************************************************
+  82:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Summary:
+  83:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Enable the VDAC8
+  84:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * 
+  85:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Parameters:
+  86:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void
+  87:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+  88:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Return:
+  89:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void
+  90:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+  91:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Theory:
+  92:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+  93:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Side Effects:
+  94:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+  95:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *******************************************************************************/
+  96:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** void DVDAC_1_VDAC8_Enable(void) 
+  97:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** {
+  98:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_PWRMGR |= DVDAC_1_VDAC8_ACT_PWR_EN;
+  99:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_STBY_PWRMGR |= DVDAC_1_VDAC8_STBY_PWR_EN;
+ 100:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 101:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /*This is to restore the value of register CR0 ,
+ 102:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     which is modified  in Stop API , this prevents misbehaviour of VDAC */
+ 103:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #if (CY_PSOC5A)
+ 104:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         if(DVDAC_1_VDAC8_restoreVal == 1u) 
+ 105:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         {
+ 106:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****              DVDAC_1_VDAC8_CR0 = DVDAC_1_VDAC8_backup.data_value;
+ 107:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****              DVDAC_1_VDAC8_restoreVal = 0u;
+ 108:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         }
+ 109:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif /* CY_PSOC5A */
+ 110:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 111:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 112:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 113:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** /*******************************************************************************
+ 114:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Function Name: DVDAC_1_VDAC8_Start
+ 115:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** ********************************************************************************
+ 116:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 117:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Summary:
+ 118:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  The start function initializes the voltage DAC with the default values, 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 4
+
+
+ 119:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  and sets the power to the given level.  A power level of 0, is the same as
+ 120:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  executing the stop function.
+ 121:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 122:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Parameters:
+ 123:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Power: Sets power level between off (0) and (3) high power
+ 124:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 125:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Return:
+ 126:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void 
+ 127:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 128:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Global variables:
+ 129:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  DVDAC_1_VDAC8_initVar: Is modified when this function is called for the 
+ 130:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  first time. Is used to ensure that initialization happens only once.
+ 131:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 132:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *******************************************************************************/
+ 133:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** void DVDAC_1_VDAC8_Start(void)  
+ 134:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** {
+ 135:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Hardware initiazation only needs to occure the first time */
+ 136:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     if(DVDAC_1_VDAC8_initVar == 0u)
+ 137:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     { 
+ 138:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         DVDAC_1_VDAC8_Init();
+ 139:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         DVDAC_1_VDAC8_initVar = 1u;
+ 140:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     }
+ 141:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 142:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Enable power to DAC */
+ 143:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_Enable();
+ 144:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 145:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Set default value */
+ 146:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_SetValue(DVDAC_1_VDAC8_DEFAULT_DATA); 
+ 147:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 148:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 149:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 150:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** /*******************************************************************************
+ 151:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Function Name: DVDAC_1_VDAC8_Stop
+ 152:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** ********************************************************************************
+ 153:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 154:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Summary:
+ 155:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Powers down DAC to lowest power state.
+ 156:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 157:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Parameters:
+ 158:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void
+ 159:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 160:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Return:
+ 161:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void
+ 162:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 163:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Theory:
+ 164:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 165:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Side Effects:
+ 166:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 167:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *******************************************************************************/
+ 168:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** void DVDAC_1_VDAC8_Stop(void) 
+ 169:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** {
+ 170:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Disble power to DAC */
+ 171:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_PWRMGR &= (uint8)(~DVDAC_1_VDAC8_ACT_PWR_EN);
+ 172:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_STBY_PWRMGR &= (uint8)(~DVDAC_1_VDAC8_STBY_PWR_EN);
+ 173:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 174:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* This is a work around for PSoC5A  ,
+ 175:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     this sets VDAC to current mode with output off */
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 5
+
+
+ 176:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #if (CY_PSOC5A)
+ 177:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         DVDAC_1_VDAC8_backup.data_value = DVDAC_1_VDAC8_CR0;
+ 178:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         DVDAC_1_VDAC8_CR0 = DVDAC_1_VDAC8_CUR_MODE_OUT_OFF;
+ 179:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         DVDAC_1_VDAC8_restoreVal = 1u;
+ 180:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif /* CY_PSOC5A */
+ 181:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 182:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 183:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 184:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** /*******************************************************************************
+ 185:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Function Name: DVDAC_1_VDAC8_SetSpeed
+ 186:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** ********************************************************************************
+ 187:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 188:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Summary:
+ 189:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Set DAC speed
+ 190:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 191:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Parameters:
+ 192:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  power: Sets speed value
+ 193:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 194:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Return:
+ 195:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void
+ 196:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 197:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Theory:
+ 198:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 199:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Side Effects:
+ 200:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 201:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *******************************************************************************/
+ 202:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** void DVDAC_1_VDAC8_SetSpeed(uint8 speed) 
+ 203:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** {
+ 204:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Clear power mask then write in new value */
+ 205:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 &= (uint8)(~DVDAC_1_VDAC8_HS_MASK);
+ 206:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |=  (speed & DVDAC_1_VDAC8_HS_MASK);
+ 207:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 208:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 209:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 210:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** /*******************************************************************************
+ 211:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Function Name: DVDAC_1_VDAC8_SetRange
+ 212:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** ********************************************************************************
+ 213:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 214:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Summary:
+ 215:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Set one of three current ranges.
+ 216:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 217:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Parameters:
+ 218:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Range: Sets one of Three valid ranges.
+ 219:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 220:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Return:
+ 221:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void 
+ 222:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 223:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Theory:
+ 224:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 225:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Side Effects:
+ 226:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 227:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *******************************************************************************/
+ 228:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** void DVDAC_1_VDAC8_SetRange(uint8 range) 
+ 229:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** {
+ 230:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 &= (uint8)(~DVDAC_1_VDAC8_RANGE_MASK);      /* Clear existing mode */
+ 231:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |= (range & DVDAC_1_VDAC8_RANGE_MASK);      /*  Set Range  */
+ 232:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_DacTrim();
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 6
+
+
+ 233:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 234:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 235:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 236:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** /*******************************************************************************
+ 237:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Function Name: DVDAC_1_VDAC8_SetValue
+ 238:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** ********************************************************************************
+ 239:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 240:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Summary:
+ 241:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Set 8-bit DAC value
+ 242:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 243:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Parameters:  
+ 244:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  value:  Sets DAC value between 0 and 255.
+ 245:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 246:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Return: 
+ 247:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void 
+ 248:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 249:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Theory: 
+ 250:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 251:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Side Effects:
+ 252:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 253:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *******************************************************************************/
+ 254:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** void DVDAC_1_VDAC8_SetValue(uint8 value) 
+ 255:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** {
+ 256:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #if (CY_PSOC5A)
+ 257:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         uint8 DVDAC_1_VDAC8_intrStatus = CyEnterCriticalSection();
+ 258:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif /* CY_PSOC5A */
+ 259:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 260:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_Data = value;                /*  Set Value  */
+ 261:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 262:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* PSOC5A requires a double write */
+ 263:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Exit Critical Section */
+ 264:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #if (CY_PSOC5A)
+ 265:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         DVDAC_1_VDAC8_Data = value;
+ 266:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****         CyExitCriticalSection(DVDAC_1_VDAC8_intrStatus);
+ 267:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif /* CY_PSOC5A */
+ 268:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 269:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 270:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 271:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** /*******************************************************************************
+ 272:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Function Name: DVDAC_1_VDAC8_DacTrim
+ 273:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** ********************************************************************************
+ 274:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 275:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Summary:
+ 276:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  Set the trim value for the given range.
+ 277:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 278:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Parameters:
+ 279:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  range:  1V or 4V range.  See constants.
+ 280:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 281:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Return:
+ 282:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *  void
+ 283:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 284:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Theory: 
+ 285:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 286:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** * Side Effects:
+ 287:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *
+ 288:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** *******************************************************************************/
+ 289:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** void DVDAC_1_VDAC8_DacTrim(void) 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 7
+
+
+ 290:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** {
+ 291:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     uint8 mode;
+ 292:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 293:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     mode = (uint8)((DVDAC_1_VDAC8_CR0 & DVDAC_1_VDAC8_RANGE_MASK) >> 2) + DVDAC_1_VDAC8_TRIM_M7_1V_
+ 294:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_TR = CY_GET_XTND_REG8((uint8 *)(DVDAC_1_VDAC8_DAC_TRIM_BASE + mode));
+  51              		.loc 1 294 0
+  52 000e A0F59050 		sub	r0, r0, #4608
+  53              	.LBE23:
+  54              	.LBE22:
+  55              	.LBE21:
+  56              	.LBE20:
+  68:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif/* (DVDAC_1_VDAC8_DEFAULT_STRB != 0) */
+  57              		.loc 1 68 0
+  58 0012 42F00802 		orr	r2, r2, #8
+  59 0016 0A70     		strb	r2, [r1]
+  60              	.LVL0:
+  61              	.LBB29:
+  62              	.LBB28:
+ 230:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |= (range & DVDAC_1_VDAC8_RANGE_MASK);      /*  Set Range  */
+  63              		.loc 1 230 0
+  64 0018 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  65              	.LBB26:
+  66              	.LBB24:
+  67              		.loc 1 294 0
+  68 001a 1F38     		subs	r0, r0, #31
+  69              	.LBE24:
+  70              	.LBE26:
+ 230:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |= (range & DVDAC_1_VDAC8_RANGE_MASK);      /*  Set Range  */
+  71              		.loc 1 230 0
+  72 001c 02F0F302 		and	r2, r2, #243
+  73 0020 1A70     		strb	r2, [r3]
+ 231:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_DacTrim();
+  74              		.loc 1 231 0
+  75 0022 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  76 0024 D2B2     		uxtb	r2, r2
+  77 0026 1A70     		strb	r2, [r3]
+  78              	.LBB27:
+  79              	.LBB25:
+ 293:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_TR = CY_GET_XTND_REG8((uint8 *)(DVDAC_1_VDAC8_DAC_TRIM_BASE + mode));
+  80              		.loc 1 293 0
+  81 0028 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  82              	.LVL1:
+  83              		.loc 1 294 0
+  84 002a C2F38102 		ubfx	r2, r2, #2, #2
+  85              	.LVL2:
+  86 002e 02F19242 		add	r2, r2, #1224736768
+  87 0032 0632     		adds	r2, r2, #6
+  88 0034 92F82821 		ldrb	r2, [r2, #296]	@ zero_extendqisi2
+  89 0038 D2B2     		uxtb	r2, r2
+  90 003a 0270     		strb	r2, [r0]
+  91              	.LVL3:
+  92              	.LBE25:
+  93              	.LBE27:
+  94              	.LBE28:
+  95              	.LBE29:
+  96              	.LBB30:
+  97              	.LBB31:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 8
+
+
+ 205:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |=  (speed & DVDAC_1_VDAC8_HS_MASK);
+  98              		.loc 1 205 0
+  99 003c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 100 003e 02F0FD02 		and	r2, r2, #253
+ 101 0042 1A70     		strb	r2, [r3]
+ 206:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 102              		.loc 1 206 0
+ 103 0044 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 104 0046 42F00202 		orr	r2, r2, #2
+ 105 004a 1A70     		strb	r2, [r3]
+ 106              	.LVL4:
+ 107 004c 7047     		bx	lr
+ 108              	.L3:
+ 109 004e 00BF     		.align	2
+ 110              	.L2:
+ 111 0050 28580040 		.word	1073764392
+ 112 0054 29580040 		.word	1073764393
+ 113 0058 975A0040 		.word	1073765015
+ 114              	.LBE31:
+ 115              	.LBE30:
+ 116              		.cfi_endproc
+ 117              	.LFE0:
+ 118              		.size	DVDAC_1_VDAC8_Init, .-DVDAC_1_VDAC8_Init
+ 119              		.section	.text.DVDAC_1_VDAC8_Enable,"ax",%progbits
+ 120              		.align	2
+ 121              		.global	DVDAC_1_VDAC8_Enable
+ 122              		.thumb
+ 123              		.thumb_func
+ 124              		.type	DVDAC_1_VDAC8_Enable, %function
+ 125              	DVDAC_1_VDAC8_Enable:
+ 126              	.LFB1:
+  97:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_PWRMGR |= DVDAC_1_VDAC8_ACT_PWR_EN;
+ 127              		.loc 1 97 0
+ 128              		.cfi_startproc
+ 129              		@ args = 0, pretend = 0, frame = 0
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 131              		@ link register save eliminated.
+  98:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_STBY_PWRMGR |= DVDAC_1_VDAC8_STBY_PWR_EN;
+ 132              		.loc 1 98 0
+ 133 0000 0549     		ldr	r1, .L5
+  99:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 134              		.loc 1 99 0
+ 135 0002 064A     		ldr	r2, .L5+4
+  98:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_STBY_PWRMGR |= DVDAC_1_VDAC8_STBY_PWR_EN;
+ 136              		.loc 1 98 0
+ 137 0004 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 138 0006 43F00403 		orr	r3, r3, #4
+ 139 000a 0B70     		strb	r3, [r1]
+  99:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 140              		.loc 1 99 0
+ 141 000c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 142 000e 43F00403 		orr	r3, r3, #4
+ 143 0012 1370     		strb	r3, [r2]
+ 144 0014 7047     		bx	lr
+ 145              	.L6:
+ 146 0016 00BF     		.align	2
+ 147              	.L5:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 9
+
+
+ 148 0018 A8430040 		.word	1073759144
+ 149 001c B8430040 		.word	1073759160
+ 150              		.cfi_endproc
+ 151              	.LFE1:
+ 152              		.size	DVDAC_1_VDAC8_Enable, .-DVDAC_1_VDAC8_Enable
+ 153              		.section	.text.DVDAC_1_VDAC8_Start,"ax",%progbits
+ 154              		.align	2
+ 155              		.global	DVDAC_1_VDAC8_Start
+ 156              		.thumb
+ 157              		.thumb_func
+ 158              		.type	DVDAC_1_VDAC8_Start, %function
+ 159              	DVDAC_1_VDAC8_Start:
+ 160              	.LFB2:
+ 134:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Hardware initiazation only needs to occure the first time */
+ 161              		.loc 1 134 0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165              		@ link register save eliminated.
+ 166 0000 10B4     		push	{r4}
+ 167              		.cfi_def_cfa_offset 4
+ 168              		.cfi_offset 4, -4
+ 136:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     { 
+ 169              		.loc 1 136 0
+ 170 0002 1C49     		ldr	r1, .L11
+ 171 0004 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 172 0006 32BB     		cbnz	r2, .L8
+ 173              	.LBB44:
+ 174              	.LBB45:
+  57:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 175              		.loc 1 57 0
+ 176 0008 1B4B     		ldr	r3, .L11+4
+  63:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif /* (DVDAC_1_VDAC8_DEFAULT_DATA_SRC != 0 ) */
+ 177              		.loc 1 63 0
+ 178 000a 1C4C     		ldr	r4, .L11+8
+  68:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif/* (DVDAC_1_VDAC8_DEFAULT_STRB != 0) */
+ 179              		.loc 1 68 0
+ 180 000c 1C48     		ldr	r0, .L11+12
+  57:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 181              		.loc 1 57 0
+ 182 000e 1A70     		strb	r2, [r3]
+  63:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif /* (DVDAC_1_VDAC8_DEFAULT_DATA_SRC != 0 ) */
+ 183              		.loc 1 63 0
+ 184 0010 2270     		strb	r2, [r4]
+  68:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif/* (DVDAC_1_VDAC8_DEFAULT_STRB != 0) */
+ 185              		.loc 1 68 0
+ 186 0012 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 187              	.LBB46:
+ 188              	.LBB47:
+ 189              	.LBB48:
+ 190              	.LBB49:
+ 191              		.loc 1 294 0
+ 192 0014 A4F59054 		sub	r4, r4, #4608
+ 193              	.LBE49:
+ 194              	.LBE48:
+ 195              	.LBE47:
+ 196              	.LBE46:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 10
+
+
+  68:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #endif/* (DVDAC_1_VDAC8_DEFAULT_STRB != 0) */
+ 197              		.loc 1 68 0
+ 198 0018 42F00802 		orr	r2, r2, #8
+ 199 001c 0270     		strb	r2, [r0]
+ 200              	.LVL5:
+ 201              	.LBB56:
+ 202              	.LBB54:
+ 230:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |= (range & DVDAC_1_VDAC8_RANGE_MASK);      /*  Set Range  */
+ 203              		.loc 1 230 0
+ 204 001e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 205              	.LBB52:
+ 206              	.LBB50:
+ 207              		.loc 1 294 0
+ 208 0020 1F3C     		subs	r4, r4, #31
+ 209              	.LBE50:
+ 210              	.LBE52:
+ 230:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |= (range & DVDAC_1_VDAC8_RANGE_MASK);      /*  Set Range  */
+ 211              		.loc 1 230 0
+ 212 0022 02F0F302 		and	r2, r2, #243
+ 213 0026 1A70     		strb	r2, [r3]
+ 231:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_DacTrim();
+ 214              		.loc 1 231 0
+ 215 0028 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 216              	.LBE54:
+ 217              	.LBE56:
+ 218              	.LBE45:
+ 219              	.LBE44:
+ 139:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     }
+ 220              		.loc 1 139 0
+ 221 002a 0120     		movs	r0, #1
+ 222              	.LBB61:
+ 223              	.LBB60:
+ 224              	.LBB57:
+ 225              	.LBB55:
+ 231:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_DacTrim();
+ 226              		.loc 1 231 0
+ 227 002c D2B2     		uxtb	r2, r2
+ 228 002e 1A70     		strb	r2, [r3]
+ 229              	.LBB53:
+ 230              	.LBB51:
+ 293:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_TR = CY_GET_XTND_REG8((uint8 *)(DVDAC_1_VDAC8_DAC_TRIM_BASE + mode));
+ 231              		.loc 1 293 0
+ 232 0030 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 233              	.LVL6:
+ 234              		.loc 1 294 0
+ 235 0032 C2F38102 		ubfx	r2, r2, #2, #2
+ 236              	.LVL7:
+ 237 0036 02F19242 		add	r2, r2, #1224736768
+ 238 003a 0632     		adds	r2, r2, #6
+ 239 003c 92F82821 		ldrb	r2, [r2, #296]	@ zero_extendqisi2
+ 240 0040 D2B2     		uxtb	r2, r2
+ 241 0042 2270     		strb	r2, [r4]
+ 242              	.LVL8:
+ 243              	.LBE51:
+ 244              	.LBE53:
+ 245              	.LBE55:
+ 246              	.LBE57:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 11
+
+
+ 247              	.LBB58:
+ 248              	.LBB59:
+ 205:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |=  (speed & DVDAC_1_VDAC8_HS_MASK);
+ 249              		.loc 1 205 0
+ 250 0044 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 251 0046 02F0FD02 		and	r2, r2, #253
+ 252 004a 1A70     		strb	r2, [r3]
+ 206:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 253              		.loc 1 206 0
+ 254 004c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 255 004e 42F00202 		orr	r2, r2, #2
+ 256 0052 1A70     		strb	r2, [r3]
+ 257              	.LVL9:
+ 258              	.LBE59:
+ 259              	.LBE58:
+ 260              	.LBE60:
+ 261              	.LBE61:
+ 139:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     }
+ 262              		.loc 1 139 0
+ 263 0054 0870     		strb	r0, [r1]
+ 264              	.L8:
+ 265              	.LBB62:
+ 266              	.LBB63:
+  98:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_STBY_PWRMGR |= DVDAC_1_VDAC8_STBY_PWR_EN;
+ 267              		.loc 1 98 0
+ 268 0056 0B49     		ldr	r1, .L11+16
+  99:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 269              		.loc 1 99 0
+ 270 0058 0B4A     		ldr	r2, .L11+20
+  98:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_STBY_PWRMGR |= DVDAC_1_VDAC8_STBY_PWR_EN;
+ 271              		.loc 1 98 0
+ 272 005a 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 273              	.LBE63:
+ 274              	.LBE62:
+ 275              	.LBB66:
+ 276              	.LBB67:
+ 260:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 277              		.loc 1 260 0
+ 278 005c 0B48     		ldr	r0, .L11+24
+ 279              	.LBE67:
+ 280              	.LBE66:
+ 281              	.LBB70:
+ 282              	.LBB64:
+  98:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_STBY_PWRMGR |= DVDAC_1_VDAC8_STBY_PWR_EN;
+ 283              		.loc 1 98 0
+ 284 005e 43F00403 		orr	r3, r3, #4
+ 285 0062 0B70     		strb	r3, [r1]
+  99:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 286              		.loc 1 99 0
+ 287 0064 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 288              	.LBE64:
+ 289              	.LBE70:
+ 290              	.LBB71:
+ 291              	.LBB68:
+ 260:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 292              		.loc 1 260 0
+ 293 0066 1921     		movs	r1, #25
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 12
+
+
+ 294              	.LBE68:
+ 295              	.LBE71:
+ 296              	.LBB72:
+ 297              	.LBB65:
+  99:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 298              		.loc 1 99 0
+ 299 0068 43F00403 		orr	r3, r3, #4
+ 300 006c 1370     		strb	r3, [r2]
+ 301              	.LVL10:
+ 302              	.LBE65:
+ 303              	.LBE72:
+ 304              	.LBB73:
+ 305              	.LBB69:
+ 260:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 306              		.loc 1 260 0
+ 307 006e 0170     		strb	r1, [r0]
+ 308              	.LVL11:
+ 309              	.LBE69:
+ 310              	.LBE73:
+ 147:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 311              		.loc 1 147 0
+ 312 0070 10BC     		pop	{r4}
+ 313              		.cfi_restore 4
+ 314              		.cfi_def_cfa_offset 0
+ 315 0072 7047     		bx	lr
+ 316              	.L12:
+ 317              		.align	2
+ 318              	.L11:
+ 319 0074 00000000 		.word	.LANCHOR0
+ 320 0078 28580040 		.word	1073764392
+ 321 007c 29580040 		.word	1073764393
+ 322 0080 975A0040 		.word	1073765015
+ 323 0084 A8430040 		.word	1073759144
+ 324 0088 B8430040 		.word	1073759160
+ 325 008c 825B0040 		.word	1073765250
+ 326              		.cfi_endproc
+ 327              	.LFE2:
+ 328              		.size	DVDAC_1_VDAC8_Start, .-DVDAC_1_VDAC8_Start
+ 329              		.section	.text.DVDAC_1_VDAC8_Stop,"ax",%progbits
+ 330              		.align	2
+ 331              		.global	DVDAC_1_VDAC8_Stop
+ 332              		.thumb
+ 333              		.thumb_func
+ 334              		.type	DVDAC_1_VDAC8_Stop, %function
+ 335              	DVDAC_1_VDAC8_Stop:
+ 336              	.LFB3:
+ 169:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Disble power to DAC */
+ 337              		.loc 1 169 0
+ 338              		.cfi_startproc
+ 339              		@ args = 0, pretend = 0, frame = 0
+ 340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 341              		@ link register save eliminated.
+ 171:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_STBY_PWRMGR &= (uint8)(~DVDAC_1_VDAC8_STBY_PWR_EN);
+ 342              		.loc 1 171 0
+ 343 0000 0549     		ldr	r1, .L14
+ 172:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 344              		.loc 1 172 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 13
+
+
+ 345 0002 064A     		ldr	r2, .L14+4
+ 171:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_STBY_PWRMGR &= (uint8)(~DVDAC_1_VDAC8_STBY_PWR_EN);
+ 346              		.loc 1 171 0
+ 347 0004 0B78     		ldrb	r3, [r1]	@ zero_extendqisi2
+ 348 0006 03F0FB03 		and	r3, r3, #251
+ 349 000a 0B70     		strb	r3, [r1]
+ 172:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 350              		.loc 1 172 0
+ 351 000c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 352 000e 03F0FB03 		and	r3, r3, #251
+ 353 0012 1370     		strb	r3, [r2]
+ 354 0014 7047     		bx	lr
+ 355              	.L15:
+ 356 0016 00BF     		.align	2
+ 357              	.L14:
+ 358 0018 A8430040 		.word	1073759144
+ 359 001c B8430040 		.word	1073759160
+ 360              		.cfi_endproc
+ 361              	.LFE3:
+ 362              		.size	DVDAC_1_VDAC8_Stop, .-DVDAC_1_VDAC8_Stop
+ 363              		.section	.text.DVDAC_1_VDAC8_SetSpeed,"ax",%progbits
+ 364              		.align	2
+ 365              		.global	DVDAC_1_VDAC8_SetSpeed
+ 366              		.thumb
+ 367              		.thumb_func
+ 368              		.type	DVDAC_1_VDAC8_SetSpeed, %function
+ 369              	DVDAC_1_VDAC8_SetSpeed:
+ 370              	.LFB4:
+ 203:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     /* Clear power mask then write in new value */
+ 371              		.loc 1 203 0
+ 372              		.cfi_startproc
+ 373              		@ args = 0, pretend = 0, frame = 0
+ 374              		@ frame_needed = 0, uses_anonymous_args = 0
+ 375              		@ link register save eliminated.
+ 376              	.LVL12:
+ 205:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |=  (speed & DVDAC_1_VDAC8_HS_MASK);
+ 377              		.loc 1 205 0
+ 378 0000 054B     		ldr	r3, .L17
+ 206:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 379              		.loc 1 206 0
+ 380 0002 00F00200 		and	r0, r0, #2
+ 381              	.LVL13:
+ 205:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |=  (speed & DVDAC_1_VDAC8_HS_MASK);
+ 382              		.loc 1 205 0
+ 383 0006 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 384 0008 02F0FD02 		and	r2, r2, #253
+ 385 000c 1A70     		strb	r2, [r3]
+ 206:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** }
+ 386              		.loc 1 206 0
+ 387 000e 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 388 0010 1043     		orrs	r0, r0, r2
+ 389 0012 1870     		strb	r0, [r3]
+ 390 0014 7047     		bx	lr
+ 391              	.L18:
+ 392 0016 00BF     		.align	2
+ 393              	.L17:
+ 394 0018 28580040 		.word	1073764392
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 14
+
+
+ 395              		.cfi_endproc
+ 396              	.LFE4:
+ 397              		.size	DVDAC_1_VDAC8_SetSpeed, .-DVDAC_1_VDAC8_SetSpeed
+ 398              		.section	.text.DVDAC_1_VDAC8_SetRange,"ax",%progbits
+ 399              		.align	2
+ 400              		.global	DVDAC_1_VDAC8_SetRange
+ 401              		.thumb
+ 402              		.thumb_func
+ 403              		.type	DVDAC_1_VDAC8_SetRange, %function
+ 404              	DVDAC_1_VDAC8_SetRange:
+ 405              	.LFB5:
+ 229:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 &= (uint8)(~DVDAC_1_VDAC8_RANGE_MASK);      /* Clear existing mode */
+ 406              		.loc 1 229 0
+ 407              		.cfi_startproc
+ 408              		@ args = 0, pretend = 0, frame = 0
+ 409              		@ frame_needed = 0, uses_anonymous_args = 0
+ 410              		@ link register save eliminated.
+ 411              	.LVL14:
+ 230:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |= (range & DVDAC_1_VDAC8_RANGE_MASK);      /*  Set Range  */
+ 412              		.loc 1 230 0
+ 413 0000 0A4B     		ldr	r3, .L20
+ 231:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_DacTrim();
+ 414              		.loc 1 231 0
+ 415 0002 00F00C00 		and	r0, r0, #12
+ 416              	.LVL15:
+ 230:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |= (range & DVDAC_1_VDAC8_RANGE_MASK);      /*  Set Range  */
+ 417              		.loc 1 230 0
+ 418 0006 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 419              	.LBB74:
+ 420              	.LBB75:
+ 421              		.loc 1 294 0
+ 422 0008 0949     		ldr	r1, .L20+4
+ 423              	.LBE75:
+ 424              	.LBE74:
+ 230:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_CR0 |= (range & DVDAC_1_VDAC8_RANGE_MASK);      /*  Set Range  */
+ 425              		.loc 1 230 0
+ 426 000a 02F0F302 		and	r2, r2, #243
+ 427 000e 1A70     		strb	r2, [r3]
+ 231:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_DacTrim();
+ 428              		.loc 1 231 0
+ 429 0010 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 430 0012 1043     		orrs	r0, r0, r2
+ 431 0014 1870     		strb	r0, [r3]
+ 432              	.LBB77:
+ 433              	.LBB76:
+ 293:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_TR = CY_GET_XTND_REG8((uint8 *)(DVDAC_1_VDAC8_DAC_TRIM_BASE + mode));
+ 434              		.loc 1 293 0
+ 435 0016 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 436              	.LVL16:
+ 437              		.loc 1 294 0
+ 438 0018 C3F38103 		ubfx	r3, r3, #2, #2
+ 439              	.LVL17:
+ 440 001c 03F19243 		add	r3, r3, #1224736768
+ 441 0020 0633     		adds	r3, r3, #6
+ 442 0022 93F82831 		ldrb	r3, [r3, #296]	@ zero_extendqisi2
+ 443 0026 DBB2     		uxtb	r3, r3
+ 444 0028 0B70     		strb	r3, [r1]
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 15
+
+
+ 445 002a 7047     		bx	lr
+ 446              	.L21:
+ 447              		.align	2
+ 448              	.L20:
+ 449 002c 28580040 		.word	1073764392
+ 450 0030 0A460040 		.word	1073759754
+ 451              	.LBE76:
+ 452              	.LBE77:
+ 453              		.cfi_endproc
+ 454              	.LFE5:
+ 455              		.size	DVDAC_1_VDAC8_SetRange, .-DVDAC_1_VDAC8_SetRange
+ 456              		.section	.text.DVDAC_1_VDAC8_SetValue,"ax",%progbits
+ 457              		.align	2
+ 458              		.global	DVDAC_1_VDAC8_SetValue
+ 459              		.thumb
+ 460              		.thumb_func
+ 461              		.type	DVDAC_1_VDAC8_SetValue, %function
+ 462              	DVDAC_1_VDAC8_SetValue:
+ 463              	.LFB6:
+ 255:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     #if (CY_PSOC5A)
+ 464              		.loc 1 255 0
+ 465              		.cfi_startproc
+ 466              		@ args = 0, pretend = 0, frame = 0
+ 467              		@ frame_needed = 0, uses_anonymous_args = 0
+ 468              		@ link register save eliminated.
+ 469              	.LVL18:
+ 260:Generated_Source\PSoC5/DVDAC_1_VDAC8.c **** 
+ 470              		.loc 1 260 0
+ 471 0000 014B     		ldr	r3, .L23
+ 472 0002 1870     		strb	r0, [r3]
+ 473 0004 7047     		bx	lr
+ 474              	.L24:
+ 475 0006 00BF     		.align	2
+ 476              	.L23:
+ 477 0008 825B0040 		.word	1073765250
+ 478              		.cfi_endproc
+ 479              	.LFE6:
+ 480              		.size	DVDAC_1_VDAC8_SetValue, .-DVDAC_1_VDAC8_SetValue
+ 481              		.section	.text.DVDAC_1_VDAC8_DacTrim,"ax",%progbits
+ 482              		.align	2
+ 483              		.global	DVDAC_1_VDAC8_DacTrim
+ 484              		.thumb
+ 485              		.thumb_func
+ 486              		.type	DVDAC_1_VDAC8_DacTrim, %function
+ 487              	DVDAC_1_VDAC8_DacTrim:
+ 488              	.LFB7:
+ 290:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     uint8 mode;
+ 489              		.loc 1 290 0
+ 490              		.cfi_startproc
+ 491              		@ args = 0, pretend = 0, frame = 0
+ 492              		@ frame_needed = 0, uses_anonymous_args = 0
+ 493              		@ link register save eliminated.
+ 293:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_TR = CY_GET_XTND_REG8((uint8 *)(DVDAC_1_VDAC8_DAC_TRIM_BASE + mode));
+ 494              		.loc 1 293 0
+ 495 0000 064B     		ldr	r3, .L26
+ 496              		.loc 1 294 0
+ 497 0002 074A     		ldr	r2, .L26+4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 16
+
+
+ 293:Generated_Source\PSoC5/DVDAC_1_VDAC8.c ****     DVDAC_1_VDAC8_TR = CY_GET_XTND_REG8((uint8 *)(DVDAC_1_VDAC8_DAC_TRIM_BASE + mode));
+ 498              		.loc 1 293 0
+ 499 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 500              	.LVL19:
+ 501              		.loc 1 294 0
+ 502 0006 C3F38103 		ubfx	r3, r3, #2, #2
+ 503              	.LVL20:
+ 504 000a 03F19243 		add	r3, r3, #1224736768
+ 505 000e 0633     		adds	r3, r3, #6
+ 506 0010 93F82831 		ldrb	r3, [r3, #296]	@ zero_extendqisi2
+ 507 0014 DBB2     		uxtb	r3, r3
+ 508 0016 1370     		strb	r3, [r2]
+ 509 0018 7047     		bx	lr
+ 510              	.L27:
+ 511 001a 00BF     		.align	2
+ 512              	.L26:
+ 513 001c 28580040 		.word	1073764392
+ 514 0020 0A460040 		.word	1073759754
+ 515              		.cfi_endproc
+ 516              	.LFE7:
+ 517              		.size	DVDAC_1_VDAC8_DacTrim, .-DVDAC_1_VDAC8_DacTrim
+ 518              		.global	DVDAC_1_VDAC8_initVar
+ 519              		.bss
+ 520              		.set	.LANCHOR0,. + 0
+ 521              		.type	DVDAC_1_VDAC8_initVar, %object
+ 522              		.size	DVDAC_1_VDAC8_initVar, 1
+ 523              	DVDAC_1_VDAC8_initVar:
+ 524 0000 00       		.space	1
+ 525              		.text
+ 526              	.Letext0:
+ 527              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 528              		.section	.debug_info,"",%progbits
+ 529              	.Ldebug_info0:
+ 530 0000 DE020000 		.4byte	0x2de
+ 531 0004 0400     		.2byte	0x4
+ 532 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 533 000a 04       		.byte	0x4
+ 534 000b 01       		.uleb128 0x1
+ 535 000c 54010000 		.4byte	.LASF23
+ 536 0010 0C       		.byte	0xc
+ 537 0011 0C020000 		.4byte	.LASF24
+ 538 0015 CB000000 		.4byte	.LASF25
+ 539 0019 E8000000 		.4byte	.Ldebug_ranges0+0xe8
+ 540 001d 00000000 		.4byte	0
+ 541 0021 00000000 		.4byte	.Ldebug_line0
+ 542 0025 02       		.uleb128 0x2
+ 543 0026 01       		.byte	0x1
+ 544 0027 06       		.byte	0x6
+ 545 0028 96020000 		.4byte	.LASF0
+ 546 002c 02       		.uleb128 0x2
+ 547 002d 01       		.byte	0x1
+ 548 002e 08       		.byte	0x8
+ 549 002f 59000000 		.4byte	.LASF1
+ 550 0033 02       		.uleb128 0x2
+ 551 0034 02       		.byte	0x2
+ 552 0035 05       		.byte	0x5
+ 553 0036 51020000 		.4byte	.LASF2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 17
+
+
+ 554 003a 02       		.uleb128 0x2
+ 555 003b 02       		.byte	0x2
+ 556 003c 07       		.byte	0x7
+ 557 003d 7E000000 		.4byte	.LASF3
+ 558 0041 02       		.uleb128 0x2
+ 559 0042 04       		.byte	0x4
+ 560 0043 05       		.byte	0x5
+ 561 0044 8D020000 		.4byte	.LASF4
+ 562 0048 02       		.uleb128 0x2
+ 563 0049 04       		.byte	0x4
+ 564 004a 07       		.byte	0x7
+ 565 004b 6C000000 		.4byte	.LASF5
+ 566 004f 02       		.uleb128 0x2
+ 567 0050 08       		.byte	0x8
+ 568 0051 05       		.byte	0x5
+ 569 0052 3E020000 		.4byte	.LASF6
+ 570 0056 02       		.uleb128 0x2
+ 571 0057 08       		.byte	0x8
+ 572 0058 07       		.byte	0x7
+ 573 0059 F5010000 		.4byte	.LASF7
+ 574 005d 03       		.uleb128 0x3
+ 575 005e 04       		.byte	0x4
+ 576 005f 05       		.byte	0x5
+ 577 0060 696E7400 		.ascii	"int\000"
+ 578 0064 02       		.uleb128 0x2
+ 579 0065 04       		.byte	0x4
+ 580 0066 07       		.byte	0x7
+ 581 0067 1C000000 		.4byte	.LASF8
+ 582 006b 04       		.uleb128 0x4
+ 583 006c 5B020000 		.4byte	.LASF12
+ 584 0070 02       		.byte	0x2
+ 585 0071 E401     		.2byte	0x1e4
+ 586 0073 2C000000 		.4byte	0x2c
+ 587 0077 02       		.uleb128 0x2
+ 588 0078 04       		.byte	0x4
+ 589 0079 04       		.byte	0x4
+ 590 007a 40000000 		.4byte	.LASF9
+ 591 007e 02       		.uleb128 0x2
+ 592 007f 08       		.byte	0x8
+ 593 0080 04       		.byte	0x4
+ 594 0081 AE000000 		.4byte	.LASF10
+ 595 0085 02       		.uleb128 0x2
+ 596 0086 01       		.byte	0x1
+ 597 0087 08       		.byte	0x8
+ 598 0088 4C020000 		.4byte	.LASF11
+ 599 008c 04       		.uleb128 0x4
+ 600 008d 67000000 		.4byte	.LASF13
+ 601 0091 02       		.byte	0x2
+ 602 0092 8E02     		.2byte	0x28e
+ 603 0094 98000000 		.4byte	0x98
+ 604 0098 05       		.uleb128 0x5
+ 605 0099 6B000000 		.4byte	0x6b
+ 606 009d 06       		.uleb128 0x6
+ 607 009e B5000000 		.4byte	.LASF14
+ 608 00a2 01       		.byte	0x1
+ 609 00a3 2101     		.2byte	0x121
+ 610 00a5 01       		.byte	0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 18
+
+
+ 611 00a6 B7000000 		.4byte	0xb7
+ 612 00aa 07       		.uleb128 0x7
+ 613 00ab 39020000 		.4byte	.LASF26
+ 614 00af 01       		.byte	0x1
+ 615 00b0 2301     		.2byte	0x123
+ 616 00b2 6B000000 		.4byte	0x6b
+ 617 00b6 00       		.byte	0
+ 618 00b7 08       		.uleb128 0x8
+ 619 00b8 97000000 		.4byte	.LASF15
+ 620 00bc 01       		.byte	0x1
+ 621 00bd CA       		.byte	0xca
+ 622 00be 01       		.byte	0x1
+ 623 00bf CF000000 		.4byte	0xcf
+ 624 00c3 09       		.uleb128 0x9
+ 625 00c4 33020000 		.4byte	.LASF17
+ 626 00c8 01       		.byte	0x1
+ 627 00c9 CA       		.byte	0xca
+ 628 00ca 6B000000 		.4byte	0x6b
+ 629 00ce 00       		.byte	0
+ 630 00cf 08       		.uleb128 0x8
+ 631 00d0 29000000 		.4byte	.LASF16
+ 632 00d4 01       		.byte	0x1
+ 633 00d5 E4       		.byte	0xe4
+ 634 00d6 01       		.byte	0x1
+ 635 00d7 E7000000 		.4byte	0xe7
+ 636 00db 09       		.uleb128 0x9
+ 637 00dc 91000000 		.4byte	.LASF18
+ 638 00e0 01       		.byte	0x1
+ 639 00e1 E4       		.byte	0xe4
+ 640 00e2 6B000000 		.4byte	0x6b
+ 641 00e6 00       		.byte	0
+ 642 00e7 08       		.uleb128 0x8
+ 643 00e8 76020000 		.4byte	.LASF19
+ 644 00ec 01       		.byte	0x1
+ 645 00ed FE       		.byte	0xfe
+ 646 00ee 01       		.byte	0x1
+ 647 00ef FF000000 		.4byte	0xff
+ 648 00f3 09       		.uleb128 0x9
+ 649 00f4 00000000 		.4byte	.LASF20
+ 650 00f8 01       		.byte	0x1
+ 651 00f9 FE       		.byte	0xfe
+ 652 00fa 6B000000 		.4byte	0x6b
+ 653 00fe 00       		.byte	0
+ 654 00ff 0A       		.uleb128 0xa
+ 655 0100 61020000 		.4byte	.LASF21
+ 656 0104 01       		.byte	0x1
+ 657 0105 60       		.byte	0x60
+ 658 0106 01       		.byte	0x1
+ 659 0107 0A       		.uleb128 0xa
+ 660 0108 B6020000 		.4byte	.LASF22
+ 661 010c 01       		.byte	0x1
+ 662 010d 37       		.byte	0x37
+ 663 010e 01       		.byte	0x1
+ 664 010f 0B       		.uleb128 0xb
+ 665 0110 07010000 		.4byte	0x107
+ 666 0114 00000000 		.4byte	.LFB0
+ 667 0118 5C000000 		.4byte	.LFE0-.LFB0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 19
+
+
+ 668 011c 01       		.uleb128 0x1
+ 669 011d 9C       		.byte	0x9c
+ 670 011e 78010000 		.4byte	0x178
+ 671 0122 0C       		.uleb128 0xc
+ 672 0123 CF000000 		.4byte	0xcf
+ 673 0127 0E000000 		.4byte	.LBB20
+ 674 012b 00000000 		.4byte	.Ldebug_ranges0+0
+ 675 012f 01       		.byte	0x1
+ 676 0130 48       		.byte	0x48
+ 677 0131 5E010000 		.4byte	0x15e
+ 678 0135 0D       		.uleb128 0xd
+ 679 0136 DB000000 		.4byte	0xdb
+ 680 013a 00000000 		.4byte	.LLST0
+ 681 013e 0E       		.uleb128 0xe
+ 682 013f 9D000000 		.4byte	0x9d
+ 683 0143 0E000000 		.4byte	.LBB22
+ 684 0147 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 685 014b 01       		.byte	0x1
+ 686 014c E8       		.byte	0xe8
+ 687 014d 0F       		.uleb128 0xf
+ 688 014e 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 689 0152 10       		.uleb128 0x10
+ 690 0153 AA000000 		.4byte	0xaa
+ 691 0157 14000000 		.4byte	.LLST1
+ 692 015b 00       		.byte	0
+ 693 015c 00       		.byte	0
+ 694 015d 00       		.byte	0
+ 695 015e 11       		.uleb128 0x11
+ 696 015f B7000000 		.4byte	0xb7
+ 697 0163 3C000000 		.4byte	.LBB30
+ 698 0167 20000000 		.4byte	.LBE30-.LBB30
+ 699 016b 01       		.byte	0x1
+ 700 016c 4B       		.byte	0x4b
+ 701 016d 0D       		.uleb128 0xd
+ 702 016e C3000000 		.4byte	0xc3
+ 703 0172 2F000000 		.4byte	.LLST2
+ 704 0176 00       		.byte	0
+ 705 0177 00       		.byte	0
+ 706 0178 12       		.uleb128 0x12
+ 707 0179 FF000000 		.4byte	0xff
+ 708 017d 00000000 		.4byte	.LFB1
+ 709 0181 20000000 		.4byte	.LFE1-.LFB1
+ 710 0185 01       		.uleb128 0x1
+ 711 0186 9C       		.byte	0x9c
+ 712 0187 13       		.uleb128 0x13
+ 713 0188 A2020000 		.4byte	.LASF27
+ 714 018c 01       		.byte	0x1
+ 715 018d 85       		.byte	0x85
+ 716 018e 00000000 		.4byte	.LFB2
+ 717 0192 90000000 		.4byte	.LFE2-.LFB2
+ 718 0196 01       		.uleb128 0x1
+ 719 0197 9C       		.byte	0x9c
+ 720 0198 2E020000 		.4byte	0x22e
+ 721 019c 0C       		.uleb128 0xc
+ 722 019d 07010000 		.4byte	0x107
+ 723 01a1 08000000 		.4byte	.LBB44
+ 724 01a5 38000000 		.4byte	.Ldebug_ranges0+0x38
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 20
+
+
+ 725 01a9 01       		.byte	0x1
+ 726 01aa 8A       		.byte	0x8a
+ 727 01ab 05020000 		.4byte	0x205
+ 728 01af 0C       		.uleb128 0xc
+ 729 01b0 CF000000 		.4byte	0xcf
+ 730 01b4 14000000 		.4byte	.LBB46
+ 731 01b8 50000000 		.4byte	.Ldebug_ranges0+0x50
+ 732 01bc 01       		.byte	0x1
+ 733 01bd 48       		.byte	0x48
+ 734 01be EB010000 		.4byte	0x1eb
+ 735 01c2 0D       		.uleb128 0xd
+ 736 01c3 DB000000 		.4byte	0xdb
+ 737 01c7 43000000 		.4byte	.LLST3
+ 738 01cb 0E       		.uleb128 0xe
+ 739 01cc 9D000000 		.4byte	0x9d
+ 740 01d0 14000000 		.4byte	.LBB48
+ 741 01d4 70000000 		.4byte	.Ldebug_ranges0+0x70
+ 742 01d8 01       		.byte	0x1
+ 743 01d9 E8       		.byte	0xe8
+ 744 01da 0F       		.uleb128 0xf
+ 745 01db 70000000 		.4byte	.Ldebug_ranges0+0x70
+ 746 01df 10       		.uleb128 0x10
+ 747 01e0 AA000000 		.4byte	0xaa
+ 748 01e4 57000000 		.4byte	.LLST4
+ 749 01e8 00       		.byte	0
+ 750 01e9 00       		.byte	0
+ 751 01ea 00       		.byte	0
+ 752 01eb 11       		.uleb128 0x11
+ 753 01ec B7000000 		.4byte	0xb7
+ 754 01f0 44000000 		.4byte	.LBB58
+ 755 01f4 10000000 		.4byte	.LBE58-.LBB58
+ 756 01f8 01       		.byte	0x1
+ 757 01f9 4B       		.byte	0x4b
+ 758 01fa 0D       		.uleb128 0xd
+ 759 01fb C3000000 		.4byte	0xc3
+ 760 01ff 72000000 		.4byte	.LLST5
+ 761 0203 00       		.byte	0
+ 762 0204 00       		.byte	0
+ 763 0205 14       		.uleb128 0x14
+ 764 0206 FF000000 		.4byte	0xff
+ 765 020a 56000000 		.4byte	.LBB62
+ 766 020e 90000000 		.4byte	.Ldebug_ranges0+0x90
+ 767 0212 01       		.byte	0x1
+ 768 0213 8F       		.byte	0x8f
+ 769 0214 0E       		.uleb128 0xe
+ 770 0215 E7000000 		.4byte	0xe7
+ 771 0219 5C000000 		.4byte	.LBB66
+ 772 021d B0000000 		.4byte	.Ldebug_ranges0+0xb0
+ 773 0221 01       		.byte	0x1
+ 774 0222 92       		.byte	0x92
+ 775 0223 0D       		.uleb128 0xd
+ 776 0224 F3000000 		.4byte	0xf3
+ 777 0228 86000000 		.4byte	.LLST6
+ 778 022c 00       		.byte	0
+ 779 022d 00       		.byte	0
+ 780 022e 15       		.uleb128 0x15
+ 781 022f 46000000 		.4byte	.LASF28
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 21
+
+
+ 782 0233 01       		.byte	0x1
+ 783 0234 A8       		.byte	0xa8
+ 784 0235 00000000 		.4byte	.LFB3
+ 785 0239 20000000 		.4byte	.LFE3-.LFB3
+ 786 023d 01       		.uleb128 0x1
+ 787 023e 9C       		.byte	0x9c
+ 788 023f 0B       		.uleb128 0xb
+ 789 0240 B7000000 		.4byte	0xb7
+ 790 0244 00000000 		.4byte	.LFB4
+ 791 0248 1C000000 		.4byte	.LFE4-.LFB4
+ 792 024c 01       		.uleb128 0x1
+ 793 024d 9C       		.byte	0x9c
+ 794 024e 5C020000 		.4byte	0x25c
+ 795 0252 0D       		.uleb128 0xd
+ 796 0253 C3000000 		.4byte	0xc3
+ 797 0257 9A000000 		.4byte	.LLST7
+ 798 025b 00       		.byte	0
+ 799 025c 0B       		.uleb128 0xb
+ 800 025d CF000000 		.4byte	0xcf
+ 801 0261 00000000 		.4byte	.LFB5
+ 802 0265 34000000 		.4byte	.LFE5-.LFB5
+ 803 0269 01       		.uleb128 0x1
+ 804 026a 9C       		.byte	0x9c
+ 805 026b 98020000 		.4byte	0x298
+ 806 026f 0D       		.uleb128 0xd
+ 807 0270 DB000000 		.4byte	0xdb
+ 808 0274 BB000000 		.4byte	.LLST8
+ 809 0278 0E       		.uleb128 0xe
+ 810 0279 9D000000 		.4byte	0x9d
+ 811 027d 08000000 		.4byte	.LBB74
+ 812 0281 D0000000 		.4byte	.Ldebug_ranges0+0xd0
+ 813 0285 01       		.byte	0x1
+ 814 0286 E8       		.byte	0xe8
+ 815 0287 0F       		.uleb128 0xf
+ 816 0288 D0000000 		.4byte	.Ldebug_ranges0+0xd0
+ 817 028c 10       		.uleb128 0x10
+ 818 028d AA000000 		.4byte	0xaa
+ 819 0291 DC000000 		.4byte	.LLST9
+ 820 0295 00       		.byte	0
+ 821 0296 00       		.byte	0
+ 822 0297 00       		.byte	0
+ 823 0298 0B       		.uleb128 0xb
+ 824 0299 E7000000 		.4byte	0xe7
+ 825 029d 00000000 		.4byte	.LFB6
+ 826 02a1 0C000000 		.4byte	.LFE6-.LFB6
+ 827 02a5 01       		.uleb128 0x1
+ 828 02a6 9C       		.byte	0x9c
+ 829 02a7 B3020000 		.4byte	0x2b3
+ 830 02ab 16       		.uleb128 0x16
+ 831 02ac F3000000 		.4byte	0xf3
+ 832 02b0 01       		.uleb128 0x1
+ 833 02b1 50       		.byte	0x50
+ 834 02b2 00       		.byte	0
+ 835 02b3 0B       		.uleb128 0xb
+ 836 02b4 9D000000 		.4byte	0x9d
+ 837 02b8 00000000 		.4byte	.LFB7
+ 838 02bc 24000000 		.4byte	.LFE7-.LFB7
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 22
+
+
+ 839 02c0 01       		.uleb128 0x1
+ 840 02c1 9C       		.byte	0x9c
+ 841 02c2 D0020000 		.4byte	0x2d0
+ 842 02c6 10       		.uleb128 0x10
+ 843 02c7 AA000000 		.4byte	0xaa
+ 844 02cb F7000000 		.4byte	.LLST10
+ 845 02cf 00       		.byte	0
+ 846 02d0 17       		.uleb128 0x17
+ 847 02d1 06000000 		.4byte	.LASF29
+ 848 02d5 01       		.byte	0x1
+ 849 02d6 1B       		.byte	0x1b
+ 850 02d7 6B000000 		.4byte	0x6b
+ 851 02db 05       		.uleb128 0x5
+ 852 02dc 03       		.byte	0x3
+ 853 02dd 00000000 		.4byte	DVDAC_1_VDAC8_initVar
+ 854 02e1 00       		.byte	0
+ 855              		.section	.debug_abbrev,"",%progbits
+ 856              	.Ldebug_abbrev0:
+ 857 0000 01       		.uleb128 0x1
+ 858 0001 11       		.uleb128 0x11
+ 859 0002 01       		.byte	0x1
+ 860 0003 25       		.uleb128 0x25
+ 861 0004 0E       		.uleb128 0xe
+ 862 0005 13       		.uleb128 0x13
+ 863 0006 0B       		.uleb128 0xb
+ 864 0007 03       		.uleb128 0x3
+ 865 0008 0E       		.uleb128 0xe
+ 866 0009 1B       		.uleb128 0x1b
+ 867 000a 0E       		.uleb128 0xe
+ 868 000b 55       		.uleb128 0x55
+ 869 000c 17       		.uleb128 0x17
+ 870 000d 11       		.uleb128 0x11
+ 871 000e 01       		.uleb128 0x1
+ 872 000f 10       		.uleb128 0x10
+ 873 0010 17       		.uleb128 0x17
+ 874 0011 00       		.byte	0
+ 875 0012 00       		.byte	0
+ 876 0013 02       		.uleb128 0x2
+ 877 0014 24       		.uleb128 0x24
+ 878 0015 00       		.byte	0
+ 879 0016 0B       		.uleb128 0xb
+ 880 0017 0B       		.uleb128 0xb
+ 881 0018 3E       		.uleb128 0x3e
+ 882 0019 0B       		.uleb128 0xb
+ 883 001a 03       		.uleb128 0x3
+ 884 001b 0E       		.uleb128 0xe
+ 885 001c 00       		.byte	0
+ 886 001d 00       		.byte	0
+ 887 001e 03       		.uleb128 0x3
+ 888 001f 24       		.uleb128 0x24
+ 889 0020 00       		.byte	0
+ 890 0021 0B       		.uleb128 0xb
+ 891 0022 0B       		.uleb128 0xb
+ 892 0023 3E       		.uleb128 0x3e
+ 893 0024 0B       		.uleb128 0xb
+ 894 0025 03       		.uleb128 0x3
+ 895 0026 08       		.uleb128 0x8
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 23
+
+
+ 896 0027 00       		.byte	0
+ 897 0028 00       		.byte	0
+ 898 0029 04       		.uleb128 0x4
+ 899 002a 16       		.uleb128 0x16
+ 900 002b 00       		.byte	0
+ 901 002c 03       		.uleb128 0x3
+ 902 002d 0E       		.uleb128 0xe
+ 903 002e 3A       		.uleb128 0x3a
+ 904 002f 0B       		.uleb128 0xb
+ 905 0030 3B       		.uleb128 0x3b
+ 906 0031 05       		.uleb128 0x5
+ 907 0032 49       		.uleb128 0x49
+ 908 0033 13       		.uleb128 0x13
+ 909 0034 00       		.byte	0
+ 910 0035 00       		.byte	0
+ 911 0036 05       		.uleb128 0x5
+ 912 0037 35       		.uleb128 0x35
+ 913 0038 00       		.byte	0
+ 914 0039 49       		.uleb128 0x49
+ 915 003a 13       		.uleb128 0x13
+ 916 003b 00       		.byte	0
+ 917 003c 00       		.byte	0
+ 918 003d 06       		.uleb128 0x6
+ 919 003e 2E       		.uleb128 0x2e
+ 920 003f 01       		.byte	0x1
+ 921 0040 3F       		.uleb128 0x3f
+ 922 0041 19       		.uleb128 0x19
+ 923 0042 03       		.uleb128 0x3
+ 924 0043 0E       		.uleb128 0xe
+ 925 0044 3A       		.uleb128 0x3a
+ 926 0045 0B       		.uleb128 0xb
+ 927 0046 3B       		.uleb128 0x3b
+ 928 0047 05       		.uleb128 0x5
+ 929 0048 27       		.uleb128 0x27
+ 930 0049 19       		.uleb128 0x19
+ 931 004a 20       		.uleb128 0x20
+ 932 004b 0B       		.uleb128 0xb
+ 933 004c 01       		.uleb128 0x1
+ 934 004d 13       		.uleb128 0x13
+ 935 004e 00       		.byte	0
+ 936 004f 00       		.byte	0
+ 937 0050 07       		.uleb128 0x7
+ 938 0051 34       		.uleb128 0x34
+ 939 0052 00       		.byte	0
+ 940 0053 03       		.uleb128 0x3
+ 941 0054 0E       		.uleb128 0xe
+ 942 0055 3A       		.uleb128 0x3a
+ 943 0056 0B       		.uleb128 0xb
+ 944 0057 3B       		.uleb128 0x3b
+ 945 0058 05       		.uleb128 0x5
+ 946 0059 49       		.uleb128 0x49
+ 947 005a 13       		.uleb128 0x13
+ 948 005b 00       		.byte	0
+ 949 005c 00       		.byte	0
+ 950 005d 08       		.uleb128 0x8
+ 951 005e 2E       		.uleb128 0x2e
+ 952 005f 01       		.byte	0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 24
+
+
+ 953 0060 3F       		.uleb128 0x3f
+ 954 0061 19       		.uleb128 0x19
+ 955 0062 03       		.uleb128 0x3
+ 956 0063 0E       		.uleb128 0xe
+ 957 0064 3A       		.uleb128 0x3a
+ 958 0065 0B       		.uleb128 0xb
+ 959 0066 3B       		.uleb128 0x3b
+ 960 0067 0B       		.uleb128 0xb
+ 961 0068 27       		.uleb128 0x27
+ 962 0069 19       		.uleb128 0x19
+ 963 006a 20       		.uleb128 0x20
+ 964 006b 0B       		.uleb128 0xb
+ 965 006c 01       		.uleb128 0x1
+ 966 006d 13       		.uleb128 0x13
+ 967 006e 00       		.byte	0
+ 968 006f 00       		.byte	0
+ 969 0070 09       		.uleb128 0x9
+ 970 0071 05       		.uleb128 0x5
+ 971 0072 00       		.byte	0
+ 972 0073 03       		.uleb128 0x3
+ 973 0074 0E       		.uleb128 0xe
+ 974 0075 3A       		.uleb128 0x3a
+ 975 0076 0B       		.uleb128 0xb
+ 976 0077 3B       		.uleb128 0x3b
+ 977 0078 0B       		.uleb128 0xb
+ 978 0079 49       		.uleb128 0x49
+ 979 007a 13       		.uleb128 0x13
+ 980 007b 00       		.byte	0
+ 981 007c 00       		.byte	0
+ 982 007d 0A       		.uleb128 0xa
+ 983 007e 2E       		.uleb128 0x2e
+ 984 007f 00       		.byte	0
+ 985 0080 3F       		.uleb128 0x3f
+ 986 0081 19       		.uleb128 0x19
+ 987 0082 03       		.uleb128 0x3
+ 988 0083 0E       		.uleb128 0xe
+ 989 0084 3A       		.uleb128 0x3a
+ 990 0085 0B       		.uleb128 0xb
+ 991 0086 3B       		.uleb128 0x3b
+ 992 0087 0B       		.uleb128 0xb
+ 993 0088 27       		.uleb128 0x27
+ 994 0089 19       		.uleb128 0x19
+ 995 008a 20       		.uleb128 0x20
+ 996 008b 0B       		.uleb128 0xb
+ 997 008c 00       		.byte	0
+ 998 008d 00       		.byte	0
+ 999 008e 0B       		.uleb128 0xb
+ 1000 008f 2E       		.uleb128 0x2e
+ 1001 0090 01       		.byte	0x1
+ 1002 0091 31       		.uleb128 0x31
+ 1003 0092 13       		.uleb128 0x13
+ 1004 0093 11       		.uleb128 0x11
+ 1005 0094 01       		.uleb128 0x1
+ 1006 0095 12       		.uleb128 0x12
+ 1007 0096 06       		.uleb128 0x6
+ 1008 0097 40       		.uleb128 0x40
+ 1009 0098 18       		.uleb128 0x18
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 25
+
+
+ 1010 0099 9742     		.uleb128 0x2117
+ 1011 009b 19       		.uleb128 0x19
+ 1012 009c 01       		.uleb128 0x1
+ 1013 009d 13       		.uleb128 0x13
+ 1014 009e 00       		.byte	0
+ 1015 009f 00       		.byte	0
+ 1016 00a0 0C       		.uleb128 0xc
+ 1017 00a1 1D       		.uleb128 0x1d
+ 1018 00a2 01       		.byte	0x1
+ 1019 00a3 31       		.uleb128 0x31
+ 1020 00a4 13       		.uleb128 0x13
+ 1021 00a5 52       		.uleb128 0x52
+ 1022 00a6 01       		.uleb128 0x1
+ 1023 00a7 55       		.uleb128 0x55
+ 1024 00a8 17       		.uleb128 0x17
+ 1025 00a9 58       		.uleb128 0x58
+ 1026 00aa 0B       		.uleb128 0xb
+ 1027 00ab 59       		.uleb128 0x59
+ 1028 00ac 0B       		.uleb128 0xb
+ 1029 00ad 01       		.uleb128 0x1
+ 1030 00ae 13       		.uleb128 0x13
+ 1031 00af 00       		.byte	0
+ 1032 00b0 00       		.byte	0
+ 1033 00b1 0D       		.uleb128 0xd
+ 1034 00b2 05       		.uleb128 0x5
+ 1035 00b3 00       		.byte	0
+ 1036 00b4 31       		.uleb128 0x31
+ 1037 00b5 13       		.uleb128 0x13
+ 1038 00b6 02       		.uleb128 0x2
+ 1039 00b7 17       		.uleb128 0x17
+ 1040 00b8 00       		.byte	0
+ 1041 00b9 00       		.byte	0
+ 1042 00ba 0E       		.uleb128 0xe
+ 1043 00bb 1D       		.uleb128 0x1d
+ 1044 00bc 01       		.byte	0x1
+ 1045 00bd 31       		.uleb128 0x31
+ 1046 00be 13       		.uleb128 0x13
+ 1047 00bf 52       		.uleb128 0x52
+ 1048 00c0 01       		.uleb128 0x1
+ 1049 00c1 55       		.uleb128 0x55
+ 1050 00c2 17       		.uleb128 0x17
+ 1051 00c3 58       		.uleb128 0x58
+ 1052 00c4 0B       		.uleb128 0xb
+ 1053 00c5 59       		.uleb128 0x59
+ 1054 00c6 0B       		.uleb128 0xb
+ 1055 00c7 00       		.byte	0
+ 1056 00c8 00       		.byte	0
+ 1057 00c9 0F       		.uleb128 0xf
+ 1058 00ca 0B       		.uleb128 0xb
+ 1059 00cb 01       		.byte	0x1
+ 1060 00cc 55       		.uleb128 0x55
+ 1061 00cd 17       		.uleb128 0x17
+ 1062 00ce 00       		.byte	0
+ 1063 00cf 00       		.byte	0
+ 1064 00d0 10       		.uleb128 0x10
+ 1065 00d1 34       		.uleb128 0x34
+ 1066 00d2 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 26
+
+
+ 1067 00d3 31       		.uleb128 0x31
+ 1068 00d4 13       		.uleb128 0x13
+ 1069 00d5 02       		.uleb128 0x2
+ 1070 00d6 17       		.uleb128 0x17
+ 1071 00d7 00       		.byte	0
+ 1072 00d8 00       		.byte	0
+ 1073 00d9 11       		.uleb128 0x11
+ 1074 00da 1D       		.uleb128 0x1d
+ 1075 00db 01       		.byte	0x1
+ 1076 00dc 31       		.uleb128 0x31
+ 1077 00dd 13       		.uleb128 0x13
+ 1078 00de 11       		.uleb128 0x11
+ 1079 00df 01       		.uleb128 0x1
+ 1080 00e0 12       		.uleb128 0x12
+ 1081 00e1 06       		.uleb128 0x6
+ 1082 00e2 58       		.uleb128 0x58
+ 1083 00e3 0B       		.uleb128 0xb
+ 1084 00e4 59       		.uleb128 0x59
+ 1085 00e5 0B       		.uleb128 0xb
+ 1086 00e6 00       		.byte	0
+ 1087 00e7 00       		.byte	0
+ 1088 00e8 12       		.uleb128 0x12
+ 1089 00e9 2E       		.uleb128 0x2e
+ 1090 00ea 00       		.byte	0
+ 1091 00eb 31       		.uleb128 0x31
+ 1092 00ec 13       		.uleb128 0x13
+ 1093 00ed 11       		.uleb128 0x11
+ 1094 00ee 01       		.uleb128 0x1
+ 1095 00ef 12       		.uleb128 0x12
+ 1096 00f0 06       		.uleb128 0x6
+ 1097 00f1 40       		.uleb128 0x40
+ 1098 00f2 18       		.uleb128 0x18
+ 1099 00f3 9742     		.uleb128 0x2117
+ 1100 00f5 19       		.uleb128 0x19
+ 1101 00f6 00       		.byte	0
+ 1102 00f7 00       		.byte	0
+ 1103 00f8 13       		.uleb128 0x13
+ 1104 00f9 2E       		.uleb128 0x2e
+ 1105 00fa 01       		.byte	0x1
+ 1106 00fb 3F       		.uleb128 0x3f
+ 1107 00fc 19       		.uleb128 0x19
+ 1108 00fd 03       		.uleb128 0x3
+ 1109 00fe 0E       		.uleb128 0xe
+ 1110 00ff 3A       		.uleb128 0x3a
+ 1111 0100 0B       		.uleb128 0xb
+ 1112 0101 3B       		.uleb128 0x3b
+ 1113 0102 0B       		.uleb128 0xb
+ 1114 0103 27       		.uleb128 0x27
+ 1115 0104 19       		.uleb128 0x19
+ 1116 0105 11       		.uleb128 0x11
+ 1117 0106 01       		.uleb128 0x1
+ 1118 0107 12       		.uleb128 0x12
+ 1119 0108 06       		.uleb128 0x6
+ 1120 0109 40       		.uleb128 0x40
+ 1121 010a 18       		.uleb128 0x18
+ 1122 010b 9742     		.uleb128 0x2117
+ 1123 010d 19       		.uleb128 0x19
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 27
+
+
+ 1124 010e 01       		.uleb128 0x1
+ 1125 010f 13       		.uleb128 0x13
+ 1126 0110 00       		.byte	0
+ 1127 0111 00       		.byte	0
+ 1128 0112 14       		.uleb128 0x14
+ 1129 0113 1D       		.uleb128 0x1d
+ 1130 0114 00       		.byte	0
+ 1131 0115 31       		.uleb128 0x31
+ 1132 0116 13       		.uleb128 0x13
+ 1133 0117 52       		.uleb128 0x52
+ 1134 0118 01       		.uleb128 0x1
+ 1135 0119 55       		.uleb128 0x55
+ 1136 011a 17       		.uleb128 0x17
+ 1137 011b 58       		.uleb128 0x58
+ 1138 011c 0B       		.uleb128 0xb
+ 1139 011d 59       		.uleb128 0x59
+ 1140 011e 0B       		.uleb128 0xb
+ 1141 011f 00       		.byte	0
+ 1142 0120 00       		.byte	0
+ 1143 0121 15       		.uleb128 0x15
+ 1144 0122 2E       		.uleb128 0x2e
+ 1145 0123 00       		.byte	0
+ 1146 0124 3F       		.uleb128 0x3f
+ 1147 0125 19       		.uleb128 0x19
+ 1148 0126 03       		.uleb128 0x3
+ 1149 0127 0E       		.uleb128 0xe
+ 1150 0128 3A       		.uleb128 0x3a
+ 1151 0129 0B       		.uleb128 0xb
+ 1152 012a 3B       		.uleb128 0x3b
+ 1153 012b 0B       		.uleb128 0xb
+ 1154 012c 27       		.uleb128 0x27
+ 1155 012d 19       		.uleb128 0x19
+ 1156 012e 11       		.uleb128 0x11
+ 1157 012f 01       		.uleb128 0x1
+ 1158 0130 12       		.uleb128 0x12
+ 1159 0131 06       		.uleb128 0x6
+ 1160 0132 40       		.uleb128 0x40
+ 1161 0133 18       		.uleb128 0x18
+ 1162 0134 9742     		.uleb128 0x2117
+ 1163 0136 19       		.uleb128 0x19
+ 1164 0137 00       		.byte	0
+ 1165 0138 00       		.byte	0
+ 1166 0139 16       		.uleb128 0x16
+ 1167 013a 05       		.uleb128 0x5
+ 1168 013b 00       		.byte	0
+ 1169 013c 31       		.uleb128 0x31
+ 1170 013d 13       		.uleb128 0x13
+ 1171 013e 02       		.uleb128 0x2
+ 1172 013f 18       		.uleb128 0x18
+ 1173 0140 00       		.byte	0
+ 1174 0141 00       		.byte	0
+ 1175 0142 17       		.uleb128 0x17
+ 1176 0143 34       		.uleb128 0x34
+ 1177 0144 00       		.byte	0
+ 1178 0145 03       		.uleb128 0x3
+ 1179 0146 0E       		.uleb128 0xe
+ 1180 0147 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 28
+
+
+ 1181 0148 0B       		.uleb128 0xb
+ 1182 0149 3B       		.uleb128 0x3b
+ 1183 014a 0B       		.uleb128 0xb
+ 1184 014b 49       		.uleb128 0x49
+ 1185 014c 13       		.uleb128 0x13
+ 1186 014d 3F       		.uleb128 0x3f
+ 1187 014e 19       		.uleb128 0x19
+ 1188 014f 02       		.uleb128 0x2
+ 1189 0150 18       		.uleb128 0x18
+ 1190 0151 00       		.byte	0
+ 1191 0152 00       		.byte	0
+ 1192 0153 00       		.byte	0
+ 1193              		.section	.debug_loc,"",%progbits
+ 1194              	.Ldebug_loc0:
+ 1195              	.LLST0:
+ 1196 0000 18000000 		.4byte	.LVL0
+ 1197 0004 3C000000 		.4byte	.LVL3
+ 1198 0008 0200     		.2byte	0x2
+ 1199 000a 30       		.byte	0x30
+ 1200 000b 9F       		.byte	0x9f
+ 1201 000c 00000000 		.4byte	0
+ 1202 0010 00000000 		.4byte	0
+ 1203              	.LLST1:
+ 1204 0014 2A000000 		.4byte	.LVL1
+ 1205 0018 2E000000 		.4byte	.LVL2
+ 1206 001c 0900     		.2byte	0x9
+ 1207 001e 72       		.byte	0x72
+ 1208 001f 00       		.sleb128 0
+ 1209 0020 3C       		.byte	0x3c
+ 1210 0021 1A       		.byte	0x1a
+ 1211 0022 32       		.byte	0x32
+ 1212 0023 25       		.byte	0x25
+ 1213 0024 23       		.byte	0x23
+ 1214 0025 06       		.uleb128 0x6
+ 1215 0026 9F       		.byte	0x9f
+ 1216 0027 00000000 		.4byte	0
+ 1217 002b 00000000 		.4byte	0
+ 1218              	.LLST2:
+ 1219 002f 3C000000 		.4byte	.LVL3
+ 1220 0033 4C000000 		.4byte	.LVL4
+ 1221 0037 0200     		.2byte	0x2
+ 1222 0039 32       		.byte	0x32
+ 1223 003a 9F       		.byte	0x9f
+ 1224 003b 00000000 		.4byte	0
+ 1225 003f 00000000 		.4byte	0
+ 1226              	.LLST3:
+ 1227 0043 1E000000 		.4byte	.LVL5
+ 1228 0047 44000000 		.4byte	.LVL8
+ 1229 004b 0200     		.2byte	0x2
+ 1230 004d 30       		.byte	0x30
+ 1231 004e 9F       		.byte	0x9f
+ 1232 004f 00000000 		.4byte	0
+ 1233 0053 00000000 		.4byte	0
+ 1234              	.LLST4:
+ 1235 0057 32000000 		.4byte	.LVL6
+ 1236 005b 36000000 		.4byte	.LVL7
+ 1237 005f 0900     		.2byte	0x9
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 29
+
+
+ 1238 0061 72       		.byte	0x72
+ 1239 0062 00       		.sleb128 0
+ 1240 0063 3C       		.byte	0x3c
+ 1241 0064 1A       		.byte	0x1a
+ 1242 0065 32       		.byte	0x32
+ 1243 0066 25       		.byte	0x25
+ 1244 0067 23       		.byte	0x23
+ 1245 0068 06       		.uleb128 0x6
+ 1246 0069 9F       		.byte	0x9f
+ 1247 006a 00000000 		.4byte	0
+ 1248 006e 00000000 		.4byte	0
+ 1249              	.LLST5:
+ 1250 0072 44000000 		.4byte	.LVL8
+ 1251 0076 54000000 		.4byte	.LVL9
+ 1252 007a 0200     		.2byte	0x2
+ 1253 007c 32       		.byte	0x32
+ 1254 007d 9F       		.byte	0x9f
+ 1255 007e 00000000 		.4byte	0
+ 1256 0082 00000000 		.4byte	0
+ 1257              	.LLST6:
+ 1258 0086 6E000000 		.4byte	.LVL10
+ 1259 008a 70000000 		.4byte	.LVL11
+ 1260 008e 0200     		.2byte	0x2
+ 1261 0090 49       		.byte	0x49
+ 1262 0091 9F       		.byte	0x9f
+ 1263 0092 00000000 		.4byte	0
+ 1264 0096 00000000 		.4byte	0
+ 1265              	.LLST7:
+ 1266 009a 00000000 		.4byte	.LVL12
+ 1267 009e 06000000 		.4byte	.LVL13
+ 1268 00a2 0100     		.2byte	0x1
+ 1269 00a4 50       		.byte	0x50
+ 1270 00a5 06000000 		.4byte	.LVL13
+ 1271 00a9 1C000000 		.4byte	.LFE4
+ 1272 00ad 0400     		.2byte	0x4
+ 1273 00af F3       		.byte	0xf3
+ 1274 00b0 01       		.uleb128 0x1
+ 1275 00b1 50       		.byte	0x50
+ 1276 00b2 9F       		.byte	0x9f
+ 1277 00b3 00000000 		.4byte	0
+ 1278 00b7 00000000 		.4byte	0
+ 1279              	.LLST8:
+ 1280 00bb 00000000 		.4byte	.LVL14
+ 1281 00bf 06000000 		.4byte	.LVL15
+ 1282 00c3 0100     		.2byte	0x1
+ 1283 00c5 50       		.byte	0x50
+ 1284 00c6 06000000 		.4byte	.LVL15
+ 1285 00ca 34000000 		.4byte	.LFE5
+ 1286 00ce 0400     		.2byte	0x4
+ 1287 00d0 F3       		.byte	0xf3
+ 1288 00d1 01       		.uleb128 0x1
+ 1289 00d2 50       		.byte	0x50
+ 1290 00d3 9F       		.byte	0x9f
+ 1291 00d4 00000000 		.4byte	0
+ 1292 00d8 00000000 		.4byte	0
+ 1293              	.LLST9:
+ 1294 00dc 18000000 		.4byte	.LVL16
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 30
+
+
+ 1295 00e0 1C000000 		.4byte	.LVL17
+ 1296 00e4 0900     		.2byte	0x9
+ 1297 00e6 73       		.byte	0x73
+ 1298 00e7 00       		.sleb128 0
+ 1299 00e8 3C       		.byte	0x3c
+ 1300 00e9 1A       		.byte	0x1a
+ 1301 00ea 32       		.byte	0x32
+ 1302 00eb 25       		.byte	0x25
+ 1303 00ec 23       		.byte	0x23
+ 1304 00ed 06       		.uleb128 0x6
+ 1305 00ee 9F       		.byte	0x9f
+ 1306 00ef 00000000 		.4byte	0
+ 1307 00f3 00000000 		.4byte	0
+ 1308              	.LLST10:
+ 1309 00f7 06000000 		.4byte	.LVL19
+ 1310 00fb 0A000000 		.4byte	.LVL20
+ 1311 00ff 0900     		.2byte	0x9
+ 1312 0101 73       		.byte	0x73
+ 1313 0102 00       		.sleb128 0
+ 1314 0103 3C       		.byte	0x3c
+ 1315 0104 1A       		.byte	0x1a
+ 1316 0105 32       		.byte	0x32
+ 1317 0106 25       		.byte	0x25
+ 1318 0107 23       		.byte	0x23
+ 1319 0108 06       		.uleb128 0x6
+ 1320 0109 9F       		.byte	0x9f
+ 1321 010a 00000000 		.4byte	0
+ 1322 010e 00000000 		.4byte	0
+ 1323              		.section	.debug_aranges,"",%progbits
+ 1324 0000 54000000 		.4byte	0x54
+ 1325 0004 0200     		.2byte	0x2
+ 1326 0006 00000000 		.4byte	.Ldebug_info0
+ 1327 000a 04       		.byte	0x4
+ 1328 000b 00       		.byte	0
+ 1329 000c 0000     		.2byte	0
+ 1330 000e 0000     		.2byte	0
+ 1331 0010 00000000 		.4byte	.LFB0
+ 1332 0014 5C000000 		.4byte	.LFE0-.LFB0
+ 1333 0018 00000000 		.4byte	.LFB1
+ 1334 001c 20000000 		.4byte	.LFE1-.LFB1
+ 1335 0020 00000000 		.4byte	.LFB2
+ 1336 0024 90000000 		.4byte	.LFE2-.LFB2
+ 1337 0028 00000000 		.4byte	.LFB3
+ 1338 002c 20000000 		.4byte	.LFE3-.LFB3
+ 1339 0030 00000000 		.4byte	.LFB4
+ 1340 0034 1C000000 		.4byte	.LFE4-.LFB4
+ 1341 0038 00000000 		.4byte	.LFB5
+ 1342 003c 34000000 		.4byte	.LFE5-.LFB5
+ 1343 0040 00000000 		.4byte	.LFB6
+ 1344 0044 0C000000 		.4byte	.LFE6-.LFB6
+ 1345 0048 00000000 		.4byte	.LFB7
+ 1346 004c 24000000 		.4byte	.LFE7-.LFB7
+ 1347 0050 00000000 		.4byte	0
+ 1348 0054 00000000 		.4byte	0
+ 1349              		.section	.debug_ranges,"",%progbits
+ 1350              	.Ldebug_ranges0:
+ 1351 0000 0E000000 		.4byte	.LBB20
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 31
+
+
+ 1352 0004 12000000 		.4byte	.LBE20
+ 1353 0008 18000000 		.4byte	.LBB29
+ 1354 000c 3C000000 		.4byte	.LBE29
+ 1355 0010 00000000 		.4byte	0
+ 1356 0014 00000000 		.4byte	0
+ 1357 0018 0E000000 		.4byte	.LBB22
+ 1358 001c 12000000 		.4byte	.LBE22
+ 1359 0020 1A000000 		.4byte	.LBB26
+ 1360 0024 1C000000 		.4byte	.LBE26
+ 1361 0028 28000000 		.4byte	.LBB27
+ 1362 002c 3C000000 		.4byte	.LBE27
+ 1363 0030 00000000 		.4byte	0
+ 1364 0034 00000000 		.4byte	0
+ 1365 0038 08000000 		.4byte	.LBB44
+ 1366 003c 2A000000 		.4byte	.LBE44
+ 1367 0040 2C000000 		.4byte	.LBB61
+ 1368 0044 54000000 		.4byte	.LBE61
+ 1369 0048 00000000 		.4byte	0
+ 1370 004c 00000000 		.4byte	0
+ 1371 0050 14000000 		.4byte	.LBB46
+ 1372 0054 18000000 		.4byte	.LBE46
+ 1373 0058 1E000000 		.4byte	.LBB56
+ 1374 005c 2A000000 		.4byte	.LBE56
+ 1375 0060 2C000000 		.4byte	.LBB57
+ 1376 0064 44000000 		.4byte	.LBE57
+ 1377 0068 00000000 		.4byte	0
+ 1378 006c 00000000 		.4byte	0
+ 1379 0070 14000000 		.4byte	.LBB48
+ 1380 0074 18000000 		.4byte	.LBE48
+ 1381 0078 20000000 		.4byte	.LBB52
+ 1382 007c 22000000 		.4byte	.LBE52
+ 1383 0080 30000000 		.4byte	.LBB53
+ 1384 0084 44000000 		.4byte	.LBE53
+ 1385 0088 00000000 		.4byte	0
+ 1386 008c 00000000 		.4byte	0
+ 1387 0090 56000000 		.4byte	.LBB62
+ 1388 0094 5C000000 		.4byte	.LBE62
+ 1389 0098 5E000000 		.4byte	.LBB70
+ 1390 009c 66000000 		.4byte	.LBE70
+ 1391 00a0 68000000 		.4byte	.LBB72
+ 1392 00a4 6E000000 		.4byte	.LBE72
+ 1393 00a8 00000000 		.4byte	0
+ 1394 00ac 00000000 		.4byte	0
+ 1395 00b0 5C000000 		.4byte	.LBB66
+ 1396 00b4 5E000000 		.4byte	.LBE66
+ 1397 00b8 66000000 		.4byte	.LBB71
+ 1398 00bc 68000000 		.4byte	.LBE71
+ 1399 00c0 6E000000 		.4byte	.LBB73
+ 1400 00c4 70000000 		.4byte	.LBE73
+ 1401 00c8 00000000 		.4byte	0
+ 1402 00cc 00000000 		.4byte	0
+ 1403 00d0 08000000 		.4byte	.LBB74
+ 1404 00d4 0A000000 		.4byte	.LBE74
+ 1405 00d8 16000000 		.4byte	.LBB77
+ 1406 00dc 34000000 		.4byte	.LBE77
+ 1407 00e0 00000000 		.4byte	0
+ 1408 00e4 00000000 		.4byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 32
+
+
+ 1409 00e8 00000000 		.4byte	.LFB0
+ 1410 00ec 5C000000 		.4byte	.LFE0
+ 1411 00f0 00000000 		.4byte	.LFB1
+ 1412 00f4 20000000 		.4byte	.LFE1
+ 1413 00f8 00000000 		.4byte	.LFB2
+ 1414 00fc 90000000 		.4byte	.LFE2
+ 1415 0100 00000000 		.4byte	.LFB3
+ 1416 0104 20000000 		.4byte	.LFE3
+ 1417 0108 00000000 		.4byte	.LFB4
+ 1418 010c 1C000000 		.4byte	.LFE4
+ 1419 0110 00000000 		.4byte	.LFB5
+ 1420 0114 34000000 		.4byte	.LFE5
+ 1421 0118 00000000 		.4byte	.LFB6
+ 1422 011c 0C000000 		.4byte	.LFE6
+ 1423 0120 00000000 		.4byte	.LFB7
+ 1424 0124 24000000 		.4byte	.LFE7
+ 1425 0128 00000000 		.4byte	0
+ 1426 012c 00000000 		.4byte	0
+ 1427              		.section	.debug_line,"",%progbits
+ 1428              	.Ldebug_line0:
+ 1429 0000 6C010000 		.section	.debug_str,"MS",%progbits,1
+ 1429      02004A00 
+ 1429      00000201 
+ 1429      FB0E0D00 
+ 1429      01010101 
+ 1430              	.LASF20:
+ 1431 0000 76616C75 		.ascii	"value\000"
+ 1431      6500
+ 1432              	.LASF29:
+ 1433 0006 44564441 		.ascii	"DVDAC_1_VDAC8_initVar\000"
+ 1433      435F315F 
+ 1433      56444143 
+ 1433      385F696E 
+ 1433      69745661 
+ 1434              	.LASF8:
+ 1435 001c 756E7369 		.ascii	"unsigned int\000"
+ 1435      676E6564 
+ 1435      20696E74 
+ 1435      00
+ 1436              	.LASF16:
+ 1437 0029 44564441 		.ascii	"DVDAC_1_VDAC8_SetRange\000"
+ 1437      435F315F 
+ 1437      56444143 
+ 1437      385F5365 
+ 1437      7452616E 
+ 1438              	.LASF9:
+ 1439 0040 666C6F61 		.ascii	"float\000"
+ 1439      7400
+ 1440              	.LASF28:
+ 1441 0046 44564441 		.ascii	"DVDAC_1_VDAC8_Stop\000"
+ 1441      435F315F 
+ 1441      56444143 
+ 1441      385F5374 
+ 1441      6F7000
+ 1442              	.LASF1:
+ 1443 0059 756E7369 		.ascii	"unsigned char\000"
+ 1443      676E6564 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 33
+
+
+ 1443      20636861 
+ 1443      7200
+ 1444              	.LASF13:
+ 1445 0067 72656738 		.ascii	"reg8\000"
+ 1445      00
+ 1446              	.LASF5:
+ 1447 006c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1447      20756E73 
+ 1447      69676E65 
+ 1447      6420696E 
+ 1447      7400
+ 1448              	.LASF3:
+ 1449 007e 73686F72 		.ascii	"short unsigned int\000"
+ 1449      7420756E 
+ 1449      7369676E 
+ 1449      65642069 
+ 1449      6E7400
+ 1450              	.LASF18:
+ 1451 0091 72616E67 		.ascii	"range\000"
+ 1451      6500
+ 1452              	.LASF15:
+ 1453 0097 44564441 		.ascii	"DVDAC_1_VDAC8_SetSpeed\000"
+ 1453      435F315F 
+ 1453      56444143 
+ 1453      385F5365 
+ 1453      74537065 
+ 1454              	.LASF10:
+ 1455 00ae 646F7562 		.ascii	"double\000"
+ 1455      6C6500
+ 1456              	.LASF14:
+ 1457 00b5 44564441 		.ascii	"DVDAC_1_VDAC8_DacTrim\000"
+ 1457      435F315F 
+ 1457      56444143 
+ 1457      385F4461 
+ 1457      63547269 
+ 1458              	.LASF25:
+ 1459 00cb 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 1459      726F7062 
+ 1459      6F785C44 
+ 1459      4556454C 
+ 1459      4F504D45 
+ 1460 00fa 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 1460      70656374 
+ 1460      72756D20 
+ 1460      616E616C 
+ 1460      797A6572 
+ 1461 012b 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 1461      416E616C 
+ 1461      797A6572 
+ 1461      5C617564 
+ 1461      696F5370 
+ 1462              	.LASF23:
+ 1463 0154 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1463      43313120 
+ 1463      352E342E 
+ 1463      31203230 
+ 1463      31363036 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 34
+
+
+ 1464 0187 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1464      20726576 
+ 1464      6973696F 
+ 1464      6E203233 
+ 1464      37373135 
+ 1465 01ba 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 1465      66756E63 
+ 1465      74696F6E 
+ 1465      2D736563 
+ 1465      74696F6E 
+ 1466 01ed 6E637469 		.ascii	"nctions\000"
+ 1466      6F6E7300 
+ 1467              	.LASF7:
+ 1468 01f5 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1468      206C6F6E 
+ 1468      6720756E 
+ 1468      7369676E 
+ 1468      65642069 
+ 1469              	.LASF24:
+ 1470 020c 47656E65 		.ascii	"Generated_Source\\PSoC5\\DVDAC_1_VDAC8.c\000"
+ 1470      72617465 
+ 1470      645F536F 
+ 1470      75726365 
+ 1470      5C50536F 
+ 1471              	.LASF17:
+ 1472 0233 73706565 		.ascii	"speed\000"
+ 1472      6400
+ 1473              	.LASF26:
+ 1474 0239 6D6F6465 		.ascii	"mode\000"
+ 1474      00
+ 1475              	.LASF6:
+ 1476 023e 6C6F6E67 		.ascii	"long long int\000"
+ 1476      206C6F6E 
+ 1476      6720696E 
+ 1476      7400
+ 1477              	.LASF11:
+ 1478 024c 63686172 		.ascii	"char\000"
+ 1478      00
+ 1479              	.LASF2:
+ 1480 0251 73686F72 		.ascii	"short int\000"
+ 1480      7420696E 
+ 1480      7400
+ 1481              	.LASF12:
+ 1482 025b 75696E74 		.ascii	"uint8\000"
+ 1482      3800
+ 1483              	.LASF21:
+ 1484 0261 44564441 		.ascii	"DVDAC_1_VDAC8_Enable\000"
+ 1484      435F315F 
+ 1484      56444143 
+ 1484      385F456E 
+ 1484      61626C65 
+ 1485              	.LASF19:
+ 1486 0276 44564441 		.ascii	"DVDAC_1_VDAC8_SetValue\000"
+ 1486      435F315F 
+ 1486      56444143 
+ 1486      385F5365 
+ 1486      7456616C 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccREDzUf.s 			page 35
+
+
+ 1487              	.LASF4:
+ 1488 028d 6C6F6E67 		.ascii	"long int\000"
+ 1488      20696E74 
+ 1488      00
+ 1489              	.LASF0:
+ 1490 0296 7369676E 		.ascii	"signed char\000"
+ 1490      65642063 
+ 1490      68617200 
+ 1491              	.LASF27:
+ 1492 02a2 44564441 		.ascii	"DVDAC_1_VDAC8_Start\000"
+ 1492      435F315F 
+ 1492      56444143 
+ 1492      385F5374 
+ 1492      61727400 
+ 1493              	.LASF22:
+ 1494 02b6 44564441 		.ascii	"DVDAC_1_VDAC8_Init\000"
+ 1494      435F315F 
+ 1494      56444143 
+ 1494      385F496E 
+ 1494      697400
+ 1495              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

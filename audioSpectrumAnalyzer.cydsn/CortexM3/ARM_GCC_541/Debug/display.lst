@@ -1,0 +1,983 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"display.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.update_buffer,"ax",%progbits
+  20              		.align	2
+  21              		.global	update_buffer
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	update_buffer, %function
+  25              	update_buffer:
+  26              	.LFB0:
+  27              		.file 1 "display.c"
+   1:display.c     **** /* ========================================
+   2:display.c     ****  *
+   3:display.c     ****  * Copyright YOUR COMPANY, THE YEAR
+   4:display.c     ****  * All Rights Reserved
+   5:display.c     ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:display.c     ****  *
+   7:display.c     ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:display.c     ****  * WHICH IS THE PROPERTY OF your company.
+   9:display.c     ****  *
+  10:display.c     ****  * ========================================
+  11:display.c     **** */
+  12:display.c     **** #include    <display.h>
+  13:display.c     **** #include    "cytypes.h"
+  14:display.c     **** 
+  15:display.c     **** // define functions
+  16:display.c     **** void update_buffer(uint8 *buff, led array[], char len )
+  17:display.c     **** {
+  28              		.loc 1 17 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  18:display.c     ****     //unsigned char byteLen = 4*len;
+  19:display.c     ****     
+  20:display.c     ****     // fill the buffer with the start frame
+  21:display.c     ****     *buff++ = 0u;
+  34              		.loc 1 21 0
+  35 0000 0023     		movs	r3, #0
+  17:display.c     ****     //unsigned char byteLen = 4*len;
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 2
+
+
+  36              		.loc 1 17 0
+  37 0002 F0B4     		push	{r4, r5, r6, r7}
+  38              		.cfi_def_cfa_offset 16
+  39              		.cfi_offset 4, -16
+  40              		.cfi_offset 5, -12
+  41              		.cfi_offset 6, -8
+  42              		.cfi_offset 7, -4
+  43              		.loc 1 21 0
+  44 0004 0370     		strb	r3, [r0]
+  45              	.LVL1:
+  22:display.c     ****     *buff++ = 0u;
+  46              		.loc 1 22 0
+  47 0006 4370     		strb	r3, [r0, #1]
+  48              	.LVL2:
+  23:display.c     ****     *buff++ = 0u;
+  49              		.loc 1 23 0
+  50 0008 8370     		strb	r3, [r0, #2]
+  24:display.c     ****     *buff++ = 0u;
+  51              		.loc 1 24 0
+  52 000a C370     		strb	r3, [r0, #3]
+  53 000c 071D     		adds	r7, r0, #4
+  54              	.LVL3:
+  55              	.LBB2:
+  25:display.c     ****     
+  26:display.c     ****     // loop through each led object and copy info into buffer
+  27:display.c     ****     // because the leds are serially driven the first data
+  28:display.c     ****     // sent out controls the last led so, we need to send the 
+  29:display.c     ****     // led info in reverse order.
+  30:display.c     ****     //for(int index = len-1; index >= 0; index--)
+  31:display.c     ****     for(int index = 0; index < len; index++)
+  56              		.loc 1 31 0
+  57 000e 002A     		cmp	r2, #0
+  58 0010 4ED0     		beq	.L7
+  59 0012 9600     		lsls	r6, r2, #2
+  60 0014 B418     		adds	r4, r6, r2
+  61 0016 0134     		adds	r4, r4, #1
+  62 0018 0C44     		add	r4, r4, r1
+  63 001a 3E44     		add	r6, r6, r7
+  64 001c 4B1C     		adds	r3, r1, #1
+  65 001e B342     		cmp	r3, r6
+  66 0020 38BF     		it	cc
+  67 0022 A742     		cmpcc	r7, r4
+  68 0024 2DD3     		bcc	.L3
+  69 0026 43EA0704 		orr	r4, r3, r7
+  70 002a 012A     		cmp	r2, #1
+  71 002c C4F30104 		ubfx	r4, r4, #0, #2
+  72 0030 94BF     		ite	ls
+  73 0032 0025     		movls	r5, #0
+  74 0034 0125     		movhi	r5, #1
+  75 0036 002C     		cmp	r4, #0
+  76 0038 18BF     		it	ne
+  77 003a 0025     		movne	r5, #0
+  78 003c 0DB3     		cbz	r5, .L3
+  79 003e 1846     		mov	r0, r3
+  80 0040 3B46     		mov	r3, r7
+  81 0042 02F18045 		add	r5, r2, #1073741824
+  82 0046 013D     		subs	r5, r5, #1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 3
+
+
+  83 0048 07EB8505 		add	r5, r7, r5, lsl #2
+  84 004c 013A     		subs	r2, r2, #1
+  85              	.LVL4:
+  86              	.L4:
+  32:display.c     ****     {
+  33:display.c     ****         *buff++ = array[index].brightness; 
+  87              		.loc 1 33 0 discriminator 3
+  88 004e 50F8054B 		ldr	r4, [r0], #5
+  89 0052 43F8044B 		str	r4, [r3], #4
+  90 0056 9D42     		cmp	r5, r3
+  91 0058 F9D1     		bne	.L4
+  92 005a 9300     		lsls	r3, r2, #2
+  93              		.loc 1 33 0 is_stmt 0
+  94 005c 9818     		adds	r0, r3, r2
+  95 005e 0144     		add	r1, r1, r0
+  96              	.LVL5:
+  97 0060 4878     		ldrb	r0, [r1, #1]	@ zero_extendqisi2
+  98 0062 3B44     		add	r3, r3, r7
+  99              	.LVL6:
+ 100 0064 07F82200 		strb	r0, [r7, r2, lsl #2]
+ 101              	.LVL7:
+  34:display.c     ****         *buff++ = array[index].blue;
+ 102              		.loc 1 34 0 is_stmt 1
+ 103 0068 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
+ 104              	.LVL8:
+ 105 006a 5A70     		strb	r2, [r3, #1]
+ 106              	.LVL9:
+  35:display.c     ****         *buff++ = array[index].green;
+ 107              		.loc 1 35 0
+ 108 006c CA78     		ldrb	r2, [r1, #3]	@ zero_extendqisi2
+ 109 006e 9A70     		strb	r2, [r3, #2]
+ 110              	.LVL10:
+  36:display.c     ****         *buff++ = array[index].red;
+ 111              		.loc 1 36 0
+ 112 0070 0A79     		ldrb	r2, [r1, #4]	@ zero_extendqisi2
+ 113 0072 DA70     		strb	r2, [r3, #3]
+ 114              	.LVL11:
+ 115              	.L2:
+ 116              	.LBE2:
+  37:display.c     ****     }
+  38:display.c     ****     
+  39:display.c     ****     // fill the buffer with the end frame
+  40:display.c     ****     *buff++ = 0xff;
+ 117              		.loc 1 40 0
+ 118 0074 FF23     		movs	r3, #255
+ 119 0076 3370     		strb	r3, [r6]
+ 120              	.LVL12:
+  41:display.c     ****     *buff++ = 0xff;
+ 121              		.loc 1 41 0
+ 122 0078 7370     		strb	r3, [r6, #1]
+ 123              	.LVL13:
+  42:display.c     ****     *buff++ = 0xff;
+ 124              		.loc 1 42 0
+ 125 007a B370     		strb	r3, [r6, #2]
+ 126              	.LVL14:
+  43:display.c     ****     *buff++ = 0xff;   
+ 127              		.loc 1 43 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 4
+
+
+ 128 007c F370     		strb	r3, [r6, #3]
+  44:display.c     ****     
+  45:display.c     **** }
+ 129              		.loc 1 45 0
+ 130 007e F0BC     		pop	{r4, r5, r6, r7}
+ 131              		.cfi_remember_state
+ 132              		.cfi_restore 7
+ 133              		.cfi_restore 6
+ 134              		.cfi_restore 5
+ 135              		.cfi_restore 4
+ 136              		.cfi_def_cfa_offset 0
+ 137              	.LVL15:
+ 138 0080 7047     		bx	lr
+ 139              	.LVL16:
+ 140              	.L3:
+ 141              		.cfi_restore_state
+ 142 0082 0132     		adds	r2, r2, #1
+ 143              	.LVL17:
+ 144 0084 07EB8202 		add	r2, r7, r2, lsl #2
+ 145 0088 0830     		adds	r0, r0, #8
+ 146              	.LVL18:
+ 147              	.L6:
+ 148              	.LBB3:
+  33:display.c     ****         *buff++ = array[index].blue;
+ 149              		.loc 1 33 0
+ 150 008a 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 151 008c 0430     		adds	r0, r0, #4
+ 152              	.LVL19:
+ 153 008e 00F8083C 		strb	r3, [r0, #-8]
+ 154              	.LVL20:
+  34:display.c     ****         *buff++ = array[index].green;
+ 155              		.loc 1 34 0
+ 156 0092 8B78     		ldrb	r3, [r1, #2]	@ zero_extendqisi2
+ 157 0094 0531     		adds	r1, r1, #5
+ 158 0096 00F8073C 		strb	r3, [r0, #-7]
+ 159              	.LVL21:
+  35:display.c     ****         *buff++ = array[index].red;
+ 160              		.loc 1 35 0
+ 161 009a 11F8023C 		ldrb	r3, [r1, #-2]	@ zero_extendqisi2
+ 162 009e 00F8063C 		strb	r3, [r0, #-6]
+ 163              	.LVL22:
+  36:display.c     ****     }
+ 164              		.loc 1 36 0
+ 165 00a2 11F8013C 		ldrb	r3, [r1, #-1]	@ zero_extendqisi2
+ 166 00a6 00F8053C 		strb	r3, [r0, #-5]
+  31:display.c     ****     {
+ 167              		.loc 1 31 0
+ 168 00aa 8242     		cmp	r2, r0
+ 169 00ac EDD1     		bne	.L6
+ 170 00ae E1E7     		b	.L2
+ 171              	.LVL23:
+ 172              	.L7:
+ 173              	.LBE3:
+  24:display.c     ****     
+ 174              		.loc 1 24 0
+ 175 00b0 3E46     		mov	r6, r7
+ 176 00b2 DFE7     		b	.L2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 5
+
+
+ 177              		.cfi_endproc
+ 178              	.LFE0:
+ 179              		.size	update_buffer, .-update_buffer
+ 180              		.text
+ 181              	.Letext0:
+ 182              		.file 2 "./led_object.h"
+ 183              		.file 3 "Generated_Source\\PSoC5/cytypes.h"
+ 184              		.section	.debug_info,"",%progbits
+ 185              	.Ldebug_info0:
+ 186 0000 3C010000 		.4byte	0x13c
+ 187 0004 0400     		.2byte	0x4
+ 188 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 189 000a 04       		.byte	0x4
+ 190 000b 01       		.uleb128 0x1
+ 191 000c 25010000 		.4byte	.LASF18
+ 192 0010 0C       		.byte	0xc
+ 193 0011 00000000 		.4byte	.LASF19
+ 194 0015 9C000000 		.4byte	.LASF20
+ 195 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 196 001d 00000000 		.4byte	0
+ 197 0021 00000000 		.4byte	.Ldebug_line0
+ 198 0025 02       		.uleb128 0x2
+ 199 0026 05       		.byte	0x5
+ 200 0027 02       		.byte	0x2
+ 201 0028 10       		.byte	0x10
+ 202 0029 69000000 		.4byte	0x69
+ 203 002d 03       		.uleb128 0x3
+ 204 002e 696400   		.ascii	"id\000"
+ 205 0031 02       		.byte	0x2
+ 206 0032 10       		.byte	0x10
+ 207 0033 69000000 		.4byte	0x69
+ 208 0037 00       		.byte	0
+ 209 0038 04       		.uleb128 0x4
+ 210 0039 75000000 		.4byte	.LASF0
+ 211 003d 02       		.byte	0x2
+ 212 003e 11       		.byte	0x11
+ 213 003f 69000000 		.4byte	0x69
+ 214 0043 01       		.byte	0x1
+ 215 0044 04       		.uleb128 0x4
+ 216 0045 25000000 		.4byte	.LASF1
+ 217 0049 02       		.byte	0x2
+ 218 004a 12       		.byte	0x12
+ 219 004b 69000000 		.4byte	0x69
+ 220 004f 02       		.byte	0x2
+ 221 0050 04       		.uleb128 0x4
+ 222 0051 6F000000 		.4byte	.LASF2
+ 223 0055 02       		.byte	0x2
+ 224 0056 13       		.byte	0x13
+ 225 0057 69000000 		.4byte	0x69
+ 226 005b 03       		.byte	0x3
+ 227 005c 03       		.uleb128 0x3
+ 228 005d 72656400 		.ascii	"red\000"
+ 229 0061 02       		.byte	0x2
+ 230 0062 14       		.byte	0x14
+ 231 0063 69000000 		.4byte	0x69
+ 232 0067 04       		.byte	0x4
+ 233 0068 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 6
+
+
+ 234 0069 05       		.uleb128 0x5
+ 235 006a 01       		.byte	0x1
+ 236 006b 08       		.byte	0x8
+ 237 006c C6010000 		.4byte	.LASF3
+ 238 0070 06       		.uleb128 0x6
+ 239 0071 6C656400 		.ascii	"led\000"
+ 240 0075 02       		.byte	0x2
+ 241 0076 14       		.byte	0x14
+ 242 0077 25000000 		.4byte	0x25
+ 243 007b 05       		.uleb128 0x5
+ 244 007c 01       		.byte	0x1
+ 245 007d 06       		.byte	0x6
+ 246 007e 30000000 		.4byte	.LASF4
+ 247 0082 05       		.uleb128 0x5
+ 248 0083 01       		.byte	0x1
+ 249 0084 08       		.byte	0x8
+ 250 0085 3C000000 		.4byte	.LASF5
+ 251 0089 05       		.uleb128 0x5
+ 252 008a 02       		.byte	0x2
+ 253 008b 05       		.byte	0x5
+ 254 008c 92000000 		.4byte	.LASF6
+ 255 0090 05       		.uleb128 0x5
+ 256 0091 02       		.byte	0x2
+ 257 0092 07       		.byte	0x7
+ 258 0093 5C000000 		.4byte	.LASF7
+ 259 0097 05       		.uleb128 0x5
+ 260 0098 04       		.byte	0x4
+ 261 0099 05       		.byte	0x5
+ 262 009a E5010000 		.4byte	.LASF8
+ 263 009e 05       		.uleb128 0x5
+ 264 009f 04       		.byte	0x4
+ 265 00a0 07       		.byte	0x7
+ 266 00a1 4A000000 		.4byte	.LASF9
+ 267 00a5 05       		.uleb128 0x5
+ 268 00a6 08       		.byte	0x8
+ 269 00a7 05       		.byte	0x5
+ 270 00a8 CB010000 		.4byte	.LASF10
+ 271 00ac 05       		.uleb128 0x5
+ 272 00ad 08       		.byte	0x8
+ 273 00ae 07       		.byte	0x7
+ 274 00af EE010000 		.4byte	.LASF11
+ 275 00b3 07       		.uleb128 0x7
+ 276 00b4 04       		.byte	0x4
+ 277 00b5 05       		.byte	0x5
+ 278 00b6 696E7400 		.ascii	"int\000"
+ 279 00ba 05       		.uleb128 0x5
+ 280 00bb 04       		.byte	0x4
+ 281 00bc 07       		.byte	0x7
+ 282 00bd 0A000000 		.4byte	.LASF12
+ 283 00c1 08       		.uleb128 0x8
+ 284 00c2 DF010000 		.4byte	.LASF13
+ 285 00c6 03       		.byte	0x3
+ 286 00c7 E401     		.2byte	0x1e4
+ 287 00c9 82000000 		.4byte	0x82
+ 288 00cd 05       		.uleb128 0x5
+ 289 00ce 04       		.byte	0x4
+ 290 00cf 04       		.byte	0x4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 7
+
+
+ 291 00d0 2A000000 		.4byte	.LASF14
+ 292 00d4 05       		.uleb128 0x5
+ 293 00d5 08       		.byte	0x8
+ 294 00d6 04       		.byte	0x4
+ 295 00d7 8B000000 		.4byte	.LASF15
+ 296 00db 09       		.uleb128 0x9
+ 297 00dc 17000000 		.4byte	.LASF21
+ 298 00e0 01       		.byte	0x1
+ 299 00e1 10       		.byte	0x10
+ 300 00e2 00000000 		.4byte	.LFB0
+ 301 00e6 B4000000 		.4byte	.LFE0-.LFB0
+ 302 00ea 01       		.uleb128 0x1
+ 303 00eb 9C       		.byte	0x9c
+ 304 00ec 33010000 		.4byte	0x133
+ 305 00f0 0A       		.uleb128 0xa
+ 306 00f1 86000000 		.4byte	.LASF16
+ 307 00f5 01       		.byte	0x1
+ 308 00f6 10       		.byte	0x10
+ 309 00f7 33010000 		.4byte	0x133
+ 310 00fb 00000000 		.4byte	.LLST0
+ 311 00ff 0A       		.uleb128 0xa
+ 312 0100 80000000 		.4byte	.LASF17
+ 313 0104 01       		.byte	0x1
+ 314 0105 10       		.byte	0x10
+ 315 0106 39010000 		.4byte	0x139
+ 316 010a F7000000 		.4byte	.LLST1
+ 317 010e 0B       		.uleb128 0xb
+ 318 010f 6C656E00 		.ascii	"len\000"
+ 319 0113 01       		.byte	0x1
+ 320 0114 10       		.byte	0x10
+ 321 0115 69000000 		.4byte	0x69
+ 322 0119 3C010000 		.4byte	.LLST2
+ 323 011d 0C       		.uleb128 0xc
+ 324 011e 00000000 		.4byte	.Ldebug_ranges0+0
+ 325 0122 0D       		.uleb128 0xd
+ 326 0123 D9010000 		.4byte	.LASF22
+ 327 0127 01       		.byte	0x1
+ 328 0128 1F       		.byte	0x1f
+ 329 0129 B3000000 		.4byte	0xb3
+ 330 012d 81010000 		.4byte	.LLST3
+ 331 0131 00       		.byte	0
+ 332 0132 00       		.byte	0
+ 333 0133 0E       		.uleb128 0xe
+ 334 0134 04       		.byte	0x4
+ 335 0135 C1000000 		.4byte	0xc1
+ 336 0139 0E       		.uleb128 0xe
+ 337 013a 04       		.byte	0x4
+ 338 013b 70000000 		.4byte	0x70
+ 339 013f 00       		.byte	0
+ 340              		.section	.debug_abbrev,"",%progbits
+ 341              	.Ldebug_abbrev0:
+ 342 0000 01       		.uleb128 0x1
+ 343 0001 11       		.uleb128 0x11
+ 344 0002 01       		.byte	0x1
+ 345 0003 25       		.uleb128 0x25
+ 346 0004 0E       		.uleb128 0xe
+ 347 0005 13       		.uleb128 0x13
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 8
+
+
+ 348 0006 0B       		.uleb128 0xb
+ 349 0007 03       		.uleb128 0x3
+ 350 0008 0E       		.uleb128 0xe
+ 351 0009 1B       		.uleb128 0x1b
+ 352 000a 0E       		.uleb128 0xe
+ 353 000b 55       		.uleb128 0x55
+ 354 000c 17       		.uleb128 0x17
+ 355 000d 11       		.uleb128 0x11
+ 356 000e 01       		.uleb128 0x1
+ 357 000f 10       		.uleb128 0x10
+ 358 0010 17       		.uleb128 0x17
+ 359 0011 00       		.byte	0
+ 360 0012 00       		.byte	0
+ 361 0013 02       		.uleb128 0x2
+ 362 0014 13       		.uleb128 0x13
+ 363 0015 01       		.byte	0x1
+ 364 0016 0B       		.uleb128 0xb
+ 365 0017 0B       		.uleb128 0xb
+ 366 0018 3A       		.uleb128 0x3a
+ 367 0019 0B       		.uleb128 0xb
+ 368 001a 3B       		.uleb128 0x3b
+ 369 001b 0B       		.uleb128 0xb
+ 370 001c 01       		.uleb128 0x1
+ 371 001d 13       		.uleb128 0x13
+ 372 001e 00       		.byte	0
+ 373 001f 00       		.byte	0
+ 374 0020 03       		.uleb128 0x3
+ 375 0021 0D       		.uleb128 0xd
+ 376 0022 00       		.byte	0
+ 377 0023 03       		.uleb128 0x3
+ 378 0024 08       		.uleb128 0x8
+ 379 0025 3A       		.uleb128 0x3a
+ 380 0026 0B       		.uleb128 0xb
+ 381 0027 3B       		.uleb128 0x3b
+ 382 0028 0B       		.uleb128 0xb
+ 383 0029 49       		.uleb128 0x49
+ 384 002a 13       		.uleb128 0x13
+ 385 002b 38       		.uleb128 0x38
+ 386 002c 0B       		.uleb128 0xb
+ 387 002d 00       		.byte	0
+ 388 002e 00       		.byte	0
+ 389 002f 04       		.uleb128 0x4
+ 390 0030 0D       		.uleb128 0xd
+ 391 0031 00       		.byte	0
+ 392 0032 03       		.uleb128 0x3
+ 393 0033 0E       		.uleb128 0xe
+ 394 0034 3A       		.uleb128 0x3a
+ 395 0035 0B       		.uleb128 0xb
+ 396 0036 3B       		.uleb128 0x3b
+ 397 0037 0B       		.uleb128 0xb
+ 398 0038 49       		.uleb128 0x49
+ 399 0039 13       		.uleb128 0x13
+ 400 003a 38       		.uleb128 0x38
+ 401 003b 0B       		.uleb128 0xb
+ 402 003c 00       		.byte	0
+ 403 003d 00       		.byte	0
+ 404 003e 05       		.uleb128 0x5
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 9
+
+
+ 405 003f 24       		.uleb128 0x24
+ 406 0040 00       		.byte	0
+ 407 0041 0B       		.uleb128 0xb
+ 408 0042 0B       		.uleb128 0xb
+ 409 0043 3E       		.uleb128 0x3e
+ 410 0044 0B       		.uleb128 0xb
+ 411 0045 03       		.uleb128 0x3
+ 412 0046 0E       		.uleb128 0xe
+ 413 0047 00       		.byte	0
+ 414 0048 00       		.byte	0
+ 415 0049 06       		.uleb128 0x6
+ 416 004a 16       		.uleb128 0x16
+ 417 004b 00       		.byte	0
+ 418 004c 03       		.uleb128 0x3
+ 419 004d 08       		.uleb128 0x8
+ 420 004e 3A       		.uleb128 0x3a
+ 421 004f 0B       		.uleb128 0xb
+ 422 0050 3B       		.uleb128 0x3b
+ 423 0051 0B       		.uleb128 0xb
+ 424 0052 49       		.uleb128 0x49
+ 425 0053 13       		.uleb128 0x13
+ 426 0054 00       		.byte	0
+ 427 0055 00       		.byte	0
+ 428 0056 07       		.uleb128 0x7
+ 429 0057 24       		.uleb128 0x24
+ 430 0058 00       		.byte	0
+ 431 0059 0B       		.uleb128 0xb
+ 432 005a 0B       		.uleb128 0xb
+ 433 005b 3E       		.uleb128 0x3e
+ 434 005c 0B       		.uleb128 0xb
+ 435 005d 03       		.uleb128 0x3
+ 436 005e 08       		.uleb128 0x8
+ 437 005f 00       		.byte	0
+ 438 0060 00       		.byte	0
+ 439 0061 08       		.uleb128 0x8
+ 440 0062 16       		.uleb128 0x16
+ 441 0063 00       		.byte	0
+ 442 0064 03       		.uleb128 0x3
+ 443 0065 0E       		.uleb128 0xe
+ 444 0066 3A       		.uleb128 0x3a
+ 445 0067 0B       		.uleb128 0xb
+ 446 0068 3B       		.uleb128 0x3b
+ 447 0069 05       		.uleb128 0x5
+ 448 006a 49       		.uleb128 0x49
+ 449 006b 13       		.uleb128 0x13
+ 450 006c 00       		.byte	0
+ 451 006d 00       		.byte	0
+ 452 006e 09       		.uleb128 0x9
+ 453 006f 2E       		.uleb128 0x2e
+ 454 0070 01       		.byte	0x1
+ 455 0071 3F       		.uleb128 0x3f
+ 456 0072 19       		.uleb128 0x19
+ 457 0073 03       		.uleb128 0x3
+ 458 0074 0E       		.uleb128 0xe
+ 459 0075 3A       		.uleb128 0x3a
+ 460 0076 0B       		.uleb128 0xb
+ 461 0077 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 10
+
+
+ 462 0078 0B       		.uleb128 0xb
+ 463 0079 27       		.uleb128 0x27
+ 464 007a 19       		.uleb128 0x19
+ 465 007b 11       		.uleb128 0x11
+ 466 007c 01       		.uleb128 0x1
+ 467 007d 12       		.uleb128 0x12
+ 468 007e 06       		.uleb128 0x6
+ 469 007f 40       		.uleb128 0x40
+ 470 0080 18       		.uleb128 0x18
+ 471 0081 9742     		.uleb128 0x2117
+ 472 0083 19       		.uleb128 0x19
+ 473 0084 01       		.uleb128 0x1
+ 474 0085 13       		.uleb128 0x13
+ 475 0086 00       		.byte	0
+ 476 0087 00       		.byte	0
+ 477 0088 0A       		.uleb128 0xa
+ 478 0089 05       		.uleb128 0x5
+ 479 008a 00       		.byte	0
+ 480 008b 03       		.uleb128 0x3
+ 481 008c 0E       		.uleb128 0xe
+ 482 008d 3A       		.uleb128 0x3a
+ 483 008e 0B       		.uleb128 0xb
+ 484 008f 3B       		.uleb128 0x3b
+ 485 0090 0B       		.uleb128 0xb
+ 486 0091 49       		.uleb128 0x49
+ 487 0092 13       		.uleb128 0x13
+ 488 0093 02       		.uleb128 0x2
+ 489 0094 17       		.uleb128 0x17
+ 490 0095 00       		.byte	0
+ 491 0096 00       		.byte	0
+ 492 0097 0B       		.uleb128 0xb
+ 493 0098 05       		.uleb128 0x5
+ 494 0099 00       		.byte	0
+ 495 009a 03       		.uleb128 0x3
+ 496 009b 08       		.uleb128 0x8
+ 497 009c 3A       		.uleb128 0x3a
+ 498 009d 0B       		.uleb128 0xb
+ 499 009e 3B       		.uleb128 0x3b
+ 500 009f 0B       		.uleb128 0xb
+ 501 00a0 49       		.uleb128 0x49
+ 502 00a1 13       		.uleb128 0x13
+ 503 00a2 02       		.uleb128 0x2
+ 504 00a3 17       		.uleb128 0x17
+ 505 00a4 00       		.byte	0
+ 506 00a5 00       		.byte	0
+ 507 00a6 0C       		.uleb128 0xc
+ 508 00a7 0B       		.uleb128 0xb
+ 509 00a8 01       		.byte	0x1
+ 510 00a9 55       		.uleb128 0x55
+ 511 00aa 17       		.uleb128 0x17
+ 512 00ab 00       		.byte	0
+ 513 00ac 00       		.byte	0
+ 514 00ad 0D       		.uleb128 0xd
+ 515 00ae 34       		.uleb128 0x34
+ 516 00af 00       		.byte	0
+ 517 00b0 03       		.uleb128 0x3
+ 518 00b1 0E       		.uleb128 0xe
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 11
+
+
+ 519 00b2 3A       		.uleb128 0x3a
+ 520 00b3 0B       		.uleb128 0xb
+ 521 00b4 3B       		.uleb128 0x3b
+ 522 00b5 0B       		.uleb128 0xb
+ 523 00b6 49       		.uleb128 0x49
+ 524 00b7 13       		.uleb128 0x13
+ 525 00b8 02       		.uleb128 0x2
+ 526 00b9 17       		.uleb128 0x17
+ 527 00ba 00       		.byte	0
+ 528 00bb 00       		.byte	0
+ 529 00bc 0E       		.uleb128 0xe
+ 530 00bd 0F       		.uleb128 0xf
+ 531 00be 00       		.byte	0
+ 532 00bf 0B       		.uleb128 0xb
+ 533 00c0 0B       		.uleb128 0xb
+ 534 00c1 49       		.uleb128 0x49
+ 535 00c2 13       		.uleb128 0x13
+ 536 00c3 00       		.byte	0
+ 537 00c4 00       		.byte	0
+ 538 00c5 00       		.byte	0
+ 539              		.section	.debug_loc,"",%progbits
+ 540              	.Ldebug_loc0:
+ 541              	.LLST0:
+ 542 0000 00000000 		.4byte	.LVL0
+ 543 0004 00000000 		.4byte	.LVL0
+ 544 0008 0100     		.2byte	0x1
+ 545 000a 50       		.byte	0x50
+ 546 000b 00000000 		.4byte	.LVL0
+ 547 000f 06000000 		.4byte	.LVL1
+ 548 0013 0300     		.2byte	0x3
+ 549 0015 70       		.byte	0x70
+ 550 0016 01       		.sleb128 1
+ 551 0017 9F       		.byte	0x9f
+ 552 0018 06000000 		.4byte	.LVL1
+ 553 001c 08000000 		.4byte	.LVL2
+ 554 0020 0300     		.2byte	0x3
+ 555 0022 70       		.byte	0x70
+ 556 0023 02       		.sleb128 2
+ 557 0024 9F       		.byte	0x9f
+ 558 0025 08000000 		.4byte	.LVL2
+ 559 0029 0E000000 		.4byte	.LVL3
+ 560 002d 0300     		.2byte	0x3
+ 561 002f 70       		.byte	0x70
+ 562 0030 03       		.sleb128 3
+ 563 0031 9F       		.byte	0x9f
+ 564 0032 0E000000 		.4byte	.LVL3
+ 565 0036 4E000000 		.4byte	.LVL4
+ 566 003a 0100     		.2byte	0x1
+ 567 003c 57       		.byte	0x57
+ 568 003d 64000000 		.4byte	.LVL6
+ 569 0041 68000000 		.4byte	.LVL7
+ 570 0045 0300     		.2byte	0x3
+ 571 0047 73       		.byte	0x73
+ 572 0048 01       		.sleb128 1
+ 573 0049 9F       		.byte	0x9f
+ 574 004a 68000000 		.4byte	.LVL7
+ 575 004e 6C000000 		.4byte	.LVL9
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 12
+
+
+ 576 0052 0300     		.2byte	0x3
+ 577 0054 73       		.byte	0x73
+ 578 0055 02       		.sleb128 2
+ 579 0056 9F       		.byte	0x9f
+ 580 0057 6C000000 		.4byte	.LVL9
+ 581 005b 70000000 		.4byte	.LVL10
+ 582 005f 0300     		.2byte	0x3
+ 583 0061 73       		.byte	0x73
+ 584 0062 03       		.sleb128 3
+ 585 0063 9F       		.byte	0x9f
+ 586 0064 70000000 		.4byte	.LVL10
+ 587 0068 74000000 		.4byte	.LVL11
+ 588 006c 0300     		.2byte	0x3
+ 589 006e 73       		.byte	0x73
+ 590 006f 04       		.sleb128 4
+ 591 0070 9F       		.byte	0x9f
+ 592 0071 74000000 		.4byte	.LVL11
+ 593 0075 78000000 		.4byte	.LVL12
+ 594 0079 0300     		.2byte	0x3
+ 595 007b 76       		.byte	0x76
+ 596 007c 01       		.sleb128 1
+ 597 007d 9F       		.byte	0x9f
+ 598 007e 78000000 		.4byte	.LVL12
+ 599 0082 7A000000 		.4byte	.LVL13
+ 600 0086 0300     		.2byte	0x3
+ 601 0088 76       		.byte	0x76
+ 602 0089 02       		.sleb128 2
+ 603 008a 9F       		.byte	0x9f
+ 604 008b 7A000000 		.4byte	.LVL13
+ 605 008f 7C000000 		.4byte	.LVL14
+ 606 0093 0300     		.2byte	0x3
+ 607 0095 76       		.byte	0x76
+ 608 0096 03       		.sleb128 3
+ 609 0097 9F       		.byte	0x9f
+ 610 0098 7C000000 		.4byte	.LVL14
+ 611 009c 80000000 		.4byte	.LVL15
+ 612 00a0 0300     		.2byte	0x3
+ 613 00a2 76       		.byte	0x76
+ 614 00a3 04       		.sleb128 4
+ 615 00a4 9F       		.byte	0x9f
+ 616 00a5 82000000 		.4byte	.LVL16
+ 617 00a9 8A000000 		.4byte	.LVL18
+ 618 00ad 0100     		.2byte	0x1
+ 619 00af 57       		.byte	0x57
+ 620 00b0 8A000000 		.4byte	.LVL18
+ 621 00b4 8E000000 		.4byte	.LVL19
+ 622 00b8 0300     		.2byte	0x3
+ 623 00ba 70       		.byte	0x70
+ 624 00bb 7D       		.sleb128 -3
+ 625 00bc 9F       		.byte	0x9f
+ 626 00bd 8E000000 		.4byte	.LVL19
+ 627 00c1 92000000 		.4byte	.LVL20
+ 628 00c5 0300     		.2byte	0x3
+ 629 00c7 70       		.byte	0x70
+ 630 00c8 79       		.sleb128 -7
+ 631 00c9 9F       		.byte	0x9f
+ 632 00ca 92000000 		.4byte	.LVL20
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 13
+
+
+ 633 00ce 9A000000 		.4byte	.LVL21
+ 634 00d2 0300     		.2byte	0x3
+ 635 00d4 70       		.byte	0x70
+ 636 00d5 7A       		.sleb128 -6
+ 637 00d6 9F       		.byte	0x9f
+ 638 00d7 9A000000 		.4byte	.LVL21
+ 639 00db A2000000 		.4byte	.LVL22
+ 640 00df 0300     		.2byte	0x3
+ 641 00e1 70       		.byte	0x70
+ 642 00e2 7B       		.sleb128 -5
+ 643 00e3 9F       		.byte	0x9f
+ 644 00e4 B0000000 		.4byte	.LVL23
+ 645 00e8 B4000000 		.4byte	.LFE0
+ 646 00ec 0100     		.2byte	0x1
+ 647 00ee 57       		.byte	0x57
+ 648 00ef 00000000 		.4byte	0
+ 649 00f3 00000000 		.4byte	0
+ 650              	.LLST1:
+ 651 00f7 00000000 		.4byte	.LVL0
+ 652 00fb 60000000 		.4byte	.LVL5
+ 653 00ff 0100     		.2byte	0x1
+ 654 0101 51       		.byte	0x51
+ 655 0102 60000000 		.4byte	.LVL5
+ 656 0106 82000000 		.4byte	.LVL16
+ 657 010a 0400     		.2byte	0x4
+ 658 010c F3       		.byte	0xf3
+ 659 010d 01       		.uleb128 0x1
+ 660 010e 51       		.byte	0x51
+ 661 010f 9F       		.byte	0x9f
+ 662 0110 82000000 		.4byte	.LVL16
+ 663 0114 8A000000 		.4byte	.LVL18
+ 664 0118 0100     		.2byte	0x1
+ 665 011a 51       		.byte	0x51
+ 666 011b 8A000000 		.4byte	.LVL18
+ 667 011f B0000000 		.4byte	.LVL23
+ 668 0123 0400     		.2byte	0x4
+ 669 0125 F3       		.byte	0xf3
+ 670 0126 01       		.uleb128 0x1
+ 671 0127 51       		.byte	0x51
+ 672 0128 9F       		.byte	0x9f
+ 673 0129 B0000000 		.4byte	.LVL23
+ 674 012d B4000000 		.4byte	.LFE0
+ 675 0131 0100     		.2byte	0x1
+ 676 0133 51       		.byte	0x51
+ 677 0134 00000000 		.4byte	0
+ 678 0138 00000000 		.4byte	0
+ 679              	.LLST2:
+ 680 013c 00000000 		.4byte	.LVL0
+ 681 0140 4E000000 		.4byte	.LVL4
+ 682 0144 0100     		.2byte	0x1
+ 683 0146 52       		.byte	0x52
+ 684 0147 4E000000 		.4byte	.LVL4
+ 685 014b 82000000 		.4byte	.LVL16
+ 686 014f 0400     		.2byte	0x4
+ 687 0151 F3       		.byte	0xf3
+ 688 0152 01       		.uleb128 0x1
+ 689 0153 52       		.byte	0x52
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 14
+
+
+ 690 0154 9F       		.byte	0x9f
+ 691 0155 82000000 		.4byte	.LVL16
+ 692 0159 84000000 		.4byte	.LVL17
+ 693 015d 0100     		.2byte	0x1
+ 694 015f 52       		.byte	0x52
+ 695 0160 84000000 		.4byte	.LVL17
+ 696 0164 B0000000 		.4byte	.LVL23
+ 697 0168 0400     		.2byte	0x4
+ 698 016a F3       		.byte	0xf3
+ 699 016b 01       		.uleb128 0x1
+ 700 016c 52       		.byte	0x52
+ 701 016d 9F       		.byte	0x9f
+ 702 016e B0000000 		.4byte	.LVL23
+ 703 0172 B4000000 		.4byte	.LFE0
+ 704 0176 0100     		.2byte	0x1
+ 705 0178 52       		.byte	0x52
+ 706 0179 00000000 		.4byte	0
+ 707 017d 00000000 		.4byte	0
+ 708              	.LLST3:
+ 709 0181 0E000000 		.4byte	.LVL3
+ 710 0185 4E000000 		.4byte	.LVL4
+ 711 0189 0200     		.2byte	0x2
+ 712 018b 30       		.byte	0x30
+ 713 018c 9F       		.byte	0x9f
+ 714 018d 64000000 		.4byte	.LVL6
+ 715 0191 6A000000 		.4byte	.LVL8
+ 716 0195 0100     		.2byte	0x1
+ 717 0197 52       		.byte	0x52
+ 718 0198 82000000 		.4byte	.LVL16
+ 719 019c 8A000000 		.4byte	.LVL18
+ 720 01a0 0200     		.2byte	0x2
+ 721 01a2 30       		.byte	0x30
+ 722 01a3 9F       		.byte	0x9f
+ 723 01a4 B0000000 		.4byte	.LVL23
+ 724 01a8 B4000000 		.4byte	.LFE0
+ 725 01ac 0200     		.2byte	0x2
+ 726 01ae 30       		.byte	0x30
+ 727 01af 9F       		.byte	0x9f
+ 728 01b0 00000000 		.4byte	0
+ 729 01b4 00000000 		.4byte	0
+ 730              		.section	.debug_aranges,"",%progbits
+ 731 0000 1C000000 		.4byte	0x1c
+ 732 0004 0200     		.2byte	0x2
+ 733 0006 00000000 		.4byte	.Ldebug_info0
+ 734 000a 04       		.byte	0x4
+ 735 000b 00       		.byte	0
+ 736 000c 0000     		.2byte	0
+ 737 000e 0000     		.2byte	0
+ 738 0010 00000000 		.4byte	.LFB0
+ 739 0014 B4000000 		.4byte	.LFE0-.LFB0
+ 740 0018 00000000 		.4byte	0
+ 741 001c 00000000 		.4byte	0
+ 742              		.section	.debug_ranges,"",%progbits
+ 743              	.Ldebug_ranges0:
+ 744 0000 0E000000 		.4byte	.LBB2
+ 745 0004 74000000 		.4byte	.LBE2
+ 746 0008 8A000000 		.4byte	.LBB3
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 15
+
+
+ 747 000c B0000000 		.4byte	.LBE3
+ 748 0010 00000000 		.4byte	0
+ 749 0014 00000000 		.4byte	0
+ 750 0018 00000000 		.4byte	.LFB0
+ 751 001c B4000000 		.4byte	.LFE0
+ 752 0020 00000000 		.4byte	0
+ 753 0024 00000000 		.4byte	0
+ 754              		.section	.debug_line,"",%progbits
+ 755              	.Ldebug_line0:
+ 756 0000 8D000000 		.section	.debug_str,"MS",%progbits,1
+ 756      02005600 
+ 756      00000201 
+ 756      FB0E0D00 
+ 756      01010101 
+ 757              	.LASF19:
+ 758 0000 64697370 		.ascii	"display.c\000"
+ 758      6C61792E 
+ 758      6300
+ 759              	.LASF12:
+ 760 000a 756E7369 		.ascii	"unsigned int\000"
+ 760      676E6564 
+ 760      20696E74 
+ 760      00
+ 761              	.LASF21:
+ 762 0017 75706461 		.ascii	"update_buffer\000"
+ 762      74655F62 
+ 762      75666665 
+ 762      7200
+ 763              	.LASF1:
+ 764 0025 626C7565 		.ascii	"blue\000"
+ 764      00
+ 765              	.LASF14:
+ 766 002a 666C6F61 		.ascii	"float\000"
+ 766      7400
+ 767              	.LASF4:
+ 768 0030 7369676E 		.ascii	"signed char\000"
+ 768      65642063 
+ 768      68617200 
+ 769              	.LASF5:
+ 770 003c 756E7369 		.ascii	"unsigned char\000"
+ 770      676E6564 
+ 770      20636861 
+ 770      7200
+ 771              	.LASF9:
+ 772 004a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 772      20756E73 
+ 772      69676E65 
+ 772      6420696E 
+ 772      7400
+ 773              	.LASF7:
+ 774 005c 73686F72 		.ascii	"short unsigned int\000"
+ 774      7420756E 
+ 774      7369676E 
+ 774      65642069 
+ 774      6E7400
+ 775              	.LASF2:
+ 776 006f 67726565 		.ascii	"green\000"
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 16
+
+
+ 776      6E00
+ 777              	.LASF0:
+ 778 0075 62726967 		.ascii	"brightness\000"
+ 778      68746E65 
+ 778      737300
+ 779              	.LASF17:
+ 780 0080 61727261 		.ascii	"array\000"
+ 780      7900
+ 781              	.LASF16:
+ 782 0086 62756666 		.ascii	"buff\000"
+ 782      00
+ 783              	.LASF15:
+ 784 008b 646F7562 		.ascii	"double\000"
+ 784      6C6500
+ 785              	.LASF6:
+ 786 0092 73686F72 		.ascii	"short int\000"
+ 786      7420696E 
+ 786      7400
+ 787              	.LASF20:
+ 788 009c 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 788      726F7062 
+ 788      6F785C44 
+ 788      4556454C 
+ 788      4F504D45 
+ 789 00cb 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 789      70656374 
+ 789      72756D20 
+ 789      616E616C 
+ 789      797A6572 
+ 790 00fc 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 790      416E616C 
+ 790      797A6572 
+ 790      5C617564 
+ 790      696F5370 
+ 791              	.LASF18:
+ 792 0125 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 792      43313120 
+ 792      352E342E 
+ 792      31203230 
+ 792      31363036 
+ 793 0158 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 793      20726576 
+ 793      6973696F 
+ 793      6E203233 
+ 793      37373135 
+ 794 018b 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 794      66756E63 
+ 794      74696F6E 
+ 794      2D736563 
+ 794      74696F6E 
+ 795 01be 6E637469 		.ascii	"nctions\000"
+ 795      6F6E7300 
+ 796              	.LASF3:
+ 797 01c6 63686172 		.ascii	"char\000"
+ 797      00
+ 798              	.LASF10:
+ 799 01cb 6C6F6E67 		.ascii	"long long int\000"
+ARM GAS  C:\Users\larco\AppData\Local\Temp\cczVQUg3.s 			page 17
+
+
+ 799      206C6F6E 
+ 799      6720696E 
+ 799      7400
+ 800              	.LASF22:
+ 801 01d9 696E6465 		.ascii	"index\000"
+ 801      7800
+ 802              	.LASF13:
+ 803 01df 75696E74 		.ascii	"uint8\000"
+ 803      3800
+ 804              	.LASF8:
+ 805 01e5 6C6F6E67 		.ascii	"long int\000"
+ 805      20696E74 
+ 805      00
+ 806              	.LASF11:
+ 807 01ee 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 807      206C6F6E 
+ 807      6720756E 
+ 807      7369676E 
+ 807      65642069 
+ 808              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

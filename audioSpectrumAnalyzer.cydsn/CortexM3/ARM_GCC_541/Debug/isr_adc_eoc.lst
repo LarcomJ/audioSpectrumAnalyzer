@@ -1,0 +1,2713 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"isr_adc_eoc.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.isr_adc_eoc_Interrupt,"ax",%progbits
+  20              		.align	2
+  21              		.global	isr_adc_eoc_Interrupt
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	isr_adc_eoc_Interrupt, %function
+  25              	isr_adc_eoc_Interrupt:
+  26              	.LFB3:
+  27              		.file 1 "Generated_Source\\PSoC5\\isr_adc_eoc.c"
+   1:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/isr_adc_eoc.c **** * File Name: isr_adc_eoc.c  
+   3:Generated_Source\PSoC5/isr_adc_eoc.c **** * Version 1.70
+   4:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+   5:Generated_Source\PSoC5/isr_adc_eoc.c **** *  Description:
+   6:Generated_Source\PSoC5/isr_adc_eoc.c **** *   API for controlling the state of an interrupt.
+   7:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+   8:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+   9:Generated_Source\PSoC5/isr_adc_eoc.c **** *  Note:
+  10:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+  11:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/isr_adc_eoc.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/isr_adc_eoc.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  14:Generated_Source\PSoC5/isr_adc_eoc.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  15:Generated_Source\PSoC5/isr_adc_eoc.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  18:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  19:Generated_Source\PSoC5/isr_adc_eoc.c **** #include <cydevice_trm.h>
+  20:Generated_Source\PSoC5/isr_adc_eoc.c **** #include <CyLib.h>
+  21:Generated_Source\PSoC5/isr_adc_eoc.c **** #include <isr_adc_eoc.h>
+  22:Generated_Source\PSoC5/isr_adc_eoc.c **** #include "cyapicallbacks.h"
+  23:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  24:Generated_Source\PSoC5/isr_adc_eoc.c **** #if !defined(isr_adc_eoc__REMOVED) /* Check for removal by optimization */
+  25:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  26:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+  27:Generated_Source\PSoC5/isr_adc_eoc.c **** *  Place your includes, defines and code here 
+  28:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************/
+  29:Generated_Source\PSoC5/isr_adc_eoc.c **** /* `#START isr_adc_eoc_intc` */
+  30:Generated_Source\PSoC5/isr_adc_eoc.c **** #include <ADC_DelSig_1.h>
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 2
+
+
+  31:Generated_Source\PSoC5/isr_adc_eoc.c **** #include <buffer.h>
+  32:Generated_Source\PSoC5/isr_adc_eoc.c **** #include <Pin_debug1.h>
+  33:Generated_Source\PSoC5/isr_adc_eoc.c **** #include <DVDAC_1.h>
+  34:Generated_Source\PSoC5/isr_adc_eoc.c ****     
+  35:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  36:Generated_Source\PSoC5/isr_adc_eoc.c **** /* `#END` */
+  37:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  38:Generated_Source\PSoC5/isr_adc_eoc.c **** #ifndef CYINT_IRQ_BASE
+  39:Generated_Source\PSoC5/isr_adc_eoc.c **** #define CYINT_IRQ_BASE      16
+  40:Generated_Source\PSoC5/isr_adc_eoc.c **** #endif /* CYINT_IRQ_BASE */
+  41:Generated_Source\PSoC5/isr_adc_eoc.c **** #ifndef CYINT_VECT_TABLE
+  42:Generated_Source\PSoC5/isr_adc_eoc.c **** #define CYINT_VECT_TABLE    ((cyisraddress **) CYREG_NVIC_VECT_OFFSET)
+  43:Generated_Source\PSoC5/isr_adc_eoc.c **** #endif /* CYINT_VECT_TABLE */
+  44:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  45:Generated_Source\PSoC5/isr_adc_eoc.c **** /* Declared in startup, used to set unused interrupts to. */
+  46:Generated_Source\PSoC5/isr_adc_eoc.c **** CY_ISR_PROTO(IntDefaultHandler);
+  47:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  48:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  49:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+  50:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_Start
+  51:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+  52:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+  53:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+  54:Generated_Source\PSoC5/isr_adc_eoc.c **** *  Set up the interrupt and enable it. This function disables the interrupt, 
+  55:Generated_Source\PSoC5/isr_adc_eoc.c **** *  sets the default interrupt vector, sets the priority from the value in the
+  56:Generated_Source\PSoC5/isr_adc_eoc.c **** *  Design Wide Resources Interrupt Editor, then enables the interrupt to the 
+  57:Generated_Source\PSoC5/isr_adc_eoc.c **** *  interrupt controller.
+  58:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+  59:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:  
+  60:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+  61:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+  62:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+  63:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+  64:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+  65:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+  66:Generated_Source\PSoC5/isr_adc_eoc.c **** void isr_adc_eoc_Start(void)
+  67:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+  68:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* For all we know the interrupt is active. */
+  69:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_Disable();
+  70:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  71:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Set the ISR to point to the isr_adc_eoc Interrupt. */
+  72:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_SetVector(&isr_adc_eoc_Interrupt);
+  73:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  74:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Set the priority. */
+  75:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_SetPriority((uint8)isr_adc_eoc_INTC_PRIOR_NUMBER);
+  76:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  77:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Enable it. */
+  78:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_Enable();
+  79:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+  80:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  81:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+  82:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+  83:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_StartEx
+  84:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+  85:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+  86:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+  87:Generated_Source\PSoC5/isr_adc_eoc.c **** *  Sets up the interrupt and enables it. This function disables the interrupt,
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 3
+
+
+  88:Generated_Source\PSoC5/isr_adc_eoc.c **** *  sets the interrupt vector based on the address passed in, sets the priority 
+  89:Generated_Source\PSoC5/isr_adc_eoc.c **** *  from the value in the Design Wide Resources Interrupt Editor, then enables 
+  90:Generated_Source\PSoC5/isr_adc_eoc.c **** *  the interrupt to the interrupt controller.
+  91:Generated_Source\PSoC5/isr_adc_eoc.c **** *  
+  92:Generated_Source\PSoC5/isr_adc_eoc.c **** *  When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+  93:Generated_Source\PSoC5/isr_adc_eoc.c **** *  used to provide consistent definition across compilers:
+  94:Generated_Source\PSoC5/isr_adc_eoc.c **** *  
+  95:Generated_Source\PSoC5/isr_adc_eoc.c **** *  Function definition example:
+  96:Generated_Source\PSoC5/isr_adc_eoc.c **** *   CY_ISR(MyISR)
+  97:Generated_Source\PSoC5/isr_adc_eoc.c **** *   {
+  98:Generated_Source\PSoC5/isr_adc_eoc.c **** *   }
+  99:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Function prototype example:
+ 100:Generated_Source\PSoC5/isr_adc_eoc.c **** *   CY_ISR_PROTO(MyISR);
+ 101:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 102:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:  
+ 103:Generated_Source\PSoC5/isr_adc_eoc.c **** *   address: Address of the ISR to set in the interrupt vector table.
+ 104:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 105:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 106:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 107:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 108:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 109:Generated_Source\PSoC5/isr_adc_eoc.c **** void isr_adc_eoc_StartEx(cyisraddress address)
+ 110:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 111:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* For all we know the interrupt is active. */
+ 112:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_Disable();
+ 113:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 114:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Set the ISR to point to the isr_adc_eoc Interrupt. */
+ 115:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_SetVector(address);
+ 116:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 117:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Set the priority. */
+ 118:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_SetPriority((uint8)isr_adc_eoc_INTC_PRIOR_NUMBER);
+ 119:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 120:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Enable it. */
+ 121:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_Enable();
+ 122:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 123:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 124:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 125:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 126:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_Stop
+ 127:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 128:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 129:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 130:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Disables and removes the interrupt.
+ 131:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 132:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:  
+ 133:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 134:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 135:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 136:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 137:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 138:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 139:Generated_Source\PSoC5/isr_adc_eoc.c **** void isr_adc_eoc_Stop(void)
+ 140:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 141:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Disable this interrupt. */
+ 142:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_Disable();
+ 143:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 144:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Set the ISR to point to the passive one. */
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 4
+
+
+ 145:Generated_Source\PSoC5/isr_adc_eoc.c ****     isr_adc_eoc_SetVector(&IntDefaultHandler);
+ 146:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 147:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 148:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 149:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 150:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_Interrupt
+ 151:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 152:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 153:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 154:Generated_Source\PSoC5/isr_adc_eoc.c **** *   The default Interrupt Service Routine for isr_adc_eoc.
+ 155:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 156:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Add custom code between the coments to keep the next version of this file
+ 157:Generated_Source\PSoC5/isr_adc_eoc.c **** *   from over writting your code.
+ 158:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 159:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:  
+ 160:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 161:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 162:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 163:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 164:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 165:Generated_Source\PSoC5/isr_adc_eoc.c **** CY_ISR(isr_adc_eoc_Interrupt)
+ 166:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+  28              		.loc 1 166 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  33              		.cfi_def_cfa_offset 24
+  34              		.cfi_offset 3, -24
+  35              		.cfi_offset 4, -20
+  36              		.cfi_offset 5, -16
+  37              		.cfi_offset 6, -12
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+ 167:Generated_Source\PSoC5/isr_adc_eoc.c ****     #ifdef isr_adc_eoc_INTERRUPT_INTERRUPT_CALLBACK
+ 168:Generated_Source\PSoC5/isr_adc_eoc.c ****         isr_adc_eoc_Interrupt_InterruptCallback();
+ 169:Generated_Source\PSoC5/isr_adc_eoc.c ****     #endif /* isr_adc_eoc_INTERRUPT_INTERRUPT_CALLBACK */ 
+ 170:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 171:Generated_Source\PSoC5/isr_adc_eoc.c ****     /*  Place your Interrupt code here. */
+ 172:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* `#START isr_adc_eoc_Interrupt` */
+ 173:Generated_Source\PSoC5/isr_adc_eoc.c ****     //Pin_debug1_Write( ~Pin_debug1_Read() );
+ 174:Generated_Source\PSoC5/isr_adc_eoc.c ****     audioBuff[buffInput][buffIndex++] = ADC_DelSig_1_GetResult16();
+  40              		.loc 1 174 0
+  41 0002 114D     		ldr	r5, .L5
+  42 0004 114F     		ldr	r7, .L5+4
+  43 0006 3C78     		ldrb	r4, [r7]	@ zero_extendqisi2
+  44 0008 2B88     		ldrh	r3, [r5]
+  45 000a E6B2     		uxtb	r6, r4
+  46 000c 9CB2     		uxth	r4, r3
+  47 000e 631C     		adds	r3, r4, #1
+  48 0010 9BB2     		uxth	r3, r3
+  49 0012 2B80     		strh	r3, [r5]	@ movhi
+  50 0014 FFF7FEFF 		bl	ADC_DelSig_1_GetResult16
+  51              	.LVL0:
+  52 0018 0D4B     		ldr	r3, .L5+8
+  53 001a 04EBC624 		add	r4, r4, r6, lsl #11
+  54 001e 23F81400 		strh	r0, [r3, r4, lsl #1]	@ movhi
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 5
+
+
+ 175:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 176:Generated_Source\PSoC5/isr_adc_eoc.c ****     //DVDAC_1_SetValue( (audioBuff[buffInput][buffIndex-1] >> 4) );
+ 177:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 178:Generated_Source\PSoC5/isr_adc_eoc.c ****     if( buffIndex == BUFFLEN )
+  55              		.loc 1 178 0
+  56 0022 2B88     		ldrh	r3, [r5]
+  57 0024 9BB2     		uxth	r3, r3
+  58 0026 B3F5006F 		cmp	r3, #2048
+  59 002a 0CD1     		bne	.L1
+  60              	.LBB24:
+ 179:Generated_Source\PSoC5/isr_adc_eoc.c ****     {
+ 180:Generated_Source\PSoC5/isr_adc_eoc.c ****         //Pin_debug1_Write( ~Pin_debug1_Read() );
+ 181:Generated_Source\PSoC5/isr_adc_eoc.c ****         buffOutput = buffInput;
+  61              		.loc 1 181 0
+  62 002c 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+  63 002e 094A     		ldr	r2, .L5+12
+  64 0030 DBB2     		uxtb	r3, r3
+  65 0032 1370     		strb	r3, [r2]
+ 182:Generated_Source\PSoC5/isr_adc_eoc.c ****         buffInput = buffInput ^ 1;
+  66              		.loc 1 182 0
+  67 0034 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 183:Generated_Source\PSoC5/isr_adc_eoc.c ****         buffIndex = 0;
+ 184:Generated_Source\PSoC5/isr_adc_eoc.c ****         buffFull = 1;
+  68              		.loc 1 184 0
+  69 0036 084A     		ldr	r2, .L5+16
+ 182:Generated_Source\PSoC5/isr_adc_eoc.c ****         buffInput = buffInput ^ 1;
+  70              		.loc 1 182 0
+  71 0038 83F00103 		eor	r3, r3, #1
+ 183:Generated_Source\PSoC5/isr_adc_eoc.c ****         buffIndex = 0;
+  72              		.loc 1 183 0
+  73 003c 0020     		movs	r0, #0
+  74              		.loc 1 184 0
+  75 003e 0121     		movs	r1, #1
+ 182:Generated_Source\PSoC5/isr_adc_eoc.c ****         buffInput = buffInput ^ 1;
+  76              		.loc 1 182 0
+  77 0040 3B70     		strb	r3, [r7]
+ 183:Generated_Source\PSoC5/isr_adc_eoc.c ****         buffIndex = 0;
+  78              		.loc 1 183 0
+  79 0042 2880     		strh	r0, [r5]	@ movhi
+  80              		.loc 1 184 0
+  81 0044 1170     		strb	r1, [r2]
+  82              	.L1:
+  83 0046 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+  84              	.L6:
+  85              		.align	2
+  86              	.L5:
+  87 0048 00000000 		.word	buffIndex
+  88 004c 00000000 		.word	buffInput
+  89 0050 00000000 		.word	audioBuff
+  90 0054 00000000 		.word	buffOutput
+  91 0058 00000000 		.word	buffFull
+  92              	.LBE24:
+  93              		.cfi_endproc
+  94              	.LFE3:
+  95              		.size	isr_adc_eoc_Interrupt, .-isr_adc_eoc_Interrupt
+  96              		.section	.text.isr_adc_eoc_Start,"ax",%progbits
+  97              		.align	2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 6
+
+
+  98              		.global	isr_adc_eoc_Start
+  99              		.thumb
+ 100              		.thumb_func
+ 101              		.type	isr_adc_eoc_Start, %function
+ 102              	isr_adc_eoc_Start:
+ 103              	.LFB0:
+  67:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* For all we know the interrupt is active. */
+ 104              		.loc 1 67 0
+ 105              		.cfi_startproc
+ 106              		@ args = 0, pretend = 0, frame = 0
+ 107              		@ frame_needed = 0, uses_anonymous_args = 0
+ 108              		@ link register save eliminated.
+ 109 0000 70B4     		push	{r4, r5, r6}
+ 110              		.cfi_def_cfa_offset 12
+ 111              		.cfi_offset 4, -12
+ 112              		.cfi_offset 5, -8
+ 113              		.cfi_offset 6, -4
+ 114              	.LBB25:
+ 115              	.LBB26:
+ 185:Generated_Source\PSoC5/isr_adc_eoc.c ****     }
+ 186:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 187:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* `#END` */
+ 188:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 189:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 190:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 191:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 192:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_SetVector
+ 193:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 194:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 195:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 196:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Change the ISR vector for the Interrupt. Note calling isr_adc_eoc_Start
+ 197:Generated_Source\PSoC5/isr_adc_eoc.c **** *   will override any effect this method would have had. To set the vector 
+ 198:Generated_Source\PSoC5/isr_adc_eoc.c **** *   before the component has been started use isr_adc_eoc_StartEx instead.
+ 199:Generated_Source\PSoC5/isr_adc_eoc.c **** * 
+ 200:Generated_Source\PSoC5/isr_adc_eoc.c **** *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+ 201:Generated_Source\PSoC5/isr_adc_eoc.c **** *   used to provide consistent definition across compilers:
+ 202:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 203:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Function definition example:
+ 204:Generated_Source\PSoC5/isr_adc_eoc.c **** *   CY_ISR(MyISR)
+ 205:Generated_Source\PSoC5/isr_adc_eoc.c **** *   {
+ 206:Generated_Source\PSoC5/isr_adc_eoc.c **** *   }
+ 207:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 208:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Function prototype example:
+ 209:Generated_Source\PSoC5/isr_adc_eoc.c **** *     CY_ISR_PROTO(MyISR);
+ 210:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 211:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:
+ 212:Generated_Source\PSoC5/isr_adc_eoc.c **** *   address: Address of the ISR to set in the interrupt vector table.
+ 213:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 214:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 215:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 216:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 217:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 218:Generated_Source\PSoC5/isr_adc_eoc.c **** void isr_adc_eoc_SetVector(cyisraddress address)
+ 219:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 220:Generated_Source\PSoC5/isr_adc_eoc.c ****     cyisraddress * ramVectorTable;
+ 221:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 222:Generated_Source\PSoC5/isr_adc_eoc.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 7
+
+
+ 116              		.loc 1 222 0
+ 117 0002 074B     		ldr	r3, .L9
+ 118              	.LBE26:
+ 119              	.LBE25:
+ 120              	.LBB29:
+ 121              	.LBB30:
+ 223:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 224:Generated_Source\PSoC5/isr_adc_eoc.c ****     ramVectorTable[CYINT_IRQ_BASE + (uint32)isr_adc_eoc__INTC_NUMBER] = address;
+ 225:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 226:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 227:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 228:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 229:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_GetVector
+ 230:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 231:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 232:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 233:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Gets the "address" of the current ISR vector for the Interrupt.
+ 234:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 235:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:
+ 236:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 237:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 238:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 239:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Address of the ISR in the interrupt vector table.
+ 240:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 241:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 242:Generated_Source\PSoC5/isr_adc_eoc.c **** cyisraddress isr_adc_eoc_GetVector(void)
+ 243:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 244:Generated_Source\PSoC5/isr_adc_eoc.c ****     cyisraddress * ramVectorTable;
+ 245:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 246:Generated_Source\PSoC5/isr_adc_eoc.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+ 247:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 248:Generated_Source\PSoC5/isr_adc_eoc.c ****     return ramVectorTable[CYINT_IRQ_BASE + (uint32)isr_adc_eoc__INTC_NUMBER];
+ 249:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 250:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 251:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 252:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 253:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_SetPriority
+ 254:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 255:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 256:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 257:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Sets the Priority of the Interrupt. 
+ 258:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 259:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Note calling isr_adc_eoc_Start or isr_adc_eoc_StartEx will 
+ 260:Generated_Source\PSoC5/isr_adc_eoc.c **** *   override any effect this API would have had. This API should only be called
+ 261:Generated_Source\PSoC5/isr_adc_eoc.c **** *   after isr_adc_eoc_Start or isr_adc_eoc_StartEx has been called. 
+ 262:Generated_Source\PSoC5/isr_adc_eoc.c **** *   To set the initial priority for the component, use the Design-Wide Resources
+ 263:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Interrupt Editor.
+ 264:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 265:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Note This API has no effect on Non-maskable interrupt NMI).
+ 266:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 267:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:
+ 268:Generated_Source\PSoC5/isr_adc_eoc.c **** *   priority: Priority of the interrupt, 0 being the highest priority
+ 269:Generated_Source\PSoC5/isr_adc_eoc.c **** *             PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 270:Generated_Source\PSoC5/isr_adc_eoc.c **** *             PSoC 4: Priority is from 0 to 3.
+ 271:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 272:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 273:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 8
+
+
+ 274:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 275:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 276:Generated_Source\PSoC5/isr_adc_eoc.c **** void isr_adc_eoc_SetPriority(uint8 priority)
+ 277:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 278:Generated_Source\PSoC5/isr_adc_eoc.c ****     *isr_adc_eoc_INTC_PRIOR = priority << 5;
+ 279:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 280:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 281:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 282:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 283:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_GetPriority
+ 284:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 285:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 286:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 287:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Gets the Priority of the Interrupt.
+ 288:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 289:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:
+ 290:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 291:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 292:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 293:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Priority of the interrupt, 0 being the highest priority
+ 294:Generated_Source\PSoC5/isr_adc_eoc.c **** *    PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 295:Generated_Source\PSoC5/isr_adc_eoc.c **** *    PSoC 4: Priority is from 0 to 3.
+ 296:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 297:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 298:Generated_Source\PSoC5/isr_adc_eoc.c **** uint8 isr_adc_eoc_GetPriority(void)
+ 299:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 300:Generated_Source\PSoC5/isr_adc_eoc.c ****     uint8 priority;
+ 301:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 302:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 303:Generated_Source\PSoC5/isr_adc_eoc.c ****     priority = *isr_adc_eoc_INTC_PRIOR >> 5;
+ 304:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 305:Generated_Source\PSoC5/isr_adc_eoc.c ****     return priority;
+ 306:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 307:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 308:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 309:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 310:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_Enable
+ 311:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 312:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 313:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 314:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Enables the interrupt to the interrupt controller. Do not call this function
+ 315:Generated_Source\PSoC5/isr_adc_eoc.c **** *   unless ISR_Start() has been called or the functionality of the ISR_Start() 
+ 316:Generated_Source\PSoC5/isr_adc_eoc.c **** *   function, which sets the vector and the priority, has been called.
+ 317:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 318:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:
+ 319:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 320:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 321:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 322:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 323:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 324:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 325:Generated_Source\PSoC5/isr_adc_eoc.c **** void isr_adc_eoc_Enable(void)
+ 326:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 327:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Enable the general interrupt. */
+ 328:Generated_Source\PSoC5/isr_adc_eoc.c ****     *isr_adc_eoc_INTC_SET_EN = isr_adc_eoc__INTC_MASK;
+ 329:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 330:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 9
+
+
+ 331:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 332:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 333:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_GetState
+ 334:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 335:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 336:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 337:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Gets the state (enabled, disabled) of the Interrupt.
+ 338:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 339:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:
+ 340:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 341:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 342:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 343:Generated_Source\PSoC5/isr_adc_eoc.c **** *   1 if enabled, 0 if disabled.
+ 344:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 345:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 346:Generated_Source\PSoC5/isr_adc_eoc.c **** uint8 isr_adc_eoc_GetState(void)
+ 347:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 348:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Get the state of the general interrupt. */
+ 349:Generated_Source\PSoC5/isr_adc_eoc.c ****     return ((*isr_adc_eoc_INTC_SET_EN & (uint32)isr_adc_eoc__INTC_MASK) != 0u) ? 1u:0u;
+ 350:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 351:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 352:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 353:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 354:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_Disable
+ 355:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 356:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 357:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 358:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Disables the Interrupt in the interrupt controller.
+ 359:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 360:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:
+ 361:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 362:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 363:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 364:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 365:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 366:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 367:Generated_Source\PSoC5/isr_adc_eoc.c **** void isr_adc_eoc_Disable(void)
+ 368:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 369:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Disable the general interrupt. */
+ 370:Generated_Source\PSoC5/isr_adc_eoc.c ****     *isr_adc_eoc_INTC_CLR_EN = isr_adc_eoc__INTC_MASK;
+ 122              		.loc 1 370 0
+ 123 0004 074E     		ldr	r6, .L9+4
+ 124              	.LBE30:
+ 125              	.LBE29:
+ 126              	.LBB33:
+ 127              	.LBB27:
+ 222:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 128              		.loc 1 222 0
+ 129 0006 1C68     		ldr	r4, [r3]
+ 224:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 130              		.loc 1 224 0
+ 131 0008 074D     		ldr	r5, .L9+8
+ 132              	.LBE27:
+ 133              	.LBE33:
+ 134              	.LBB34:
+ 135              	.LBB35:
+ 278:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 10
+
+
+ 136              		.loc 1 278 0
+ 137 000a 0849     		ldr	r1, .L9+12
+ 138              	.LBE35:
+ 139              	.LBE34:
+ 140              	.LBB38:
+ 141              	.LBB31:
+ 142              		.loc 1 370 0
+ 143 000c 0423     		movs	r3, #4
+ 144              	.LBE31:
+ 145              	.LBE38:
+ 146              	.LBB39:
+ 147              	.LBB40:
+ 328:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 148              		.loc 1 328 0
+ 149 000e 084A     		ldr	r2, .L9+16
+ 150              	.LBE40:
+ 151              	.LBE39:
+ 152              	.LBB42:
+ 153              	.LBB36:
+ 278:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 154              		.loc 1 278 0
+ 155 0010 E020     		movs	r0, #224
+ 156              	.LBE36:
+ 157              	.LBE42:
+ 158              	.LBB43:
+ 159              	.LBB32:
+ 160              		.loc 1 370 0
+ 161 0012 3360     		str	r3, [r6]
+ 162              	.LVL1:
+ 163              	.LBE32:
+ 164              	.LBE43:
+ 165              	.LBB44:
+ 166              	.LBB28:
+ 224:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 167              		.loc 1 224 0
+ 168 0014 A564     		str	r5, [r4, #72]
+ 169              	.LVL2:
+ 170              	.LBE28:
+ 171              	.LBE44:
+ 172              	.LBB45:
+ 173              	.LBB37:
+ 278:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 174              		.loc 1 278 0
+ 175 0016 0870     		strb	r0, [r1]
+ 176              	.LVL3:
+ 177              	.LBE37:
+ 178              	.LBE45:
+  79:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 179              		.loc 1 79 0
+ 180 0018 70BC     		pop	{r4, r5, r6}
+ 181              		.cfi_restore 6
+ 182              		.cfi_restore 5
+ 183              		.cfi_restore 4
+ 184              		.cfi_def_cfa_offset 0
+ 185              	.LBB46:
+ 186              	.LBB41:
+ 328:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 11
+
+
+ 187              		.loc 1 328 0
+ 188 001a 1360     		str	r3, [r2]
+ 189              	.LBE41:
+ 190              	.LBE46:
+  79:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 191              		.loc 1 79 0
+ 192 001c 7047     		bx	lr
+ 193              	.L10:
+ 194 001e 00BF     		.align	2
+ 195              	.L9:
+ 196 0020 08ED00E0 		.word	-536810232
+ 197 0024 80E100E0 		.word	-536813184
+ 198 0028 00000000 		.word	isr_adc_eoc_Interrupt
+ 199 002c 02E400E0 		.word	-536812542
+ 200 0030 00E100E0 		.word	-536813312
+ 201              		.cfi_endproc
+ 202              	.LFE0:
+ 203              		.size	isr_adc_eoc_Start, .-isr_adc_eoc_Start
+ 204              		.section	.text.isr_adc_eoc_StartEx,"ax",%progbits
+ 205              		.align	2
+ 206              		.global	isr_adc_eoc_StartEx
+ 207              		.thumb
+ 208              		.thumb_func
+ 209              		.type	isr_adc_eoc_StartEx, %function
+ 210              	isr_adc_eoc_StartEx:
+ 211              	.LFB1:
+ 110:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* For all we know the interrupt is active. */
+ 212              		.loc 1 110 0
+ 213              		.cfi_startproc
+ 214              		@ args = 0, pretend = 0, frame = 0
+ 215              		@ frame_needed = 0, uses_anonymous_args = 0
+ 216              		@ link register save eliminated.
+ 217              	.LVL4:
+ 218 0000 70B4     		push	{r4, r5, r6}
+ 219              		.cfi_def_cfa_offset 12
+ 220              		.cfi_offset 4, -12
+ 221              		.cfi_offset 5, -8
+ 222              		.cfi_offset 6, -4
+ 223              	.LBB47:
+ 224              	.LBB48:
+ 222:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 225              		.loc 1 222 0
+ 226 0002 064B     		ldr	r3, .L13
+ 227              	.LBE48:
+ 228              	.LBE47:
+ 229              	.LBB51:
+ 230              	.LBB52:
+ 231              		.loc 1 370 0
+ 232 0004 064E     		ldr	r6, .L13+4
+ 233              	.LBE52:
+ 234              	.LBE51:
+ 235              	.LBB55:
+ 236              	.LBB49:
+ 222:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 237              		.loc 1 222 0
+ 238 0006 1D68     		ldr	r5, [r3]
+ 239              	.LBE49:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 12
+
+
+ 240              	.LBE55:
+ 241              	.LBB56:
+ 242              	.LBB57:
+ 278:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 243              		.loc 1 278 0
+ 244 0008 0649     		ldr	r1, .L13+8
+ 245              	.LBE57:
+ 246              	.LBE56:
+ 247              	.LBB60:
+ 248              	.LBB53:
+ 249              		.loc 1 370 0
+ 250 000a 0423     		movs	r3, #4
+ 251              	.LBE53:
+ 252              	.LBE60:
+ 253              	.LBB61:
+ 254              	.LBB58:
+ 278:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 255              		.loc 1 278 0
+ 256 000c E024     		movs	r4, #224
+ 257              	.LBE58:
+ 258              	.LBE61:
+ 259              	.LBB62:
+ 260              	.LBB63:
+ 328:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 261              		.loc 1 328 0
+ 262 000e 064A     		ldr	r2, .L13+12
+ 263              	.LBE63:
+ 264              	.LBE62:
+ 265              	.LBB65:
+ 266              	.LBB54:
+ 267              		.loc 1 370 0
+ 268 0010 3360     		str	r3, [r6]
+ 269              	.LVL5:
+ 270              	.LBE54:
+ 271              	.LBE65:
+ 272              	.LBB66:
+ 273              	.LBB50:
+ 224:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 274              		.loc 1 224 0
+ 275 0012 A864     		str	r0, [r5, #72]
+ 276              	.LVL6:
+ 277              	.LBE50:
+ 278              	.LBE66:
+ 279              	.LBB67:
+ 280              	.LBB59:
+ 278:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 281              		.loc 1 278 0
+ 282 0014 0C70     		strb	r4, [r1]
+ 283              	.LVL7:
+ 284              	.LBE59:
+ 285              	.LBE67:
+ 122:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 286              		.loc 1 122 0
+ 287 0016 70BC     		pop	{r4, r5, r6}
+ 288              		.cfi_restore 6
+ 289              		.cfi_restore 5
+ 290              		.cfi_restore 4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 13
+
+
+ 291              		.cfi_def_cfa_offset 0
+ 292              	.LBB68:
+ 293              	.LBB64:
+ 328:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 294              		.loc 1 328 0
+ 295 0018 1360     		str	r3, [r2]
+ 296              	.LBE64:
+ 297              	.LBE68:
+ 122:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 298              		.loc 1 122 0
+ 299 001a 7047     		bx	lr
+ 300              	.L14:
+ 301              		.align	2
+ 302              	.L13:
+ 303 001c 08ED00E0 		.word	-536810232
+ 304 0020 80E100E0 		.word	-536813184
+ 305 0024 02E400E0 		.word	-536812542
+ 306 0028 00E100E0 		.word	-536813312
+ 307              		.cfi_endproc
+ 308              	.LFE1:
+ 309              		.size	isr_adc_eoc_StartEx, .-isr_adc_eoc_StartEx
+ 310              		.section	.text.isr_adc_eoc_Stop,"ax",%progbits
+ 311              		.align	2
+ 312              		.global	isr_adc_eoc_Stop
+ 313              		.thumb
+ 314              		.thumb_func
+ 315              		.type	isr_adc_eoc_Stop, %function
+ 316              	isr_adc_eoc_Stop:
+ 317              	.LFB2:
+ 140:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Disable this interrupt. */
+ 318              		.loc 1 140 0
+ 319              		.cfi_startproc
+ 320              		@ args = 0, pretend = 0, frame = 0
+ 321              		@ frame_needed = 0, uses_anonymous_args = 0
+ 322              		@ link register save eliminated.
+ 323              	.LBB69:
+ 324              	.LBB70:
+ 222:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 325              		.loc 1 222 0
+ 326 0000 034B     		ldr	r3, .L16
+ 327              	.LBE70:
+ 328              	.LBE69:
+ 329              	.LBB73:
+ 330              	.LBB74:
+ 331              		.loc 1 370 0
+ 332 0002 0449     		ldr	r1, .L16+4
+ 333              	.LBE74:
+ 334              	.LBE73:
+ 335              	.LBB76:
+ 336              	.LBB71:
+ 222:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 337              		.loc 1 222 0
+ 338 0004 1B68     		ldr	r3, [r3]
+ 224:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 339              		.loc 1 224 0
+ 340 0006 044A     		ldr	r2, .L16+8
+ 341              	.LBE71:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 14
+
+
+ 342              	.LBE76:
+ 343              	.LBB77:
+ 344              	.LBB75:
+ 345              		.loc 1 370 0
+ 346 0008 0420     		movs	r0, #4
+ 347 000a 0860     		str	r0, [r1]
+ 348              	.LVL8:
+ 349              	.LBE75:
+ 350              	.LBE77:
+ 351              	.LBB78:
+ 352              	.LBB72:
+ 224:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 353              		.loc 1 224 0
+ 354 000c 9A64     		str	r2, [r3, #72]
+ 355              	.LVL9:
+ 356 000e 7047     		bx	lr
+ 357              	.L17:
+ 358              		.align	2
+ 359              	.L16:
+ 360 0010 08ED00E0 		.word	-536810232
+ 361 0014 80E100E0 		.word	-536813184
+ 362 0018 00000000 		.word	IntDefaultHandler
+ 363              	.LBE72:
+ 364              	.LBE78:
+ 365              		.cfi_endproc
+ 366              	.LFE2:
+ 367              		.size	isr_adc_eoc_Stop, .-isr_adc_eoc_Stop
+ 368              		.section	.text.isr_adc_eoc_SetVector,"ax",%progbits
+ 369              		.align	2
+ 370              		.global	isr_adc_eoc_SetVector
+ 371              		.thumb
+ 372              		.thumb_func
+ 373              		.type	isr_adc_eoc_SetVector, %function
+ 374              	isr_adc_eoc_SetVector:
+ 375              	.LFB4:
+ 219:Generated_Source\PSoC5/isr_adc_eoc.c ****     cyisraddress * ramVectorTable;
+ 376              		.loc 1 219 0
+ 377              		.cfi_startproc
+ 378              		@ args = 0, pretend = 0, frame = 0
+ 379              		@ frame_needed = 0, uses_anonymous_args = 0
+ 380              		@ link register save eliminated.
+ 381              	.LVL10:
+ 222:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 382              		.loc 1 222 0
+ 383 0000 014B     		ldr	r3, .L19
+ 384 0002 1B68     		ldr	r3, [r3]
+ 385              	.LVL11:
+ 224:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 386              		.loc 1 224 0
+ 387 0004 9864     		str	r0, [r3, #72]
+ 388 0006 7047     		bx	lr
+ 389              	.L20:
+ 390              		.align	2
+ 391              	.L19:
+ 392 0008 08ED00E0 		.word	-536810232
+ 393              		.cfi_endproc
+ 394              	.LFE4:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 15
+
+
+ 395              		.size	isr_adc_eoc_SetVector, .-isr_adc_eoc_SetVector
+ 396              		.section	.text.isr_adc_eoc_GetVector,"ax",%progbits
+ 397              		.align	2
+ 398              		.global	isr_adc_eoc_GetVector
+ 399              		.thumb
+ 400              		.thumb_func
+ 401              		.type	isr_adc_eoc_GetVector, %function
+ 402              	isr_adc_eoc_GetVector:
+ 403              	.LFB5:
+ 243:Generated_Source\PSoC5/isr_adc_eoc.c ****     cyisraddress * ramVectorTable;
+ 404              		.loc 1 243 0
+ 405              		.cfi_startproc
+ 406              		@ args = 0, pretend = 0, frame = 0
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408              		@ link register save eliminated.
+ 409              	.LVL12:
+ 246:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 410              		.loc 1 246 0
+ 411 0000 014B     		ldr	r3, .L22
+ 412              	.LVL13:
+ 248:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 413              		.loc 1 248 0
+ 414 0002 1B68     		ldr	r3, [r3]
+ 415              	.LVL14:
+ 249:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 416              		.loc 1 249 0
+ 417 0004 986C     		ldr	r0, [r3, #72]
+ 418 0006 7047     		bx	lr
+ 419              	.L23:
+ 420              		.align	2
+ 421              	.L22:
+ 422 0008 08ED00E0 		.word	-536810232
+ 423              		.cfi_endproc
+ 424              	.LFE5:
+ 425              		.size	isr_adc_eoc_GetVector, .-isr_adc_eoc_GetVector
+ 426              		.section	.text.isr_adc_eoc_SetPriority,"ax",%progbits
+ 427              		.align	2
+ 428              		.global	isr_adc_eoc_SetPriority
+ 429              		.thumb
+ 430              		.thumb_func
+ 431              		.type	isr_adc_eoc_SetPriority, %function
+ 432              	isr_adc_eoc_SetPriority:
+ 433              	.LFB6:
+ 277:Generated_Source\PSoC5/isr_adc_eoc.c ****     *isr_adc_eoc_INTC_PRIOR = priority << 5;
+ 434              		.loc 1 277 0
+ 435              		.cfi_startproc
+ 436              		@ args = 0, pretend = 0, frame = 0
+ 437              		@ frame_needed = 0, uses_anonymous_args = 0
+ 438              		@ link register save eliminated.
+ 439              	.LVL15:
+ 278:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 440              		.loc 1 278 0
+ 441 0000 4001     		lsls	r0, r0, #5
+ 442              	.LVL16:
+ 443 0002 024B     		ldr	r3, .L25
+ 444 0004 C0B2     		uxtb	r0, r0
+ 445 0006 1870     		strb	r0, [r3]
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 16
+
+
+ 446 0008 7047     		bx	lr
+ 447              	.L26:
+ 448 000a 00BF     		.align	2
+ 449              	.L25:
+ 450 000c 02E400E0 		.word	-536812542
+ 451              		.cfi_endproc
+ 452              	.LFE6:
+ 453              		.size	isr_adc_eoc_SetPriority, .-isr_adc_eoc_SetPriority
+ 454              		.section	.text.isr_adc_eoc_GetPriority,"ax",%progbits
+ 455              		.align	2
+ 456              		.global	isr_adc_eoc_GetPriority
+ 457              		.thumb
+ 458              		.thumb_func
+ 459              		.type	isr_adc_eoc_GetPriority, %function
+ 460              	isr_adc_eoc_GetPriority:
+ 461              	.LFB7:
+ 299:Generated_Source\PSoC5/isr_adc_eoc.c ****     uint8 priority;
+ 462              		.loc 1 299 0
+ 463              		.cfi_startproc
+ 464              		@ args = 0, pretend = 0, frame = 0
+ 465              		@ frame_needed = 0, uses_anonymous_args = 0
+ 466              		@ link register save eliminated.
+ 303:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 467              		.loc 1 303 0
+ 468 0000 014B     		ldr	r3, .L28
+ 469 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 470              	.LVL17:
+ 306:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 471              		.loc 1 306 0
+ 472 0004 4009     		lsrs	r0, r0, #5
+ 473              	.LVL18:
+ 474 0006 7047     		bx	lr
+ 475              	.L29:
+ 476              		.align	2
+ 477              	.L28:
+ 478 0008 02E400E0 		.word	-536812542
+ 479              		.cfi_endproc
+ 480              	.LFE7:
+ 481              		.size	isr_adc_eoc_GetPriority, .-isr_adc_eoc_GetPriority
+ 482              		.section	.text.isr_adc_eoc_Enable,"ax",%progbits
+ 483              		.align	2
+ 484              		.global	isr_adc_eoc_Enable
+ 485              		.thumb
+ 486              		.thumb_func
+ 487              		.type	isr_adc_eoc_Enable, %function
+ 488              	isr_adc_eoc_Enable:
+ 489              	.LFB8:
+ 326:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Enable the general interrupt. */
+ 490              		.loc 1 326 0
+ 491              		.cfi_startproc
+ 492              		@ args = 0, pretend = 0, frame = 0
+ 493              		@ frame_needed = 0, uses_anonymous_args = 0
+ 494              		@ link register save eliminated.
+ 328:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 495              		.loc 1 328 0
+ 496 0000 014B     		ldr	r3, .L31
+ 497 0002 0422     		movs	r2, #4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 17
+
+
+ 498 0004 1A60     		str	r2, [r3]
+ 499 0006 7047     		bx	lr
+ 500              	.L32:
+ 501              		.align	2
+ 502              	.L31:
+ 503 0008 00E100E0 		.word	-536813312
+ 504              		.cfi_endproc
+ 505              	.LFE8:
+ 506              		.size	isr_adc_eoc_Enable, .-isr_adc_eoc_Enable
+ 507              		.section	.text.isr_adc_eoc_GetState,"ax",%progbits
+ 508              		.align	2
+ 509              		.global	isr_adc_eoc_GetState
+ 510              		.thumb
+ 511              		.thumb_func
+ 512              		.type	isr_adc_eoc_GetState, %function
+ 513              	isr_adc_eoc_GetState:
+ 514              	.LFB9:
+ 347:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Get the state of the general interrupt. */
+ 515              		.loc 1 347 0
+ 516              		.cfi_startproc
+ 517              		@ args = 0, pretend = 0, frame = 0
+ 518              		@ frame_needed = 0, uses_anonymous_args = 0
+ 519              		@ link register save eliminated.
+ 349:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 520              		.loc 1 349 0
+ 521 0000 024B     		ldr	r3, .L34
+ 522 0002 1868     		ldr	r0, [r3]
+ 350:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 523              		.loc 1 350 0
+ 524 0004 C0F38000 		ubfx	r0, r0, #2, #1
+ 525 0008 7047     		bx	lr
+ 526              	.L35:
+ 527 000a 00BF     		.align	2
+ 528              	.L34:
+ 529 000c 00E100E0 		.word	-536813312
+ 530              		.cfi_endproc
+ 531              	.LFE9:
+ 532              		.size	isr_adc_eoc_GetState, .-isr_adc_eoc_GetState
+ 533              		.section	.text.isr_adc_eoc_Disable,"ax",%progbits
+ 534              		.align	2
+ 535              		.global	isr_adc_eoc_Disable
+ 536              		.thumb
+ 537              		.thumb_func
+ 538              		.type	isr_adc_eoc_Disable, %function
+ 539              	isr_adc_eoc_Disable:
+ 540              	.LFB10:
+ 368:Generated_Source\PSoC5/isr_adc_eoc.c ****     /* Disable the general interrupt. */
+ 541              		.loc 1 368 0
+ 542              		.cfi_startproc
+ 543              		@ args = 0, pretend = 0, frame = 0
+ 544              		@ frame_needed = 0, uses_anonymous_args = 0
+ 545              		@ link register save eliminated.
+ 546              		.loc 1 370 0
+ 547 0000 014B     		ldr	r3, .L37
+ 548 0002 0422     		movs	r2, #4
+ 549 0004 1A60     		str	r2, [r3]
+ 550 0006 7047     		bx	lr
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 18
+
+
+ 551              	.L38:
+ 552              		.align	2
+ 553              	.L37:
+ 554 0008 80E100E0 		.word	-536813184
+ 555              		.cfi_endproc
+ 556              	.LFE10:
+ 557              		.size	isr_adc_eoc_Disable, .-isr_adc_eoc_Disable
+ 558              		.section	.text.isr_adc_eoc_SetPending,"ax",%progbits
+ 559              		.align	2
+ 560              		.global	isr_adc_eoc_SetPending
+ 561              		.thumb
+ 562              		.thumb_func
+ 563              		.type	isr_adc_eoc_SetPending, %function
+ 564              	isr_adc_eoc_SetPending:
+ 565              	.LFB11:
+ 371:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 372:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 373:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 374:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 375:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_SetPending
+ 376:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 377:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 378:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 379:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Causes the Interrupt to enter the pending state, a software method of
+ 380:Generated_Source\PSoC5/isr_adc_eoc.c **** *   generating the interrupt.
+ 381:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 382:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:
+ 383:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 384:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 385:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 386:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 387:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 388:Generated_Source\PSoC5/isr_adc_eoc.c **** * Side Effects:
+ 389:Generated_Source\PSoC5/isr_adc_eoc.c **** *   If interrupts are enabled and the interrupt is set up properly, the ISR is
+ 390:Generated_Source\PSoC5/isr_adc_eoc.c **** *   entered (depending on the priority of this interrupt and other pending 
+ 391:Generated_Source\PSoC5/isr_adc_eoc.c **** *   interrupts).
+ 392:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 393:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 394:Generated_Source\PSoC5/isr_adc_eoc.c **** void isr_adc_eoc_SetPending(void)
+ 395:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 566              		.loc 1 395 0
+ 567              		.cfi_startproc
+ 568              		@ args = 0, pretend = 0, frame = 0
+ 569              		@ frame_needed = 0, uses_anonymous_args = 0
+ 570              		@ link register save eliminated.
+ 396:Generated_Source\PSoC5/isr_adc_eoc.c ****     *isr_adc_eoc_INTC_SET_PD = isr_adc_eoc__INTC_MASK;
+ 571              		.loc 1 396 0
+ 572 0000 014B     		ldr	r3, .L40
+ 573 0002 0422     		movs	r2, #4
+ 574 0004 1A60     		str	r2, [r3]
+ 575 0006 7047     		bx	lr
+ 576              	.L41:
+ 577              		.align	2
+ 578              	.L40:
+ 579 0008 00E200E0 		.word	-536813056
+ 580              		.cfi_endproc
+ 581              	.LFE11:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 19
+
+
+ 582              		.size	isr_adc_eoc_SetPending, .-isr_adc_eoc_SetPending
+ 583              		.section	.text.isr_adc_eoc_ClearPending,"ax",%progbits
+ 584              		.align	2
+ 585              		.global	isr_adc_eoc_ClearPending
+ 586              		.thumb
+ 587              		.thumb_func
+ 588              		.type	isr_adc_eoc_ClearPending, %function
+ 589              	isr_adc_eoc_ClearPending:
+ 590              	.LFB12:
+ 397:Generated_Source\PSoC5/isr_adc_eoc.c **** }
+ 398:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 399:Generated_Source\PSoC5/isr_adc_eoc.c **** 
+ 400:Generated_Source\PSoC5/isr_adc_eoc.c **** /*******************************************************************************
+ 401:Generated_Source\PSoC5/isr_adc_eoc.c **** * Function Name: isr_adc_eoc_ClearPending
+ 402:Generated_Source\PSoC5/isr_adc_eoc.c **** ********************************************************************************
+ 403:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 404:Generated_Source\PSoC5/isr_adc_eoc.c **** * Summary:
+ 405:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Clears a pending interrupt in the interrupt controller.
+ 406:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 407:Generated_Source\PSoC5/isr_adc_eoc.c **** *   Note Some interrupt sources are clear-on-read and require the block 
+ 408:Generated_Source\PSoC5/isr_adc_eoc.c **** *   interrupt/status register to be read/cleared with the appropriate block API 
+ 409:Generated_Source\PSoC5/isr_adc_eoc.c **** *   (GPIO, UART, and so on). Otherwise the ISR will continue to remain in 
+ 410:Generated_Source\PSoC5/isr_adc_eoc.c **** *   pending state even though the interrupt itself is cleared using this API.
+ 411:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 412:Generated_Source\PSoC5/isr_adc_eoc.c **** * Parameters:
+ 413:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 414:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 415:Generated_Source\PSoC5/isr_adc_eoc.c **** * Return:
+ 416:Generated_Source\PSoC5/isr_adc_eoc.c **** *   None
+ 417:Generated_Source\PSoC5/isr_adc_eoc.c **** *
+ 418:Generated_Source\PSoC5/isr_adc_eoc.c **** *******************************************************************************/
+ 419:Generated_Source\PSoC5/isr_adc_eoc.c **** void isr_adc_eoc_ClearPending(void)
+ 420:Generated_Source\PSoC5/isr_adc_eoc.c **** {
+ 591              		.loc 1 420 0
+ 592              		.cfi_startproc
+ 593              		@ args = 0, pretend = 0, frame = 0
+ 594              		@ frame_needed = 0, uses_anonymous_args = 0
+ 595              		@ link register save eliminated.
+ 421:Generated_Source\PSoC5/isr_adc_eoc.c ****     *isr_adc_eoc_INTC_CLR_PD = isr_adc_eoc__INTC_MASK;
+ 596              		.loc 1 421 0
+ 597 0000 014B     		ldr	r3, .L43
+ 598 0002 0422     		movs	r2, #4
+ 599 0004 1A60     		str	r2, [r3]
+ 600 0006 7047     		bx	lr
+ 601              	.L44:
+ 602              		.align	2
+ 603              	.L43:
+ 604 0008 80E200E0 		.word	-536812928
+ 605              		.cfi_endproc
+ 606              	.LFE12:
+ 607              		.size	isr_adc_eoc_ClearPending, .-isr_adc_eoc_ClearPending
+ 608              		.text
+ 609              	.Letext0:
+ 610              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 611              		.file 3 "./buffer.h"
+ 612              		.file 4 "Generated_Source\\PSoC5/ADC_DelSig_1.h"
+ 613              		.section	.debug_info,"",%progbits
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 20
+
+
+ 614              	.Ldebug_info0:
+ 615 0000 11040000 		.4byte	0x411
+ 616 0004 0400     		.2byte	0x4
+ 617 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 618 000a 04       		.byte	0x4
+ 619 000b 01       		.uleb128 0x1
+ 620 000c E4010000 		.4byte	.LASF41
+ 621 0010 0C       		.byte	0xc
+ 622 0011 9C020000 		.4byte	.LASF42
+ 623 0015 2F000000 		.4byte	.LASF43
+ 624 0019 28010000 		.4byte	.Ldebug_ranges0+0x128
+ 625 001d 00000000 		.4byte	0
+ 626 0021 00000000 		.4byte	.Ldebug_line0
+ 627 0025 02       		.uleb128 0x2
+ 628 0026 04       		.byte	0x4
+ 629 0027 05       		.byte	0x5
+ 630 0028 696E7400 		.ascii	"int\000"
+ 631 002c 03       		.uleb128 0x3
+ 632 002d 04       		.byte	0x4
+ 633 002e 07       		.byte	0x7
+ 634 002f D7010000 		.4byte	.LASF0
+ 635 0033 03       		.uleb128 0x3
+ 636 0034 08       		.byte	0x8
+ 637 0035 05       		.byte	0x5
+ 638 0036 F4020000 		.4byte	.LASF1
+ 639 003a 03       		.uleb128 0x3
+ 640 003b 08       		.byte	0x8
+ 641 003c 04       		.byte	0x4
+ 642 003d 6C030000 		.4byte	.LASF2
+ 643 0041 03       		.uleb128 0x3
+ 644 0042 01       		.byte	0x1
+ 645 0043 06       		.byte	0x6
+ 646 0044 8A030000 		.4byte	.LASF3
+ 647 0048 03       		.uleb128 0x3
+ 648 0049 01       		.byte	0x1
+ 649 004a 08       		.byte	0x8
+ 650 004b 1A010000 		.4byte	.LASF4
+ 651 004f 03       		.uleb128 0x3
+ 652 0050 02       		.byte	0x2
+ 653 0051 05       		.byte	0x5
+ 654 0052 9B010000 		.4byte	.LASF5
+ 655 0056 03       		.uleb128 0x3
+ 656 0057 02       		.byte	0x2
+ 657 0058 07       		.byte	0x7
+ 658 0059 B8000000 		.4byte	.LASF6
+ 659 005d 03       		.uleb128 0x3
+ 660 005e 04       		.byte	0x4
+ 661 005f 05       		.byte	0x5
+ 662 0060 4A030000 		.4byte	.LASF7
+ 663 0064 03       		.uleb128 0x3
+ 664 0065 04       		.byte	0x4
+ 665 0066 07       		.byte	0x7
+ 666 0067 4B010000 		.4byte	.LASF8
+ 667 006b 03       		.uleb128 0x3
+ 668 006c 08       		.byte	0x8
+ 669 006d 07       		.byte	0x7
+ 670 006e 85020000 		.4byte	.LASF9
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 21
+
+
+ 671 0072 03       		.uleb128 0x3
+ 672 0073 04       		.byte	0x4
+ 673 0074 07       		.byte	0x7
+ 674 0075 EB020000 		.4byte	.LASF10
+ 675 0079 03       		.uleb128 0x3
+ 676 007a 01       		.byte	0x1
+ 677 007b 08       		.byte	0x8
+ 678 007c 16030000 		.4byte	.LASF11
+ 679 0080 04       		.uleb128 0x4
+ 680 0081 04       		.byte	0x4
+ 681 0082 86000000 		.4byte	0x86
+ 682 0086 05       		.uleb128 0x5
+ 683 0087 06       		.uleb128 0x6
+ 684 0088 5D010000 		.4byte	.LASF12
+ 685 008c 02       		.byte	0x2
+ 686 008d E401     		.2byte	0x1e4
+ 687 008f 48000000 		.4byte	0x48
+ 688 0093 06       		.uleb128 0x6
+ 689 0094 A5010000 		.4byte	.LASF13
+ 690 0098 02       		.byte	0x2
+ 691 0099 E501     		.2byte	0x1e5
+ 692 009b 56000000 		.4byte	0x56
+ 693 009f 06       		.uleb128 0x6
+ 694 00a0 B7010000 		.4byte	.LASF14
+ 695 00a4 02       		.byte	0x2
+ 696 00a5 E601     		.2byte	0x1e6
+ 697 00a7 64000000 		.4byte	0x64
+ 698 00ab 06       		.uleb128 0x6
+ 699 00ac E0000000 		.4byte	.LASF15
+ 700 00b0 02       		.byte	0x2
+ 701 00b1 E801     		.2byte	0x1e8
+ 702 00b3 4F000000 		.4byte	0x4f
+ 703 00b7 03       		.uleb128 0x3
+ 704 00b8 04       		.byte	0x4
+ 705 00b9 04       		.byte	0x4
+ 706 00ba E6000000 		.4byte	.LASF16
+ 707 00be 03       		.uleb128 0x3
+ 708 00bf 08       		.byte	0x8
+ 709 00c0 04       		.byte	0x4
+ 710 00c1 80010000 		.4byte	.LASF17
+ 711 00c5 06       		.uleb128 0x6
+ 712 00c6 3E010000 		.4byte	.LASF18
+ 713 00ca 02       		.byte	0x2
+ 714 00cb 8E02     		.2byte	0x28e
+ 715 00cd D1000000 		.4byte	0xd1
+ 716 00d1 07       		.uleb128 0x7
+ 717 00d2 87000000 		.4byte	0x87
+ 718 00d6 07       		.uleb128 0x7
+ 719 00d7 93000000 		.4byte	0x93
+ 720 00db 06       		.uleb128 0x6
+ 721 00dc 18000000 		.4byte	.LASF19
+ 722 00e0 02       		.byte	0x2
+ 723 00e1 9002     		.2byte	0x290
+ 724 00e3 E7000000 		.4byte	0xe7
+ 725 00e7 07       		.uleb128 0x7
+ 726 00e8 9F000000 		.4byte	0x9f
+ 727 00ec 06       		.uleb128 0x6
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 22
+
+
+ 728 00ed D4020000 		.4byte	.LASF20
+ 729 00f1 02       		.byte	0x2
+ 730 00f2 A002     		.2byte	0x2a0
+ 731 00f4 80000000 		.4byte	0x80
+ 732 00f8 08       		.uleb128 0x8
+ 733 00f9 28010000 		.4byte	.LASF21
+ 734 00fd 01       		.byte	0x1
+ 735 00fe A5       		.byte	0xa5
+ 736 00ff 01       		.byte	0x1
+ 737 0100 09       		.uleb128 0x9
+ 738 0101 C1020000 		.4byte	.LASF22
+ 739 0105 01       		.byte	0x1
+ 740 0106 4501     		.2byte	0x145
+ 741 0108 01       		.byte	0x1
+ 742 0109 0A       		.uleb128 0xa
+ 743 010a EC000000 		.4byte	.LASF23
+ 744 010e 01       		.byte	0x1
+ 745 010f 1401     		.2byte	0x114
+ 746 0111 01       		.byte	0x1
+ 747 0112 23010000 		.4byte	0x123
+ 748 0116 0B       		.uleb128 0xb
+ 749 0117 63010000 		.4byte	.LASF25
+ 750 011b 01       		.byte	0x1
+ 751 011c 1401     		.2byte	0x114
+ 752 011e 87000000 		.4byte	0x87
+ 753 0122 00       		.byte	0
+ 754 0123 0C       		.uleb128 0xc
+ 755 0124 96030000 		.4byte	.LASF24
+ 756 0128 01       		.byte	0x1
+ 757 0129 DA       		.byte	0xda
+ 758 012a 01       		.byte	0x1
+ 759 012b 46010000 		.4byte	0x146
+ 760 012f 0D       		.uleb128 0xd
+ 761 0130 43010000 		.4byte	.LASF26
+ 762 0134 01       		.byte	0x1
+ 763 0135 DA       		.byte	0xda
+ 764 0136 EC000000 		.4byte	0xec
+ 765 013a 0E       		.uleb128 0xe
+ 766 013b 1B030000 		.4byte	.LASF33
+ 767 013f 01       		.byte	0x1
+ 768 0140 DC       		.byte	0xdc
+ 769 0141 46010000 		.4byte	0x146
+ 770 0145 00       		.byte	0
+ 771 0146 04       		.uleb128 0x4
+ 772 0147 04       		.byte	0x4
+ 773 0148 EC000000 		.4byte	0xec
+ 774 014c 09       		.uleb128 0x9
+ 775 014d 02030000 		.4byte	.LASF27
+ 776 0151 01       		.byte	0x1
+ 777 0152 6F01     		.2byte	0x16f
+ 778 0154 01       		.byte	0x1
+ 779 0155 0F       		.uleb128 0xf
+ 780 0156 F8000000 		.4byte	0xf8
+ 781 015a 00000000 		.4byte	.LFB3
+ 782 015e 5C000000 		.4byte	.LFE3-.LFB3
+ 783 0162 01       		.uleb128 0x1
+ 784 0163 9C       		.byte	0x9c
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 23
+
+
+ 785 0164 72010000 		.4byte	0x172
+ 786 0168 10       		.uleb128 0x10
+ 787 0169 18000000 		.4byte	.LVL0
+ 788 016d 09040000 		.4byte	0x409
+ 789 0171 00       		.byte	0
+ 790 0172 11       		.uleb128 0x11
+ 791 0173 78030000 		.4byte	.LASF28
+ 792 0177 01       		.byte	0x1
+ 793 0178 42       		.byte	0x42
+ 794 0179 00000000 		.4byte	.LFB0
+ 795 017d 34000000 		.4byte	.LFE0-.LFB0
+ 796 0181 01       		.uleb128 0x1
+ 797 0182 9C       		.byte	0x9c
+ 798 0183 EF010000 		.4byte	0x1ef
+ 799 0187 12       		.uleb128 0x12
+ 800 0188 23010000 		.4byte	0x123
+ 801 018c 02000000 		.4byte	.LBB25
+ 802 0190 00000000 		.4byte	.Ldebug_ranges0+0
+ 803 0194 01       		.byte	0x1
+ 804 0195 48       		.byte	0x48
+ 805 0196 B3010000 		.4byte	0x1b3
+ 806 019a 13       		.uleb128 0x13
+ 807 019b 2F010000 		.4byte	0x12f
+ 808 019f 00000000 		.4byte	.LLST0
+ 809 01a3 14       		.uleb128 0x14
+ 810 01a4 00000000 		.4byte	.Ldebug_ranges0+0
+ 811 01a8 15       		.uleb128 0x15
+ 812 01a9 3A010000 		.4byte	0x13a
+ 813 01ad 18000000 		.4byte	.LLST1
+ 814 01b1 00       		.byte	0
+ 815 01b2 00       		.byte	0
+ 816 01b3 16       		.uleb128 0x16
+ 817 01b4 4C010000 		.4byte	0x14c
+ 818 01b8 04000000 		.4byte	.LBB29
+ 819 01bc 20000000 		.4byte	.Ldebug_ranges0+0x20
+ 820 01c0 01       		.byte	0x1
+ 821 01c1 45       		.byte	0x45
+ 822 01c2 12       		.uleb128 0x12
+ 823 01c3 09010000 		.4byte	0x109
+ 824 01c7 0A000000 		.4byte	.LBB34
+ 825 01cb 40000000 		.4byte	.Ldebug_ranges0+0x40
+ 826 01cf 01       		.byte	0x1
+ 827 01d0 4B       		.byte	0x4b
+ 828 01d1 DF010000 		.4byte	0x1df
+ 829 01d5 13       		.uleb128 0x13
+ 830 01d6 16010000 		.4byte	0x116
+ 831 01da 2B000000 		.4byte	.LLST2
+ 832 01de 00       		.byte	0
+ 833 01df 16       		.uleb128 0x16
+ 834 01e0 00010000 		.4byte	0x100
+ 835 01e4 0E000000 		.4byte	.LBB39
+ 836 01e8 60000000 		.4byte	.Ldebug_ranges0+0x60
+ 837 01ec 01       		.byte	0x1
+ 838 01ed 4E       		.byte	0x4e
+ 839 01ee 00       		.byte	0
+ 840 01ef 11       		.uleb128 0x11
+ 841 01f0 6C010000 		.4byte	.LASF29
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 24
+
+
+ 842 01f4 01       		.byte	0x1
+ 843 01f5 6D       		.byte	0x6d
+ 844 01f6 00000000 		.4byte	.LFB1
+ 845 01fa 2C000000 		.4byte	.LFE1-.LFB1
+ 846 01fe 01       		.uleb128 0x1
+ 847 01ff 9C       		.byte	0x9c
+ 848 0200 79020000 		.4byte	0x279
+ 849 0204 17       		.uleb128 0x17
+ 850 0205 43010000 		.4byte	.LASF26
+ 851 0209 01       		.byte	0x1
+ 852 020a 6D       		.byte	0x6d
+ 853 020b EC000000 		.4byte	0xec
+ 854 020f 01       		.uleb128 0x1
+ 855 0210 50       		.byte	0x50
+ 856 0211 12       		.uleb128 0x12
+ 857 0212 23010000 		.4byte	0x123
+ 858 0216 02000000 		.4byte	.LBB47
+ 859 021a 78000000 		.4byte	.Ldebug_ranges0+0x78
+ 860 021e 01       		.byte	0x1
+ 861 021f 73       		.byte	0x73
+ 862 0220 3D020000 		.4byte	0x23d
+ 863 0224 13       		.uleb128 0x13
+ 864 0225 2F010000 		.4byte	0x12f
+ 865 0229 3F000000 		.4byte	.LLST3
+ 866 022d 14       		.uleb128 0x14
+ 867 022e 78000000 		.4byte	.Ldebug_ranges0+0x78
+ 868 0232 15       		.uleb128 0x15
+ 869 0233 3A010000 		.4byte	0x13a
+ 870 0237 52000000 		.4byte	.LLST4
+ 871 023b 00       		.byte	0
+ 872 023c 00       		.byte	0
+ 873 023d 16       		.uleb128 0x16
+ 874 023e 4C010000 		.4byte	0x14c
+ 875 0242 04000000 		.4byte	.LBB51
+ 876 0246 98000000 		.4byte	.Ldebug_ranges0+0x98
+ 877 024a 01       		.byte	0x1
+ 878 024b 70       		.byte	0x70
+ 879 024c 12       		.uleb128 0x12
+ 880 024d 09010000 		.4byte	0x109
+ 881 0251 08000000 		.4byte	.LBB56
+ 882 0255 B8000000 		.4byte	.Ldebug_ranges0+0xb8
+ 883 0259 01       		.byte	0x1
+ 884 025a 76       		.byte	0x76
+ 885 025b 69020000 		.4byte	0x269
+ 886 025f 13       		.uleb128 0x13
+ 887 0260 16010000 		.4byte	0x116
+ 888 0264 65000000 		.4byte	.LLST5
+ 889 0268 00       		.byte	0
+ 890 0269 16       		.uleb128 0x16
+ 891 026a 00010000 		.4byte	0x100
+ 892 026e 0E000000 		.4byte	.LBB62
+ 893 0272 D8000000 		.4byte	.Ldebug_ranges0+0xd8
+ 894 0276 01       		.byte	0x1
+ 895 0277 79       		.byte	0x79
+ 896 0278 00       		.byte	0
+ 897 0279 11       		.uleb128 0x11
+ 898 027a 1E000000 		.4byte	.LASF30
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 25
+
+
+ 899 027e 01       		.byte	0x1
+ 900 027f 8B       		.byte	0x8b
+ 901 0280 00000000 		.4byte	.LFB2
+ 902 0284 1C000000 		.4byte	.LFE2-.LFB2
+ 903 0288 01       		.uleb128 0x1
+ 904 0289 9C       		.byte	0x9c
+ 905 028a C6020000 		.4byte	0x2c6
+ 906 028e 12       		.uleb128 0x12
+ 907 028f 23010000 		.4byte	0x123
+ 908 0293 00000000 		.4byte	.LBB69
+ 909 0297 F0000000 		.4byte	.Ldebug_ranges0+0xf0
+ 910 029b 01       		.byte	0x1
+ 911 029c 91       		.byte	0x91
+ 912 029d B6020000 		.4byte	0x2b6
+ 913 02a1 18       		.uleb128 0x18
+ 914 02a2 2F010000 		.4byte	0x12f
+ 915 02a6 14       		.uleb128 0x14
+ 916 02a7 F0000000 		.4byte	.Ldebug_ranges0+0xf0
+ 917 02ab 15       		.uleb128 0x15
+ 918 02ac 3A010000 		.4byte	0x13a
+ 919 02b0 79000000 		.4byte	.LLST6
+ 920 02b4 00       		.byte	0
+ 921 02b5 00       		.byte	0
+ 922 02b6 16       		.uleb128 0x16
+ 923 02b7 4C010000 		.4byte	0x14c
+ 924 02bb 02000000 		.4byte	.LBB73
+ 925 02bf 10010000 		.4byte	.Ldebug_ranges0+0x110
+ 926 02c3 01       		.byte	0x1
+ 927 02c4 8E       		.byte	0x8e
+ 928 02c5 00       		.byte	0
+ 929 02c6 0F       		.uleb128 0xf
+ 930 02c7 23010000 		.4byte	0x123
+ 931 02cb 00000000 		.4byte	.LFB4
+ 932 02cf 0C000000 		.4byte	.LFE4-.LFB4
+ 933 02d3 01       		.uleb128 0x1
+ 934 02d4 9C       		.byte	0x9c
+ 935 02d5 E8020000 		.4byte	0x2e8
+ 936 02d9 19       		.uleb128 0x19
+ 937 02da 2F010000 		.4byte	0x12f
+ 938 02de 01       		.uleb128 0x1
+ 939 02df 50       		.byte	0x50
+ 940 02e0 1A       		.uleb128 0x1a
+ 941 02e1 3A010000 		.4byte	0x13a
+ 942 02e5 01       		.uleb128 0x1
+ 943 02e6 53       		.byte	0x53
+ 944 02e7 00       		.byte	0
+ 945 02e8 1B       		.uleb128 0x1b
+ 946 02e9 04010000 		.4byte	.LASF31
+ 947 02ed 01       		.byte	0x1
+ 948 02ee F2       		.byte	0xf2
+ 949 02ef EC000000 		.4byte	0xec
+ 950 02f3 00000000 		.4byte	.LFB5
+ 951 02f7 0C000000 		.4byte	.LFE5-.LFB5
+ 952 02fb 01       		.uleb128 0x1
+ 953 02fc 9C       		.byte	0x9c
+ 954 02fd 11030000 		.4byte	0x311
+ 955 0301 1C       		.uleb128 0x1c
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 26
+
+
+ 956 0302 1B030000 		.4byte	.LASF33
+ 957 0306 01       		.byte	0x1
+ 958 0307 F4       		.byte	0xf4
+ 959 0308 46010000 		.4byte	0x146
+ 960 030c 8C000000 		.4byte	.LLST7
+ 961 0310 00       		.byte	0
+ 962 0311 0F       		.uleb128 0xf
+ 963 0312 09010000 		.4byte	0x109
+ 964 0316 00000000 		.4byte	.LFB6
+ 965 031a 10000000 		.4byte	.LFE6-.LFB6
+ 966 031e 01       		.uleb128 0x1
+ 967 031f 9C       		.byte	0x9c
+ 968 0320 2E030000 		.4byte	0x32e
+ 969 0324 13       		.uleb128 0x13
+ 970 0325 16010000 		.4byte	0x116
+ 971 0329 BB000000 		.4byte	.LLST8
+ 972 032d 00       		.byte	0
+ 973 032e 1D       		.uleb128 0x1d
+ 974 032f 00000000 		.4byte	.LASF32
+ 975 0333 01       		.byte	0x1
+ 976 0334 2A01     		.2byte	0x12a
+ 977 0336 87000000 		.4byte	0x87
+ 978 033a 00000000 		.4byte	.LFB7
+ 979 033e 0C000000 		.4byte	.LFE7-.LFB7
+ 980 0342 01       		.uleb128 0x1
+ 981 0343 9C       		.byte	0x9c
+ 982 0344 59030000 		.4byte	0x359
+ 983 0348 1E       		.uleb128 0x1e
+ 984 0349 63010000 		.4byte	.LASF25
+ 985 034d 01       		.byte	0x1
+ 986 034e 2C01     		.2byte	0x12c
+ 987 0350 87000000 		.4byte	0x87
+ 988 0354 DC000000 		.4byte	.LLST9
+ 989 0358 00       		.byte	0
+ 990 0359 1F       		.uleb128 0x1f
+ 991 035a 00010000 		.4byte	0x100
+ 992 035e 00000000 		.4byte	.LFB8
+ 993 0362 0C000000 		.4byte	.LFE8-.LFB8
+ 994 0366 01       		.uleb128 0x1
+ 995 0367 9C       		.byte	0x9c
+ 996 0368 20       		.uleb128 0x20
+ 997 0369 CB000000 		.4byte	.LASF44
+ 998 036d 01       		.byte	0x1
+ 999 036e 5A01     		.2byte	0x15a
+ 1000 0370 87000000 		.4byte	0x87
+ 1001 0374 00000000 		.4byte	.LFB9
+ 1002 0378 10000000 		.4byte	.LFE9-.LFB9
+ 1003 037c 01       		.uleb128 0x1
+ 1004 037d 9C       		.byte	0x9c
+ 1005 037e 1F       		.uleb128 0x1f
+ 1006 037f 4C010000 		.4byte	0x14c
+ 1007 0383 00000000 		.4byte	.LFB10
+ 1008 0387 0C000000 		.4byte	.LFE10-.LFB10
+ 1009 038b 01       		.uleb128 0x1
+ 1010 038c 9C       		.byte	0x9c
+ 1011 038d 21       		.uleb128 0x21
+ 1012 038e 33030000 		.4byte	.LASF34
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 27
+
+
+ 1013 0392 01       		.byte	0x1
+ 1014 0393 8A01     		.2byte	0x18a
+ 1015 0395 00000000 		.4byte	.LFB11
+ 1016 0399 0C000000 		.4byte	.LFE11-.LFB11
+ 1017 039d 01       		.uleb128 0x1
+ 1018 039e 9C       		.byte	0x9c
+ 1019 039f 21       		.uleb128 0x21
+ 1020 03a0 53030000 		.4byte	.LASF35
+ 1021 03a4 01       		.byte	0x1
+ 1022 03a5 A301     		.2byte	0x1a3
+ 1023 03a7 00000000 		.4byte	.LFB12
+ 1024 03ab 0C000000 		.4byte	.LFE12-.LFB12
+ 1025 03af 01       		.uleb128 0x1
+ 1026 03b0 9C       		.byte	0x9c
+ 1027 03b1 22       		.uleb128 0x22
+ 1028 03b2 C8030000 		.4byte	0x3c8
+ 1029 03b6 C8030000 		.4byte	0x3c8
+ 1030 03ba 23       		.uleb128 0x23
+ 1031 03bb 72000000 		.4byte	0x72
+ 1032 03bf 01       		.byte	0x1
+ 1033 03c0 24       		.uleb128 0x24
+ 1034 03c1 72000000 		.4byte	0x72
+ 1035 03c5 FF07     		.2byte	0x7ff
+ 1036 03c7 00       		.byte	0
+ 1037 03c8 07       		.uleb128 0x7
+ 1038 03c9 AB000000 		.4byte	0xab
+ 1039 03cd 25       		.uleb128 0x25
+ 1040 03ce 87010000 		.4byte	.LASF36
+ 1041 03d2 03       		.byte	0x3
+ 1042 03d3 17       		.byte	0x17
+ 1043 03d4 D8030000 		.4byte	0x3d8
+ 1044 03d8 07       		.uleb128 0x7
+ 1045 03d9 B1030000 		.4byte	0x3b1
+ 1046 03dd 25       		.uleb128 0x25
+ 1047 03de 91010000 		.4byte	.LASF37
+ 1048 03e2 03       		.byte	0x3
+ 1049 03e3 18       		.byte	0x18
+ 1050 03e4 D1000000 		.4byte	0xd1
+ 1051 03e8 25       		.uleb128 0x25
+ 1052 03e9 AC010000 		.4byte	.LASF38
+ 1053 03ed 03       		.byte	0x3
+ 1054 03ee 19       		.byte	0x19
+ 1055 03ef D1000000 		.4byte	0xd1
+ 1056 03f3 25       		.uleb128 0x25
+ 1057 03f4 E1020000 		.4byte	.LASF39
+ 1058 03f8 03       		.byte	0x3
+ 1059 03f9 1A       		.byte	0x1a
+ 1060 03fa D6000000 		.4byte	0xd6
+ 1061 03fe 25       		.uleb128 0x25
+ 1062 03ff 2A030000 		.4byte	.LASF40
+ 1063 0403 03       		.byte	0x3
+ 1064 0404 1B       		.byte	0x1b
+ 1065 0405 D1000000 		.4byte	0xd1
+ 1066 0409 26       		.uleb128 0x26
+ 1067 040a BE010000 		.4byte	.LASF45
+ 1068 040e BE010000 		.4byte	.LASF45
+ 1069 0412 04       		.byte	0x4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 28
+
+
+ 1070 0413 41       		.byte	0x41
+ 1071 0414 00       		.byte	0
+ 1072              		.section	.debug_abbrev,"",%progbits
+ 1073              	.Ldebug_abbrev0:
+ 1074 0000 01       		.uleb128 0x1
+ 1075 0001 11       		.uleb128 0x11
+ 1076 0002 01       		.byte	0x1
+ 1077 0003 25       		.uleb128 0x25
+ 1078 0004 0E       		.uleb128 0xe
+ 1079 0005 13       		.uleb128 0x13
+ 1080 0006 0B       		.uleb128 0xb
+ 1081 0007 03       		.uleb128 0x3
+ 1082 0008 0E       		.uleb128 0xe
+ 1083 0009 1B       		.uleb128 0x1b
+ 1084 000a 0E       		.uleb128 0xe
+ 1085 000b 55       		.uleb128 0x55
+ 1086 000c 17       		.uleb128 0x17
+ 1087 000d 11       		.uleb128 0x11
+ 1088 000e 01       		.uleb128 0x1
+ 1089 000f 10       		.uleb128 0x10
+ 1090 0010 17       		.uleb128 0x17
+ 1091 0011 00       		.byte	0
+ 1092 0012 00       		.byte	0
+ 1093 0013 02       		.uleb128 0x2
+ 1094 0014 24       		.uleb128 0x24
+ 1095 0015 00       		.byte	0
+ 1096 0016 0B       		.uleb128 0xb
+ 1097 0017 0B       		.uleb128 0xb
+ 1098 0018 3E       		.uleb128 0x3e
+ 1099 0019 0B       		.uleb128 0xb
+ 1100 001a 03       		.uleb128 0x3
+ 1101 001b 08       		.uleb128 0x8
+ 1102 001c 00       		.byte	0
+ 1103 001d 00       		.byte	0
+ 1104 001e 03       		.uleb128 0x3
+ 1105 001f 24       		.uleb128 0x24
+ 1106 0020 00       		.byte	0
+ 1107 0021 0B       		.uleb128 0xb
+ 1108 0022 0B       		.uleb128 0xb
+ 1109 0023 3E       		.uleb128 0x3e
+ 1110 0024 0B       		.uleb128 0xb
+ 1111 0025 03       		.uleb128 0x3
+ 1112 0026 0E       		.uleb128 0xe
+ 1113 0027 00       		.byte	0
+ 1114 0028 00       		.byte	0
+ 1115 0029 04       		.uleb128 0x4
+ 1116 002a 0F       		.uleb128 0xf
+ 1117 002b 00       		.byte	0
+ 1118 002c 0B       		.uleb128 0xb
+ 1119 002d 0B       		.uleb128 0xb
+ 1120 002e 49       		.uleb128 0x49
+ 1121 002f 13       		.uleb128 0x13
+ 1122 0030 00       		.byte	0
+ 1123 0031 00       		.byte	0
+ 1124 0032 05       		.uleb128 0x5
+ 1125 0033 15       		.uleb128 0x15
+ 1126 0034 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 29
+
+
+ 1127 0035 27       		.uleb128 0x27
+ 1128 0036 19       		.uleb128 0x19
+ 1129 0037 00       		.byte	0
+ 1130 0038 00       		.byte	0
+ 1131 0039 06       		.uleb128 0x6
+ 1132 003a 16       		.uleb128 0x16
+ 1133 003b 00       		.byte	0
+ 1134 003c 03       		.uleb128 0x3
+ 1135 003d 0E       		.uleb128 0xe
+ 1136 003e 3A       		.uleb128 0x3a
+ 1137 003f 0B       		.uleb128 0xb
+ 1138 0040 3B       		.uleb128 0x3b
+ 1139 0041 05       		.uleb128 0x5
+ 1140 0042 49       		.uleb128 0x49
+ 1141 0043 13       		.uleb128 0x13
+ 1142 0044 00       		.byte	0
+ 1143 0045 00       		.byte	0
+ 1144 0046 07       		.uleb128 0x7
+ 1145 0047 35       		.uleb128 0x35
+ 1146 0048 00       		.byte	0
+ 1147 0049 49       		.uleb128 0x49
+ 1148 004a 13       		.uleb128 0x13
+ 1149 004b 00       		.byte	0
+ 1150 004c 00       		.byte	0
+ 1151 004d 08       		.uleb128 0x8
+ 1152 004e 2E       		.uleb128 0x2e
+ 1153 004f 00       		.byte	0
+ 1154 0050 3F       		.uleb128 0x3f
+ 1155 0051 19       		.uleb128 0x19
+ 1156 0052 03       		.uleb128 0x3
+ 1157 0053 0E       		.uleb128 0xe
+ 1158 0054 3A       		.uleb128 0x3a
+ 1159 0055 0B       		.uleb128 0xb
+ 1160 0056 3B       		.uleb128 0x3b
+ 1161 0057 0B       		.uleb128 0xb
+ 1162 0058 27       		.uleb128 0x27
+ 1163 0059 19       		.uleb128 0x19
+ 1164 005a 20       		.uleb128 0x20
+ 1165 005b 0B       		.uleb128 0xb
+ 1166 005c 00       		.byte	0
+ 1167 005d 00       		.byte	0
+ 1168 005e 09       		.uleb128 0x9
+ 1169 005f 2E       		.uleb128 0x2e
+ 1170 0060 00       		.byte	0
+ 1171 0061 3F       		.uleb128 0x3f
+ 1172 0062 19       		.uleb128 0x19
+ 1173 0063 03       		.uleb128 0x3
+ 1174 0064 0E       		.uleb128 0xe
+ 1175 0065 3A       		.uleb128 0x3a
+ 1176 0066 0B       		.uleb128 0xb
+ 1177 0067 3B       		.uleb128 0x3b
+ 1178 0068 05       		.uleb128 0x5
+ 1179 0069 27       		.uleb128 0x27
+ 1180 006a 19       		.uleb128 0x19
+ 1181 006b 20       		.uleb128 0x20
+ 1182 006c 0B       		.uleb128 0xb
+ 1183 006d 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 30
+
+
+ 1184 006e 00       		.byte	0
+ 1185 006f 0A       		.uleb128 0xa
+ 1186 0070 2E       		.uleb128 0x2e
+ 1187 0071 01       		.byte	0x1
+ 1188 0072 3F       		.uleb128 0x3f
+ 1189 0073 19       		.uleb128 0x19
+ 1190 0074 03       		.uleb128 0x3
+ 1191 0075 0E       		.uleb128 0xe
+ 1192 0076 3A       		.uleb128 0x3a
+ 1193 0077 0B       		.uleb128 0xb
+ 1194 0078 3B       		.uleb128 0x3b
+ 1195 0079 05       		.uleb128 0x5
+ 1196 007a 27       		.uleb128 0x27
+ 1197 007b 19       		.uleb128 0x19
+ 1198 007c 20       		.uleb128 0x20
+ 1199 007d 0B       		.uleb128 0xb
+ 1200 007e 01       		.uleb128 0x1
+ 1201 007f 13       		.uleb128 0x13
+ 1202 0080 00       		.byte	0
+ 1203 0081 00       		.byte	0
+ 1204 0082 0B       		.uleb128 0xb
+ 1205 0083 05       		.uleb128 0x5
+ 1206 0084 00       		.byte	0
+ 1207 0085 03       		.uleb128 0x3
+ 1208 0086 0E       		.uleb128 0xe
+ 1209 0087 3A       		.uleb128 0x3a
+ 1210 0088 0B       		.uleb128 0xb
+ 1211 0089 3B       		.uleb128 0x3b
+ 1212 008a 05       		.uleb128 0x5
+ 1213 008b 49       		.uleb128 0x49
+ 1214 008c 13       		.uleb128 0x13
+ 1215 008d 00       		.byte	0
+ 1216 008e 00       		.byte	0
+ 1217 008f 0C       		.uleb128 0xc
+ 1218 0090 2E       		.uleb128 0x2e
+ 1219 0091 01       		.byte	0x1
+ 1220 0092 3F       		.uleb128 0x3f
+ 1221 0093 19       		.uleb128 0x19
+ 1222 0094 03       		.uleb128 0x3
+ 1223 0095 0E       		.uleb128 0xe
+ 1224 0096 3A       		.uleb128 0x3a
+ 1225 0097 0B       		.uleb128 0xb
+ 1226 0098 3B       		.uleb128 0x3b
+ 1227 0099 0B       		.uleb128 0xb
+ 1228 009a 27       		.uleb128 0x27
+ 1229 009b 19       		.uleb128 0x19
+ 1230 009c 20       		.uleb128 0x20
+ 1231 009d 0B       		.uleb128 0xb
+ 1232 009e 01       		.uleb128 0x1
+ 1233 009f 13       		.uleb128 0x13
+ 1234 00a0 00       		.byte	0
+ 1235 00a1 00       		.byte	0
+ 1236 00a2 0D       		.uleb128 0xd
+ 1237 00a3 05       		.uleb128 0x5
+ 1238 00a4 00       		.byte	0
+ 1239 00a5 03       		.uleb128 0x3
+ 1240 00a6 0E       		.uleb128 0xe
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 31
+
+
+ 1241 00a7 3A       		.uleb128 0x3a
+ 1242 00a8 0B       		.uleb128 0xb
+ 1243 00a9 3B       		.uleb128 0x3b
+ 1244 00aa 0B       		.uleb128 0xb
+ 1245 00ab 49       		.uleb128 0x49
+ 1246 00ac 13       		.uleb128 0x13
+ 1247 00ad 00       		.byte	0
+ 1248 00ae 00       		.byte	0
+ 1249 00af 0E       		.uleb128 0xe
+ 1250 00b0 34       		.uleb128 0x34
+ 1251 00b1 00       		.byte	0
+ 1252 00b2 03       		.uleb128 0x3
+ 1253 00b3 0E       		.uleb128 0xe
+ 1254 00b4 3A       		.uleb128 0x3a
+ 1255 00b5 0B       		.uleb128 0xb
+ 1256 00b6 3B       		.uleb128 0x3b
+ 1257 00b7 0B       		.uleb128 0xb
+ 1258 00b8 49       		.uleb128 0x49
+ 1259 00b9 13       		.uleb128 0x13
+ 1260 00ba 00       		.byte	0
+ 1261 00bb 00       		.byte	0
+ 1262 00bc 0F       		.uleb128 0xf
+ 1263 00bd 2E       		.uleb128 0x2e
+ 1264 00be 01       		.byte	0x1
+ 1265 00bf 31       		.uleb128 0x31
+ 1266 00c0 13       		.uleb128 0x13
+ 1267 00c1 11       		.uleb128 0x11
+ 1268 00c2 01       		.uleb128 0x1
+ 1269 00c3 12       		.uleb128 0x12
+ 1270 00c4 06       		.uleb128 0x6
+ 1271 00c5 40       		.uleb128 0x40
+ 1272 00c6 18       		.uleb128 0x18
+ 1273 00c7 9742     		.uleb128 0x2117
+ 1274 00c9 19       		.uleb128 0x19
+ 1275 00ca 01       		.uleb128 0x1
+ 1276 00cb 13       		.uleb128 0x13
+ 1277 00cc 00       		.byte	0
+ 1278 00cd 00       		.byte	0
+ 1279 00ce 10       		.uleb128 0x10
+ 1280 00cf 898201   		.uleb128 0x4109
+ 1281 00d2 00       		.byte	0
+ 1282 00d3 11       		.uleb128 0x11
+ 1283 00d4 01       		.uleb128 0x1
+ 1284 00d5 31       		.uleb128 0x31
+ 1285 00d6 13       		.uleb128 0x13
+ 1286 00d7 00       		.byte	0
+ 1287 00d8 00       		.byte	0
+ 1288 00d9 11       		.uleb128 0x11
+ 1289 00da 2E       		.uleb128 0x2e
+ 1290 00db 01       		.byte	0x1
+ 1291 00dc 3F       		.uleb128 0x3f
+ 1292 00dd 19       		.uleb128 0x19
+ 1293 00de 03       		.uleb128 0x3
+ 1294 00df 0E       		.uleb128 0xe
+ 1295 00e0 3A       		.uleb128 0x3a
+ 1296 00e1 0B       		.uleb128 0xb
+ 1297 00e2 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 32
+
+
+ 1298 00e3 0B       		.uleb128 0xb
+ 1299 00e4 27       		.uleb128 0x27
+ 1300 00e5 19       		.uleb128 0x19
+ 1301 00e6 11       		.uleb128 0x11
+ 1302 00e7 01       		.uleb128 0x1
+ 1303 00e8 12       		.uleb128 0x12
+ 1304 00e9 06       		.uleb128 0x6
+ 1305 00ea 40       		.uleb128 0x40
+ 1306 00eb 18       		.uleb128 0x18
+ 1307 00ec 9742     		.uleb128 0x2117
+ 1308 00ee 19       		.uleb128 0x19
+ 1309 00ef 01       		.uleb128 0x1
+ 1310 00f0 13       		.uleb128 0x13
+ 1311 00f1 00       		.byte	0
+ 1312 00f2 00       		.byte	0
+ 1313 00f3 12       		.uleb128 0x12
+ 1314 00f4 1D       		.uleb128 0x1d
+ 1315 00f5 01       		.byte	0x1
+ 1316 00f6 31       		.uleb128 0x31
+ 1317 00f7 13       		.uleb128 0x13
+ 1318 00f8 52       		.uleb128 0x52
+ 1319 00f9 01       		.uleb128 0x1
+ 1320 00fa 55       		.uleb128 0x55
+ 1321 00fb 17       		.uleb128 0x17
+ 1322 00fc 58       		.uleb128 0x58
+ 1323 00fd 0B       		.uleb128 0xb
+ 1324 00fe 59       		.uleb128 0x59
+ 1325 00ff 0B       		.uleb128 0xb
+ 1326 0100 01       		.uleb128 0x1
+ 1327 0101 13       		.uleb128 0x13
+ 1328 0102 00       		.byte	0
+ 1329 0103 00       		.byte	0
+ 1330 0104 13       		.uleb128 0x13
+ 1331 0105 05       		.uleb128 0x5
+ 1332 0106 00       		.byte	0
+ 1333 0107 31       		.uleb128 0x31
+ 1334 0108 13       		.uleb128 0x13
+ 1335 0109 02       		.uleb128 0x2
+ 1336 010a 17       		.uleb128 0x17
+ 1337 010b 00       		.byte	0
+ 1338 010c 00       		.byte	0
+ 1339 010d 14       		.uleb128 0x14
+ 1340 010e 0B       		.uleb128 0xb
+ 1341 010f 01       		.byte	0x1
+ 1342 0110 55       		.uleb128 0x55
+ 1343 0111 17       		.uleb128 0x17
+ 1344 0112 00       		.byte	0
+ 1345 0113 00       		.byte	0
+ 1346 0114 15       		.uleb128 0x15
+ 1347 0115 34       		.uleb128 0x34
+ 1348 0116 00       		.byte	0
+ 1349 0117 31       		.uleb128 0x31
+ 1350 0118 13       		.uleb128 0x13
+ 1351 0119 02       		.uleb128 0x2
+ 1352 011a 17       		.uleb128 0x17
+ 1353 011b 00       		.byte	0
+ 1354 011c 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 33
+
+
+ 1355 011d 16       		.uleb128 0x16
+ 1356 011e 1D       		.uleb128 0x1d
+ 1357 011f 00       		.byte	0
+ 1358 0120 31       		.uleb128 0x31
+ 1359 0121 13       		.uleb128 0x13
+ 1360 0122 52       		.uleb128 0x52
+ 1361 0123 01       		.uleb128 0x1
+ 1362 0124 55       		.uleb128 0x55
+ 1363 0125 17       		.uleb128 0x17
+ 1364 0126 58       		.uleb128 0x58
+ 1365 0127 0B       		.uleb128 0xb
+ 1366 0128 59       		.uleb128 0x59
+ 1367 0129 0B       		.uleb128 0xb
+ 1368 012a 00       		.byte	0
+ 1369 012b 00       		.byte	0
+ 1370 012c 17       		.uleb128 0x17
+ 1371 012d 05       		.uleb128 0x5
+ 1372 012e 00       		.byte	0
+ 1373 012f 03       		.uleb128 0x3
+ 1374 0130 0E       		.uleb128 0xe
+ 1375 0131 3A       		.uleb128 0x3a
+ 1376 0132 0B       		.uleb128 0xb
+ 1377 0133 3B       		.uleb128 0x3b
+ 1378 0134 0B       		.uleb128 0xb
+ 1379 0135 49       		.uleb128 0x49
+ 1380 0136 13       		.uleb128 0x13
+ 1381 0137 02       		.uleb128 0x2
+ 1382 0138 18       		.uleb128 0x18
+ 1383 0139 00       		.byte	0
+ 1384 013a 00       		.byte	0
+ 1385 013b 18       		.uleb128 0x18
+ 1386 013c 05       		.uleb128 0x5
+ 1387 013d 00       		.byte	0
+ 1388 013e 31       		.uleb128 0x31
+ 1389 013f 13       		.uleb128 0x13
+ 1390 0140 00       		.byte	0
+ 1391 0141 00       		.byte	0
+ 1392 0142 19       		.uleb128 0x19
+ 1393 0143 05       		.uleb128 0x5
+ 1394 0144 00       		.byte	0
+ 1395 0145 31       		.uleb128 0x31
+ 1396 0146 13       		.uleb128 0x13
+ 1397 0147 02       		.uleb128 0x2
+ 1398 0148 18       		.uleb128 0x18
+ 1399 0149 00       		.byte	0
+ 1400 014a 00       		.byte	0
+ 1401 014b 1A       		.uleb128 0x1a
+ 1402 014c 34       		.uleb128 0x34
+ 1403 014d 00       		.byte	0
+ 1404 014e 31       		.uleb128 0x31
+ 1405 014f 13       		.uleb128 0x13
+ 1406 0150 02       		.uleb128 0x2
+ 1407 0151 18       		.uleb128 0x18
+ 1408 0152 00       		.byte	0
+ 1409 0153 00       		.byte	0
+ 1410 0154 1B       		.uleb128 0x1b
+ 1411 0155 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 34
+
+
+ 1412 0156 01       		.byte	0x1
+ 1413 0157 3F       		.uleb128 0x3f
+ 1414 0158 19       		.uleb128 0x19
+ 1415 0159 03       		.uleb128 0x3
+ 1416 015a 0E       		.uleb128 0xe
+ 1417 015b 3A       		.uleb128 0x3a
+ 1418 015c 0B       		.uleb128 0xb
+ 1419 015d 3B       		.uleb128 0x3b
+ 1420 015e 0B       		.uleb128 0xb
+ 1421 015f 27       		.uleb128 0x27
+ 1422 0160 19       		.uleb128 0x19
+ 1423 0161 49       		.uleb128 0x49
+ 1424 0162 13       		.uleb128 0x13
+ 1425 0163 11       		.uleb128 0x11
+ 1426 0164 01       		.uleb128 0x1
+ 1427 0165 12       		.uleb128 0x12
+ 1428 0166 06       		.uleb128 0x6
+ 1429 0167 40       		.uleb128 0x40
+ 1430 0168 18       		.uleb128 0x18
+ 1431 0169 9742     		.uleb128 0x2117
+ 1432 016b 19       		.uleb128 0x19
+ 1433 016c 01       		.uleb128 0x1
+ 1434 016d 13       		.uleb128 0x13
+ 1435 016e 00       		.byte	0
+ 1436 016f 00       		.byte	0
+ 1437 0170 1C       		.uleb128 0x1c
+ 1438 0171 34       		.uleb128 0x34
+ 1439 0172 00       		.byte	0
+ 1440 0173 03       		.uleb128 0x3
+ 1441 0174 0E       		.uleb128 0xe
+ 1442 0175 3A       		.uleb128 0x3a
+ 1443 0176 0B       		.uleb128 0xb
+ 1444 0177 3B       		.uleb128 0x3b
+ 1445 0178 0B       		.uleb128 0xb
+ 1446 0179 49       		.uleb128 0x49
+ 1447 017a 13       		.uleb128 0x13
+ 1448 017b 02       		.uleb128 0x2
+ 1449 017c 17       		.uleb128 0x17
+ 1450 017d 00       		.byte	0
+ 1451 017e 00       		.byte	0
+ 1452 017f 1D       		.uleb128 0x1d
+ 1453 0180 2E       		.uleb128 0x2e
+ 1454 0181 01       		.byte	0x1
+ 1455 0182 3F       		.uleb128 0x3f
+ 1456 0183 19       		.uleb128 0x19
+ 1457 0184 03       		.uleb128 0x3
+ 1458 0185 0E       		.uleb128 0xe
+ 1459 0186 3A       		.uleb128 0x3a
+ 1460 0187 0B       		.uleb128 0xb
+ 1461 0188 3B       		.uleb128 0x3b
+ 1462 0189 05       		.uleb128 0x5
+ 1463 018a 27       		.uleb128 0x27
+ 1464 018b 19       		.uleb128 0x19
+ 1465 018c 49       		.uleb128 0x49
+ 1466 018d 13       		.uleb128 0x13
+ 1467 018e 11       		.uleb128 0x11
+ 1468 018f 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 35
+
+
+ 1469 0190 12       		.uleb128 0x12
+ 1470 0191 06       		.uleb128 0x6
+ 1471 0192 40       		.uleb128 0x40
+ 1472 0193 18       		.uleb128 0x18
+ 1473 0194 9742     		.uleb128 0x2117
+ 1474 0196 19       		.uleb128 0x19
+ 1475 0197 01       		.uleb128 0x1
+ 1476 0198 13       		.uleb128 0x13
+ 1477 0199 00       		.byte	0
+ 1478 019a 00       		.byte	0
+ 1479 019b 1E       		.uleb128 0x1e
+ 1480 019c 34       		.uleb128 0x34
+ 1481 019d 00       		.byte	0
+ 1482 019e 03       		.uleb128 0x3
+ 1483 019f 0E       		.uleb128 0xe
+ 1484 01a0 3A       		.uleb128 0x3a
+ 1485 01a1 0B       		.uleb128 0xb
+ 1486 01a2 3B       		.uleb128 0x3b
+ 1487 01a3 05       		.uleb128 0x5
+ 1488 01a4 49       		.uleb128 0x49
+ 1489 01a5 13       		.uleb128 0x13
+ 1490 01a6 02       		.uleb128 0x2
+ 1491 01a7 17       		.uleb128 0x17
+ 1492 01a8 00       		.byte	0
+ 1493 01a9 00       		.byte	0
+ 1494 01aa 1F       		.uleb128 0x1f
+ 1495 01ab 2E       		.uleb128 0x2e
+ 1496 01ac 00       		.byte	0
+ 1497 01ad 31       		.uleb128 0x31
+ 1498 01ae 13       		.uleb128 0x13
+ 1499 01af 11       		.uleb128 0x11
+ 1500 01b0 01       		.uleb128 0x1
+ 1501 01b1 12       		.uleb128 0x12
+ 1502 01b2 06       		.uleb128 0x6
+ 1503 01b3 40       		.uleb128 0x40
+ 1504 01b4 18       		.uleb128 0x18
+ 1505 01b5 9742     		.uleb128 0x2117
+ 1506 01b7 19       		.uleb128 0x19
+ 1507 01b8 00       		.byte	0
+ 1508 01b9 00       		.byte	0
+ 1509 01ba 20       		.uleb128 0x20
+ 1510 01bb 2E       		.uleb128 0x2e
+ 1511 01bc 00       		.byte	0
+ 1512 01bd 3F       		.uleb128 0x3f
+ 1513 01be 19       		.uleb128 0x19
+ 1514 01bf 03       		.uleb128 0x3
+ 1515 01c0 0E       		.uleb128 0xe
+ 1516 01c1 3A       		.uleb128 0x3a
+ 1517 01c2 0B       		.uleb128 0xb
+ 1518 01c3 3B       		.uleb128 0x3b
+ 1519 01c4 05       		.uleb128 0x5
+ 1520 01c5 27       		.uleb128 0x27
+ 1521 01c6 19       		.uleb128 0x19
+ 1522 01c7 49       		.uleb128 0x49
+ 1523 01c8 13       		.uleb128 0x13
+ 1524 01c9 11       		.uleb128 0x11
+ 1525 01ca 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 36
+
+
+ 1526 01cb 12       		.uleb128 0x12
+ 1527 01cc 06       		.uleb128 0x6
+ 1528 01cd 40       		.uleb128 0x40
+ 1529 01ce 18       		.uleb128 0x18
+ 1530 01cf 9742     		.uleb128 0x2117
+ 1531 01d1 19       		.uleb128 0x19
+ 1532 01d2 00       		.byte	0
+ 1533 01d3 00       		.byte	0
+ 1534 01d4 21       		.uleb128 0x21
+ 1535 01d5 2E       		.uleb128 0x2e
+ 1536 01d6 00       		.byte	0
+ 1537 01d7 3F       		.uleb128 0x3f
+ 1538 01d8 19       		.uleb128 0x19
+ 1539 01d9 03       		.uleb128 0x3
+ 1540 01da 0E       		.uleb128 0xe
+ 1541 01db 3A       		.uleb128 0x3a
+ 1542 01dc 0B       		.uleb128 0xb
+ 1543 01dd 3B       		.uleb128 0x3b
+ 1544 01de 05       		.uleb128 0x5
+ 1545 01df 27       		.uleb128 0x27
+ 1546 01e0 19       		.uleb128 0x19
+ 1547 01e1 11       		.uleb128 0x11
+ 1548 01e2 01       		.uleb128 0x1
+ 1549 01e3 12       		.uleb128 0x12
+ 1550 01e4 06       		.uleb128 0x6
+ 1551 01e5 40       		.uleb128 0x40
+ 1552 01e6 18       		.uleb128 0x18
+ 1553 01e7 9742     		.uleb128 0x2117
+ 1554 01e9 19       		.uleb128 0x19
+ 1555 01ea 00       		.byte	0
+ 1556 01eb 00       		.byte	0
+ 1557 01ec 22       		.uleb128 0x22
+ 1558 01ed 01       		.uleb128 0x1
+ 1559 01ee 01       		.byte	0x1
+ 1560 01ef 49       		.uleb128 0x49
+ 1561 01f0 13       		.uleb128 0x13
+ 1562 01f1 01       		.uleb128 0x1
+ 1563 01f2 13       		.uleb128 0x13
+ 1564 01f3 00       		.byte	0
+ 1565 01f4 00       		.byte	0
+ 1566 01f5 23       		.uleb128 0x23
+ 1567 01f6 21       		.uleb128 0x21
+ 1568 01f7 00       		.byte	0
+ 1569 01f8 49       		.uleb128 0x49
+ 1570 01f9 13       		.uleb128 0x13
+ 1571 01fa 2F       		.uleb128 0x2f
+ 1572 01fb 0B       		.uleb128 0xb
+ 1573 01fc 00       		.byte	0
+ 1574 01fd 00       		.byte	0
+ 1575 01fe 24       		.uleb128 0x24
+ 1576 01ff 21       		.uleb128 0x21
+ 1577 0200 00       		.byte	0
+ 1578 0201 49       		.uleb128 0x49
+ 1579 0202 13       		.uleb128 0x13
+ 1580 0203 2F       		.uleb128 0x2f
+ 1581 0204 05       		.uleb128 0x5
+ 1582 0205 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 37
+
+
+ 1583 0206 00       		.byte	0
+ 1584 0207 25       		.uleb128 0x25
+ 1585 0208 34       		.uleb128 0x34
+ 1586 0209 00       		.byte	0
+ 1587 020a 03       		.uleb128 0x3
+ 1588 020b 0E       		.uleb128 0xe
+ 1589 020c 3A       		.uleb128 0x3a
+ 1590 020d 0B       		.uleb128 0xb
+ 1591 020e 3B       		.uleb128 0x3b
+ 1592 020f 0B       		.uleb128 0xb
+ 1593 0210 49       		.uleb128 0x49
+ 1594 0211 13       		.uleb128 0x13
+ 1595 0212 3F       		.uleb128 0x3f
+ 1596 0213 19       		.uleb128 0x19
+ 1597 0214 3C       		.uleb128 0x3c
+ 1598 0215 19       		.uleb128 0x19
+ 1599 0216 00       		.byte	0
+ 1600 0217 00       		.byte	0
+ 1601 0218 26       		.uleb128 0x26
+ 1602 0219 2E       		.uleb128 0x2e
+ 1603 021a 00       		.byte	0
+ 1604 021b 3F       		.uleb128 0x3f
+ 1605 021c 19       		.uleb128 0x19
+ 1606 021d 3C       		.uleb128 0x3c
+ 1607 021e 19       		.uleb128 0x19
+ 1608 021f 6E       		.uleb128 0x6e
+ 1609 0220 0E       		.uleb128 0xe
+ 1610 0221 03       		.uleb128 0x3
+ 1611 0222 0E       		.uleb128 0xe
+ 1612 0223 3A       		.uleb128 0x3a
+ 1613 0224 0B       		.uleb128 0xb
+ 1614 0225 3B       		.uleb128 0x3b
+ 1615 0226 0B       		.uleb128 0xb
+ 1616 0227 00       		.byte	0
+ 1617 0228 00       		.byte	0
+ 1618 0229 00       		.byte	0
+ 1619              		.section	.debug_loc,"",%progbits
+ 1620              	.Ldebug_loc0:
+ 1621              	.LLST0:
+ 1622 0000 14000000 		.4byte	.LVL1
+ 1623 0004 16000000 		.4byte	.LVL2
+ 1624 0008 0600     		.2byte	0x6
+ 1625 000a 03       		.byte	0x3
+ 1626 000b 00000000 		.4byte	isr_adc_eoc_Interrupt
+ 1627 000f 9F       		.byte	0x9f
+ 1628 0010 00000000 		.4byte	0
+ 1629 0014 00000000 		.4byte	0
+ 1630              	.LLST1:
+ 1631 0018 14000000 		.4byte	.LVL1
+ 1632 001c 16000000 		.4byte	.LVL2
+ 1633 0020 0100     		.2byte	0x1
+ 1634 0022 54       		.byte	0x54
+ 1635 0023 00000000 		.4byte	0
+ 1636 0027 00000000 		.4byte	0
+ 1637              	.LLST2:
+ 1638 002b 16000000 		.4byte	.LVL2
+ 1639 002f 18000000 		.4byte	.LVL3
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 38
+
+
+ 1640 0033 0200     		.2byte	0x2
+ 1641 0035 37       		.byte	0x37
+ 1642 0036 9F       		.byte	0x9f
+ 1643 0037 00000000 		.4byte	0
+ 1644 003b 00000000 		.4byte	0
+ 1645              	.LLST3:
+ 1646 003f 12000000 		.4byte	.LVL5
+ 1647 0043 14000000 		.4byte	.LVL6
+ 1648 0047 0100     		.2byte	0x1
+ 1649 0049 50       		.byte	0x50
+ 1650 004a 00000000 		.4byte	0
+ 1651 004e 00000000 		.4byte	0
+ 1652              	.LLST4:
+ 1653 0052 12000000 		.4byte	.LVL5
+ 1654 0056 14000000 		.4byte	.LVL6
+ 1655 005a 0100     		.2byte	0x1
+ 1656 005c 55       		.byte	0x55
+ 1657 005d 00000000 		.4byte	0
+ 1658 0061 00000000 		.4byte	0
+ 1659              	.LLST5:
+ 1660 0065 14000000 		.4byte	.LVL6
+ 1661 0069 16000000 		.4byte	.LVL7
+ 1662 006d 0200     		.2byte	0x2
+ 1663 006f 37       		.byte	0x37
+ 1664 0070 9F       		.byte	0x9f
+ 1665 0071 00000000 		.4byte	0
+ 1666 0075 00000000 		.4byte	0
+ 1667              	.LLST6:
+ 1668 0079 0C000000 		.4byte	.LVL8
+ 1669 007d 0E000000 		.4byte	.LVL9
+ 1670 0081 0100     		.2byte	0x1
+ 1671 0083 53       		.byte	0x53
+ 1672 0084 00000000 		.4byte	0
+ 1673 0088 00000000 		.4byte	0
+ 1674              	.LLST7:
+ 1675 008c 00000000 		.4byte	.LVL12
+ 1676 0090 02000000 		.4byte	.LVL13
+ 1677 0094 0600     		.2byte	0x6
+ 1678 0096 11       		.byte	0x11
+ 1679 0097 88DA8380 		.sleb128 -536810232
+ 1679      7E
+ 1680 009c 02000000 		.4byte	.LVL13
+ 1681 00a0 04000000 		.4byte	.LVL14
+ 1682 00a4 0200     		.2byte	0x2
+ 1683 00a6 73       		.byte	0x73
+ 1684 00a7 00       		.sleb128 0
+ 1685 00a8 04000000 		.4byte	.LVL14
+ 1686 00ac 0C000000 		.4byte	.LFE5
+ 1687 00b0 0100     		.2byte	0x1
+ 1688 00b2 53       		.byte	0x53
+ 1689 00b3 00000000 		.4byte	0
+ 1690 00b7 00000000 		.4byte	0
+ 1691              	.LLST8:
+ 1692 00bb 00000000 		.4byte	.LVL15
+ 1693 00bf 02000000 		.4byte	.LVL16
+ 1694 00c3 0100     		.2byte	0x1
+ 1695 00c5 50       		.byte	0x50
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 39
+
+
+ 1696 00c6 02000000 		.4byte	.LVL16
+ 1697 00ca 10000000 		.4byte	.LFE6
+ 1698 00ce 0400     		.2byte	0x4
+ 1699 00d0 F3       		.byte	0xf3
+ 1700 00d1 01       		.uleb128 0x1
+ 1701 00d2 50       		.byte	0x50
+ 1702 00d3 9F       		.byte	0x9f
+ 1703 00d4 00000000 		.4byte	0
+ 1704 00d8 00000000 		.4byte	0
+ 1705              	.LLST9:
+ 1706 00dc 04000000 		.4byte	.LVL17
+ 1707 00e0 06000000 		.4byte	.LVL18
+ 1708 00e4 0500     		.2byte	0x5
+ 1709 00e6 70       		.byte	0x70
+ 1710 00e7 00       		.sleb128 0
+ 1711 00e8 35       		.byte	0x35
+ 1712 00e9 25       		.byte	0x25
+ 1713 00ea 9F       		.byte	0x9f
+ 1714 00eb 00000000 		.4byte	0
+ 1715 00ef 00000000 		.4byte	0
+ 1716              		.section	.debug_aranges,"",%progbits
+ 1717 0000 7C000000 		.4byte	0x7c
+ 1718 0004 0200     		.2byte	0x2
+ 1719 0006 00000000 		.4byte	.Ldebug_info0
+ 1720 000a 04       		.byte	0x4
+ 1721 000b 00       		.byte	0
+ 1722 000c 0000     		.2byte	0
+ 1723 000e 0000     		.2byte	0
+ 1724 0010 00000000 		.4byte	.LFB3
+ 1725 0014 5C000000 		.4byte	.LFE3-.LFB3
+ 1726 0018 00000000 		.4byte	.LFB0
+ 1727 001c 34000000 		.4byte	.LFE0-.LFB0
+ 1728 0020 00000000 		.4byte	.LFB1
+ 1729 0024 2C000000 		.4byte	.LFE1-.LFB1
+ 1730 0028 00000000 		.4byte	.LFB2
+ 1731 002c 1C000000 		.4byte	.LFE2-.LFB2
+ 1732 0030 00000000 		.4byte	.LFB4
+ 1733 0034 0C000000 		.4byte	.LFE4-.LFB4
+ 1734 0038 00000000 		.4byte	.LFB5
+ 1735 003c 0C000000 		.4byte	.LFE5-.LFB5
+ 1736 0040 00000000 		.4byte	.LFB6
+ 1737 0044 10000000 		.4byte	.LFE6-.LFB6
+ 1738 0048 00000000 		.4byte	.LFB7
+ 1739 004c 0C000000 		.4byte	.LFE7-.LFB7
+ 1740 0050 00000000 		.4byte	.LFB8
+ 1741 0054 0C000000 		.4byte	.LFE8-.LFB8
+ 1742 0058 00000000 		.4byte	.LFB9
+ 1743 005c 10000000 		.4byte	.LFE9-.LFB9
+ 1744 0060 00000000 		.4byte	.LFB10
+ 1745 0064 0C000000 		.4byte	.LFE10-.LFB10
+ 1746 0068 00000000 		.4byte	.LFB11
+ 1747 006c 0C000000 		.4byte	.LFE11-.LFB11
+ 1748 0070 00000000 		.4byte	.LFB12
+ 1749 0074 0C000000 		.4byte	.LFE12-.LFB12
+ 1750 0078 00000000 		.4byte	0
+ 1751 007c 00000000 		.4byte	0
+ 1752              		.section	.debug_ranges,"",%progbits
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 40
+
+
+ 1753              	.Ldebug_ranges0:
+ 1754 0000 02000000 		.4byte	.LBB25
+ 1755 0004 04000000 		.4byte	.LBE25
+ 1756 0008 06000000 		.4byte	.LBB33
+ 1757 000c 0A000000 		.4byte	.LBE33
+ 1758 0010 14000000 		.4byte	.LBB44
+ 1759 0014 16000000 		.4byte	.LBE44
+ 1760 0018 00000000 		.4byte	0
+ 1761 001c 00000000 		.4byte	0
+ 1762 0020 04000000 		.4byte	.LBB29
+ 1763 0024 06000000 		.4byte	.LBE29
+ 1764 0028 0C000000 		.4byte	.LBB38
+ 1765 002c 0E000000 		.4byte	.LBE38
+ 1766 0030 12000000 		.4byte	.LBB43
+ 1767 0034 14000000 		.4byte	.LBE43
+ 1768 0038 00000000 		.4byte	0
+ 1769 003c 00000000 		.4byte	0
+ 1770 0040 0A000000 		.4byte	.LBB34
+ 1771 0044 0C000000 		.4byte	.LBE34
+ 1772 0048 10000000 		.4byte	.LBB42
+ 1773 004c 12000000 		.4byte	.LBE42
+ 1774 0050 16000000 		.4byte	.LBB45
+ 1775 0054 18000000 		.4byte	.LBE45
+ 1776 0058 00000000 		.4byte	0
+ 1777 005c 00000000 		.4byte	0
+ 1778 0060 0E000000 		.4byte	.LBB39
+ 1779 0064 10000000 		.4byte	.LBE39
+ 1780 0068 1A000000 		.4byte	.LBB46
+ 1781 006c 1C000000 		.4byte	.LBE46
+ 1782 0070 00000000 		.4byte	0
+ 1783 0074 00000000 		.4byte	0
+ 1784 0078 02000000 		.4byte	.LBB47
+ 1785 007c 04000000 		.4byte	.LBE47
+ 1786 0080 06000000 		.4byte	.LBB55
+ 1787 0084 08000000 		.4byte	.LBE55
+ 1788 0088 12000000 		.4byte	.LBB66
+ 1789 008c 14000000 		.4byte	.LBE66
+ 1790 0090 00000000 		.4byte	0
+ 1791 0094 00000000 		.4byte	0
+ 1792 0098 04000000 		.4byte	.LBB51
+ 1793 009c 06000000 		.4byte	.LBE51
+ 1794 00a0 0A000000 		.4byte	.LBB60
+ 1795 00a4 0C000000 		.4byte	.LBE60
+ 1796 00a8 10000000 		.4byte	.LBB65
+ 1797 00ac 12000000 		.4byte	.LBE65
+ 1798 00b0 00000000 		.4byte	0
+ 1799 00b4 00000000 		.4byte	0
+ 1800 00b8 08000000 		.4byte	.LBB56
+ 1801 00bc 0A000000 		.4byte	.LBE56
+ 1802 00c0 0C000000 		.4byte	.LBB61
+ 1803 00c4 0E000000 		.4byte	.LBE61
+ 1804 00c8 14000000 		.4byte	.LBB67
+ 1805 00cc 16000000 		.4byte	.LBE67
+ 1806 00d0 00000000 		.4byte	0
+ 1807 00d4 00000000 		.4byte	0
+ 1808 00d8 0E000000 		.4byte	.LBB62
+ 1809 00dc 10000000 		.4byte	.LBE62
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 41
+
+
+ 1810 00e0 18000000 		.4byte	.LBB68
+ 1811 00e4 1A000000 		.4byte	.LBE68
+ 1812 00e8 00000000 		.4byte	0
+ 1813 00ec 00000000 		.4byte	0
+ 1814 00f0 00000000 		.4byte	.LBB69
+ 1815 00f4 02000000 		.4byte	.LBE69
+ 1816 00f8 04000000 		.4byte	.LBB76
+ 1817 00fc 08000000 		.4byte	.LBE76
+ 1818 0100 0C000000 		.4byte	.LBB78
+ 1819 0104 1C000000 		.4byte	.LBE78
+ 1820 0108 00000000 		.4byte	0
+ 1821 010c 00000000 		.4byte	0
+ 1822 0110 02000000 		.4byte	.LBB73
+ 1823 0114 04000000 		.4byte	.LBE73
+ 1824 0118 08000000 		.4byte	.LBB77
+ 1825 011c 0C000000 		.4byte	.LBE77
+ 1826 0120 00000000 		.4byte	0
+ 1827 0124 00000000 		.4byte	0
+ 1828 0128 00000000 		.4byte	.LFB3
+ 1829 012c 5C000000 		.4byte	.LFE3
+ 1830 0130 00000000 		.4byte	.LFB0
+ 1831 0134 34000000 		.4byte	.LFE0
+ 1832 0138 00000000 		.4byte	.LFB1
+ 1833 013c 2C000000 		.4byte	.LFE1
+ 1834 0140 00000000 		.4byte	.LFB2
+ 1835 0144 1C000000 		.4byte	.LFE2
+ 1836 0148 00000000 		.4byte	.LFB4
+ 1837 014c 0C000000 		.4byte	.LFE4
+ 1838 0150 00000000 		.4byte	.LFB5
+ 1839 0154 0C000000 		.4byte	.LFE5
+ 1840 0158 00000000 		.4byte	.LFB6
+ 1841 015c 10000000 		.4byte	.LFE6
+ 1842 0160 00000000 		.4byte	.LFB7
+ 1843 0164 0C000000 		.4byte	.LFE7
+ 1844 0168 00000000 		.4byte	.LFB8
+ 1845 016c 0C000000 		.4byte	.LFE8
+ 1846 0170 00000000 		.4byte	.LFB9
+ 1847 0174 10000000 		.4byte	.LFE9
+ 1848 0178 00000000 		.4byte	.LFB10
+ 1849 017c 0C000000 		.4byte	.LFE10
+ 1850 0180 00000000 		.4byte	.LFB11
+ 1851 0184 0C000000 		.4byte	.LFE11
+ 1852 0188 00000000 		.4byte	.LFB12
+ 1853 018c 0C000000 		.4byte	.LFE12
+ 1854 0190 00000000 		.4byte	0
+ 1855 0194 00000000 		.4byte	0
+ 1856              		.section	.debug_line,"",%progbits
+ 1857              	.Ldebug_line0:
+ 1858 0000 CD010000 		.section	.debug_str,"MS",%progbits,1
+ 1858      02006800 
+ 1858      00000201 
+ 1858      FB0E0D00 
+ 1858      01010101 
+ 1859              	.LASF32:
+ 1860 0000 6973725F 		.ascii	"isr_adc_eoc_GetPriority\000"
+ 1860      6164635F 
+ 1860      656F635F 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 42
+
+
+ 1860      47657450 
+ 1860      72696F72 
+ 1861              	.LASF19:
+ 1862 0018 72656733 		.ascii	"reg32\000"
+ 1862      3200
+ 1863              	.LASF30:
+ 1864 001e 6973725F 		.ascii	"isr_adc_eoc_Stop\000"
+ 1864      6164635F 
+ 1864      656F635F 
+ 1864      53746F70 
+ 1864      00
+ 1865              	.LASF43:
+ 1866 002f 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 1866      726F7062 
+ 1866      6F785C44 
+ 1866      4556454C 
+ 1866      4F504D45 
+ 1867 005e 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 1867      70656374 
+ 1867      72756D20 
+ 1867      616E616C 
+ 1867      797A6572 
+ 1868 008f 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 1868      416E616C 
+ 1868      797A6572 
+ 1868      5C617564 
+ 1868      696F5370 
+ 1869              	.LASF6:
+ 1870 00b8 73686F72 		.ascii	"short unsigned int\000"
+ 1870      7420756E 
+ 1870      7369676E 
+ 1870      65642069 
+ 1870      6E7400
+ 1871              	.LASF44:
+ 1872 00cb 6973725F 		.ascii	"isr_adc_eoc_GetState\000"
+ 1872      6164635F 
+ 1872      656F635F 
+ 1872      47657453 
+ 1872      74617465 
+ 1873              	.LASF15:
+ 1874 00e0 696E7431 		.ascii	"int16\000"
+ 1874      3600
+ 1875              	.LASF16:
+ 1876 00e6 666C6F61 		.ascii	"float\000"
+ 1876      7400
+ 1877              	.LASF23:
+ 1878 00ec 6973725F 		.ascii	"isr_adc_eoc_SetPriority\000"
+ 1878      6164635F 
+ 1878      656F635F 
+ 1878      53657450 
+ 1878      72696F72 
+ 1879              	.LASF31:
+ 1880 0104 6973725F 		.ascii	"isr_adc_eoc_GetVector\000"
+ 1880      6164635F 
+ 1880      656F635F 
+ 1880      47657456 
+ 1880      6563746F 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 43
+
+
+ 1881              	.LASF4:
+ 1882 011a 756E7369 		.ascii	"unsigned char\000"
+ 1882      676E6564 
+ 1882      20636861 
+ 1882      7200
+ 1883              	.LASF21:
+ 1884 0128 6973725F 		.ascii	"isr_adc_eoc_Interrupt\000"
+ 1884      6164635F 
+ 1884      656F635F 
+ 1884      496E7465 
+ 1884      72727570 
+ 1885              	.LASF18:
+ 1886 013e 72656738 		.ascii	"reg8\000"
+ 1886      00
+ 1887              	.LASF26:
+ 1888 0143 61646472 		.ascii	"address\000"
+ 1888      65737300 
+ 1889              	.LASF8:
+ 1890 014b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1890      20756E73 
+ 1890      69676E65 
+ 1890      6420696E 
+ 1890      7400
+ 1891              	.LASF12:
+ 1892 015d 75696E74 		.ascii	"uint8\000"
+ 1892      3800
+ 1893              	.LASF25:
+ 1894 0163 7072696F 		.ascii	"priority\000"
+ 1894      72697479 
+ 1894      00
+ 1895              	.LASF29:
+ 1896 016c 6973725F 		.ascii	"isr_adc_eoc_StartEx\000"
+ 1896      6164635F 
+ 1896      656F635F 
+ 1896      53746172 
+ 1896      74457800 
+ 1897              	.LASF17:
+ 1898 0180 646F7562 		.ascii	"double\000"
+ 1898      6C6500
+ 1899              	.LASF36:
+ 1900 0187 61756469 		.ascii	"audioBuff\000"
+ 1900      6F427566 
+ 1900      6600
+ 1901              	.LASF37:
+ 1902 0191 62756666 		.ascii	"buffInput\000"
+ 1902      496E7075 
+ 1902      7400
+ 1903              	.LASF5:
+ 1904 019b 73686F72 		.ascii	"short int\000"
+ 1904      7420696E 
+ 1904      7400
+ 1905              	.LASF13:
+ 1906 01a5 75696E74 		.ascii	"uint16\000"
+ 1906      313600
+ 1907              	.LASF38:
+ 1908 01ac 62756666 		.ascii	"buffOutput\000"
+ 1908      4F757470 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 44
+
+
+ 1908      757400
+ 1909              	.LASF14:
+ 1910 01b7 75696E74 		.ascii	"uint32\000"
+ 1910      333200
+ 1911              	.LASF45:
+ 1912 01be 4144435F 		.ascii	"ADC_DelSig_1_GetResult16\000"
+ 1912      44656C53 
+ 1912      69675F31 
+ 1912      5F476574 
+ 1912      52657375 
+ 1913              	.LASF0:
+ 1914 01d7 756E7369 		.ascii	"unsigned int\000"
+ 1914      676E6564 
+ 1914      20696E74 
+ 1914      00
+ 1915              	.LASF41:
+ 1916 01e4 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1916      43313120 
+ 1916      352E342E 
+ 1916      31203230 
+ 1916      31363036 
+ 1917 0217 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1917      20726576 
+ 1917      6973696F 
+ 1917      6E203233 
+ 1917      37373135 
+ 1918 024a 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 1918      66756E63 
+ 1918      74696F6E 
+ 1918      2D736563 
+ 1918      74696F6E 
+ 1919 027d 6E637469 		.ascii	"nctions\000"
+ 1919      6F6E7300 
+ 1920              	.LASF9:
+ 1921 0285 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1921      206C6F6E 
+ 1921      6720756E 
+ 1921      7369676E 
+ 1921      65642069 
+ 1922              	.LASF42:
+ 1923 029c 47656E65 		.ascii	"Generated_Source\\PSoC5\\isr_adc_eoc.c\000"
+ 1923      72617465 
+ 1923      645F536F 
+ 1923      75726365 
+ 1923      5C50536F 
+ 1924              	.LASF22:
+ 1925 02c1 6973725F 		.ascii	"isr_adc_eoc_Enable\000"
+ 1925      6164635F 
+ 1925      656F635F 
+ 1925      456E6162 
+ 1925      6C6500
+ 1926              	.LASF20:
+ 1927 02d4 63796973 		.ascii	"cyisraddress\000"
+ 1927      72616464 
+ 1927      72657373 
+ 1927      00
+ 1928              	.LASF39:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 45
+
+
+ 1929 02e1 62756666 		.ascii	"buffIndex\000"
+ 1929      496E6465 
+ 1929      7800
+ 1930              	.LASF10:
+ 1931 02eb 73697A65 		.ascii	"sizetype\000"
+ 1931      74797065 
+ 1931      00
+ 1932              	.LASF1:
+ 1933 02f4 6C6F6E67 		.ascii	"long long int\000"
+ 1933      206C6F6E 
+ 1933      6720696E 
+ 1933      7400
+ 1934              	.LASF27:
+ 1935 0302 6973725F 		.ascii	"isr_adc_eoc_Disable\000"
+ 1935      6164635F 
+ 1935      656F635F 
+ 1935      44697361 
+ 1935      626C6500 
+ 1936              	.LASF11:
+ 1937 0316 63686172 		.ascii	"char\000"
+ 1937      00
+ 1938              	.LASF33:
+ 1939 031b 72616D56 		.ascii	"ramVectorTable\000"
+ 1939      6563746F 
+ 1939      72546162 
+ 1939      6C6500
+ 1940              	.LASF40:
+ 1941 032a 62756666 		.ascii	"buffFull\000"
+ 1941      46756C6C 
+ 1941      00
+ 1942              	.LASF34:
+ 1943 0333 6973725F 		.ascii	"isr_adc_eoc_SetPending\000"
+ 1943      6164635F 
+ 1943      656F635F 
+ 1943      53657450 
+ 1943      656E6469 
+ 1944              	.LASF7:
+ 1945 034a 6C6F6E67 		.ascii	"long int\000"
+ 1945      20696E74 
+ 1945      00
+ 1946              	.LASF35:
+ 1947 0353 6973725F 		.ascii	"isr_adc_eoc_ClearPending\000"
+ 1947      6164635F 
+ 1947      656F635F 
+ 1947      436C6561 
+ 1947      7250656E 
+ 1948              	.LASF2:
+ 1949 036c 6C6F6E67 		.ascii	"long double\000"
+ 1949      20646F75 
+ 1949      626C6500 
+ 1950              	.LASF28:
+ 1951 0378 6973725F 		.ascii	"isr_adc_eoc_Start\000"
+ 1951      6164635F 
+ 1951      656F635F 
+ 1951      53746172 
+ 1951      7400
+ 1952              	.LASF3:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccq3nehE.s 			page 46
+
+
+ 1953 038a 7369676E 		.ascii	"signed char\000"
+ 1953      65642063 
+ 1953      68617200 
+ 1954              	.LASF24:
+ 1955 0396 6973725F 		.ascii	"isr_adc_eoc_SetVector\000"
+ 1955      6164635F 
+ 1955      656F635F 
+ 1955      53657456 
+ 1955      6563746F 
+ 1956              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

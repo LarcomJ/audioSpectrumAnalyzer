@@ -1,0 +1,2490 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"isr_Pin_buttDown.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.isr_Pin_buttDown_Interrupt,"ax",%progbits
+  20              		.align	2
+  21              		.global	isr_Pin_buttDown_Interrupt
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	isr_Pin_buttDown_Interrupt, %function
+  25              	isr_Pin_buttDown_Interrupt:
+  26              	.LFB3:
+  27              		.file 1 "Generated_Source\\PSoC5\\isr_Pin_buttDown.c"
+   1:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * File Name: isr_Pin_buttDown.c  
+   3:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Version 1.70
+   4:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+   5:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  Description:
+   6:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   API for controlling the state of an interrupt.
+   7:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+   8:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+   9:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  Note:
+  10:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+  11:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  14:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  15:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  18:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  19:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #include <cydevice_trm.h>
+  20:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #include <CyLib.h>
+  21:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #include <isr_Pin_buttDown.h>
+  22:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #include "cyapicallbacks.h"
+  23:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  24:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #if !defined(isr_Pin_buttDown__REMOVED) /* Check for removal by optimization */
+  25:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  26:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+  27:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  Place your includes, defines and code here 
+  28:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************/
+  29:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /* `#START isr_Pin_buttDown_intc` */
+  30:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 2
+
+
+  31:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /* `#END` */
+  32:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  33:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #ifndef CYINT_IRQ_BASE
+  34:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #define CYINT_IRQ_BASE      16
+  35:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #endif /* CYINT_IRQ_BASE */
+  36:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #ifndef CYINT_VECT_TABLE
+  37:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #define CYINT_VECT_TABLE    ((cyisraddress **) CYREG_NVIC_VECT_OFFSET)
+  38:Generated_Source\PSoC5/isr_Pin_buttDown.c **** #endif /* CYINT_VECT_TABLE */
+  39:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  40:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /* Declared in startup, used to set unused interrupts to. */
+  41:Generated_Source\PSoC5/isr_Pin_buttDown.c **** CY_ISR_PROTO(IntDefaultHandler);
+  42:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  43:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  44:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+  45:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_Start
+  46:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+  47:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+  48:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+  49:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  Set up the interrupt and enable it. This function disables the interrupt, 
+  50:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  sets the default interrupt vector, sets the priority from the value in the
+  51:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  Design Wide Resources Interrupt Editor, then enables the interrupt to the 
+  52:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  interrupt controller.
+  53:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+  54:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:  
+  55:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+  56:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+  57:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+  58:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+  59:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+  60:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+  61:Generated_Source\PSoC5/isr_Pin_buttDown.c **** void isr_Pin_buttDown_Start(void)
+  62:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+  63:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* For all we know the interrupt is active. */
+  64:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_Disable();
+  65:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  66:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Set the ISR to point to the isr_Pin_buttDown Interrupt. */
+  67:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_SetVector(&isr_Pin_buttDown_Interrupt);
+  68:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  69:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Set the priority. */
+  70:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_SetPriority((uint8)isr_Pin_buttDown_INTC_PRIOR_NUMBER);
+  71:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  72:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Enable it. */
+  73:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_Enable();
+  74:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+  75:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  76:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  77:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+  78:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_StartEx
+  79:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+  80:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+  81:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+  82:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  Sets up the interrupt and enables it. This function disables the interrupt,
+  83:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  sets the interrupt vector based on the address passed in, sets the priority 
+  84:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  from the value in the Design Wide Resources Interrupt Editor, then enables 
+  85:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  the interrupt to the interrupt controller.
+  86:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  
+  87:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 3
+
+
+  88:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  used to provide consistent definition across compilers:
+  89:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  
+  90:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *  Function definition example:
+  91:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   CY_ISR(MyISR)
+  92:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   {
+  93:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   }
+  94:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Function prototype example:
+  95:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   CY_ISR_PROTO(MyISR);
+  96:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+  97:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:  
+  98:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   address: Address of the ISR to set in the interrupt vector table.
+  99:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 100:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 101:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 102:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 103:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 104:Generated_Source\PSoC5/isr_Pin_buttDown.c **** void isr_Pin_buttDown_StartEx(cyisraddress address)
+ 105:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 106:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* For all we know the interrupt is active. */
+ 107:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_Disable();
+ 108:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 109:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Set the ISR to point to the isr_Pin_buttDown Interrupt. */
+ 110:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_SetVector(address);
+ 111:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 112:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Set the priority. */
+ 113:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_SetPriority((uint8)isr_Pin_buttDown_INTC_PRIOR_NUMBER);
+ 114:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 115:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Enable it. */
+ 116:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_Enable();
+ 117:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 118:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 119:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 120:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 121:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_Stop
+ 122:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 123:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 124:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 125:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Disables and removes the interrupt.
+ 126:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 127:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:  
+ 128:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 129:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 130:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 131:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 132:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 133:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 134:Generated_Source\PSoC5/isr_Pin_buttDown.c **** void isr_Pin_buttDown_Stop(void)
+ 135:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 136:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Disable this interrupt. */
+ 137:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_Disable();
+ 138:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 139:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Set the ISR to point to the passive one. */
+ 140:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     isr_Pin_buttDown_SetVector(&IntDefaultHandler);
+ 141:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 142:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 143:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 144:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 4
+
+
+ 145:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_Interrupt
+ 146:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 147:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 148:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 149:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   The default Interrupt Service Routine for isr_Pin_buttDown.
+ 150:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 151:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Add custom code between the coments to keep the next version of this file
+ 152:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   from over writting your code.
+ 153:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 154:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:  
+ 155:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 156:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 157:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 158:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 159:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 160:Generated_Source\PSoC5/isr_Pin_buttDown.c **** CY_ISR(isr_Pin_buttDown_Interrupt)
+ 161:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+  28              		.loc 1 161 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+ 162:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     #ifdef isr_Pin_buttDown_INTERRUPT_INTERRUPT_CALLBACK
+ 163:Generated_Source\PSoC5/isr_Pin_buttDown.c ****         isr_Pin_buttDown_Interrupt_InterruptCallback();
+ 164:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     #endif /* isr_Pin_buttDown_INTERRUPT_INTERRUPT_CALLBACK */ 
+ 165:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 166:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /*  Place your Interrupt code here. */
+ 167:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* `#START isr_Pin_buttDown_Interrupt` */
+ 168:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     extern volatile uint8 buttonPress;
+ 169:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     extern volatile uint8 buttonDown;
+ 170:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     
+ 171:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     buttonPress = 1;
+  33              		.loc 1 171 0
+  34 0000 014B     		ldr	r3, .L2
+  35 0002 0122     		movs	r2, #1
+  36 0004 1A70     		strb	r2, [r3]
+  37 0006 7047     		bx	lr
+  38              	.L3:
+  39              		.align	2
+  40              	.L2:
+  41 0008 00000000 		.word	buttonPress
+  42              		.cfi_endproc
+  43              	.LFE3:
+  44              		.size	isr_Pin_buttDown_Interrupt, .-isr_Pin_buttDown_Interrupt
+  45              		.section	.text.isr_Pin_buttDown_Start,"ax",%progbits
+  46              		.align	2
+  47              		.global	isr_Pin_buttDown_Start
+  48              		.thumb
+  49              		.thumb_func
+  50              		.type	isr_Pin_buttDown_Start, %function
+  51              	isr_Pin_buttDown_Start:
+  52              	.LFB0:
+  62:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* For all we know the interrupt is active. */
+  53              		.loc 1 62 0
+  54              		.cfi_startproc
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 5
+
+
+  57              		@ link register save eliminated.
+  58 0000 70B4     		push	{r4, r5, r6}
+  59              		.cfi_def_cfa_offset 12
+  60              		.cfi_offset 4, -12
+  61              		.cfi_offset 5, -8
+  62              		.cfi_offset 6, -4
+  63              	.LBB22:
+  64              	.LBB23:
+ 172:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     //buttonDown = 1;    
+ 173:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 174:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* `#END` */
+ 175:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 176:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 177:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 178:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 179:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_SetVector
+ 180:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 181:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 182:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 183:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Change the ISR vector for the Interrupt. Note calling isr_Pin_buttDown_Start
+ 184:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   will override any effect this method would have had. To set the vector 
+ 185:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   before the component has been started use isr_Pin_buttDown_StartEx instead.
+ 186:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * 
+ 187:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+ 188:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   used to provide consistent definition across compilers:
+ 189:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 190:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Function definition example:
+ 191:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   CY_ISR(MyISR)
+ 192:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   {
+ 193:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   }
+ 194:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 195:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Function prototype example:
+ 196:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *     CY_ISR_PROTO(MyISR);
+ 197:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 198:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:
+ 199:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   address: Address of the ISR to set in the interrupt vector table.
+ 200:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 201:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 202:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 203:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 204:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 205:Generated_Source\PSoC5/isr_Pin_buttDown.c **** void isr_Pin_buttDown_SetVector(cyisraddress address)
+ 206:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 207:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     cyisraddress * ramVectorTable;
+ 208:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 209:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+  65              		.loc 1 209 0
+  66 0002 074B     		ldr	r3, .L6
+  67              	.LBE23:
+  68              	.LBE22:
+  69              	.LBB26:
+  70              	.LBB27:
+ 210:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 211:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     ramVectorTable[CYINT_IRQ_BASE + (uint32)isr_Pin_buttDown__INTC_NUMBER] = address;
+ 212:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 213:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 214:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 6
+
+
+ 215:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 216:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_GetVector
+ 217:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 218:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 219:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 220:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Gets the "address" of the current ISR vector for the Interrupt.
+ 221:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 222:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:
+ 223:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 224:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 225:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 226:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Address of the ISR in the interrupt vector table.
+ 227:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 228:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 229:Generated_Source\PSoC5/isr_Pin_buttDown.c **** cyisraddress isr_Pin_buttDown_GetVector(void)
+ 230:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 231:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     cyisraddress * ramVectorTable;
+ 232:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 233:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+ 234:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 235:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     return ramVectorTable[CYINT_IRQ_BASE + (uint32)isr_Pin_buttDown__INTC_NUMBER];
+ 236:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 237:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 238:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 239:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 240:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_SetPriority
+ 241:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 242:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 243:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 244:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Sets the Priority of the Interrupt. 
+ 245:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 246:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Note calling isr_Pin_buttDown_Start or isr_Pin_buttDown_StartEx will 
+ 247:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   override any effect this API would have had. This API should only be called
+ 248:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   after isr_Pin_buttDown_Start or isr_Pin_buttDown_StartEx has been called. 
+ 249:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   To set the initial priority for the component, use the Design-Wide Resources
+ 250:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Interrupt Editor.
+ 251:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 252:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Note This API has no effect on Non-maskable interrupt NMI).
+ 253:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 254:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:
+ 255:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   priority: Priority of the interrupt, 0 being the highest priority
+ 256:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *             PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 257:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *             PSoC 4: Priority is from 0 to 3.
+ 258:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 259:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 260:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 261:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 262:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 263:Generated_Source\PSoC5/isr_Pin_buttDown.c **** void isr_Pin_buttDown_SetPriority(uint8 priority)
+ 264:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 265:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     *isr_Pin_buttDown_INTC_PRIOR = priority << 5;
+ 266:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 267:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 268:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 269:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 270:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_GetPriority
+ 271:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 7
+
+
+ 272:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 273:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 274:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Gets the Priority of the Interrupt.
+ 275:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 276:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:
+ 277:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 278:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 279:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 280:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Priority of the interrupt, 0 being the highest priority
+ 281:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *    PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 282:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *    PSoC 4: Priority is from 0 to 3.
+ 283:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 284:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 285:Generated_Source\PSoC5/isr_Pin_buttDown.c **** uint8 isr_Pin_buttDown_GetPriority(void)
+ 286:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 287:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     uint8 priority;
+ 288:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 289:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 290:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     priority = *isr_Pin_buttDown_INTC_PRIOR >> 5;
+ 291:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 292:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     return priority;
+ 293:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 294:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 295:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 296:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 297:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_Enable
+ 298:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 299:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 300:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 301:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Enables the interrupt to the interrupt controller. Do not call this function
+ 302:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   unless ISR_Start() has been called or the functionality of the ISR_Start() 
+ 303:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   function, which sets the vector and the priority, has been called.
+ 304:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 305:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:
+ 306:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 307:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 308:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 309:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 310:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 311:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 312:Generated_Source\PSoC5/isr_Pin_buttDown.c **** void isr_Pin_buttDown_Enable(void)
+ 313:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 314:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Enable the general interrupt. */
+ 315:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     *isr_Pin_buttDown_INTC_SET_EN = isr_Pin_buttDown__INTC_MASK;
+ 316:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 317:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 318:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 319:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 320:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_GetState
+ 321:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 322:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 323:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 324:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Gets the state (enabled, disabled) of the Interrupt.
+ 325:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 326:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:
+ 327:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 328:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 8
+
+
+ 329:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 330:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   1 if enabled, 0 if disabled.
+ 331:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 332:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 333:Generated_Source\PSoC5/isr_Pin_buttDown.c **** uint8 isr_Pin_buttDown_GetState(void)
+ 334:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 335:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Get the state of the general interrupt. */
+ 336:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     return ((*isr_Pin_buttDown_INTC_SET_EN & (uint32)isr_Pin_buttDown__INTC_MASK) != 0u) ? 1u:0u;
+ 337:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 338:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 339:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 340:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 341:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_Disable
+ 342:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 343:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 344:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 345:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Disables the Interrupt in the interrupt controller.
+ 346:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 347:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:
+ 348:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 349:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 350:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 351:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 352:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 353:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 354:Generated_Source\PSoC5/isr_Pin_buttDown.c **** void isr_Pin_buttDown_Disable(void)
+ 355:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 356:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Disable the general interrupt. */
+ 357:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     *isr_Pin_buttDown_INTC_CLR_EN = isr_Pin_buttDown__INTC_MASK;
+  71              		.loc 1 357 0
+  72 0004 074E     		ldr	r6, .L6+4
+  73              	.LBE27:
+  74              	.LBE26:
+  75              	.LBB30:
+  76              	.LBB24:
+ 209:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+  77              		.loc 1 209 0
+  78 0006 1C68     		ldr	r4, [r3]
+ 211:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+  79              		.loc 1 211 0
+  80 0008 074D     		ldr	r5, .L6+8
+  81              	.LBE24:
+  82              	.LBE30:
+  83              	.LBB31:
+  84              	.LBB32:
+ 265:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+  85              		.loc 1 265 0
+  86 000a 0849     		ldr	r1, .L6+12
+  87              	.LBE32:
+  88              	.LBE31:
+  89              	.LBB35:
+  90              	.LBB28:
+  91              		.loc 1 357 0
+  92 000c 0123     		movs	r3, #1
+  93              	.LBE28:
+  94              	.LBE35:
+  95              	.LBB36:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 9
+
+
+  96              	.LBB37:
+ 315:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+  97              		.loc 1 315 0
+  98 000e 084A     		ldr	r2, .L6+16
+  99              	.LBE37:
+ 100              	.LBE36:
+ 101              	.LBB39:
+ 102              	.LBB33:
+ 265:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 103              		.loc 1 265 0
+ 104 0010 E020     		movs	r0, #224
+ 105              	.LBE33:
+ 106              	.LBE39:
+ 107              	.LBB40:
+ 108              	.LBB29:
+ 109              		.loc 1 357 0
+ 110 0012 3360     		str	r3, [r6]
+ 111              	.LVL0:
+ 112              	.LBE29:
+ 113              	.LBE40:
+ 114              	.LBB41:
+ 115              	.LBB25:
+ 211:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 116              		.loc 1 211 0
+ 117 0014 2564     		str	r5, [r4, #64]
+ 118              	.LVL1:
+ 119              	.LBE25:
+ 120              	.LBE41:
+ 121              	.LBB42:
+ 122              	.LBB34:
+ 265:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 123              		.loc 1 265 0
+ 124 0016 0870     		strb	r0, [r1]
+ 125              	.LVL2:
+ 126              	.LBE34:
+ 127              	.LBE42:
+  74:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 128              		.loc 1 74 0
+ 129 0018 70BC     		pop	{r4, r5, r6}
+ 130              		.cfi_restore 6
+ 131              		.cfi_restore 5
+ 132              		.cfi_restore 4
+ 133              		.cfi_def_cfa_offset 0
+ 134              	.LBB43:
+ 135              	.LBB38:
+ 315:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 136              		.loc 1 315 0
+ 137 001a 1360     		str	r3, [r2]
+ 138              	.LBE38:
+ 139              	.LBE43:
+  74:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 140              		.loc 1 74 0
+ 141 001c 7047     		bx	lr
+ 142              	.L7:
+ 143 001e 00BF     		.align	2
+ 144              	.L6:
+ 145 0020 08ED00E0 		.word	-536810232
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 10
+
+
+ 146 0024 80E100E0 		.word	-536813184
+ 147 0028 00000000 		.word	isr_Pin_buttDown_Interrupt
+ 148 002c 00E400E0 		.word	-536812544
+ 149 0030 00E100E0 		.word	-536813312
+ 150              		.cfi_endproc
+ 151              	.LFE0:
+ 152              		.size	isr_Pin_buttDown_Start, .-isr_Pin_buttDown_Start
+ 153              		.section	.text.isr_Pin_buttDown_StartEx,"ax",%progbits
+ 154              		.align	2
+ 155              		.global	isr_Pin_buttDown_StartEx
+ 156              		.thumb
+ 157              		.thumb_func
+ 158              		.type	isr_Pin_buttDown_StartEx, %function
+ 159              	isr_Pin_buttDown_StartEx:
+ 160              	.LFB1:
+ 105:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* For all we know the interrupt is active. */
+ 161              		.loc 1 105 0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165              		@ link register save eliminated.
+ 166              	.LVL3:
+ 167 0000 70B4     		push	{r4, r5, r6}
+ 168              		.cfi_def_cfa_offset 12
+ 169              		.cfi_offset 4, -12
+ 170              		.cfi_offset 5, -8
+ 171              		.cfi_offset 6, -4
+ 172              	.LBB44:
+ 173              	.LBB45:
+ 209:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 174              		.loc 1 209 0
+ 175 0002 064B     		ldr	r3, .L10
+ 176              	.LBE45:
+ 177              	.LBE44:
+ 178              	.LBB48:
+ 179              	.LBB49:
+ 180              		.loc 1 357 0
+ 181 0004 064E     		ldr	r6, .L10+4
+ 182              	.LBE49:
+ 183              	.LBE48:
+ 184              	.LBB52:
+ 185              	.LBB46:
+ 209:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 186              		.loc 1 209 0
+ 187 0006 1D68     		ldr	r5, [r3]
+ 188              	.LBE46:
+ 189              	.LBE52:
+ 190              	.LBB53:
+ 191              	.LBB54:
+ 265:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 192              		.loc 1 265 0
+ 193 0008 0649     		ldr	r1, .L10+8
+ 194              	.LBE54:
+ 195              	.LBE53:
+ 196              	.LBB57:
+ 197              	.LBB50:
+ 198              		.loc 1 357 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 11
+
+
+ 199 000a 0123     		movs	r3, #1
+ 200              	.LBE50:
+ 201              	.LBE57:
+ 202              	.LBB58:
+ 203              	.LBB55:
+ 265:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 204              		.loc 1 265 0
+ 205 000c E024     		movs	r4, #224
+ 206              	.LBE55:
+ 207              	.LBE58:
+ 208              	.LBB59:
+ 209              	.LBB60:
+ 315:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 210              		.loc 1 315 0
+ 211 000e 064A     		ldr	r2, .L10+12
+ 212              	.LBE60:
+ 213              	.LBE59:
+ 214              	.LBB62:
+ 215              	.LBB51:
+ 216              		.loc 1 357 0
+ 217 0010 3360     		str	r3, [r6]
+ 218              	.LVL4:
+ 219              	.LBE51:
+ 220              	.LBE62:
+ 221              	.LBB63:
+ 222              	.LBB47:
+ 211:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 223              		.loc 1 211 0
+ 224 0012 2864     		str	r0, [r5, #64]
+ 225              	.LVL5:
+ 226              	.LBE47:
+ 227              	.LBE63:
+ 228              	.LBB64:
+ 229              	.LBB56:
+ 265:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 230              		.loc 1 265 0
+ 231 0014 0C70     		strb	r4, [r1]
+ 232              	.LVL6:
+ 233              	.LBE56:
+ 234              	.LBE64:
+ 117:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 235              		.loc 1 117 0
+ 236 0016 70BC     		pop	{r4, r5, r6}
+ 237              		.cfi_restore 6
+ 238              		.cfi_restore 5
+ 239              		.cfi_restore 4
+ 240              		.cfi_def_cfa_offset 0
+ 241              	.LBB65:
+ 242              	.LBB61:
+ 315:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 243              		.loc 1 315 0
+ 244 0018 1360     		str	r3, [r2]
+ 245              	.LBE61:
+ 246              	.LBE65:
+ 117:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 247              		.loc 1 117 0
+ 248 001a 7047     		bx	lr
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 12
+
+
+ 249              	.L11:
+ 250              		.align	2
+ 251              	.L10:
+ 252 001c 08ED00E0 		.word	-536810232
+ 253 0020 80E100E0 		.word	-536813184
+ 254 0024 00E400E0 		.word	-536812544
+ 255 0028 00E100E0 		.word	-536813312
+ 256              		.cfi_endproc
+ 257              	.LFE1:
+ 258              		.size	isr_Pin_buttDown_StartEx, .-isr_Pin_buttDown_StartEx
+ 259              		.section	.text.isr_Pin_buttDown_Stop,"ax",%progbits
+ 260              		.align	2
+ 261              		.global	isr_Pin_buttDown_Stop
+ 262              		.thumb
+ 263              		.thumb_func
+ 264              		.type	isr_Pin_buttDown_Stop, %function
+ 265              	isr_Pin_buttDown_Stop:
+ 266              	.LFB2:
+ 135:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Disable this interrupt. */
+ 267              		.loc 1 135 0
+ 268              		.cfi_startproc
+ 269              		@ args = 0, pretend = 0, frame = 0
+ 270              		@ frame_needed = 0, uses_anonymous_args = 0
+ 271              		@ link register save eliminated.
+ 272              	.LBB66:
+ 273              	.LBB67:
+ 209:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 274              		.loc 1 209 0
+ 275 0000 034B     		ldr	r3, .L13
+ 276              	.LBE67:
+ 277              	.LBE66:
+ 278              	.LBB70:
+ 279              	.LBB71:
+ 280              		.loc 1 357 0
+ 281 0002 0449     		ldr	r1, .L13+4
+ 282              	.LBE71:
+ 283              	.LBE70:
+ 284              	.LBB73:
+ 285              	.LBB68:
+ 209:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 286              		.loc 1 209 0
+ 287 0004 1B68     		ldr	r3, [r3]
+ 211:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 288              		.loc 1 211 0
+ 289 0006 044A     		ldr	r2, .L13+8
+ 290              	.LBE68:
+ 291              	.LBE73:
+ 292              	.LBB74:
+ 293              	.LBB72:
+ 294              		.loc 1 357 0
+ 295 0008 0120     		movs	r0, #1
+ 296 000a 0860     		str	r0, [r1]
+ 297              	.LVL7:
+ 298              	.LBE72:
+ 299              	.LBE74:
+ 300              	.LBB75:
+ 301              	.LBB69:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 13
+
+
+ 211:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 302              		.loc 1 211 0
+ 303 000c 1A64     		str	r2, [r3, #64]
+ 304              	.LVL8:
+ 305 000e 7047     		bx	lr
+ 306              	.L14:
+ 307              		.align	2
+ 308              	.L13:
+ 309 0010 08ED00E0 		.word	-536810232
+ 310 0014 80E100E0 		.word	-536813184
+ 311 0018 00000000 		.word	IntDefaultHandler
+ 312              	.LBE69:
+ 313              	.LBE75:
+ 314              		.cfi_endproc
+ 315              	.LFE2:
+ 316              		.size	isr_Pin_buttDown_Stop, .-isr_Pin_buttDown_Stop
+ 317              		.section	.text.isr_Pin_buttDown_SetVector,"ax",%progbits
+ 318              		.align	2
+ 319              		.global	isr_Pin_buttDown_SetVector
+ 320              		.thumb
+ 321              		.thumb_func
+ 322              		.type	isr_Pin_buttDown_SetVector, %function
+ 323              	isr_Pin_buttDown_SetVector:
+ 324              	.LFB4:
+ 206:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     cyisraddress * ramVectorTable;
+ 325              		.loc 1 206 0
+ 326              		.cfi_startproc
+ 327              		@ args = 0, pretend = 0, frame = 0
+ 328              		@ frame_needed = 0, uses_anonymous_args = 0
+ 329              		@ link register save eliminated.
+ 330              	.LVL9:
+ 209:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 331              		.loc 1 209 0
+ 332 0000 014B     		ldr	r3, .L16
+ 333 0002 1B68     		ldr	r3, [r3]
+ 334              	.LVL10:
+ 211:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 335              		.loc 1 211 0
+ 336 0004 1864     		str	r0, [r3, #64]
+ 337 0006 7047     		bx	lr
+ 338              	.L17:
+ 339              		.align	2
+ 340              	.L16:
+ 341 0008 08ED00E0 		.word	-536810232
+ 342              		.cfi_endproc
+ 343              	.LFE4:
+ 344              		.size	isr_Pin_buttDown_SetVector, .-isr_Pin_buttDown_SetVector
+ 345              		.section	.text.isr_Pin_buttDown_GetVector,"ax",%progbits
+ 346              		.align	2
+ 347              		.global	isr_Pin_buttDown_GetVector
+ 348              		.thumb
+ 349              		.thumb_func
+ 350              		.type	isr_Pin_buttDown_GetVector, %function
+ 351              	isr_Pin_buttDown_GetVector:
+ 352              	.LFB5:
+ 230:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     cyisraddress * ramVectorTable;
+ 353              		.loc 1 230 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 14
+
+
+ 354              		.cfi_startproc
+ 355              		@ args = 0, pretend = 0, frame = 0
+ 356              		@ frame_needed = 0, uses_anonymous_args = 0
+ 357              		@ link register save eliminated.
+ 358              	.LVL11:
+ 233:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 359              		.loc 1 233 0
+ 360 0000 014B     		ldr	r3, .L19
+ 361              	.LVL12:
+ 235:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 362              		.loc 1 235 0
+ 363 0002 1B68     		ldr	r3, [r3]
+ 364              	.LVL13:
+ 236:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 365              		.loc 1 236 0
+ 366 0004 186C     		ldr	r0, [r3, #64]
+ 367 0006 7047     		bx	lr
+ 368              	.L20:
+ 369              		.align	2
+ 370              	.L19:
+ 371 0008 08ED00E0 		.word	-536810232
+ 372              		.cfi_endproc
+ 373              	.LFE5:
+ 374              		.size	isr_Pin_buttDown_GetVector, .-isr_Pin_buttDown_GetVector
+ 375              		.section	.text.isr_Pin_buttDown_SetPriority,"ax",%progbits
+ 376              		.align	2
+ 377              		.global	isr_Pin_buttDown_SetPriority
+ 378              		.thumb
+ 379              		.thumb_func
+ 380              		.type	isr_Pin_buttDown_SetPriority, %function
+ 381              	isr_Pin_buttDown_SetPriority:
+ 382              	.LFB6:
+ 264:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     *isr_Pin_buttDown_INTC_PRIOR = priority << 5;
+ 383              		.loc 1 264 0
+ 384              		.cfi_startproc
+ 385              		@ args = 0, pretend = 0, frame = 0
+ 386              		@ frame_needed = 0, uses_anonymous_args = 0
+ 387              		@ link register save eliminated.
+ 388              	.LVL14:
+ 265:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 389              		.loc 1 265 0
+ 390 0000 4001     		lsls	r0, r0, #5
+ 391              	.LVL15:
+ 392 0002 024B     		ldr	r3, .L22
+ 393 0004 C0B2     		uxtb	r0, r0
+ 394 0006 1870     		strb	r0, [r3]
+ 395 0008 7047     		bx	lr
+ 396              	.L23:
+ 397 000a 00BF     		.align	2
+ 398              	.L22:
+ 399 000c 00E400E0 		.word	-536812544
+ 400              		.cfi_endproc
+ 401              	.LFE6:
+ 402              		.size	isr_Pin_buttDown_SetPriority, .-isr_Pin_buttDown_SetPriority
+ 403              		.section	.text.isr_Pin_buttDown_GetPriority,"ax",%progbits
+ 404              		.align	2
+ 405              		.global	isr_Pin_buttDown_GetPriority
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 15
+
+
+ 406              		.thumb
+ 407              		.thumb_func
+ 408              		.type	isr_Pin_buttDown_GetPriority, %function
+ 409              	isr_Pin_buttDown_GetPriority:
+ 410              	.LFB7:
+ 286:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     uint8 priority;
+ 411              		.loc 1 286 0
+ 412              		.cfi_startproc
+ 413              		@ args = 0, pretend = 0, frame = 0
+ 414              		@ frame_needed = 0, uses_anonymous_args = 0
+ 415              		@ link register save eliminated.
+ 290:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 416              		.loc 1 290 0
+ 417 0000 014B     		ldr	r3, .L25
+ 418 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 419              	.LVL16:
+ 293:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 420              		.loc 1 293 0
+ 421 0004 4009     		lsrs	r0, r0, #5
+ 422              	.LVL17:
+ 423 0006 7047     		bx	lr
+ 424              	.L26:
+ 425              		.align	2
+ 426              	.L25:
+ 427 0008 00E400E0 		.word	-536812544
+ 428              		.cfi_endproc
+ 429              	.LFE7:
+ 430              		.size	isr_Pin_buttDown_GetPriority, .-isr_Pin_buttDown_GetPriority
+ 431              		.section	.text.isr_Pin_buttDown_Enable,"ax",%progbits
+ 432              		.align	2
+ 433              		.global	isr_Pin_buttDown_Enable
+ 434              		.thumb
+ 435              		.thumb_func
+ 436              		.type	isr_Pin_buttDown_Enable, %function
+ 437              	isr_Pin_buttDown_Enable:
+ 438              	.LFB8:
+ 313:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Enable the general interrupt. */
+ 439              		.loc 1 313 0
+ 440              		.cfi_startproc
+ 441              		@ args = 0, pretend = 0, frame = 0
+ 442              		@ frame_needed = 0, uses_anonymous_args = 0
+ 443              		@ link register save eliminated.
+ 315:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 444              		.loc 1 315 0
+ 445 0000 014B     		ldr	r3, .L28
+ 446 0002 0122     		movs	r2, #1
+ 447 0004 1A60     		str	r2, [r3]
+ 448 0006 7047     		bx	lr
+ 449              	.L29:
+ 450              		.align	2
+ 451              	.L28:
+ 452 0008 00E100E0 		.word	-536813312
+ 453              		.cfi_endproc
+ 454              	.LFE8:
+ 455              		.size	isr_Pin_buttDown_Enable, .-isr_Pin_buttDown_Enable
+ 456              		.section	.text.isr_Pin_buttDown_GetState,"ax",%progbits
+ 457              		.align	2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 16
+
+
+ 458              		.global	isr_Pin_buttDown_GetState
+ 459              		.thumb
+ 460              		.thumb_func
+ 461              		.type	isr_Pin_buttDown_GetState, %function
+ 462              	isr_Pin_buttDown_GetState:
+ 463              	.LFB9:
+ 334:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Get the state of the general interrupt. */
+ 464              		.loc 1 334 0
+ 465              		.cfi_startproc
+ 466              		@ args = 0, pretend = 0, frame = 0
+ 467              		@ frame_needed = 0, uses_anonymous_args = 0
+ 468              		@ link register save eliminated.
+ 336:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 469              		.loc 1 336 0
+ 470 0000 024B     		ldr	r3, .L31
+ 471 0002 1868     		ldr	r0, [r3]
+ 337:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 472              		.loc 1 337 0
+ 473 0004 00F00100 		and	r0, r0, #1
+ 474 0008 7047     		bx	lr
+ 475              	.L32:
+ 476 000a 00BF     		.align	2
+ 477              	.L31:
+ 478 000c 00E100E0 		.word	-536813312
+ 479              		.cfi_endproc
+ 480              	.LFE9:
+ 481              		.size	isr_Pin_buttDown_GetState, .-isr_Pin_buttDown_GetState
+ 482              		.section	.text.isr_Pin_buttDown_Disable,"ax",%progbits
+ 483              		.align	2
+ 484              		.global	isr_Pin_buttDown_Disable
+ 485              		.thumb
+ 486              		.thumb_func
+ 487              		.type	isr_Pin_buttDown_Disable, %function
+ 488              	isr_Pin_buttDown_Disable:
+ 489              	.LFB10:
+ 355:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     /* Disable the general interrupt. */
+ 490              		.loc 1 355 0
+ 491              		.cfi_startproc
+ 492              		@ args = 0, pretend = 0, frame = 0
+ 493              		@ frame_needed = 0, uses_anonymous_args = 0
+ 494              		@ link register save eliminated.
+ 495              		.loc 1 357 0
+ 496 0000 014B     		ldr	r3, .L34
+ 497 0002 0122     		movs	r2, #1
+ 498 0004 1A60     		str	r2, [r3]
+ 499 0006 7047     		bx	lr
+ 500              	.L35:
+ 501              		.align	2
+ 502              	.L34:
+ 503 0008 80E100E0 		.word	-536813184
+ 504              		.cfi_endproc
+ 505              	.LFE10:
+ 506              		.size	isr_Pin_buttDown_Disable, .-isr_Pin_buttDown_Disable
+ 507              		.section	.text.isr_Pin_buttDown_SetPending,"ax",%progbits
+ 508              		.align	2
+ 509              		.global	isr_Pin_buttDown_SetPending
+ 510              		.thumb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 17
+
+
+ 511              		.thumb_func
+ 512              		.type	isr_Pin_buttDown_SetPending, %function
+ 513              	isr_Pin_buttDown_SetPending:
+ 514              	.LFB11:
+ 358:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 359:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 360:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 361:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 362:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_SetPending
+ 363:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 364:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 365:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 366:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Causes the Interrupt to enter the pending state, a software method of
+ 367:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   generating the interrupt.
+ 368:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 369:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:
+ 370:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 371:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 372:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 373:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 374:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 375:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Side Effects:
+ 376:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   If interrupts are enabled and the interrupt is set up properly, the ISR is
+ 377:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   entered (depending on the priority of this interrupt and other pending 
+ 378:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   interrupts).
+ 379:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 380:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 381:Generated_Source\PSoC5/isr_Pin_buttDown.c **** void isr_Pin_buttDown_SetPending(void)
+ 382:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 515              		.loc 1 382 0
+ 516              		.cfi_startproc
+ 517              		@ args = 0, pretend = 0, frame = 0
+ 518              		@ frame_needed = 0, uses_anonymous_args = 0
+ 519              		@ link register save eliminated.
+ 383:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     *isr_Pin_buttDown_INTC_SET_PD = isr_Pin_buttDown__INTC_MASK;
+ 520              		.loc 1 383 0
+ 521 0000 014B     		ldr	r3, .L37
+ 522 0002 0122     		movs	r2, #1
+ 523 0004 1A60     		str	r2, [r3]
+ 524 0006 7047     		bx	lr
+ 525              	.L38:
+ 526              		.align	2
+ 527              	.L37:
+ 528 0008 00E200E0 		.word	-536813056
+ 529              		.cfi_endproc
+ 530              	.LFE11:
+ 531              		.size	isr_Pin_buttDown_SetPending, .-isr_Pin_buttDown_SetPending
+ 532              		.section	.text.isr_Pin_buttDown_ClearPending,"ax",%progbits
+ 533              		.align	2
+ 534              		.global	isr_Pin_buttDown_ClearPending
+ 535              		.thumb
+ 536              		.thumb_func
+ 537              		.type	isr_Pin_buttDown_ClearPending, %function
+ 538              	isr_Pin_buttDown_ClearPending:
+ 539              	.LFB12:
+ 384:Generated_Source\PSoC5/isr_Pin_buttDown.c **** }
+ 385:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 18
+
+
+ 386:Generated_Source\PSoC5/isr_Pin_buttDown.c **** 
+ 387:Generated_Source\PSoC5/isr_Pin_buttDown.c **** /*******************************************************************************
+ 388:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Function Name: isr_Pin_buttDown_ClearPending
+ 389:Generated_Source\PSoC5/isr_Pin_buttDown.c **** ********************************************************************************
+ 390:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 391:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Summary:
+ 392:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Clears a pending interrupt in the interrupt controller.
+ 393:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 394:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   Note Some interrupt sources are clear-on-read and require the block 
+ 395:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   interrupt/status register to be read/cleared with the appropriate block API 
+ 396:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   (GPIO, UART, and so on). Otherwise the ISR will continue to remain in 
+ 397:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   pending state even though the interrupt itself is cleared using this API.
+ 398:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 399:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Parameters:
+ 400:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 401:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 402:Generated_Source\PSoC5/isr_Pin_buttDown.c **** * Return:
+ 403:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *   None
+ 404:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *
+ 405:Generated_Source\PSoC5/isr_Pin_buttDown.c **** *******************************************************************************/
+ 406:Generated_Source\PSoC5/isr_Pin_buttDown.c **** void isr_Pin_buttDown_ClearPending(void)
+ 407:Generated_Source\PSoC5/isr_Pin_buttDown.c **** {
+ 540              		.loc 1 407 0
+ 541              		.cfi_startproc
+ 542              		@ args = 0, pretend = 0, frame = 0
+ 543              		@ frame_needed = 0, uses_anonymous_args = 0
+ 544              		@ link register save eliminated.
+ 408:Generated_Source\PSoC5/isr_Pin_buttDown.c ****     *isr_Pin_buttDown_INTC_CLR_PD = isr_Pin_buttDown__INTC_MASK;
+ 545              		.loc 1 408 0
+ 546 0000 014B     		ldr	r3, .L40
+ 547 0002 0122     		movs	r2, #1
+ 548 0004 1A60     		str	r2, [r3]
+ 549 0006 7047     		bx	lr
+ 550              	.L41:
+ 551              		.align	2
+ 552              	.L40:
+ 553 0008 80E200E0 		.word	-536812928
+ 554              		.cfi_endproc
+ 555              	.LFE12:
+ 556              		.size	isr_Pin_buttDown_ClearPending, .-isr_Pin_buttDown_ClearPending
+ 557              		.text
+ 558              	.Letext0:
+ 559              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 560              		.section	.debug_info,"",%progbits
+ 561              	.Ldebug_info0:
+ 562 0000 A3030000 		.4byte	0x3a3
+ 563 0004 0400     		.2byte	0x4
+ 564 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 565 000a 04       		.byte	0x4
+ 566 000b 01       		.uleb128 0x1
+ 567 000c FE010000 		.4byte	.LASF36
+ 568 0010 0C       		.byte	0xc
+ 569 0011 AB010000 		.4byte	.LASF37
+ 570 0015 06000000 		.4byte	.LASF38
+ 571 0019 28010000 		.4byte	.Ldebug_ranges0+0x128
+ 572 001d 00000000 		.4byte	0
+ 573 0021 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 19
+
+
+ 574 0025 02       		.uleb128 0x2
+ 575 0026 04       		.byte	0x4
+ 576 0027 05       		.byte	0x5
+ 577 0028 696E7400 		.ascii	"int\000"
+ 578 002c 03       		.uleb128 0x3
+ 579 002d 04       		.byte	0x4
+ 580 002e 07       		.byte	0x7
+ 581 002f D5010000 		.4byte	.LASF0
+ 582 0033 03       		.uleb128 0x3
+ 583 0034 08       		.byte	0x8
+ 584 0035 05       		.byte	0x5
+ 585 0036 07030000 		.4byte	.LASF1
+ 586 003a 03       		.uleb128 0x3
+ 587 003b 08       		.byte	0x8
+ 588 003c 04       		.byte	0x4
+ 589 003d 7E030000 		.4byte	.LASF2
+ 590 0041 03       		.uleb128 0x3
+ 591 0042 01       		.byte	0x1
+ 592 0043 06       		.byte	0x6
+ 593 0044 8A030000 		.4byte	.LASF3
+ 594 0048 03       		.uleb128 0x3
+ 595 0049 01       		.byte	0x1
+ 596 004a 08       		.byte	0x8
+ 597 004b C8000000 		.4byte	.LASF4
+ 598 004f 03       		.uleb128 0x3
+ 599 0050 02       		.byte	0x2
+ 600 0051 05       		.byte	0x5
+ 601 0052 46030000 		.4byte	.LASF5
+ 602 0056 03       		.uleb128 0x3
+ 603 0057 02       		.byte	0x2
+ 604 0058 07       		.byte	0x7
+ 605 0059 97000000 		.4byte	.LASF6
+ 606 005d 03       		.uleb128 0x3
+ 607 005e 04       		.byte	0x4
+ 608 005f 05       		.byte	0x5
+ 609 0060 75030000 		.4byte	.LASF7
+ 610 0064 03       		.uleb128 0x3
+ 611 0065 04       		.byte	0x4
+ 612 0066 07       		.byte	0x7
+ 613 0067 11010000 		.4byte	.LASF8
+ 614 006b 03       		.uleb128 0x3
+ 615 006c 08       		.byte	0x8
+ 616 006d 07       		.byte	0x7
+ 617 006e 9F020000 		.4byte	.LASF9
+ 618 0072 03       		.uleb128 0x3
+ 619 0073 04       		.byte	0x4
+ 620 0074 07       		.byte	0x7
+ 621 0075 FE020000 		.4byte	.LASF10
+ 622 0079 03       		.uleb128 0x3
+ 623 007a 01       		.byte	0x1
+ 624 007b 08       		.byte	0x8
+ 625 007c 32030000 		.4byte	.LASF11
+ 626 0080 04       		.uleb128 0x4
+ 627 0081 04       		.byte	0x4
+ 628 0082 86000000 		.4byte	0x86
+ 629 0086 05       		.uleb128 0x5
+ 630 0087 06       		.uleb128 0x6
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 20
+
+
+ 631 0088 3A010000 		.4byte	.LASF12
+ 632 008c 02       		.byte	0x2
+ 633 008d E401     		.2byte	0x1e4
+ 634 008f 48000000 		.4byte	0x48
+ 635 0093 06       		.uleb128 0x6
+ 636 0094 86010000 		.4byte	.LASF13
+ 637 0098 02       		.byte	0x2
+ 638 0099 E601     		.2byte	0x1e6
+ 639 009b 64000000 		.4byte	0x64
+ 640 009f 03       		.uleb128 0x3
+ 641 00a0 04       		.byte	0x4
+ 642 00a1 04       		.byte	0x4
+ 643 00a2 C2000000 		.4byte	.LASF14
+ 644 00a6 03       		.uleb128 0x3
+ 645 00a7 08       		.byte	0x8
+ 646 00a8 04       		.byte	0x4
+ 647 00a9 66010000 		.4byte	.LASF15
+ 648 00ad 06       		.uleb128 0x6
+ 649 00ae F1000000 		.4byte	.LASF16
+ 650 00b2 02       		.byte	0x2
+ 651 00b3 8E02     		.2byte	0x28e
+ 652 00b5 B9000000 		.4byte	0xb9
+ 653 00b9 07       		.uleb128 0x7
+ 654 00ba 87000000 		.4byte	0x87
+ 655 00be 06       		.uleb128 0x6
+ 656 00bf 00000000 		.4byte	.LASF17
+ 657 00c3 02       		.byte	0x2
+ 658 00c4 9002     		.2byte	0x290
+ 659 00c6 CA000000 		.4byte	0xca
+ 660 00ca 07       		.uleb128 0x7
+ 661 00cb 93000000 		.4byte	0x93
+ 662 00cf 06       		.uleb128 0x6
+ 663 00d0 B6020000 		.4byte	.LASF18
+ 664 00d4 02       		.byte	0x2
+ 665 00d5 A002     		.2byte	0x2a0
+ 666 00d7 80000000 		.4byte	0x80
+ 667 00db 08       		.uleb128 0x8
+ 668 00dc AA000000 		.4byte	.LASF23
+ 669 00e0 01       		.byte	0x1
+ 670 00e1 3801     		.2byte	0x138
+ 671 00e3 01       		.byte	0x1
+ 672 00e4 09       		.uleb128 0x9
+ 673 00e5 15030000 		.4byte	.LASF19
+ 674 00e9 01       		.byte	0x1
+ 675 00ea 0701     		.2byte	0x107
+ 676 00ec 01       		.byte	0x1
+ 677 00ed FE000000 		.4byte	0xfe
+ 678 00f1 0A       		.uleb128 0xa
+ 679 00f2 40010000 		.4byte	.LASF21
+ 680 00f6 01       		.byte	0x1
+ 681 00f7 0701     		.2byte	0x107
+ 682 00f9 87000000 		.4byte	0x87
+ 683 00fd 00       		.byte	0
+ 684 00fe 0B       		.uleb128 0xb
+ 685 00ff 96030000 		.4byte	.LASF20
+ 686 0103 01       		.byte	0x1
+ 687 0104 CD       		.byte	0xcd
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 21
+
+
+ 688 0105 01       		.byte	0x1
+ 689 0106 21010000 		.4byte	0x121
+ 690 010a 0C       		.uleb128 0xc
+ 691 010b 8F000000 		.4byte	.LASF22
+ 692 010f 01       		.byte	0x1
+ 693 0110 CD       		.byte	0xcd
+ 694 0111 CF000000 		.4byte	0xcf
+ 695 0115 0D       		.uleb128 0xd
+ 696 0116 37030000 		.4byte	.LASF33
+ 697 011a 01       		.byte	0x1
+ 698 011b CF       		.byte	0xcf
+ 699 011c 21010000 		.4byte	0x121
+ 700 0120 00       		.byte	0
+ 701 0121 04       		.uleb128 0x4
+ 702 0122 04       		.byte	0x4
+ 703 0123 CF000000 		.4byte	0xcf
+ 704 0127 08       		.uleb128 0x8
+ 705 0128 CF020000 		.4byte	.LASF24
+ 706 012c 01       		.byte	0x1
+ 707 012d 6201     		.2byte	0x162
+ 708 012f 01       		.byte	0x1
+ 709 0130 0E       		.uleb128 0xe
+ 710 0131 D6000000 		.4byte	.LASF27
+ 711 0135 01       		.byte	0x1
+ 712 0136 A0       		.byte	0xa0
+ 713 0137 00000000 		.4byte	.LFB3
+ 714 013b 0C000000 		.4byte	.LFE3-.LFB3
+ 715 013f 01       		.uleb128 0x1
+ 716 0140 9C       		.byte	0x9c
+ 717 0141 5C010000 		.4byte	0x15c
+ 718 0145 0F       		.uleb128 0xf
+ 719 0146 C3020000 		.4byte	.LASF25
+ 720 014a 01       		.byte	0x1
+ 721 014b A8       		.byte	0xa8
+ 722 014c B9000000 		.4byte	0xb9
+ 723 0150 0F       		.uleb128 0xf
+ 724 0151 6A030000 		.4byte	.LASF26
+ 725 0155 01       		.byte	0x1
+ 726 0156 A9       		.byte	0xa9
+ 727 0157 B9000000 		.4byte	0xb9
+ 728 015b 00       		.byte	0
+ 729 015c 0E       		.uleb128 0xe
+ 730 015d 23010000 		.4byte	.LASF28
+ 731 0161 01       		.byte	0x1
+ 732 0162 3D       		.byte	0x3d
+ 733 0163 00000000 		.4byte	.LFB0
+ 734 0167 34000000 		.4byte	.LFE0-.LFB0
+ 735 016b 01       		.uleb128 0x1
+ 736 016c 9C       		.byte	0x9c
+ 737 016d D9010000 		.4byte	0x1d9
+ 738 0171 10       		.uleb128 0x10
+ 739 0172 FE000000 		.4byte	0xfe
+ 740 0176 02000000 		.4byte	.LBB22
+ 741 017a 00000000 		.4byte	.Ldebug_ranges0+0
+ 742 017e 01       		.byte	0x1
+ 743 017f 43       		.byte	0x43
+ 744 0180 9D010000 		.4byte	0x19d
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 22
+
+
+ 745 0184 11       		.uleb128 0x11
+ 746 0185 0A010000 		.4byte	0x10a
+ 747 0189 00000000 		.4byte	.LLST0
+ 748 018d 12       		.uleb128 0x12
+ 749 018e 00000000 		.4byte	.Ldebug_ranges0+0
+ 750 0192 13       		.uleb128 0x13
+ 751 0193 15010000 		.4byte	0x115
+ 752 0197 18000000 		.4byte	.LLST1
+ 753 019b 00       		.byte	0
+ 754 019c 00       		.byte	0
+ 755 019d 14       		.uleb128 0x14
+ 756 019e 27010000 		.4byte	0x127
+ 757 01a2 04000000 		.4byte	.LBB26
+ 758 01a6 20000000 		.4byte	.Ldebug_ranges0+0x20
+ 759 01aa 01       		.byte	0x1
+ 760 01ab 40       		.byte	0x40
+ 761 01ac 10       		.uleb128 0x10
+ 762 01ad E4000000 		.4byte	0xe4
+ 763 01b1 0A000000 		.4byte	.LBB31
+ 764 01b5 40000000 		.4byte	.Ldebug_ranges0+0x40
+ 765 01b9 01       		.byte	0x1
+ 766 01ba 46       		.byte	0x46
+ 767 01bb C9010000 		.4byte	0x1c9
+ 768 01bf 11       		.uleb128 0x11
+ 769 01c0 F1000000 		.4byte	0xf1
+ 770 01c4 2B000000 		.4byte	.LLST2
+ 771 01c8 00       		.byte	0
+ 772 01c9 14       		.uleb128 0x14
+ 773 01ca DB000000 		.4byte	0xdb
+ 774 01ce 0E000000 		.4byte	.LBB36
+ 775 01d2 60000000 		.4byte	.Ldebug_ranges0+0x60
+ 776 01d6 01       		.byte	0x1
+ 777 01d7 49       		.byte	0x49
+ 778 01d8 00       		.byte	0
+ 779 01d9 0E       		.uleb128 0xe
+ 780 01da 6D010000 		.4byte	.LASF29
+ 781 01de 01       		.byte	0x1
+ 782 01df 68       		.byte	0x68
+ 783 01e0 00000000 		.4byte	.LFB1
+ 784 01e4 2C000000 		.4byte	.LFE1-.LFB1
+ 785 01e8 01       		.uleb128 0x1
+ 786 01e9 9C       		.byte	0x9c
+ 787 01ea 63020000 		.4byte	0x263
+ 788 01ee 15       		.uleb128 0x15
+ 789 01ef 8F000000 		.4byte	.LASF22
+ 790 01f3 01       		.byte	0x1
+ 791 01f4 68       		.byte	0x68
+ 792 01f5 CF000000 		.4byte	0xcf
+ 793 01f9 01       		.uleb128 0x1
+ 794 01fa 50       		.byte	0x50
+ 795 01fb 10       		.uleb128 0x10
+ 796 01fc FE000000 		.4byte	0xfe
+ 797 0200 02000000 		.4byte	.LBB44
+ 798 0204 78000000 		.4byte	.Ldebug_ranges0+0x78
+ 799 0208 01       		.byte	0x1
+ 800 0209 6E       		.byte	0x6e
+ 801 020a 27020000 		.4byte	0x227
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 23
+
+
+ 802 020e 11       		.uleb128 0x11
+ 803 020f 0A010000 		.4byte	0x10a
+ 804 0213 3F000000 		.4byte	.LLST3
+ 805 0217 12       		.uleb128 0x12
+ 806 0218 78000000 		.4byte	.Ldebug_ranges0+0x78
+ 807 021c 13       		.uleb128 0x13
+ 808 021d 15010000 		.4byte	0x115
+ 809 0221 52000000 		.4byte	.LLST4
+ 810 0225 00       		.byte	0
+ 811 0226 00       		.byte	0
+ 812 0227 14       		.uleb128 0x14
+ 813 0228 27010000 		.4byte	0x127
+ 814 022c 04000000 		.4byte	.LBB48
+ 815 0230 98000000 		.4byte	.Ldebug_ranges0+0x98
+ 816 0234 01       		.byte	0x1
+ 817 0235 6B       		.byte	0x6b
+ 818 0236 10       		.uleb128 0x10
+ 819 0237 E4000000 		.4byte	0xe4
+ 820 023b 08000000 		.4byte	.LBB53
+ 821 023f B8000000 		.4byte	.Ldebug_ranges0+0xb8
+ 822 0243 01       		.byte	0x1
+ 823 0244 71       		.byte	0x71
+ 824 0245 53020000 		.4byte	0x253
+ 825 0249 11       		.uleb128 0x11
+ 826 024a F1000000 		.4byte	0xf1
+ 827 024e 65000000 		.4byte	.LLST5
+ 828 0252 00       		.byte	0
+ 829 0253 14       		.uleb128 0x14
+ 830 0254 DB000000 		.4byte	0xdb
+ 831 0258 0E000000 		.4byte	.LBB59
+ 832 025c D8000000 		.4byte	.Ldebug_ranges0+0xd8
+ 833 0260 01       		.byte	0x1
+ 834 0261 74       		.byte	0x74
+ 835 0262 00       		.byte	0
+ 836 0263 0E       		.uleb128 0xe
+ 837 0264 E8020000 		.4byte	.LASF30
+ 838 0268 01       		.byte	0x1
+ 839 0269 86       		.byte	0x86
+ 840 026a 00000000 		.4byte	.LFB2
+ 841 026e 1C000000 		.4byte	.LFE2-.LFB2
+ 842 0272 01       		.uleb128 0x1
+ 843 0273 9C       		.byte	0x9c
+ 844 0274 B0020000 		.4byte	0x2b0
+ 845 0278 10       		.uleb128 0x10
+ 846 0279 FE000000 		.4byte	0xfe
+ 847 027d 00000000 		.4byte	.LBB66
+ 848 0281 F0000000 		.4byte	.Ldebug_ranges0+0xf0
+ 849 0285 01       		.byte	0x1
+ 850 0286 8C       		.byte	0x8c
+ 851 0287 A0020000 		.4byte	0x2a0
+ 852 028b 16       		.uleb128 0x16
+ 853 028c 0A010000 		.4byte	0x10a
+ 854 0290 12       		.uleb128 0x12
+ 855 0291 F0000000 		.4byte	.Ldebug_ranges0+0xf0
+ 856 0295 13       		.uleb128 0x13
+ 857 0296 15010000 		.4byte	0x115
+ 858 029a 79000000 		.4byte	.LLST6
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 24
+
+
+ 859 029e 00       		.byte	0
+ 860 029f 00       		.byte	0
+ 861 02a0 14       		.uleb128 0x14
+ 862 02a1 27010000 		.4byte	0x127
+ 863 02a5 02000000 		.4byte	.LBB70
+ 864 02a9 10010000 		.4byte	.Ldebug_ranges0+0x110
+ 865 02ad 01       		.byte	0x1
+ 866 02ae 89       		.byte	0x89
+ 867 02af 00       		.byte	0
+ 868 02b0 17       		.uleb128 0x17
+ 869 02b1 FE000000 		.4byte	0xfe
+ 870 02b5 00000000 		.4byte	.LFB4
+ 871 02b9 0C000000 		.4byte	.LFE4-.LFB4
+ 872 02bd 01       		.uleb128 0x1
+ 873 02be 9C       		.byte	0x9c
+ 874 02bf D2020000 		.4byte	0x2d2
+ 875 02c3 18       		.uleb128 0x18
+ 876 02c4 0A010000 		.4byte	0x10a
+ 877 02c8 01       		.uleb128 0x1
+ 878 02c9 50       		.byte	0x50
+ 879 02ca 19       		.uleb128 0x19
+ 880 02cb 15010000 		.4byte	0x115
+ 881 02cf 01       		.uleb128 0x1
+ 882 02d0 53       		.byte	0x53
+ 883 02d1 00       		.byte	0
+ 884 02d2 1A       		.uleb128 0x1a
+ 885 02d3 F6000000 		.4byte	.LASF31
+ 886 02d7 01       		.byte	0x1
+ 887 02d8 E5       		.byte	0xe5
+ 888 02d9 CF000000 		.4byte	0xcf
+ 889 02dd 00000000 		.4byte	.LFB5
+ 890 02e1 0C000000 		.4byte	.LFE5-.LFB5
+ 891 02e5 01       		.uleb128 0x1
+ 892 02e6 9C       		.byte	0x9c
+ 893 02e7 FB020000 		.4byte	0x2fb
+ 894 02eb 1B       		.uleb128 0x1b
+ 895 02ec 37030000 		.4byte	.LASF33
+ 896 02f0 01       		.byte	0x1
+ 897 02f1 E7       		.byte	0xe7
+ 898 02f2 21010000 		.4byte	0x121
+ 899 02f6 8C000000 		.4byte	.LLST7
+ 900 02fa 00       		.byte	0
+ 901 02fb 17       		.uleb128 0x17
+ 902 02fc E4000000 		.4byte	0xe4
+ 903 0300 00000000 		.4byte	.LFB6
+ 904 0304 10000000 		.4byte	.LFE6-.LFB6
+ 905 0308 01       		.uleb128 0x1
+ 906 0309 9C       		.byte	0x9c
+ 907 030a 18030000 		.4byte	0x318
+ 908 030e 11       		.uleb128 0x11
+ 909 030f F1000000 		.4byte	0xf1
+ 910 0313 BB000000 		.4byte	.LLST8
+ 911 0317 00       		.byte	0
+ 912 0318 1C       		.uleb128 0x1c
+ 913 0319 49010000 		.4byte	.LASF32
+ 914 031d 01       		.byte	0x1
+ 915 031e 1D01     		.2byte	0x11d
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 25
+
+
+ 916 0320 87000000 		.4byte	0x87
+ 917 0324 00000000 		.4byte	.LFB7
+ 918 0328 0C000000 		.4byte	.LFE7-.LFB7
+ 919 032c 01       		.uleb128 0x1
+ 920 032d 9C       		.byte	0x9c
+ 921 032e 43030000 		.4byte	0x343
+ 922 0332 1D       		.uleb128 0x1d
+ 923 0333 40010000 		.4byte	.LASF21
+ 924 0337 01       		.byte	0x1
+ 925 0338 1F01     		.2byte	0x11f
+ 926 033a 87000000 		.4byte	0x87
+ 927 033e DC000000 		.4byte	.LLST9
+ 928 0342 00       		.byte	0
+ 929 0343 1E       		.uleb128 0x1e
+ 930 0344 DB000000 		.4byte	0xdb
+ 931 0348 00000000 		.4byte	.LFB8
+ 932 034c 0C000000 		.4byte	.LFE8-.LFB8
+ 933 0350 01       		.uleb128 0x1
+ 934 0351 9C       		.byte	0x9c
+ 935 0352 1F       		.uleb128 0x1f
+ 936 0353 50030000 		.4byte	.LASF39
+ 937 0357 01       		.byte	0x1
+ 938 0358 4D01     		.2byte	0x14d
+ 939 035a 87000000 		.4byte	0x87
+ 940 035e 00000000 		.4byte	.LFB9
+ 941 0362 10000000 		.4byte	.LFE9-.LFB9
+ 942 0366 01       		.uleb128 0x1
+ 943 0367 9C       		.byte	0x9c
+ 944 0368 1E       		.uleb128 0x1e
+ 945 0369 27010000 		.4byte	0x127
+ 946 036d 00000000 		.4byte	.LFB10
+ 947 0371 0C000000 		.4byte	.LFE10-.LFB10
+ 948 0375 01       		.uleb128 0x1
+ 949 0376 9C       		.byte	0x9c
+ 950 0377 20       		.uleb128 0x20
+ 951 0378 E2010000 		.4byte	.LASF34
+ 952 037c 01       		.byte	0x1
+ 953 037d 7D01     		.2byte	0x17d
+ 954 037f 00000000 		.4byte	.LFB11
+ 955 0383 0C000000 		.4byte	.LFE11-.LFB11
+ 956 0387 01       		.uleb128 0x1
+ 957 0388 9C       		.byte	0x9c
+ 958 0389 20       		.uleb128 0x20
+ 959 038a 8D010000 		.4byte	.LASF35
+ 960 038e 01       		.byte	0x1
+ 961 038f 9601     		.2byte	0x196
+ 962 0391 00000000 		.4byte	.LFB12
+ 963 0395 0C000000 		.4byte	.LFE12-.LFB12
+ 964 0399 01       		.uleb128 0x1
+ 965 039a 9C       		.byte	0x9c
+ 966 039b 0F       		.uleb128 0xf
+ 967 039c C3020000 		.4byte	.LASF25
+ 968 03a0 01       		.byte	0x1
+ 969 03a1 A8       		.byte	0xa8
+ 970 03a2 B9000000 		.4byte	0xb9
+ 971 03a6 00       		.byte	0
+ 972              		.section	.debug_abbrev,"",%progbits
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 26
+
+
+ 973              	.Ldebug_abbrev0:
+ 974 0000 01       		.uleb128 0x1
+ 975 0001 11       		.uleb128 0x11
+ 976 0002 01       		.byte	0x1
+ 977 0003 25       		.uleb128 0x25
+ 978 0004 0E       		.uleb128 0xe
+ 979 0005 13       		.uleb128 0x13
+ 980 0006 0B       		.uleb128 0xb
+ 981 0007 03       		.uleb128 0x3
+ 982 0008 0E       		.uleb128 0xe
+ 983 0009 1B       		.uleb128 0x1b
+ 984 000a 0E       		.uleb128 0xe
+ 985 000b 55       		.uleb128 0x55
+ 986 000c 17       		.uleb128 0x17
+ 987 000d 11       		.uleb128 0x11
+ 988 000e 01       		.uleb128 0x1
+ 989 000f 10       		.uleb128 0x10
+ 990 0010 17       		.uleb128 0x17
+ 991 0011 00       		.byte	0
+ 992 0012 00       		.byte	0
+ 993 0013 02       		.uleb128 0x2
+ 994 0014 24       		.uleb128 0x24
+ 995 0015 00       		.byte	0
+ 996 0016 0B       		.uleb128 0xb
+ 997 0017 0B       		.uleb128 0xb
+ 998 0018 3E       		.uleb128 0x3e
+ 999 0019 0B       		.uleb128 0xb
+ 1000 001a 03       		.uleb128 0x3
+ 1001 001b 08       		.uleb128 0x8
+ 1002 001c 00       		.byte	0
+ 1003 001d 00       		.byte	0
+ 1004 001e 03       		.uleb128 0x3
+ 1005 001f 24       		.uleb128 0x24
+ 1006 0020 00       		.byte	0
+ 1007 0021 0B       		.uleb128 0xb
+ 1008 0022 0B       		.uleb128 0xb
+ 1009 0023 3E       		.uleb128 0x3e
+ 1010 0024 0B       		.uleb128 0xb
+ 1011 0025 03       		.uleb128 0x3
+ 1012 0026 0E       		.uleb128 0xe
+ 1013 0027 00       		.byte	0
+ 1014 0028 00       		.byte	0
+ 1015 0029 04       		.uleb128 0x4
+ 1016 002a 0F       		.uleb128 0xf
+ 1017 002b 00       		.byte	0
+ 1018 002c 0B       		.uleb128 0xb
+ 1019 002d 0B       		.uleb128 0xb
+ 1020 002e 49       		.uleb128 0x49
+ 1021 002f 13       		.uleb128 0x13
+ 1022 0030 00       		.byte	0
+ 1023 0031 00       		.byte	0
+ 1024 0032 05       		.uleb128 0x5
+ 1025 0033 15       		.uleb128 0x15
+ 1026 0034 00       		.byte	0
+ 1027 0035 27       		.uleb128 0x27
+ 1028 0036 19       		.uleb128 0x19
+ 1029 0037 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 27
+
+
+ 1030 0038 00       		.byte	0
+ 1031 0039 06       		.uleb128 0x6
+ 1032 003a 16       		.uleb128 0x16
+ 1033 003b 00       		.byte	0
+ 1034 003c 03       		.uleb128 0x3
+ 1035 003d 0E       		.uleb128 0xe
+ 1036 003e 3A       		.uleb128 0x3a
+ 1037 003f 0B       		.uleb128 0xb
+ 1038 0040 3B       		.uleb128 0x3b
+ 1039 0041 05       		.uleb128 0x5
+ 1040 0042 49       		.uleb128 0x49
+ 1041 0043 13       		.uleb128 0x13
+ 1042 0044 00       		.byte	0
+ 1043 0045 00       		.byte	0
+ 1044 0046 07       		.uleb128 0x7
+ 1045 0047 35       		.uleb128 0x35
+ 1046 0048 00       		.byte	0
+ 1047 0049 49       		.uleb128 0x49
+ 1048 004a 13       		.uleb128 0x13
+ 1049 004b 00       		.byte	0
+ 1050 004c 00       		.byte	0
+ 1051 004d 08       		.uleb128 0x8
+ 1052 004e 2E       		.uleb128 0x2e
+ 1053 004f 00       		.byte	0
+ 1054 0050 3F       		.uleb128 0x3f
+ 1055 0051 19       		.uleb128 0x19
+ 1056 0052 03       		.uleb128 0x3
+ 1057 0053 0E       		.uleb128 0xe
+ 1058 0054 3A       		.uleb128 0x3a
+ 1059 0055 0B       		.uleb128 0xb
+ 1060 0056 3B       		.uleb128 0x3b
+ 1061 0057 05       		.uleb128 0x5
+ 1062 0058 27       		.uleb128 0x27
+ 1063 0059 19       		.uleb128 0x19
+ 1064 005a 20       		.uleb128 0x20
+ 1065 005b 0B       		.uleb128 0xb
+ 1066 005c 00       		.byte	0
+ 1067 005d 00       		.byte	0
+ 1068 005e 09       		.uleb128 0x9
+ 1069 005f 2E       		.uleb128 0x2e
+ 1070 0060 01       		.byte	0x1
+ 1071 0061 3F       		.uleb128 0x3f
+ 1072 0062 19       		.uleb128 0x19
+ 1073 0063 03       		.uleb128 0x3
+ 1074 0064 0E       		.uleb128 0xe
+ 1075 0065 3A       		.uleb128 0x3a
+ 1076 0066 0B       		.uleb128 0xb
+ 1077 0067 3B       		.uleb128 0x3b
+ 1078 0068 05       		.uleb128 0x5
+ 1079 0069 27       		.uleb128 0x27
+ 1080 006a 19       		.uleb128 0x19
+ 1081 006b 20       		.uleb128 0x20
+ 1082 006c 0B       		.uleb128 0xb
+ 1083 006d 01       		.uleb128 0x1
+ 1084 006e 13       		.uleb128 0x13
+ 1085 006f 00       		.byte	0
+ 1086 0070 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 28
+
+
+ 1087 0071 0A       		.uleb128 0xa
+ 1088 0072 05       		.uleb128 0x5
+ 1089 0073 00       		.byte	0
+ 1090 0074 03       		.uleb128 0x3
+ 1091 0075 0E       		.uleb128 0xe
+ 1092 0076 3A       		.uleb128 0x3a
+ 1093 0077 0B       		.uleb128 0xb
+ 1094 0078 3B       		.uleb128 0x3b
+ 1095 0079 05       		.uleb128 0x5
+ 1096 007a 49       		.uleb128 0x49
+ 1097 007b 13       		.uleb128 0x13
+ 1098 007c 00       		.byte	0
+ 1099 007d 00       		.byte	0
+ 1100 007e 0B       		.uleb128 0xb
+ 1101 007f 2E       		.uleb128 0x2e
+ 1102 0080 01       		.byte	0x1
+ 1103 0081 3F       		.uleb128 0x3f
+ 1104 0082 19       		.uleb128 0x19
+ 1105 0083 03       		.uleb128 0x3
+ 1106 0084 0E       		.uleb128 0xe
+ 1107 0085 3A       		.uleb128 0x3a
+ 1108 0086 0B       		.uleb128 0xb
+ 1109 0087 3B       		.uleb128 0x3b
+ 1110 0088 0B       		.uleb128 0xb
+ 1111 0089 27       		.uleb128 0x27
+ 1112 008a 19       		.uleb128 0x19
+ 1113 008b 20       		.uleb128 0x20
+ 1114 008c 0B       		.uleb128 0xb
+ 1115 008d 01       		.uleb128 0x1
+ 1116 008e 13       		.uleb128 0x13
+ 1117 008f 00       		.byte	0
+ 1118 0090 00       		.byte	0
+ 1119 0091 0C       		.uleb128 0xc
+ 1120 0092 05       		.uleb128 0x5
+ 1121 0093 00       		.byte	0
+ 1122 0094 03       		.uleb128 0x3
+ 1123 0095 0E       		.uleb128 0xe
+ 1124 0096 3A       		.uleb128 0x3a
+ 1125 0097 0B       		.uleb128 0xb
+ 1126 0098 3B       		.uleb128 0x3b
+ 1127 0099 0B       		.uleb128 0xb
+ 1128 009a 49       		.uleb128 0x49
+ 1129 009b 13       		.uleb128 0x13
+ 1130 009c 00       		.byte	0
+ 1131 009d 00       		.byte	0
+ 1132 009e 0D       		.uleb128 0xd
+ 1133 009f 34       		.uleb128 0x34
+ 1134 00a0 00       		.byte	0
+ 1135 00a1 03       		.uleb128 0x3
+ 1136 00a2 0E       		.uleb128 0xe
+ 1137 00a3 3A       		.uleb128 0x3a
+ 1138 00a4 0B       		.uleb128 0xb
+ 1139 00a5 3B       		.uleb128 0x3b
+ 1140 00a6 0B       		.uleb128 0xb
+ 1141 00a7 49       		.uleb128 0x49
+ 1142 00a8 13       		.uleb128 0x13
+ 1143 00a9 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 29
+
+
+ 1144 00aa 00       		.byte	0
+ 1145 00ab 0E       		.uleb128 0xe
+ 1146 00ac 2E       		.uleb128 0x2e
+ 1147 00ad 01       		.byte	0x1
+ 1148 00ae 3F       		.uleb128 0x3f
+ 1149 00af 19       		.uleb128 0x19
+ 1150 00b0 03       		.uleb128 0x3
+ 1151 00b1 0E       		.uleb128 0xe
+ 1152 00b2 3A       		.uleb128 0x3a
+ 1153 00b3 0B       		.uleb128 0xb
+ 1154 00b4 3B       		.uleb128 0x3b
+ 1155 00b5 0B       		.uleb128 0xb
+ 1156 00b6 27       		.uleb128 0x27
+ 1157 00b7 19       		.uleb128 0x19
+ 1158 00b8 11       		.uleb128 0x11
+ 1159 00b9 01       		.uleb128 0x1
+ 1160 00ba 12       		.uleb128 0x12
+ 1161 00bb 06       		.uleb128 0x6
+ 1162 00bc 40       		.uleb128 0x40
+ 1163 00bd 18       		.uleb128 0x18
+ 1164 00be 9742     		.uleb128 0x2117
+ 1165 00c0 19       		.uleb128 0x19
+ 1166 00c1 01       		.uleb128 0x1
+ 1167 00c2 13       		.uleb128 0x13
+ 1168 00c3 00       		.byte	0
+ 1169 00c4 00       		.byte	0
+ 1170 00c5 0F       		.uleb128 0xf
+ 1171 00c6 34       		.uleb128 0x34
+ 1172 00c7 00       		.byte	0
+ 1173 00c8 03       		.uleb128 0x3
+ 1174 00c9 0E       		.uleb128 0xe
+ 1175 00ca 3A       		.uleb128 0x3a
+ 1176 00cb 0B       		.uleb128 0xb
+ 1177 00cc 3B       		.uleb128 0x3b
+ 1178 00cd 0B       		.uleb128 0xb
+ 1179 00ce 49       		.uleb128 0x49
+ 1180 00cf 13       		.uleb128 0x13
+ 1181 00d0 3F       		.uleb128 0x3f
+ 1182 00d1 19       		.uleb128 0x19
+ 1183 00d2 3C       		.uleb128 0x3c
+ 1184 00d3 19       		.uleb128 0x19
+ 1185 00d4 00       		.byte	0
+ 1186 00d5 00       		.byte	0
+ 1187 00d6 10       		.uleb128 0x10
+ 1188 00d7 1D       		.uleb128 0x1d
+ 1189 00d8 01       		.byte	0x1
+ 1190 00d9 31       		.uleb128 0x31
+ 1191 00da 13       		.uleb128 0x13
+ 1192 00db 52       		.uleb128 0x52
+ 1193 00dc 01       		.uleb128 0x1
+ 1194 00dd 55       		.uleb128 0x55
+ 1195 00de 17       		.uleb128 0x17
+ 1196 00df 58       		.uleb128 0x58
+ 1197 00e0 0B       		.uleb128 0xb
+ 1198 00e1 59       		.uleb128 0x59
+ 1199 00e2 0B       		.uleb128 0xb
+ 1200 00e3 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 30
+
+
+ 1201 00e4 13       		.uleb128 0x13
+ 1202 00e5 00       		.byte	0
+ 1203 00e6 00       		.byte	0
+ 1204 00e7 11       		.uleb128 0x11
+ 1205 00e8 05       		.uleb128 0x5
+ 1206 00e9 00       		.byte	0
+ 1207 00ea 31       		.uleb128 0x31
+ 1208 00eb 13       		.uleb128 0x13
+ 1209 00ec 02       		.uleb128 0x2
+ 1210 00ed 17       		.uleb128 0x17
+ 1211 00ee 00       		.byte	0
+ 1212 00ef 00       		.byte	0
+ 1213 00f0 12       		.uleb128 0x12
+ 1214 00f1 0B       		.uleb128 0xb
+ 1215 00f2 01       		.byte	0x1
+ 1216 00f3 55       		.uleb128 0x55
+ 1217 00f4 17       		.uleb128 0x17
+ 1218 00f5 00       		.byte	0
+ 1219 00f6 00       		.byte	0
+ 1220 00f7 13       		.uleb128 0x13
+ 1221 00f8 34       		.uleb128 0x34
+ 1222 00f9 00       		.byte	0
+ 1223 00fa 31       		.uleb128 0x31
+ 1224 00fb 13       		.uleb128 0x13
+ 1225 00fc 02       		.uleb128 0x2
+ 1226 00fd 17       		.uleb128 0x17
+ 1227 00fe 00       		.byte	0
+ 1228 00ff 00       		.byte	0
+ 1229 0100 14       		.uleb128 0x14
+ 1230 0101 1D       		.uleb128 0x1d
+ 1231 0102 00       		.byte	0
+ 1232 0103 31       		.uleb128 0x31
+ 1233 0104 13       		.uleb128 0x13
+ 1234 0105 52       		.uleb128 0x52
+ 1235 0106 01       		.uleb128 0x1
+ 1236 0107 55       		.uleb128 0x55
+ 1237 0108 17       		.uleb128 0x17
+ 1238 0109 58       		.uleb128 0x58
+ 1239 010a 0B       		.uleb128 0xb
+ 1240 010b 59       		.uleb128 0x59
+ 1241 010c 0B       		.uleb128 0xb
+ 1242 010d 00       		.byte	0
+ 1243 010e 00       		.byte	0
+ 1244 010f 15       		.uleb128 0x15
+ 1245 0110 05       		.uleb128 0x5
+ 1246 0111 00       		.byte	0
+ 1247 0112 03       		.uleb128 0x3
+ 1248 0113 0E       		.uleb128 0xe
+ 1249 0114 3A       		.uleb128 0x3a
+ 1250 0115 0B       		.uleb128 0xb
+ 1251 0116 3B       		.uleb128 0x3b
+ 1252 0117 0B       		.uleb128 0xb
+ 1253 0118 49       		.uleb128 0x49
+ 1254 0119 13       		.uleb128 0x13
+ 1255 011a 02       		.uleb128 0x2
+ 1256 011b 18       		.uleb128 0x18
+ 1257 011c 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 31
+
+
+ 1258 011d 00       		.byte	0
+ 1259 011e 16       		.uleb128 0x16
+ 1260 011f 05       		.uleb128 0x5
+ 1261 0120 00       		.byte	0
+ 1262 0121 31       		.uleb128 0x31
+ 1263 0122 13       		.uleb128 0x13
+ 1264 0123 00       		.byte	0
+ 1265 0124 00       		.byte	0
+ 1266 0125 17       		.uleb128 0x17
+ 1267 0126 2E       		.uleb128 0x2e
+ 1268 0127 01       		.byte	0x1
+ 1269 0128 31       		.uleb128 0x31
+ 1270 0129 13       		.uleb128 0x13
+ 1271 012a 11       		.uleb128 0x11
+ 1272 012b 01       		.uleb128 0x1
+ 1273 012c 12       		.uleb128 0x12
+ 1274 012d 06       		.uleb128 0x6
+ 1275 012e 40       		.uleb128 0x40
+ 1276 012f 18       		.uleb128 0x18
+ 1277 0130 9742     		.uleb128 0x2117
+ 1278 0132 19       		.uleb128 0x19
+ 1279 0133 01       		.uleb128 0x1
+ 1280 0134 13       		.uleb128 0x13
+ 1281 0135 00       		.byte	0
+ 1282 0136 00       		.byte	0
+ 1283 0137 18       		.uleb128 0x18
+ 1284 0138 05       		.uleb128 0x5
+ 1285 0139 00       		.byte	0
+ 1286 013a 31       		.uleb128 0x31
+ 1287 013b 13       		.uleb128 0x13
+ 1288 013c 02       		.uleb128 0x2
+ 1289 013d 18       		.uleb128 0x18
+ 1290 013e 00       		.byte	0
+ 1291 013f 00       		.byte	0
+ 1292 0140 19       		.uleb128 0x19
+ 1293 0141 34       		.uleb128 0x34
+ 1294 0142 00       		.byte	0
+ 1295 0143 31       		.uleb128 0x31
+ 1296 0144 13       		.uleb128 0x13
+ 1297 0145 02       		.uleb128 0x2
+ 1298 0146 18       		.uleb128 0x18
+ 1299 0147 00       		.byte	0
+ 1300 0148 00       		.byte	0
+ 1301 0149 1A       		.uleb128 0x1a
+ 1302 014a 2E       		.uleb128 0x2e
+ 1303 014b 01       		.byte	0x1
+ 1304 014c 3F       		.uleb128 0x3f
+ 1305 014d 19       		.uleb128 0x19
+ 1306 014e 03       		.uleb128 0x3
+ 1307 014f 0E       		.uleb128 0xe
+ 1308 0150 3A       		.uleb128 0x3a
+ 1309 0151 0B       		.uleb128 0xb
+ 1310 0152 3B       		.uleb128 0x3b
+ 1311 0153 0B       		.uleb128 0xb
+ 1312 0154 27       		.uleb128 0x27
+ 1313 0155 19       		.uleb128 0x19
+ 1314 0156 49       		.uleb128 0x49
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 32
+
+
+ 1315 0157 13       		.uleb128 0x13
+ 1316 0158 11       		.uleb128 0x11
+ 1317 0159 01       		.uleb128 0x1
+ 1318 015a 12       		.uleb128 0x12
+ 1319 015b 06       		.uleb128 0x6
+ 1320 015c 40       		.uleb128 0x40
+ 1321 015d 18       		.uleb128 0x18
+ 1322 015e 9742     		.uleb128 0x2117
+ 1323 0160 19       		.uleb128 0x19
+ 1324 0161 01       		.uleb128 0x1
+ 1325 0162 13       		.uleb128 0x13
+ 1326 0163 00       		.byte	0
+ 1327 0164 00       		.byte	0
+ 1328 0165 1B       		.uleb128 0x1b
+ 1329 0166 34       		.uleb128 0x34
+ 1330 0167 00       		.byte	0
+ 1331 0168 03       		.uleb128 0x3
+ 1332 0169 0E       		.uleb128 0xe
+ 1333 016a 3A       		.uleb128 0x3a
+ 1334 016b 0B       		.uleb128 0xb
+ 1335 016c 3B       		.uleb128 0x3b
+ 1336 016d 0B       		.uleb128 0xb
+ 1337 016e 49       		.uleb128 0x49
+ 1338 016f 13       		.uleb128 0x13
+ 1339 0170 02       		.uleb128 0x2
+ 1340 0171 17       		.uleb128 0x17
+ 1341 0172 00       		.byte	0
+ 1342 0173 00       		.byte	0
+ 1343 0174 1C       		.uleb128 0x1c
+ 1344 0175 2E       		.uleb128 0x2e
+ 1345 0176 01       		.byte	0x1
+ 1346 0177 3F       		.uleb128 0x3f
+ 1347 0178 19       		.uleb128 0x19
+ 1348 0179 03       		.uleb128 0x3
+ 1349 017a 0E       		.uleb128 0xe
+ 1350 017b 3A       		.uleb128 0x3a
+ 1351 017c 0B       		.uleb128 0xb
+ 1352 017d 3B       		.uleb128 0x3b
+ 1353 017e 05       		.uleb128 0x5
+ 1354 017f 27       		.uleb128 0x27
+ 1355 0180 19       		.uleb128 0x19
+ 1356 0181 49       		.uleb128 0x49
+ 1357 0182 13       		.uleb128 0x13
+ 1358 0183 11       		.uleb128 0x11
+ 1359 0184 01       		.uleb128 0x1
+ 1360 0185 12       		.uleb128 0x12
+ 1361 0186 06       		.uleb128 0x6
+ 1362 0187 40       		.uleb128 0x40
+ 1363 0188 18       		.uleb128 0x18
+ 1364 0189 9742     		.uleb128 0x2117
+ 1365 018b 19       		.uleb128 0x19
+ 1366 018c 01       		.uleb128 0x1
+ 1367 018d 13       		.uleb128 0x13
+ 1368 018e 00       		.byte	0
+ 1369 018f 00       		.byte	0
+ 1370 0190 1D       		.uleb128 0x1d
+ 1371 0191 34       		.uleb128 0x34
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 33
+
+
+ 1372 0192 00       		.byte	0
+ 1373 0193 03       		.uleb128 0x3
+ 1374 0194 0E       		.uleb128 0xe
+ 1375 0195 3A       		.uleb128 0x3a
+ 1376 0196 0B       		.uleb128 0xb
+ 1377 0197 3B       		.uleb128 0x3b
+ 1378 0198 05       		.uleb128 0x5
+ 1379 0199 49       		.uleb128 0x49
+ 1380 019a 13       		.uleb128 0x13
+ 1381 019b 02       		.uleb128 0x2
+ 1382 019c 17       		.uleb128 0x17
+ 1383 019d 00       		.byte	0
+ 1384 019e 00       		.byte	0
+ 1385 019f 1E       		.uleb128 0x1e
+ 1386 01a0 2E       		.uleb128 0x2e
+ 1387 01a1 00       		.byte	0
+ 1388 01a2 31       		.uleb128 0x31
+ 1389 01a3 13       		.uleb128 0x13
+ 1390 01a4 11       		.uleb128 0x11
+ 1391 01a5 01       		.uleb128 0x1
+ 1392 01a6 12       		.uleb128 0x12
+ 1393 01a7 06       		.uleb128 0x6
+ 1394 01a8 40       		.uleb128 0x40
+ 1395 01a9 18       		.uleb128 0x18
+ 1396 01aa 9742     		.uleb128 0x2117
+ 1397 01ac 19       		.uleb128 0x19
+ 1398 01ad 00       		.byte	0
+ 1399 01ae 00       		.byte	0
+ 1400 01af 1F       		.uleb128 0x1f
+ 1401 01b0 2E       		.uleb128 0x2e
+ 1402 01b1 00       		.byte	0
+ 1403 01b2 3F       		.uleb128 0x3f
+ 1404 01b3 19       		.uleb128 0x19
+ 1405 01b4 03       		.uleb128 0x3
+ 1406 01b5 0E       		.uleb128 0xe
+ 1407 01b6 3A       		.uleb128 0x3a
+ 1408 01b7 0B       		.uleb128 0xb
+ 1409 01b8 3B       		.uleb128 0x3b
+ 1410 01b9 05       		.uleb128 0x5
+ 1411 01ba 27       		.uleb128 0x27
+ 1412 01bb 19       		.uleb128 0x19
+ 1413 01bc 49       		.uleb128 0x49
+ 1414 01bd 13       		.uleb128 0x13
+ 1415 01be 11       		.uleb128 0x11
+ 1416 01bf 01       		.uleb128 0x1
+ 1417 01c0 12       		.uleb128 0x12
+ 1418 01c1 06       		.uleb128 0x6
+ 1419 01c2 40       		.uleb128 0x40
+ 1420 01c3 18       		.uleb128 0x18
+ 1421 01c4 9742     		.uleb128 0x2117
+ 1422 01c6 19       		.uleb128 0x19
+ 1423 01c7 00       		.byte	0
+ 1424 01c8 00       		.byte	0
+ 1425 01c9 20       		.uleb128 0x20
+ 1426 01ca 2E       		.uleb128 0x2e
+ 1427 01cb 00       		.byte	0
+ 1428 01cc 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 34
+
+
+ 1429 01cd 19       		.uleb128 0x19
+ 1430 01ce 03       		.uleb128 0x3
+ 1431 01cf 0E       		.uleb128 0xe
+ 1432 01d0 3A       		.uleb128 0x3a
+ 1433 01d1 0B       		.uleb128 0xb
+ 1434 01d2 3B       		.uleb128 0x3b
+ 1435 01d3 05       		.uleb128 0x5
+ 1436 01d4 27       		.uleb128 0x27
+ 1437 01d5 19       		.uleb128 0x19
+ 1438 01d6 11       		.uleb128 0x11
+ 1439 01d7 01       		.uleb128 0x1
+ 1440 01d8 12       		.uleb128 0x12
+ 1441 01d9 06       		.uleb128 0x6
+ 1442 01da 40       		.uleb128 0x40
+ 1443 01db 18       		.uleb128 0x18
+ 1444 01dc 9742     		.uleb128 0x2117
+ 1445 01de 19       		.uleb128 0x19
+ 1446 01df 00       		.byte	0
+ 1447 01e0 00       		.byte	0
+ 1448 01e1 00       		.byte	0
+ 1449              		.section	.debug_loc,"",%progbits
+ 1450              	.Ldebug_loc0:
+ 1451              	.LLST0:
+ 1452 0000 14000000 		.4byte	.LVL0
+ 1453 0004 16000000 		.4byte	.LVL1
+ 1454 0008 0600     		.2byte	0x6
+ 1455 000a 03       		.byte	0x3
+ 1456 000b 00000000 		.4byte	isr_Pin_buttDown_Interrupt
+ 1457 000f 9F       		.byte	0x9f
+ 1458 0010 00000000 		.4byte	0
+ 1459 0014 00000000 		.4byte	0
+ 1460              	.LLST1:
+ 1461 0018 14000000 		.4byte	.LVL0
+ 1462 001c 16000000 		.4byte	.LVL1
+ 1463 0020 0100     		.2byte	0x1
+ 1464 0022 54       		.byte	0x54
+ 1465 0023 00000000 		.4byte	0
+ 1466 0027 00000000 		.4byte	0
+ 1467              	.LLST2:
+ 1468 002b 16000000 		.4byte	.LVL1
+ 1469 002f 18000000 		.4byte	.LVL2
+ 1470 0033 0200     		.2byte	0x2
+ 1471 0035 37       		.byte	0x37
+ 1472 0036 9F       		.byte	0x9f
+ 1473 0037 00000000 		.4byte	0
+ 1474 003b 00000000 		.4byte	0
+ 1475              	.LLST3:
+ 1476 003f 12000000 		.4byte	.LVL4
+ 1477 0043 14000000 		.4byte	.LVL5
+ 1478 0047 0100     		.2byte	0x1
+ 1479 0049 50       		.byte	0x50
+ 1480 004a 00000000 		.4byte	0
+ 1481 004e 00000000 		.4byte	0
+ 1482              	.LLST4:
+ 1483 0052 12000000 		.4byte	.LVL4
+ 1484 0056 14000000 		.4byte	.LVL5
+ 1485 005a 0100     		.2byte	0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 35
+
+
+ 1486 005c 55       		.byte	0x55
+ 1487 005d 00000000 		.4byte	0
+ 1488 0061 00000000 		.4byte	0
+ 1489              	.LLST5:
+ 1490 0065 14000000 		.4byte	.LVL5
+ 1491 0069 16000000 		.4byte	.LVL6
+ 1492 006d 0200     		.2byte	0x2
+ 1493 006f 37       		.byte	0x37
+ 1494 0070 9F       		.byte	0x9f
+ 1495 0071 00000000 		.4byte	0
+ 1496 0075 00000000 		.4byte	0
+ 1497              	.LLST6:
+ 1498 0079 0C000000 		.4byte	.LVL7
+ 1499 007d 0E000000 		.4byte	.LVL8
+ 1500 0081 0100     		.2byte	0x1
+ 1501 0083 53       		.byte	0x53
+ 1502 0084 00000000 		.4byte	0
+ 1503 0088 00000000 		.4byte	0
+ 1504              	.LLST7:
+ 1505 008c 00000000 		.4byte	.LVL11
+ 1506 0090 02000000 		.4byte	.LVL12
+ 1507 0094 0600     		.2byte	0x6
+ 1508 0096 11       		.byte	0x11
+ 1509 0097 88DA8380 		.sleb128 -536810232
+ 1509      7E
+ 1510 009c 02000000 		.4byte	.LVL12
+ 1511 00a0 04000000 		.4byte	.LVL13
+ 1512 00a4 0200     		.2byte	0x2
+ 1513 00a6 73       		.byte	0x73
+ 1514 00a7 00       		.sleb128 0
+ 1515 00a8 04000000 		.4byte	.LVL13
+ 1516 00ac 0C000000 		.4byte	.LFE5
+ 1517 00b0 0100     		.2byte	0x1
+ 1518 00b2 53       		.byte	0x53
+ 1519 00b3 00000000 		.4byte	0
+ 1520 00b7 00000000 		.4byte	0
+ 1521              	.LLST8:
+ 1522 00bb 00000000 		.4byte	.LVL14
+ 1523 00bf 02000000 		.4byte	.LVL15
+ 1524 00c3 0100     		.2byte	0x1
+ 1525 00c5 50       		.byte	0x50
+ 1526 00c6 02000000 		.4byte	.LVL15
+ 1527 00ca 10000000 		.4byte	.LFE6
+ 1528 00ce 0400     		.2byte	0x4
+ 1529 00d0 F3       		.byte	0xf3
+ 1530 00d1 01       		.uleb128 0x1
+ 1531 00d2 50       		.byte	0x50
+ 1532 00d3 9F       		.byte	0x9f
+ 1533 00d4 00000000 		.4byte	0
+ 1534 00d8 00000000 		.4byte	0
+ 1535              	.LLST9:
+ 1536 00dc 04000000 		.4byte	.LVL16
+ 1537 00e0 06000000 		.4byte	.LVL17
+ 1538 00e4 0500     		.2byte	0x5
+ 1539 00e6 70       		.byte	0x70
+ 1540 00e7 00       		.sleb128 0
+ 1541 00e8 35       		.byte	0x35
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 36
+
+
+ 1542 00e9 25       		.byte	0x25
+ 1543 00ea 9F       		.byte	0x9f
+ 1544 00eb 00000000 		.4byte	0
+ 1545 00ef 00000000 		.4byte	0
+ 1546              		.section	.debug_aranges,"",%progbits
+ 1547 0000 7C000000 		.4byte	0x7c
+ 1548 0004 0200     		.2byte	0x2
+ 1549 0006 00000000 		.4byte	.Ldebug_info0
+ 1550 000a 04       		.byte	0x4
+ 1551 000b 00       		.byte	0
+ 1552 000c 0000     		.2byte	0
+ 1553 000e 0000     		.2byte	0
+ 1554 0010 00000000 		.4byte	.LFB3
+ 1555 0014 0C000000 		.4byte	.LFE3-.LFB3
+ 1556 0018 00000000 		.4byte	.LFB0
+ 1557 001c 34000000 		.4byte	.LFE0-.LFB0
+ 1558 0020 00000000 		.4byte	.LFB1
+ 1559 0024 2C000000 		.4byte	.LFE1-.LFB1
+ 1560 0028 00000000 		.4byte	.LFB2
+ 1561 002c 1C000000 		.4byte	.LFE2-.LFB2
+ 1562 0030 00000000 		.4byte	.LFB4
+ 1563 0034 0C000000 		.4byte	.LFE4-.LFB4
+ 1564 0038 00000000 		.4byte	.LFB5
+ 1565 003c 0C000000 		.4byte	.LFE5-.LFB5
+ 1566 0040 00000000 		.4byte	.LFB6
+ 1567 0044 10000000 		.4byte	.LFE6-.LFB6
+ 1568 0048 00000000 		.4byte	.LFB7
+ 1569 004c 0C000000 		.4byte	.LFE7-.LFB7
+ 1570 0050 00000000 		.4byte	.LFB8
+ 1571 0054 0C000000 		.4byte	.LFE8-.LFB8
+ 1572 0058 00000000 		.4byte	.LFB9
+ 1573 005c 10000000 		.4byte	.LFE9-.LFB9
+ 1574 0060 00000000 		.4byte	.LFB10
+ 1575 0064 0C000000 		.4byte	.LFE10-.LFB10
+ 1576 0068 00000000 		.4byte	.LFB11
+ 1577 006c 0C000000 		.4byte	.LFE11-.LFB11
+ 1578 0070 00000000 		.4byte	.LFB12
+ 1579 0074 0C000000 		.4byte	.LFE12-.LFB12
+ 1580 0078 00000000 		.4byte	0
+ 1581 007c 00000000 		.4byte	0
+ 1582              		.section	.debug_ranges,"",%progbits
+ 1583              	.Ldebug_ranges0:
+ 1584 0000 02000000 		.4byte	.LBB22
+ 1585 0004 04000000 		.4byte	.LBE22
+ 1586 0008 06000000 		.4byte	.LBB30
+ 1587 000c 0A000000 		.4byte	.LBE30
+ 1588 0010 14000000 		.4byte	.LBB41
+ 1589 0014 16000000 		.4byte	.LBE41
+ 1590 0018 00000000 		.4byte	0
+ 1591 001c 00000000 		.4byte	0
+ 1592 0020 04000000 		.4byte	.LBB26
+ 1593 0024 06000000 		.4byte	.LBE26
+ 1594 0028 0C000000 		.4byte	.LBB35
+ 1595 002c 0E000000 		.4byte	.LBE35
+ 1596 0030 12000000 		.4byte	.LBB40
+ 1597 0034 14000000 		.4byte	.LBE40
+ 1598 0038 00000000 		.4byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 37
+
+
+ 1599 003c 00000000 		.4byte	0
+ 1600 0040 0A000000 		.4byte	.LBB31
+ 1601 0044 0C000000 		.4byte	.LBE31
+ 1602 0048 10000000 		.4byte	.LBB39
+ 1603 004c 12000000 		.4byte	.LBE39
+ 1604 0050 16000000 		.4byte	.LBB42
+ 1605 0054 18000000 		.4byte	.LBE42
+ 1606 0058 00000000 		.4byte	0
+ 1607 005c 00000000 		.4byte	0
+ 1608 0060 0E000000 		.4byte	.LBB36
+ 1609 0064 10000000 		.4byte	.LBE36
+ 1610 0068 1A000000 		.4byte	.LBB43
+ 1611 006c 1C000000 		.4byte	.LBE43
+ 1612 0070 00000000 		.4byte	0
+ 1613 0074 00000000 		.4byte	0
+ 1614 0078 02000000 		.4byte	.LBB44
+ 1615 007c 04000000 		.4byte	.LBE44
+ 1616 0080 06000000 		.4byte	.LBB52
+ 1617 0084 08000000 		.4byte	.LBE52
+ 1618 0088 12000000 		.4byte	.LBB63
+ 1619 008c 14000000 		.4byte	.LBE63
+ 1620 0090 00000000 		.4byte	0
+ 1621 0094 00000000 		.4byte	0
+ 1622 0098 04000000 		.4byte	.LBB48
+ 1623 009c 06000000 		.4byte	.LBE48
+ 1624 00a0 0A000000 		.4byte	.LBB57
+ 1625 00a4 0C000000 		.4byte	.LBE57
+ 1626 00a8 10000000 		.4byte	.LBB62
+ 1627 00ac 12000000 		.4byte	.LBE62
+ 1628 00b0 00000000 		.4byte	0
+ 1629 00b4 00000000 		.4byte	0
+ 1630 00b8 08000000 		.4byte	.LBB53
+ 1631 00bc 0A000000 		.4byte	.LBE53
+ 1632 00c0 0C000000 		.4byte	.LBB58
+ 1633 00c4 0E000000 		.4byte	.LBE58
+ 1634 00c8 14000000 		.4byte	.LBB64
+ 1635 00cc 16000000 		.4byte	.LBE64
+ 1636 00d0 00000000 		.4byte	0
+ 1637 00d4 00000000 		.4byte	0
+ 1638 00d8 0E000000 		.4byte	.LBB59
+ 1639 00dc 10000000 		.4byte	.LBE59
+ 1640 00e0 18000000 		.4byte	.LBB65
+ 1641 00e4 1A000000 		.4byte	.LBE65
+ 1642 00e8 00000000 		.4byte	0
+ 1643 00ec 00000000 		.4byte	0
+ 1644 00f0 00000000 		.4byte	.LBB66
+ 1645 00f4 02000000 		.4byte	.LBE66
+ 1646 00f8 04000000 		.4byte	.LBB73
+ 1647 00fc 08000000 		.4byte	.LBE73
+ 1648 0100 0C000000 		.4byte	.LBB75
+ 1649 0104 1C000000 		.4byte	.LBE75
+ 1650 0108 00000000 		.4byte	0
+ 1651 010c 00000000 		.4byte	0
+ 1652 0110 02000000 		.4byte	.LBB70
+ 1653 0114 04000000 		.4byte	.LBE70
+ 1654 0118 08000000 		.4byte	.LBB74
+ 1655 011c 0C000000 		.4byte	.LBE74
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 38
+
+
+ 1656 0120 00000000 		.4byte	0
+ 1657 0124 00000000 		.4byte	0
+ 1658 0128 00000000 		.4byte	.LFB3
+ 1659 012c 0C000000 		.4byte	.LFE3
+ 1660 0130 00000000 		.4byte	.LFB0
+ 1661 0134 34000000 		.4byte	.LFE0
+ 1662 0138 00000000 		.4byte	.LFB1
+ 1663 013c 2C000000 		.4byte	.LFE1
+ 1664 0140 00000000 		.4byte	.LFB2
+ 1665 0144 1C000000 		.4byte	.LFE2
+ 1666 0148 00000000 		.4byte	.LFB4
+ 1667 014c 0C000000 		.4byte	.LFE4
+ 1668 0150 00000000 		.4byte	.LFB5
+ 1669 0154 0C000000 		.4byte	.LFE5
+ 1670 0158 00000000 		.4byte	.LFB6
+ 1671 015c 10000000 		.4byte	.LFE6
+ 1672 0160 00000000 		.4byte	.LFB7
+ 1673 0164 0C000000 		.4byte	.LFE7
+ 1674 0168 00000000 		.4byte	.LFB8
+ 1675 016c 0C000000 		.4byte	.LFE8
+ 1676 0170 00000000 		.4byte	.LFB9
+ 1677 0174 10000000 		.4byte	.LFE9
+ 1678 0178 00000000 		.4byte	.LFB10
+ 1679 017c 0C000000 		.4byte	.LFE10
+ 1680 0180 00000000 		.4byte	.LFB11
+ 1681 0184 0C000000 		.4byte	.LFE11
+ 1682 0188 00000000 		.4byte	.LFB12
+ 1683 018c 0C000000 		.4byte	.LFE12
+ 1684 0190 00000000 		.4byte	0
+ 1685 0194 00000000 		.4byte	0
+ 1686              		.section	.debug_line,"",%progbits
+ 1687              	.Ldebug_line0:
+ 1688 0000 A9010000 		.section	.debug_str,"MS",%progbits,1
+ 1688      02004D00 
+ 1688      00000201 
+ 1688      FB0E0D00 
+ 1688      01010101 
+ 1689              	.LASF17:
+ 1690 0000 72656733 		.ascii	"reg32\000"
+ 1690      3200
+ 1691              	.LASF38:
+ 1692 0006 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 1692      726F7062 
+ 1692      6F785C44 
+ 1692      4556454C 
+ 1692      4F504D45 
+ 1693 0035 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 1693      70656374 
+ 1693      72756D20 
+ 1693      616E616C 
+ 1693      797A6572 
+ 1694 0066 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 1694      416E616C 
+ 1694      797A6572 
+ 1694      5C617564 
+ 1694      696F5370 
+ 1695              	.LASF22:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 39
+
+
+ 1696 008f 61646472 		.ascii	"address\000"
+ 1696      65737300 
+ 1697              	.LASF6:
+ 1698 0097 73686F72 		.ascii	"short unsigned int\000"
+ 1698      7420756E 
+ 1698      7369676E 
+ 1698      65642069 
+ 1698      6E7400
+ 1699              	.LASF23:
+ 1700 00aa 6973725F 		.ascii	"isr_Pin_buttDown_Enable\000"
+ 1700      50696E5F 
+ 1700      62757474 
+ 1700      446F776E 
+ 1700      5F456E61 
+ 1701              	.LASF14:
+ 1702 00c2 666C6F61 		.ascii	"float\000"
+ 1702      7400
+ 1703              	.LASF4:
+ 1704 00c8 756E7369 		.ascii	"unsigned char\000"
+ 1704      676E6564 
+ 1704      20636861 
+ 1704      7200
+ 1705              	.LASF27:
+ 1706 00d6 6973725F 		.ascii	"isr_Pin_buttDown_Interrupt\000"
+ 1706      50696E5F 
+ 1706      62757474 
+ 1706      446F776E 
+ 1706      5F496E74 
+ 1707              	.LASF16:
+ 1708 00f1 72656738 		.ascii	"reg8\000"
+ 1708      00
+ 1709              	.LASF31:
+ 1710 00f6 6973725F 		.ascii	"isr_Pin_buttDown_GetVector\000"
+ 1710      50696E5F 
+ 1710      62757474 
+ 1710      446F776E 
+ 1710      5F476574 
+ 1711              	.LASF8:
+ 1712 0111 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1712      20756E73 
+ 1712      69676E65 
+ 1712      6420696E 
+ 1712      7400
+ 1713              	.LASF28:
+ 1714 0123 6973725F 		.ascii	"isr_Pin_buttDown_Start\000"
+ 1714      50696E5F 
+ 1714      62757474 
+ 1714      446F776E 
+ 1714      5F537461 
+ 1715              	.LASF12:
+ 1716 013a 75696E74 		.ascii	"uint8\000"
+ 1716      3800
+ 1717              	.LASF21:
+ 1718 0140 7072696F 		.ascii	"priority\000"
+ 1718      72697479 
+ 1718      00
+ 1719              	.LASF32:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 40
+
+
+ 1720 0149 6973725F 		.ascii	"isr_Pin_buttDown_GetPriority\000"
+ 1720      50696E5F 
+ 1720      62757474 
+ 1720      446F776E 
+ 1720      5F476574 
+ 1721              	.LASF15:
+ 1722 0166 646F7562 		.ascii	"double\000"
+ 1722      6C6500
+ 1723              	.LASF29:
+ 1724 016d 6973725F 		.ascii	"isr_Pin_buttDown_StartEx\000"
+ 1724      50696E5F 
+ 1724      62757474 
+ 1724      446F776E 
+ 1724      5F537461 
+ 1725              	.LASF13:
+ 1726 0186 75696E74 		.ascii	"uint32\000"
+ 1726      333200
+ 1727              	.LASF35:
+ 1728 018d 6973725F 		.ascii	"isr_Pin_buttDown_ClearPending\000"
+ 1728      50696E5F 
+ 1728      62757474 
+ 1728      446F776E 
+ 1728      5F436C65 
+ 1729              	.LASF37:
+ 1730 01ab 47656E65 		.ascii	"Generated_Source\\PSoC5\\isr_Pin_buttDown.c\000"
+ 1730      72617465 
+ 1730      645F536F 
+ 1730      75726365 
+ 1730      5C50536F 
+ 1731              	.LASF0:
+ 1732 01d5 756E7369 		.ascii	"unsigned int\000"
+ 1732      676E6564 
+ 1732      20696E74 
+ 1732      00
+ 1733              	.LASF34:
+ 1734 01e2 6973725F 		.ascii	"isr_Pin_buttDown_SetPending\000"
+ 1734      50696E5F 
+ 1734      62757474 
+ 1734      446F776E 
+ 1734      5F536574 
+ 1735              	.LASF36:
+ 1736 01fe 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1736      43313120 
+ 1736      352E342E 
+ 1736      31203230 
+ 1736      31363036 
+ 1737 0231 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1737      20726576 
+ 1737      6973696F 
+ 1737      6E203233 
+ 1737      37373135 
+ 1738 0264 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 1738      66756E63 
+ 1738      74696F6E 
+ 1738      2D736563 
+ 1738      74696F6E 
+ 1739 0297 6E637469 		.ascii	"nctions\000"
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 41
+
+
+ 1739      6F6E7300 
+ 1740              	.LASF9:
+ 1741 029f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1741      206C6F6E 
+ 1741      6720756E 
+ 1741      7369676E 
+ 1741      65642069 
+ 1742              	.LASF18:
+ 1743 02b6 63796973 		.ascii	"cyisraddress\000"
+ 1743      72616464 
+ 1743      72657373 
+ 1743      00
+ 1744              	.LASF25:
+ 1745 02c3 62757474 		.ascii	"buttonPress\000"
+ 1745      6F6E5072 
+ 1745      65737300 
+ 1746              	.LASF24:
+ 1747 02cf 6973725F 		.ascii	"isr_Pin_buttDown_Disable\000"
+ 1747      50696E5F 
+ 1747      62757474 
+ 1747      446F776E 
+ 1747      5F446973 
+ 1748              	.LASF30:
+ 1749 02e8 6973725F 		.ascii	"isr_Pin_buttDown_Stop\000"
+ 1749      50696E5F 
+ 1749      62757474 
+ 1749      446F776E 
+ 1749      5F53746F 
+ 1750              	.LASF10:
+ 1751 02fe 73697A65 		.ascii	"sizetype\000"
+ 1751      74797065 
+ 1751      00
+ 1752              	.LASF1:
+ 1753 0307 6C6F6E67 		.ascii	"long long int\000"
+ 1753      206C6F6E 
+ 1753      6720696E 
+ 1753      7400
+ 1754              	.LASF19:
+ 1755 0315 6973725F 		.ascii	"isr_Pin_buttDown_SetPriority\000"
+ 1755      50696E5F 
+ 1755      62757474 
+ 1755      446F776E 
+ 1755      5F536574 
+ 1756              	.LASF11:
+ 1757 0332 63686172 		.ascii	"char\000"
+ 1757      00
+ 1758              	.LASF33:
+ 1759 0337 72616D56 		.ascii	"ramVectorTable\000"
+ 1759      6563746F 
+ 1759      72546162 
+ 1759      6C6500
+ 1760              	.LASF5:
+ 1761 0346 73686F72 		.ascii	"short int\000"
+ 1761      7420696E 
+ 1761      7400
+ 1762              	.LASF39:
+ 1763 0350 6973725F 		.ascii	"isr_Pin_buttDown_GetState\000"
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccoycSRe.s 			page 42
+
+
+ 1763      50696E5F 
+ 1763      62757474 
+ 1763      446F776E 
+ 1763      5F476574 
+ 1764              	.LASF26:
+ 1765 036a 62757474 		.ascii	"buttonDown\000"
+ 1765      6F6E446F 
+ 1765      776E00
+ 1766              	.LASF7:
+ 1767 0375 6C6F6E67 		.ascii	"long int\000"
+ 1767      20696E74 
+ 1767      00
+ 1768              	.LASF2:
+ 1769 037e 6C6F6E67 		.ascii	"long double\000"
+ 1769      20646F75 
+ 1769      626C6500 
+ 1770              	.LASF3:
+ 1771 038a 7369676E 		.ascii	"signed char\000"
+ 1771      65642063 
+ 1771      68617200 
+ 1772              	.LASF20:
+ 1773 0396 6973725F 		.ascii	"isr_Pin_buttDown_SetVector\000"
+ 1773      50696E5F 
+ 1773      62757474 
+ 1773      446F776E 
+ 1773      5F536574 
+ 1774              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,6 @@
+# DO NOT DELETE
+CyBootAsmGnu.o:  \
+   D:/Dropbox/DEVELOPMENT/Audio\ spectrum\ analyzer/Firmware/audioSpectrumAnalyzer/audioSpectrumAnalyzer.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s \
+   D:/Dropbox/DEVELOPMENT/Audio\ spectrum\ analyzer/Firmware/audioSpectrumAnalyzer/audioSpectrumAnalyzer.cydsn/Generated_Source/PSoC5/cydevicegnu.inc \
+   D:/Dropbox/DEVELOPMENT/Audio\ spectrum\ analyzer/Firmware/audioSpectrumAnalyzer/audioSpectrumAnalyzer.cydsn/Generated_Source/PSoC5/cydevicegnu_trm.inc \
+   D:/Dropbox/DEVELOPMENT/Audio\ spectrum\ analyzer/Firmware/audioSpectrumAnalyzer/audioSpectrumAnalyzer.cydsn/Generated_Source/PSoC5/cyfittergnu.inc

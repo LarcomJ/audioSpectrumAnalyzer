@@ -1,0 +1,2450 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"filters.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.iir_biquad_4th_order,"ax",%progbits
+  20              		.align	2
+  21              		.global	iir_biquad_4th_order
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	iir_biquad_4th_order, %function
+  25              	iir_biquad_4th_order:
+  26              	.LFB0:
+  27              		.file 1 "filters.c"
+   1:filters.c     **** /* ========================================
+   2:filters.c     ****  *
+   3:filters.c     ****  * Copyright YOUR COMPANY, THE YEAR
+   4:filters.c     ****  * All Rights Reserved
+   5:filters.c     ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:filters.c     ****  *
+   7:filters.c     ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:filters.c     ****  * WHICH IS THE PROPERTY OF your company.
+   9:filters.c     ****  *
+  10:filters.c     ****  * ========================================
+  11:filters.c     **** */
+  12:filters.c     **** 
+  13:filters.c     **** #include "filters.h"
+  14:filters.c     **** 
+  15:filters.c     **** //==============================================================================
+  16:filters.c     **** //	IIR Biquad filter
+  17:filters.c     **** //
+  18:filters.c     **** //	nth order filter that impliments a direct form biquad filter. The function
+  19:filters.c     **** //  is recursive allowing for N 2nd order stages to be calculated in cascade.
+  20:filters.c     **** //
+  21:filters.c     **** //	sample_t -- struct pointer to input sample buffer
+  22:filters.c     **** //	output_t -- struct pointer to output buffer
+  23:filters.c     **** //	coeff	 -- this holds the filter coefficients and must follow the form below
+  24:filters.c     **** //	order	 -- order of the filter, must be multiples of 2
+  25:filters.c     **** //
+  26:filters.c     **** //										   |   1st biquad   | |   2nd biquad   | .......
+  27:filters.c     **** //	coeff is an linear array of the form [ b0 b1 b2 a0 a1 a2  b3 b4 b5 a3 a4 a5 ....... ]
+  28:filters.c     **** //											
+  29:filters.c     **** //	
+  30:filters.c     **** // =============================================================================
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 2
+
+
+  31:filters.c     **** short signed int iir_biquad_4th_order( short signed int sample, reg_struct *reg, short signed int c
+  32:filters.c     **** {
+  28              		.loc 1 32 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33:filters.c     **** 	signed int acc = 0;
+  34:filters.c     **** 	
+  35:filters.c     ****     //================= First BiQuad stage =======================//
+  36:filters.c     ****     
+  37:filters.c     **** 	// scale input to avoid overflow
+  38:filters.c     **** 	sample = ( short signed int )( ( ( signed int )sample * ( signed int )reg->input_scale[ 0 ] ) >> Q
+  33              		.loc 1 38 0
+  34 0000 D1F810C0 		ldr	ip, [r1, #16]
+  32:filters.c     **** 	signed int acc = 0;
+  35              		.loc 1 32 0
+  36 0004 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+  37              		.cfi_def_cfa_offset 32
+  38              		.cfi_offset 4, -32
+  39              		.cfi_offset 5, -28
+  40              		.cfi_offset 6, -24
+  41              		.cfi_offset 7, -20
+  42              		.cfi_offset 8, -16
+  43              		.cfi_offset 9, -12
+  44              		.cfi_offset 10, -8
+  45              		.cfi_offset 14, -4
+  39:filters.c     **** 	
+  40:filters.c     **** 	// compute direct form biquad filter
+  41:filters.c     **** 	acc = ( (signed int)sample * (signed int)coeff[ 0 ] );
+  42:filters.c     **** 	acc = acc + ( (signed int)reg->x1[ 0 ] * (signed int)coeff[ 1 ] );
+  46              		.loc 1 42 0
+  47 0008 0F68     		ldr	r7, [r1]
+  38:filters.c     **** 	
+  48              		.loc 1 38 0
+  49 000a BCF90090 		ldrsh	r9, [ip]
+  50              		.loc 1 42 0
+  51 000e B7F90080 		ldrsh	r8, [r7]
+  52 0012 B2F90230 		ldrsh	r3, [r2, #2]
+  38:filters.c     **** 	
+  53              		.loc 1 38 0
+  54 0016 00FB09F0 		mul	r0, r0, r9
+  55              	.LVL1:
+  56              		.loc 1 42 0
+  57 001a 08FB03F3 		mul	r3, r8, r3
+  41:filters.c     **** 	acc = acc + ( (signed int)reg->x1[ 0 ] * (signed int)coeff[ 1 ] );
+  58              		.loc 1 41 0
+  59 001e B2F90040 		ldrsh	r4, [r2]
+  38:filters.c     **** 	
+  60              		.loc 1 38 0
+  61 0022 40F38F39 		sbfx	r9, r0, #14, #16
+  62              	.LVL2:
+  43:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 0 ] * (signed int)coeff[ 2 ] );
+  63              		.loc 1 43 0
+  64 0026 D1F804E0 		ldr	lr, [r1, #4]
+  42:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 0 ] * (signed int)coeff[ 2 ] );
+  65              		.loc 1 42 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 3
+
+
+  66 002a 09FB0433 		mla	r3, r9, r4, r3
+  67              	.LVL3:
+  68              		.loc 1 43 0
+  69 002e BEF90000 		ldrsh	r0, [lr]
+  70 0032 B2F90440 		ldrsh	r4, [r2, #4]
+  44:filters.c     **** 	acc = acc - ( (signed int)reg->y1[ 0 ] * (signed int)coeff[ 4 ] );
+  71              		.loc 1 44 0
+  72 0036 8D68     		ldr	r5, [r1, #8]
+  43:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 0 ] * (signed int)coeff[ 2 ] );
+  73              		.loc 1 43 0
+  74 0038 04FB0033 		mla	r3, r4, r0, r3
+  75              	.LVL4:
+  76              		.loc 1 44 0
+  77 003c B5F90000 		ldrsh	r0, [r5]
+  78 0040 B2F90840 		ldrsh	r4, [r2, #8]
+  45:filters.c     **** 	acc = acc - ( (signed int)reg->y2[ 0 ] * (signed int)coeff[ 5 ] );
+  79              		.loc 1 45 0
+  80 0044 CE68     		ldr	r6, [r1, #12]
+  44:filters.c     **** 	acc = acc - ( (signed int)reg->y1[ 0 ] * (signed int)coeff[ 4 ] );
+  81              		.loc 1 44 0
+  82 0046 04FB1031 		mls	r1, r4, r0, r3
+  83              	.LVL5:
+  84              		.loc 1 45 0
+  85 004a B6F90040 		ldrsh	r4, [r6]
+  86 004e B2F90A30 		ldrsh	r3, [r2, #10]
+  87 0052 2448     		ldr	r0, .L3
+  88 0054 03FB1411 		mls	r1, r3, r4, r1
+  89              	.LVL6:
+  46:filters.c     **** 	acc = acc >> Q_format;
+  90              		.loc 1 46 0
+  91 0058 8913     		asrs	r1, r1, #14
+  92              	.LVL7:
+  93 005a 8142     		cmp	r1, r0
+  94 005c B8BF     		it	lt
+  95 005e 0146     		movlt	r1, r0
+  96              	.LVL8:
+  97 0060 47F6FF74 		movw	r4, #32767
+  98              	.LVL9:
+  99 0064 A142     		cmp	r1, r4
+ 100 0066 0B46     		mov	r3, r1
+ 101              	.LVL10:
+ 102 0068 A8BF     		it	ge
+ 103 006a 2346     		movge	r3, r4
+ 104              	.LVL11:
+  47:filters.c     **** 	
+  48:filters.c     **** 	
+  49:filters.c     **** 	// saturate the output if overflow occured
+  50:filters.c     **** 	if( acc > overflow ) 
+  51:filters.c     **** 	{ acc = overflow; }
+  52:filters.c     **** 	else if( acc < underflow )
+  53:filters.c     **** 	{ acc = underflow; }
+  54:filters.c     **** 	
+  55:filters.c     **** 	
+  56:filters.c     **** 	// shift data in registers
+  57:filters.c     **** 	reg->x2[ 0 ] = reg->x1[ 0 ];
+ 105              		.loc 1 57 0
+ 106 006c AEF80080 		strh	r8, [lr]	@ movhi
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 4
+
+
+  58:filters.c     **** 	reg->x1[ 0 ] = sample;
+ 107              		.loc 1 58 0
+ 108 0070 A7F80090 		strh	r9, [r7]	@ movhi
+  59:filters.c     **** 	reg->y2[ 0 ] = reg->y1[ 0 ];
+ 109              		.loc 1 59 0
+ 110 0074 B5F90010 		ldrsh	r1, [r5]
+ 111 0078 3180     		strh	r1, [r6]	@ movhi
+  60:filters.c     **** 	reg->y1[ 0 ] = ( short signed int )acc;
+ 112              		.loc 1 60 0
+ 113 007a 2B80     		strh	r3, [r5]	@ movhi
+  61:filters.c     ****     
+  62:filters.c     ****     //================= Second BiQuad stage =======================//
+  63:filters.c     ****     
+  64:filters.c     **** 	// scale input to avoid overflow
+  65:filters.c     **** 	sample = ( short signed int )( ( ( signed int )acc * ( signed int )reg->input_scale[ 1 ] ) >> Q_fo
+ 114              		.loc 1 65 0
+ 115 007c BCF90210 		ldrsh	r1, [ip, #2]
+  66:filters.c     **** 	
+  67:filters.c     **** 	// compute direct form biquad filter
+  68:filters.c     **** 	acc = ( (signed int)sample * (signed int)coeff[ 6 ] );
+  69:filters.c     **** 	acc = acc + ( (signed int)reg->x1[ 1 ] * (signed int)coeff[ 7 ] );
+ 116              		.loc 1 69 0
+ 117 0080 B2F90E80 		ldrsh	r8, [r2, #14]
+ 118 0084 B7F902C0 		ldrsh	ip, [r7, #2]
+  65:filters.c     **** 	
+ 119              		.loc 1 65 0
+ 120 0088 03FB01F3 		mul	r3, r3, r1
+ 121              	.LVL12:
+ 122              		.loc 1 69 0
+ 123 008c 0CFB08F8 		mul	r8, ip, r8
+  68:filters.c     **** 	acc = acc + ( (signed int)reg->x1[ 1 ] * (signed int)coeff[ 7 ] );
+ 124              		.loc 1 68 0
+ 125 0090 B2F90C10 		ldrsh	r1, [r2, #12]
+  65:filters.c     **** 	
+ 126              		.loc 1 65 0
+ 127 0094 43F38F33 		sbfx	r3, r3, #14, #16
+ 128              	.LVL13:
+ 129              		.loc 1 69 0
+ 130 0098 03FB0188 		mla	r8, r3, r1, r8
+ 131              	.LVL14:
+  70:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 1 ] * (signed int)coeff[ 8 ] );
+ 132              		.loc 1 70 0
+ 133 009c B2F910A0 		ldrsh	r10, [r2, #16]
+ 134 00a0 BEF90210 		ldrsh	r1, [lr, #2]
+  71:filters.c     **** 	acc = acc - ( (signed int)reg->y1[ 1 ] * (signed int)coeff[ 10 ] );
+ 135              		.loc 1 71 0
+ 136 00a4 B2F91490 		ldrsh	r9, [r2, #20]
+  70:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 1 ] * (signed int)coeff[ 8 ] );
+ 137              		.loc 1 70 0
+ 138 00a8 0AFB0188 		mla	r8, r10, r1, r8
+ 139              	.LVL15:
+ 140              		.loc 1 71 0
+ 141 00ac B5F90210 		ldrsh	r1, [r5, #2]
+  72:filters.c     **** 	acc = acc - ( (signed int)reg->y2[ 1 ] * (signed int)coeff[ 11 ] );
+ 142              		.loc 1 72 0
+ 143 00b0 B2F916A0 		ldrsh	r10, [r2, #22]
+  71:filters.c     **** 	acc = acc - ( (signed int)reg->y1[ 1 ] * (signed int)coeff[ 10 ] );
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 5
+
+
+ 144              		.loc 1 71 0
+ 145 00b4 09FB1182 		mls	r2, r9, r1, r8
+ 146              	.LVL16:
+ 147              		.loc 1 72 0
+ 148 00b8 B6F90210 		ldrsh	r1, [r6, #2]
+  73:filters.c     **** 	acc = acc >> Q_format;
+  74:filters.c     **** 	
+  75:filters.c     **** 	
+  76:filters.c     **** 	// saturate the output if overflow occured
+  77:filters.c     **** 	if( acc > overflow ) 
+  78:filters.c     **** 	{ acc = overflow; }
+  79:filters.c     **** 	else if( acc < underflow )
+  80:filters.c     **** 	{ acc = underflow; }
+  81:filters.c     ****     
+  82:filters.c     ****     // shift data in registers
+  83:filters.c     **** 	reg->x2[ 1 ] = reg->x1[ 1 ];
+ 149              		.loc 1 83 0
+ 150 00bc AEF802C0 		strh	ip, [lr, #2]	@ movhi
+  72:filters.c     **** 	acc = acc - ( (signed int)reg->y2[ 1 ] * (signed int)coeff[ 11 ] );
+ 151              		.loc 1 72 0
+ 152 00c0 0AFB1122 		mls	r2, r10, r1, r2
+ 153              	.LVL17:
+  73:filters.c     **** 	acc = acc >> Q_format;
+ 154              		.loc 1 73 0
+ 155 00c4 9213     		asrs	r2, r2, #14
+ 156              	.LVL18:
+ 157 00c6 8242     		cmp	r2, r0
+ 158 00c8 B8BF     		it	lt
+ 159 00ca 0246     		movlt	r2, r0
+ 160              	.LVL19:
+  84:filters.c     **** 	reg->x1[ 1 ] = sample;
+  85:filters.c     **** 	reg->y2[ 1 ] = reg->y1[ 1 ];
+  86:filters.c     **** 	reg->y1[ 1 ] = ( short signed int )acc;
+ 161              		.loc 1 86 0
+ 162 00cc A242     		cmp	r2, r4
+ 163 00ce A8BF     		it	ge
+ 164 00d0 2246     		movge	r2, r4
+ 165              	.LVL20:
+  84:filters.c     **** 	reg->x1[ 1 ] = sample;
+ 166              		.loc 1 84 0
+ 167 00d2 7B80     		strh	r3, [r7, #2]	@ movhi
+  85:filters.c     **** 	reg->y1[ 1 ] = ( short signed int )acc;
+ 168              		.loc 1 85 0
+ 169 00d4 B5F90210 		ldrsh	r1, [r5, #2]
+ 170              		.loc 1 86 0
+ 171 00d8 13B2     		sxth	r3, r2
+ 172              	.LVL21:
+  85:filters.c     **** 	reg->y1[ 1 ] = ( short signed int )acc;
+ 173              		.loc 1 85 0
+ 174 00da 7180     		strh	r1, [r6, #2]	@ movhi
+ 175              	.LVL22:
+  87:filters.c     **** 	
+  88:filters.c     **** 	// scale output
+  89:filters.c     **** 	//acc = ( acc * ( signed int )reg->gain[ stage ] ) >> Q_format;
+  90:filters.c     **** 	//acc = ( acc * reg->output_scale[ stage ] ) >> Q_format;
+  91:filters.c     **** 		
+  92:filters.c     **** 	return ( short signed int )acc;
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 6
+
+
+  93:filters.c     **** 	
+  94:filters.c     **** }
+ 176              		.loc 1 94 0
+ 177 00dc 1846     		mov	r0, r3
+  86:filters.c     **** 	
+ 178              		.loc 1 86 0
+ 179 00de 6B80     		strh	r3, [r5, #2]	@ movhi
+ 180              		.loc 1 94 0
+ 181 00e0 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 182              	.L4:
+ 183              		.align	2
+ 184              	.L3:
+ 185 00e4 0080FFFF 		.word	-32768
+ 186              		.cfi_endproc
+ 187              	.LFE0:
+ 188              		.size	iir_biquad_4th_order, .-iir_biquad_4th_order
+ 189              		.section	.text.iir_coupled_form,"ax",%progbits
+ 190              		.align	2
+ 191              		.global	iir_coupled_form
+ 192              		.thumb
+ 193              		.thumb_func
+ 194              		.type	iir_coupled_form, %function
+ 195              	iir_coupled_form:
+ 196              	.LFB1:
+  95:filters.c     **** 
+  96:filters.c     **** //==========================================================================
+  97:filters.c     **** //
+  98:filters.c     **** //	iir coupled form filter by Gold and Rader
+  99:filters.c     **** //
+ 100:filters.c     **** //
+ 101:filters.c     **** //
+ 102:filters.c     **** //
+ 103:filters.c     **** //
+ 104:filters.c     **** //
+ 105:filters.c     **** //==========================================================================
+ 106:filters.c     **** short signed int iir_coupled_form( short signed int sample, reg_struct *reg, short signed int coeff
+ 107:filters.c     **** {
+ 197              		.loc 1 107 0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 8
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201              	.LVL23:
+ 202 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 203              		.cfi_def_cfa_offset 36
+ 204              		.cfi_offset 4, -36
+ 205              		.cfi_offset 5, -32
+ 206              		.cfi_offset 6, -28
+ 207              		.cfi_offset 7, -24
+ 208              		.cfi_offset 8, -20
+ 209              		.cfi_offset 9, -16
+ 210              		.cfi_offset 10, -12
+ 211              		.cfi_offset 11, -8
+ 212              		.cfi_offset 14, -4
+ 108:filters.c     **** 	signed int acc = 0;
+ 109:filters.c     **** 	signed int acc1 = 0;
+ 110:filters.c     **** 	signed int acc2 = 0;
+ 111:filters.c     **** 	
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 7
+
+
+ 112:filters.c     ****     //=================== First 2nd order stage ==================//
+ 113:filters.c     **** 	
+ 114:filters.c     **** 	// scale input to avoid overflow
+ 115:filters.c     **** 	//sample = ( short signed int )( ( ( signed int )sample * ( signed int )reg->input_scale[ 0 ] ) >>
+ 116:filters.c     **** 	sample = sample >> 1;
+ 117:filters.c     ****     
+ 118:filters.c     **** 	// compute feed forward branch
+ 119:filters.c     **** 	acc = ( (signed int)sample * (signed int)coeff[ 0 ] );
+ 120:filters.c     **** 	acc = acc + ( (signed int)reg->x1[ 0 ] * (signed int)coeff[ 1 ] );
+ 121:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 0 ] * (signed int)coeff[ 2 ] );
+ 122:filters.c     **** 	acc = acc >> Q_format;
+ 123:filters.c     **** 	
+ 124:filters.c     **** 	
+ 125:filters.c     **** 	// compute feed back branch
+ 126:filters.c     **** 	acc1 = acc + ( (signed int)reg->y1[ 0 ] * (signed int)coeff[ 3 ] >> Q_format ) - ( (signed int)reg
+ 213              		.loc 1 126 0
+ 214 0004 CB68     		ldr	r3, [r1, #12]
+ 215 0006 8D68     		ldr	r5, [r1, #8]
+ 216 0008 B2F906E0 		ldrsh	lr, [r2, #6]
+ 217 000c B3F90070 		ldrsh	r7, [r3]
+ 218 0010 B2F90890 		ldrsh	r9, [r2, #8]
+ 219 0014 B5F900A0 		ldrsh	r10, [r5]
+ 107:filters.c     **** 	signed int acc = 0;
+ 220              		.loc 1 107 0
+ 221 0018 83B0     		sub	sp, sp, #12
+ 222              		.cfi_def_cfa_offset 48
+ 223              		.loc 1 126 0
+ 224 001a 0193     		str	r3, [sp, #4]
+ 127:filters.c     **** 	acc2 = ( (signed int)reg->y1[ 0 ] * (signed int)coeff[ 4 ] >> Q_format ) + ( (signed int)reg->y2[ 
+ 225              		.loc 1 127 0
+ 226 001c 07FB0EF3 		mul	r3, r7, lr
+ 227 0020 09FB0AFB 		mul	fp, r9, r10
+ 228 0024 374C     		ldr	r4, .L7
+ 229 0026 9B13     		asrs	r3, r3, #14
+ 230 0028 03EBAB33 		add	r3, r3, fp, asr #14
+ 231 002c A342     		cmp	r3, r4
+ 232 002e B8BF     		it	lt
+ 233 0030 2346     		movlt	r3, r4
+ 234 0032 47F6FF74 		movw	r4, #32767
+ 235 0036 A342     		cmp	r3, r4
+ 236 0038 A8BF     		it	ge
+ 237 003a 2346     		movge	r3, r4
+ 238 003c 1C46     		mov	r4, r3
+ 120:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 0 ] * (signed int)coeff[ 2 ] );
+ 239              		.loc 1 120 0
+ 240 003e 0E68     		ldr	r6, [r1]
+ 241 0040 B2F902C0 		ldrsh	ip, [r2, #2]
+ 242 0044 B6F90080 		ldrsh	r8, [r6]
+ 119:filters.c     **** 	acc = acc + ( (signed int)reg->x1[ 0 ] * (signed int)coeff[ 1 ] );
+ 243              		.loc 1 119 0
+ 244 0048 B2F900B0 		ldrsh	fp, [r2]
+ 120:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 0 ] * (signed int)coeff[ 2 ] );
+ 245              		.loc 1 120 0
+ 246 004c 08FB0CF3 		mul	r3, r8, ip
+ 116:filters.c     ****     
+ 247              		.loc 1 116 0
+ 248 0050 4010     		asrs	r0, r0, #1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 8
+
+
+ 249              	.LVL24:
+ 121:filters.c     **** 	acc = acc >> Q_format;
+ 250              		.loc 1 121 0
+ 251 0052 4968     		ldr	r1, [r1, #4]
+ 252              	.LVL25:
+ 120:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 0 ] * (signed int)coeff[ 2 ] );
+ 253              		.loc 1 120 0
+ 254 0054 00FB0B3C 		mla	ip, r0, fp, r3
+ 255              	.LVL26:
+ 121:filters.c     **** 	acc = acc >> Q_format;
+ 256              		.loc 1 121 0
+ 257 0058 B2F904B0 		ldrsh	fp, [r2, #4]
+ 258 005c B1F90030 		ldrsh	r3, [r1]
+ 128:filters.c     **** 	
+ 129:filters.c     **** 	
+ 130:filters.c     **** 	// saturate the output if overflow occured
+ 131:filters.c     **** 	if( acc2 > overflow ) 
+ 132:filters.c     **** 	{ acc2 = overflow; }
+ 133:filters.c     **** 	else if( acc2 < underflow )
+ 134:filters.c     **** 	{ acc2 = underflow; }
+ 135:filters.c     **** 	
+ 136:filters.c     **** 	// shift data in registers
+ 137:filters.c     **** 	reg->x2[ 0 ] = reg->x1[ 0 ];
+ 138:filters.c     **** 	reg->x1[ 0 ] = sample;
+ 139:filters.c     **** 	reg->y1[ 0 ] = ( short signed int )acc1;
+ 259              		.loc 1 139 0
+ 260 0060 0EFB0AFE 		mul	lr, lr, r10
+ 121:filters.c     **** 	acc = acc >> Q_format;
+ 261              		.loc 1 121 0
+ 262 0064 0BFB03C3 		mla	r3, fp, r3, ip
+ 263              	.LVL27:
+ 264              		.loc 1 139 0
+ 265 0068 09FB07F7 		mul	r7, r9, r7
+ 266              	.LVL28:
+ 267 006c 9B13     		asrs	r3, r3, #14
+ 268              	.LVL29:
+ 269 006e 03EBAE3E 		add	lr, r3, lr, asr #14
+ 140:filters.c     **** 	reg->y2[ 0 ] = ( short signed int )acc2;
+ 270              		.loc 1 140 0
+ 271 0072 019B     		ldr	r3, [sp, #4]
+ 272              	.LVL30:
+ 139:filters.c     **** 	reg->y2[ 0 ] = ( short signed int )acc2;
+ 273              		.loc 1 139 0
+ 274 0074 AEEBA73E 		sub	lr, lr, r7, asr #14
+ 275              		.loc 1 140 0
+ 276 0078 0FFA84FC 		sxth	ip, r4
+ 277              	.LVL31:
+ 137:filters.c     **** 	reg->x1[ 0 ] = sample;
+ 278              		.loc 1 137 0
+ 279 007c A1F80080 		strh	r8, [r1]	@ movhi
+ 280              	.LVL32:
+ 138:filters.c     **** 	reg->y1[ 0 ] = ( short signed int )acc1;
+ 281              		.loc 1 138 0
+ 282 0080 3080     		strh	r0, [r6]	@ movhi
+ 139:filters.c     **** 	reg->y2[ 0 ] = ( short signed int )acc2;
+ 283              		.loc 1 139 0
+ 284 0082 A5F800E0 		strh	lr, [r5]	@ movhi
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 9
+
+
+ 285              		.loc 1 140 0
+ 286 0086 A3F800C0 		strh	ip, [r3]	@ movhi
+ 287              	.LVL33:
+ 141:filters.c     ****     
+ 142:filters.c     ****     //=================== Second 2nd order stage ==================//
+ 143:filters.c     ****     
+ 144:filters.c     ****     // scale input to avoid overflow
+ 145:filters.c     **** 	//sample = ( short signed int )( ( ( signed int )acc2 * ( signed int )reg->input_scale[ 1 ] ) >> Q
+ 146:filters.c     **** 	sample = acc2;
+ 147:filters.c     **** 	
+ 148:filters.c     **** 	// compute feed forward branch
+ 149:filters.c     **** 	acc = ( (signed int)sample * (signed int)coeff[ 5 ] );
+ 150:filters.c     **** 	acc = acc + ( (signed int)reg->x1[ 1 ] * (signed int)coeff[ 6 ] );
+ 151:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 1 ] * (signed int)coeff[ 7 ] );
+ 152:filters.c     **** 	acc = acc >> Q_format;
+ 153:filters.c     **** 	
+ 154:filters.c     **** 	
+ 155:filters.c     **** 	// compute feed back branch
+ 156:filters.c     **** 	acc1 = acc + ( (signed int)reg->y1[ 1 ] * (signed int)coeff[ 8 ] >> Q_format ) - ( (signed int)reg
+ 288              		.loc 1 156 0
+ 289 008a B2F91090 		ldrsh	r9, [r2, #16]
+ 290 008e B3F90280 		ldrsh	r8, [r3, #2]
+ 291 0092 B5F902E0 		ldrsh	lr, [r5, #2]
+ 292 0096 B2F91270 		ldrsh	r7, [r2, #18]
+ 157:filters.c     **** 	acc2 = ( (signed int)reg->y1[ 1 ] * (signed int)coeff[ 9 ] >> Q_format ) + ( (signed int)reg->y2[ 
+ 293              		.loc 1 157 0
+ 294 009a 08FB09F3 		mul	r3, r8, r9
+ 295 009e 07FB0EF0 		mul	r0, r7, lr
+ 296 00a2 9B13     		asrs	r3, r3, #14
+ 297 00a4 03EBA030 		add	r0, r3, r0, asr #14
+ 298 00a8 164B     		ldr	r3, .L7
+ 150:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 1 ] * (signed int)coeff[ 7 ] );
+ 299              		.loc 1 150 0
+ 300 00aa B6F902A0 		ldrsh	r10, [r6, #2]
+ 301 00ae 9842     		cmp	r0, r3
+ 302 00b0 B8BF     		it	lt
+ 303 00b2 1846     		movlt	r0, r3
+ 158:filters.c     **** 	
+ 159:filters.c     **** 	
+ 160:filters.c     **** 	// saturate the output if overflow occured
+ 161:filters.c     **** 	if( acc2 > overflow ) 
+ 162:filters.c     **** 	{ acc2 = overflow; }
+ 163:filters.c     **** 	else if( acc2 < underflow )
+ 164:filters.c     **** 	{ acc2 = underflow; }
+ 165:filters.c     **** 	
+ 166:filters.c     **** 	// shift data in registers
+ 167:filters.c     **** 	reg->x2[ 1 ] = reg->x1[ 1 ];
+ 168:filters.c     **** 	reg->x1[ 1 ] = sample;
+ 169:filters.c     **** 	reg->y1[ 1 ] = ( short signed int )acc1;
+ 170:filters.c     **** 	reg->y2[ 1 ] = ( short signed int )acc2;
+ 304              		.loc 1 170 0
+ 305 00b4 47F6FF73 		movw	r3, #32767
+ 306 00b8 9842     		cmp	r0, r3
+ 307 00ba A8BF     		it	ge
+ 308 00bc 1846     		movge	r0, r3
+ 150:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 1 ] * (signed int)coeff[ 7 ] );
+ 309              		.loc 1 150 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 10
+
+
+ 310 00be B2F90C30 		ldrsh	r3, [r2, #12]
+ 149:filters.c     **** 	acc = acc + ( (signed int)reg->x1[ 1 ] * (signed int)coeff[ 6 ] );
+ 311              		.loc 1 149 0
+ 312 00c2 B2F90AB0 		ldrsh	fp, [r2, #10]
+ 313              	.LVL34:
+ 150:filters.c     **** 	acc = acc + ( (signed int)reg->x2[ 1 ] * (signed int)coeff[ 7 ] );
+ 314              		.loc 1 150 0
+ 315 00c6 0AFB03F3 		mul	r3, r10, r3
+ 316 00ca 04FB0B33 		mla	r3, r4, fp, r3
+ 317              	.LVL35:
+ 151:filters.c     **** 	acc = acc >> Q_format;
+ 318              		.loc 1 151 0
+ 319 00ce B2F90E20 		ldrsh	r2, [r2, #14]
+ 320              	.LVL36:
+ 321 00d2 B1F902B0 		ldrsh	fp, [r1, #2]
+ 169:filters.c     **** 	reg->y2[ 1 ] = ( short signed int )acc2;
+ 322              		.loc 1 169 0
+ 323 00d6 09FB0EF9 		mul	r9, r9, lr
+ 151:filters.c     **** 	acc = acc >> Q_format;
+ 324              		.loc 1 151 0
+ 325 00da 02FB0B33 		mla	r3, r2, fp, r3
+ 326              	.LVL37:
+ 169:filters.c     **** 	reg->y2[ 1 ] = ( short signed int )acc2;
+ 327              		.loc 1 169 0
+ 328 00de 9B13     		asrs	r3, r3, #14
+ 329              	.LVL38:
+ 330 00e0 03EBA93E 		add	lr, r3, r9, asr #14
+ 331              	.LVL39:
+ 332              		.loc 1 170 0
+ 333 00e4 03B2     		sxth	r3, r0
+ 334              	.LVL40:
+ 171:filters.c     **** 	
+ 172:filters.c     **** 		
+ 173:filters.c     **** 	return ( short signed int )acc2;
+ 174:filters.c     **** 	
+ 175:filters.c     **** }
+ 335              		.loc 1 175 0
+ 336 00e6 1846     		mov	r0, r3
+ 169:filters.c     **** 	reg->y2[ 1 ] = ( short signed int )acc2;
+ 337              		.loc 1 169 0
+ 338 00e8 07FB08F7 		mul	r7, r7, r8
+ 339              	.LVL41:
+ 340 00ec AEEBA737 		sub	r7, lr, r7, asr #14
+ 167:filters.c     **** 	reg->x1[ 1 ] = sample;
+ 341              		.loc 1 167 0
+ 342 00f0 A1F802A0 		strh	r10, [r1, #2]	@ movhi
+ 343              	.LVL42:
+ 168:filters.c     **** 	reg->y1[ 1 ] = ( short signed int )acc1;
+ 344              		.loc 1 168 0
+ 345 00f4 A6F802C0 		strh	ip, [r6, #2]	@ movhi
+ 169:filters.c     **** 	reg->y2[ 1 ] = ( short signed int )acc2;
+ 346              		.loc 1 169 0
+ 347 00f8 6F80     		strh	r7, [r5, #2]	@ movhi
+ 170:filters.c     **** 	
+ 348              		.loc 1 170 0
+ 349 00fa 019A     		ldr	r2, [sp, #4]
+ 350 00fc 5380     		strh	r3, [r2, #2]	@ movhi
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 11
+
+
+ 351              		.loc 1 175 0
+ 352 00fe 03B0     		add	sp, sp, #12
+ 353              		.cfi_def_cfa_offset 36
+ 354              		@ sp needed
+ 355 0100 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 356              	.L8:
+ 357              		.align	2
+ 358              	.L7:
+ 359 0104 0080FFFF 		.word	-32768
+ 360              		.cfi_endproc
+ 361              	.LFE1:
+ 362              		.size	iir_coupled_form, .-iir_coupled_form
+ 363              		.text
+ 364              	.Letext0:
+ 365              		.file 2 "filters.h"
+ 366              		.section	.debug_info,"",%progbits
+ 367              	.Ldebug_info0:
+ 368 0000 4E010000 		.4byte	0x14e
+ 369 0004 0400     		.2byte	0x4
+ 370 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 371 000a 04       		.byte	0x4
+ 372 000b 01       		.uleb128 0x1
+ 373 000c 2D000000 		.4byte	.LASF6
+ 374 0010 0C       		.byte	0xc
+ 375 0011 D9000000 		.4byte	.LASF7
+ 376 0015 09010000 		.4byte	.LASF8
+ 377 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 378 001d 00000000 		.4byte	0
+ 379 0021 00000000 		.4byte	.Ldebug_line0
+ 380 0025 02       		.uleb128 0x2
+ 381 0026 14       		.byte	0x14
+ 382 0027 02       		.byte	0x2
+ 383 0028 18       		.byte	0x18
+ 384 0029 66000000 		.4byte	0x66
+ 385 002d 03       		.uleb128 0x3
+ 386 002e 783100   		.ascii	"x1\000"
+ 387 0031 02       		.byte	0x2
+ 388 0032 1C       		.byte	0x1c
+ 389 0033 66000000 		.4byte	0x66
+ 390 0037 00       		.byte	0
+ 391 0038 03       		.uleb128 0x3
+ 392 0039 783200   		.ascii	"x2\000"
+ 393 003c 02       		.byte	0x2
+ 394 003d 1E       		.byte	0x1e
+ 395 003e 66000000 		.4byte	0x66
+ 396 0042 04       		.byte	0x4
+ 397 0043 03       		.uleb128 0x3
+ 398 0044 793100   		.ascii	"y1\000"
+ 399 0047 02       		.byte	0x2
+ 400 0048 20       		.byte	0x20
+ 401 0049 66000000 		.4byte	0x66
+ 402 004d 08       		.byte	0x8
+ 403 004e 03       		.uleb128 0x3
+ 404 004f 793200   		.ascii	"y2\000"
+ 405 0052 02       		.byte	0x2
+ 406 0053 22       		.byte	0x22
+ 407 0054 66000000 		.4byte	0x66
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 12
+
+
+ 408 0058 0C       		.byte	0xc
+ 409 0059 04       		.uleb128 0x4
+ 410 005a FD000000 		.4byte	.LASF0
+ 411 005e 02       		.byte	0x2
+ 412 005f 24       		.byte	0x24
+ 413 0060 66000000 		.4byte	0x66
+ 414 0064 10       		.byte	0x10
+ 415 0065 00       		.byte	0
+ 416 0066 05       		.uleb128 0x5
+ 417 0067 04       		.byte	0x4
+ 418 0068 6C000000 		.4byte	0x6c
+ 419 006c 06       		.uleb128 0x6
+ 420 006d 02       		.byte	0x2
+ 421 006e 05       		.byte	0x5
+ 422 006f 23000000 		.4byte	.LASF3
+ 423 0073 07       		.uleb128 0x7
+ 424 0074 CE000000 		.4byte	.LASF9
+ 425 0078 02       		.byte	0x2
+ 426 0079 27       		.byte	0x27
+ 427 007a 25000000 		.4byte	0x25
+ 428 007e 08       		.uleb128 0x8
+ 429 007f E8000000 		.4byte	.LASF10
+ 430 0083 01       		.byte	0x1
+ 431 0084 1F       		.byte	0x1f
+ 432 0085 6C000000 		.4byte	0x6c
+ 433 0089 00000000 		.4byte	.LFB0
+ 434 008d E8000000 		.4byte	.LFE0-.LFB0
+ 435 0091 01       		.uleb128 0x1
+ 436 0092 9C       		.byte	0x9c
+ 437 0093 D4000000 		.4byte	0xd4
+ 438 0097 09       		.uleb128 0x9
+ 439 0098 0B000000 		.4byte	.LASF1
+ 440 009c 01       		.byte	0x1
+ 441 009d 1F       		.byte	0x1f
+ 442 009e 6C000000 		.4byte	0x6c
+ 443 00a2 00000000 		.4byte	.LLST0
+ 444 00a6 0A       		.uleb128 0xa
+ 445 00a7 72656700 		.ascii	"reg\000"
+ 446 00ab 01       		.byte	0x1
+ 447 00ac 1F       		.byte	0x1f
+ 448 00ad D4000000 		.4byte	0xd4
+ 449 00b1 43000000 		.4byte	.LLST1
+ 450 00b5 09       		.uleb128 0x9
+ 451 00b6 00000000 		.4byte	.LASF2
+ 452 00ba 01       		.byte	0x1
+ 453 00bb 1F       		.byte	0x1f
+ 454 00bc 66000000 		.4byte	0x66
+ 455 00c0 64000000 		.4byte	.LLST2
+ 456 00c4 0B       		.uleb128 0xb
+ 457 00c5 61636300 		.ascii	"acc\000"
+ 458 00c9 01       		.byte	0x1
+ 459 00ca 21       		.byte	0x21
+ 460 00cb DA000000 		.4byte	0xda
+ 461 00cf 85000000 		.4byte	.LLST3
+ 462 00d3 00       		.byte	0
+ 463 00d4 05       		.uleb128 0x5
+ 464 00d5 04       		.byte	0x4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 13
+
+
+ 465 00d6 73000000 		.4byte	0x73
+ 466 00da 0C       		.uleb128 0xc
+ 467 00db 04       		.byte	0x4
+ 468 00dc 05       		.byte	0x5
+ 469 00dd 696E7400 		.ascii	"int\000"
+ 470 00e1 0D       		.uleb128 0xd
+ 471 00e2 12000000 		.4byte	.LASF11
+ 472 00e6 01       		.byte	0x1
+ 473 00e7 6A       		.byte	0x6a
+ 474 00e8 6C000000 		.4byte	0x6c
+ 475 00ec 00000000 		.4byte	.LFB1
+ 476 00f0 08010000 		.4byte	.LFE1-.LFB1
+ 477 00f4 01       		.uleb128 0x1
+ 478 00f5 9C       		.byte	0x9c
+ 479 00f6 09       		.uleb128 0x9
+ 480 00f7 0B000000 		.4byte	.LASF1
+ 481 00fb 01       		.byte	0x1
+ 482 00fc 6A       		.byte	0x6a
+ 483 00fd 6C000000 		.4byte	0x6c
+ 484 0101 05020000 		.4byte	.LLST4
+ 485 0105 0A       		.uleb128 0xa
+ 486 0106 72656700 		.ascii	"reg\000"
+ 487 010a 01       		.byte	0x1
+ 488 010b 6A       		.byte	0x6a
+ 489 010c D4000000 		.4byte	0xd4
+ 490 0110 2E020000 		.4byte	.LLST5
+ 491 0114 09       		.uleb128 0x9
+ 492 0115 00000000 		.4byte	.LASF2
+ 493 0119 01       		.byte	0x1
+ 494 011a 6A       		.byte	0x6a
+ 495 011b 66000000 		.4byte	0x66
+ 496 011f 4F020000 		.4byte	.LLST6
+ 497 0123 0B       		.uleb128 0xb
+ 498 0124 61636300 		.ascii	"acc\000"
+ 499 0128 01       		.byte	0x1
+ 500 0129 6C       		.byte	0x6c
+ 501 012a DA000000 		.4byte	0xda
+ 502 012e 70020000 		.4byte	.LLST7
+ 503 0132 0E       		.uleb128 0xe
+ 504 0133 06000000 		.4byte	.LASF4
+ 505 0137 01       		.byte	0x1
+ 506 0138 6D       		.byte	0x6d
+ 507 0139 DA000000 		.4byte	0xda
+ 508 013d 69030000 		.4byte	.LLST8
+ 509 0141 0E       		.uleb128 0xe
+ 510 0142 E3000000 		.4byte	.LASF5
+ 511 0146 01       		.byte	0x1
+ 512 0147 6E       		.byte	0x6e
+ 513 0148 DA000000 		.4byte	0xda
+ 514 014c 6B050000 		.4byte	.LLST9
+ 515 0150 00       		.byte	0
+ 516 0151 00       		.byte	0
+ 517              		.section	.debug_abbrev,"",%progbits
+ 518              	.Ldebug_abbrev0:
+ 519 0000 01       		.uleb128 0x1
+ 520 0001 11       		.uleb128 0x11
+ 521 0002 01       		.byte	0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 14
+
+
+ 522 0003 25       		.uleb128 0x25
+ 523 0004 0E       		.uleb128 0xe
+ 524 0005 13       		.uleb128 0x13
+ 525 0006 0B       		.uleb128 0xb
+ 526 0007 03       		.uleb128 0x3
+ 527 0008 0E       		.uleb128 0xe
+ 528 0009 1B       		.uleb128 0x1b
+ 529 000a 0E       		.uleb128 0xe
+ 530 000b 55       		.uleb128 0x55
+ 531 000c 17       		.uleb128 0x17
+ 532 000d 11       		.uleb128 0x11
+ 533 000e 01       		.uleb128 0x1
+ 534 000f 10       		.uleb128 0x10
+ 535 0010 17       		.uleb128 0x17
+ 536 0011 00       		.byte	0
+ 537 0012 00       		.byte	0
+ 538 0013 02       		.uleb128 0x2
+ 539 0014 13       		.uleb128 0x13
+ 540 0015 01       		.byte	0x1
+ 541 0016 0B       		.uleb128 0xb
+ 542 0017 0B       		.uleb128 0xb
+ 543 0018 3A       		.uleb128 0x3a
+ 544 0019 0B       		.uleb128 0xb
+ 545 001a 3B       		.uleb128 0x3b
+ 546 001b 0B       		.uleb128 0xb
+ 547 001c 01       		.uleb128 0x1
+ 548 001d 13       		.uleb128 0x13
+ 549 001e 00       		.byte	0
+ 550 001f 00       		.byte	0
+ 551 0020 03       		.uleb128 0x3
+ 552 0021 0D       		.uleb128 0xd
+ 553 0022 00       		.byte	0
+ 554 0023 03       		.uleb128 0x3
+ 555 0024 08       		.uleb128 0x8
+ 556 0025 3A       		.uleb128 0x3a
+ 557 0026 0B       		.uleb128 0xb
+ 558 0027 3B       		.uleb128 0x3b
+ 559 0028 0B       		.uleb128 0xb
+ 560 0029 49       		.uleb128 0x49
+ 561 002a 13       		.uleb128 0x13
+ 562 002b 38       		.uleb128 0x38
+ 563 002c 0B       		.uleb128 0xb
+ 564 002d 00       		.byte	0
+ 565 002e 00       		.byte	0
+ 566 002f 04       		.uleb128 0x4
+ 567 0030 0D       		.uleb128 0xd
+ 568 0031 00       		.byte	0
+ 569 0032 03       		.uleb128 0x3
+ 570 0033 0E       		.uleb128 0xe
+ 571 0034 3A       		.uleb128 0x3a
+ 572 0035 0B       		.uleb128 0xb
+ 573 0036 3B       		.uleb128 0x3b
+ 574 0037 0B       		.uleb128 0xb
+ 575 0038 49       		.uleb128 0x49
+ 576 0039 13       		.uleb128 0x13
+ 577 003a 38       		.uleb128 0x38
+ 578 003b 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 15
+
+
+ 579 003c 00       		.byte	0
+ 580 003d 00       		.byte	0
+ 581 003e 05       		.uleb128 0x5
+ 582 003f 0F       		.uleb128 0xf
+ 583 0040 00       		.byte	0
+ 584 0041 0B       		.uleb128 0xb
+ 585 0042 0B       		.uleb128 0xb
+ 586 0043 49       		.uleb128 0x49
+ 587 0044 13       		.uleb128 0x13
+ 588 0045 00       		.byte	0
+ 589 0046 00       		.byte	0
+ 590 0047 06       		.uleb128 0x6
+ 591 0048 24       		.uleb128 0x24
+ 592 0049 00       		.byte	0
+ 593 004a 0B       		.uleb128 0xb
+ 594 004b 0B       		.uleb128 0xb
+ 595 004c 3E       		.uleb128 0x3e
+ 596 004d 0B       		.uleb128 0xb
+ 597 004e 03       		.uleb128 0x3
+ 598 004f 0E       		.uleb128 0xe
+ 599 0050 00       		.byte	0
+ 600 0051 00       		.byte	0
+ 601 0052 07       		.uleb128 0x7
+ 602 0053 16       		.uleb128 0x16
+ 603 0054 00       		.byte	0
+ 604 0055 03       		.uleb128 0x3
+ 605 0056 0E       		.uleb128 0xe
+ 606 0057 3A       		.uleb128 0x3a
+ 607 0058 0B       		.uleb128 0xb
+ 608 0059 3B       		.uleb128 0x3b
+ 609 005a 0B       		.uleb128 0xb
+ 610 005b 49       		.uleb128 0x49
+ 611 005c 13       		.uleb128 0x13
+ 612 005d 00       		.byte	0
+ 613 005e 00       		.byte	0
+ 614 005f 08       		.uleb128 0x8
+ 615 0060 2E       		.uleb128 0x2e
+ 616 0061 01       		.byte	0x1
+ 617 0062 3F       		.uleb128 0x3f
+ 618 0063 19       		.uleb128 0x19
+ 619 0064 03       		.uleb128 0x3
+ 620 0065 0E       		.uleb128 0xe
+ 621 0066 3A       		.uleb128 0x3a
+ 622 0067 0B       		.uleb128 0xb
+ 623 0068 3B       		.uleb128 0x3b
+ 624 0069 0B       		.uleb128 0xb
+ 625 006a 27       		.uleb128 0x27
+ 626 006b 19       		.uleb128 0x19
+ 627 006c 49       		.uleb128 0x49
+ 628 006d 13       		.uleb128 0x13
+ 629 006e 11       		.uleb128 0x11
+ 630 006f 01       		.uleb128 0x1
+ 631 0070 12       		.uleb128 0x12
+ 632 0071 06       		.uleb128 0x6
+ 633 0072 40       		.uleb128 0x40
+ 634 0073 18       		.uleb128 0x18
+ 635 0074 9742     		.uleb128 0x2117
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 16
+
+
+ 636 0076 19       		.uleb128 0x19
+ 637 0077 01       		.uleb128 0x1
+ 638 0078 13       		.uleb128 0x13
+ 639 0079 00       		.byte	0
+ 640 007a 00       		.byte	0
+ 641 007b 09       		.uleb128 0x9
+ 642 007c 05       		.uleb128 0x5
+ 643 007d 00       		.byte	0
+ 644 007e 03       		.uleb128 0x3
+ 645 007f 0E       		.uleb128 0xe
+ 646 0080 3A       		.uleb128 0x3a
+ 647 0081 0B       		.uleb128 0xb
+ 648 0082 3B       		.uleb128 0x3b
+ 649 0083 0B       		.uleb128 0xb
+ 650 0084 49       		.uleb128 0x49
+ 651 0085 13       		.uleb128 0x13
+ 652 0086 02       		.uleb128 0x2
+ 653 0087 17       		.uleb128 0x17
+ 654 0088 00       		.byte	0
+ 655 0089 00       		.byte	0
+ 656 008a 0A       		.uleb128 0xa
+ 657 008b 05       		.uleb128 0x5
+ 658 008c 00       		.byte	0
+ 659 008d 03       		.uleb128 0x3
+ 660 008e 08       		.uleb128 0x8
+ 661 008f 3A       		.uleb128 0x3a
+ 662 0090 0B       		.uleb128 0xb
+ 663 0091 3B       		.uleb128 0x3b
+ 664 0092 0B       		.uleb128 0xb
+ 665 0093 49       		.uleb128 0x49
+ 666 0094 13       		.uleb128 0x13
+ 667 0095 02       		.uleb128 0x2
+ 668 0096 17       		.uleb128 0x17
+ 669 0097 00       		.byte	0
+ 670 0098 00       		.byte	0
+ 671 0099 0B       		.uleb128 0xb
+ 672 009a 34       		.uleb128 0x34
+ 673 009b 00       		.byte	0
+ 674 009c 03       		.uleb128 0x3
+ 675 009d 08       		.uleb128 0x8
+ 676 009e 3A       		.uleb128 0x3a
+ 677 009f 0B       		.uleb128 0xb
+ 678 00a0 3B       		.uleb128 0x3b
+ 679 00a1 0B       		.uleb128 0xb
+ 680 00a2 49       		.uleb128 0x49
+ 681 00a3 13       		.uleb128 0x13
+ 682 00a4 02       		.uleb128 0x2
+ 683 00a5 17       		.uleb128 0x17
+ 684 00a6 00       		.byte	0
+ 685 00a7 00       		.byte	0
+ 686 00a8 0C       		.uleb128 0xc
+ 687 00a9 24       		.uleb128 0x24
+ 688 00aa 00       		.byte	0
+ 689 00ab 0B       		.uleb128 0xb
+ 690 00ac 0B       		.uleb128 0xb
+ 691 00ad 3E       		.uleb128 0x3e
+ 692 00ae 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 17
+
+
+ 693 00af 03       		.uleb128 0x3
+ 694 00b0 08       		.uleb128 0x8
+ 695 00b1 00       		.byte	0
+ 696 00b2 00       		.byte	0
+ 697 00b3 0D       		.uleb128 0xd
+ 698 00b4 2E       		.uleb128 0x2e
+ 699 00b5 01       		.byte	0x1
+ 700 00b6 3F       		.uleb128 0x3f
+ 701 00b7 19       		.uleb128 0x19
+ 702 00b8 03       		.uleb128 0x3
+ 703 00b9 0E       		.uleb128 0xe
+ 704 00ba 3A       		.uleb128 0x3a
+ 705 00bb 0B       		.uleb128 0xb
+ 706 00bc 3B       		.uleb128 0x3b
+ 707 00bd 0B       		.uleb128 0xb
+ 708 00be 27       		.uleb128 0x27
+ 709 00bf 19       		.uleb128 0x19
+ 710 00c0 49       		.uleb128 0x49
+ 711 00c1 13       		.uleb128 0x13
+ 712 00c2 11       		.uleb128 0x11
+ 713 00c3 01       		.uleb128 0x1
+ 714 00c4 12       		.uleb128 0x12
+ 715 00c5 06       		.uleb128 0x6
+ 716 00c6 40       		.uleb128 0x40
+ 717 00c7 18       		.uleb128 0x18
+ 718 00c8 9742     		.uleb128 0x2117
+ 719 00ca 19       		.uleb128 0x19
+ 720 00cb 00       		.byte	0
+ 721 00cc 00       		.byte	0
+ 722 00cd 0E       		.uleb128 0xe
+ 723 00ce 34       		.uleb128 0x34
+ 724 00cf 00       		.byte	0
+ 725 00d0 03       		.uleb128 0x3
+ 726 00d1 0E       		.uleb128 0xe
+ 727 00d2 3A       		.uleb128 0x3a
+ 728 00d3 0B       		.uleb128 0xb
+ 729 00d4 3B       		.uleb128 0x3b
+ 730 00d5 0B       		.uleb128 0xb
+ 731 00d6 49       		.uleb128 0x49
+ 732 00d7 13       		.uleb128 0x13
+ 733 00d8 02       		.uleb128 0x2
+ 734 00d9 17       		.uleb128 0x17
+ 735 00da 00       		.byte	0
+ 736 00db 00       		.byte	0
+ 737 00dc 00       		.byte	0
+ 738              		.section	.debug_loc,"",%progbits
+ 739              	.Ldebug_loc0:
+ 740              	.LLST0:
+ 741 0000 00000000 		.4byte	.LVL0
+ 742 0004 1A000000 		.4byte	.LVL1
+ 743 0008 0100     		.2byte	0x1
+ 744 000a 50       		.byte	0x50
+ 745 000b 1A000000 		.4byte	.LVL1
+ 746 000f 26000000 		.4byte	.LVL2
+ 747 0013 0400     		.2byte	0x4
+ 748 0015 F3       		.byte	0xf3
+ 749 0016 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 18
+
+
+ 750 0017 50       		.byte	0x50
+ 751 0018 9F       		.byte	0x9f
+ 752 0019 26000000 		.4byte	.LVL2
+ 753 001d 98000000 		.4byte	.LVL13
+ 754 0021 0100     		.2byte	0x1
+ 755 0023 59       		.byte	0x59
+ 756 0024 98000000 		.4byte	.LVL13
+ 757 0028 DA000000 		.4byte	.LVL21
+ 758 002c 0100     		.2byte	0x1
+ 759 002e 53       		.byte	0x53
+ 760 002f DA000000 		.4byte	.LVL21
+ 761 0033 DC000000 		.4byte	.LVL22
+ 762 0037 0200     		.2byte	0x2
+ 763 0039 77       		.byte	0x77
+ 764 003a 02       		.sleb128 2
+ 765 003b 00000000 		.4byte	0
+ 766 003f 00000000 		.4byte	0
+ 767              	.LLST1:
+ 768 0043 00000000 		.4byte	.LVL0
+ 769 0047 4A000000 		.4byte	.LVL5
+ 770 004b 0100     		.2byte	0x1
+ 771 004d 51       		.byte	0x51
+ 772 004e 4A000000 		.4byte	.LVL5
+ 773 0052 E8000000 		.4byte	.LFE0
+ 774 0056 0400     		.2byte	0x4
+ 775 0058 F3       		.byte	0xf3
+ 776 0059 01       		.uleb128 0x1
+ 777 005a 51       		.byte	0x51
+ 778 005b 9F       		.byte	0x9f
+ 779 005c 00000000 		.4byte	0
+ 780 0060 00000000 		.4byte	0
+ 781              	.LLST2:
+ 782 0064 00000000 		.4byte	.LVL0
+ 783 0068 B8000000 		.4byte	.LVL16
+ 784 006c 0100     		.2byte	0x1
+ 785 006e 52       		.byte	0x52
+ 786 006f B8000000 		.4byte	.LVL16
+ 787 0073 E8000000 		.4byte	.LFE0
+ 788 0077 0400     		.2byte	0x4
+ 789 0079 F3       		.byte	0xf3
+ 790 007a 01       		.uleb128 0x1
+ 791 007b 52       		.byte	0x52
+ 792 007c 9F       		.byte	0x9f
+ 793 007d 00000000 		.4byte	0
+ 794 0081 00000000 		.4byte	0
+ 795              	.LLST3:
+ 796 0085 00000000 		.4byte	.LVL0
+ 797 0089 26000000 		.4byte	.LVL2
+ 798 008d 0200     		.2byte	0x2
+ 799 008f 30       		.byte	0x30
+ 800 0090 9F       		.byte	0x9f
+ 801 0091 26000000 		.4byte	.LVL2
+ 802 0095 2E000000 		.4byte	.LVL3
+ 803 0099 0600     		.2byte	0x6
+ 804 009b 79       		.byte	0x79
+ 805 009c 00       		.sleb128 0
+ 806 009d 74       		.byte	0x74
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 19
+
+
+ 807 009e 00       		.sleb128 0
+ 808 009f 1E       		.byte	0x1e
+ 809 00a0 9F       		.byte	0x9f
+ 810 00a1 2E000000 		.4byte	.LVL3
+ 811 00a5 4A000000 		.4byte	.LVL5
+ 812 00a9 0100     		.2byte	0x1
+ 813 00ab 53       		.byte	0x53
+ 814 00ac 4A000000 		.4byte	.LVL5
+ 815 00b0 60000000 		.4byte	.LVL8
+ 816 00b4 0100     		.2byte	0x1
+ 817 00b6 51       		.byte	0x51
+ 818 00b7 60000000 		.4byte	.LVL8
+ 819 00bb 64000000 		.4byte	.LVL9
+ 820 00bf 4400     		.2byte	0x44
+ 821 00c1 72       		.byte	0x72
+ 822 00c2 04       		.sleb128 4
+ 823 00c3 94       		.byte	0x94
+ 824 00c4 02       		.byte	0x2
+ 825 00c5 40       		.byte	0x40
+ 826 00c6 24       		.byte	0x24
+ 827 00c7 40       		.byte	0x40
+ 828 00c8 26       		.byte	0x26
+ 829 00c9 7E       		.byte	0x7e
+ 830 00ca 00       		.sleb128 0
+ 831 00cb 94       		.byte	0x94
+ 832 00cc 02       		.byte	0x2
+ 833 00cd 40       		.byte	0x40
+ 834 00ce 24       		.byte	0x24
+ 835 00cf 40       		.byte	0x40
+ 836 00d0 26       		.byte	0x26
+ 837 00d1 1E       		.byte	0x1e
+ 838 00d2 73       		.byte	0x73
+ 839 00d3 00       		.sleb128 0
+ 840 00d4 74       		.byte	0x74
+ 841 00d5 00       		.sleb128 0
+ 842 00d6 1E       		.byte	0x1e
+ 843 00d7 1C       		.byte	0x1c
+ 844 00d8 72       		.byte	0x72
+ 845 00d9 02       		.sleb128 2
+ 846 00da 94       		.byte	0x94
+ 847 00db 02       		.byte	0x2
+ 848 00dc 40       		.byte	0x40
+ 849 00dd 24       		.byte	0x24
+ 850 00de 40       		.byte	0x40
+ 851 00df 26       		.byte	0x26
+ 852 00e0 78       		.byte	0x78
+ 853 00e1 00       		.sleb128 0
+ 854 00e2 1E       		.byte	0x1e
+ 855 00e3 22       		.byte	0x22
+ 856 00e4 72       		.byte	0x72
+ 857 00e5 00       		.sleb128 0
+ 858 00e6 94       		.byte	0x94
+ 859 00e7 02       		.byte	0x2
+ 860 00e8 40       		.byte	0x40
+ 861 00e9 24       		.byte	0x24
+ 862 00ea 40       		.byte	0x40
+ 863 00eb 26       		.byte	0x26
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 20
+
+
+ 864 00ec 79       		.byte	0x79
+ 865 00ed 00       		.sleb128 0
+ 866 00ee 1E       		.byte	0x1e
+ 867 00ef 22       		.byte	0x22
+ 868 00f0 72       		.byte	0x72
+ 869 00f1 08       		.sleb128 8
+ 870 00f2 94       		.byte	0x94
+ 871 00f3 02       		.byte	0x2
+ 872 00f4 40       		.byte	0x40
+ 873 00f5 24       		.byte	0x24
+ 874 00f6 40       		.byte	0x40
+ 875 00f7 26       		.byte	0x26
+ 876 00f8 75       		.byte	0x75
+ 877 00f9 00       		.sleb128 0
+ 878 00fa 94       		.byte	0x94
+ 879 00fb 02       		.byte	0x2
+ 880 00fc 40       		.byte	0x40
+ 881 00fd 24       		.byte	0x24
+ 882 00fe 40       		.byte	0x40
+ 883 00ff 26       		.byte	0x26
+ 884 0100 1E       		.byte	0x1e
+ 885 0101 1C       		.byte	0x1c
+ 886 0102 3E       		.byte	0x3e
+ 887 0103 26       		.byte	0x26
+ 888 0104 9F       		.byte	0x9f
+ 889 0105 64000000 		.4byte	.LVL9
+ 890 0109 68000000 		.4byte	.LVL10
+ 891 010d 4A00     		.2byte	0x4a
+ 892 010f 72       		.byte	0x72
+ 893 0110 04       		.sleb128 4
+ 894 0111 94       		.byte	0x94
+ 895 0112 02       		.byte	0x2
+ 896 0113 40       		.byte	0x40
+ 897 0114 24       		.byte	0x24
+ 898 0115 40       		.byte	0x40
+ 899 0116 26       		.byte	0x26
+ 900 0117 7E       		.byte	0x7e
+ 901 0118 00       		.sleb128 0
+ 902 0119 94       		.byte	0x94
+ 903 011a 02       		.byte	0x2
+ 904 011b 40       		.byte	0x40
+ 905 011c 24       		.byte	0x24
+ 906 011d 40       		.byte	0x40
+ 907 011e 26       		.byte	0x26
+ 908 011f 1E       		.byte	0x1e
+ 909 0120 76       		.byte	0x76
+ 910 0121 00       		.sleb128 0
+ 911 0122 94       		.byte	0x94
+ 912 0123 02       		.byte	0x2
+ 913 0124 40       		.byte	0x40
+ 914 0125 24       		.byte	0x24
+ 915 0126 40       		.byte	0x40
+ 916 0127 26       		.byte	0x26
+ 917 0128 73       		.byte	0x73
+ 918 0129 00       		.sleb128 0
+ 919 012a 1E       		.byte	0x1e
+ 920 012b 1C       		.byte	0x1c
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 21
+
+
+ 921 012c 72       		.byte	0x72
+ 922 012d 02       		.sleb128 2
+ 923 012e 94       		.byte	0x94
+ 924 012f 02       		.byte	0x2
+ 925 0130 40       		.byte	0x40
+ 926 0131 24       		.byte	0x24
+ 927 0132 40       		.byte	0x40
+ 928 0133 26       		.byte	0x26
+ 929 0134 78       		.byte	0x78
+ 930 0135 00       		.sleb128 0
+ 931 0136 1E       		.byte	0x1e
+ 932 0137 22       		.byte	0x22
+ 933 0138 72       		.byte	0x72
+ 934 0139 00       		.sleb128 0
+ 935 013a 94       		.byte	0x94
+ 936 013b 02       		.byte	0x2
+ 937 013c 40       		.byte	0x40
+ 938 013d 24       		.byte	0x24
+ 939 013e 40       		.byte	0x40
+ 940 013f 26       		.byte	0x26
+ 941 0140 79       		.byte	0x79
+ 942 0141 00       		.sleb128 0
+ 943 0142 1E       		.byte	0x1e
+ 944 0143 22       		.byte	0x22
+ 945 0144 72       		.byte	0x72
+ 946 0145 08       		.sleb128 8
+ 947 0146 94       		.byte	0x94
+ 948 0147 02       		.byte	0x2
+ 949 0148 40       		.byte	0x40
+ 950 0149 24       		.byte	0x24
+ 951 014a 40       		.byte	0x40
+ 952 014b 26       		.byte	0x26
+ 953 014c 75       		.byte	0x75
+ 954 014d 00       		.sleb128 0
+ 955 014e 94       		.byte	0x94
+ 956 014f 02       		.byte	0x2
+ 957 0150 40       		.byte	0x40
+ 958 0151 24       		.byte	0x24
+ 959 0152 40       		.byte	0x40
+ 960 0153 26       		.byte	0x26
+ 961 0154 1E       		.byte	0x1e
+ 962 0155 1C       		.byte	0x1c
+ 963 0156 3E       		.byte	0x3e
+ 964 0157 26       		.byte	0x26
+ 965 0158 9F       		.byte	0x9f
+ 966 0159 68000000 		.4byte	.LVL10
+ 967 015d 6C000000 		.4byte	.LVL11
+ 968 0161 5000     		.2byte	0x50
+ 969 0163 72       		.byte	0x72
+ 970 0164 04       		.sleb128 4
+ 971 0165 94       		.byte	0x94
+ 972 0166 02       		.byte	0x2
+ 973 0167 40       		.byte	0x40
+ 974 0168 24       		.byte	0x24
+ 975 0169 40       		.byte	0x40
+ 976 016a 26       		.byte	0x26
+ 977 016b 7E       		.byte	0x7e
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 22
+
+
+ 978 016c 00       		.sleb128 0
+ 979 016d 94       		.byte	0x94
+ 980 016e 02       		.byte	0x2
+ 981 016f 40       		.byte	0x40
+ 982 0170 24       		.byte	0x24
+ 983 0171 40       		.byte	0x40
+ 984 0172 26       		.byte	0x26
+ 985 0173 1E       		.byte	0x1e
+ 986 0174 72       		.byte	0x72
+ 987 0175 0A       		.sleb128 10
+ 988 0176 94       		.byte	0x94
+ 989 0177 02       		.byte	0x2
+ 990 0178 40       		.byte	0x40
+ 991 0179 24       		.byte	0x24
+ 992 017a 40       		.byte	0x40
+ 993 017b 26       		.byte	0x26
+ 994 017c 76       		.byte	0x76
+ 995 017d 00       		.sleb128 0
+ 996 017e 94       		.byte	0x94
+ 997 017f 02       		.byte	0x2
+ 998 0180 40       		.byte	0x40
+ 999 0181 24       		.byte	0x24
+ 1000 0182 40       		.byte	0x40
+ 1001 0183 26       		.byte	0x26
+ 1002 0184 1E       		.byte	0x1e
+ 1003 0185 1C       		.byte	0x1c
+ 1004 0186 72       		.byte	0x72
+ 1005 0187 02       		.sleb128 2
+ 1006 0188 94       		.byte	0x94
+ 1007 0189 02       		.byte	0x2
+ 1008 018a 40       		.byte	0x40
+ 1009 018b 24       		.byte	0x24
+ 1010 018c 40       		.byte	0x40
+ 1011 018d 26       		.byte	0x26
+ 1012 018e 78       		.byte	0x78
+ 1013 018f 00       		.sleb128 0
+ 1014 0190 1E       		.byte	0x1e
+ 1015 0191 22       		.byte	0x22
+ 1016 0192 72       		.byte	0x72
+ 1017 0193 00       		.sleb128 0
+ 1018 0194 94       		.byte	0x94
+ 1019 0195 02       		.byte	0x2
+ 1020 0196 40       		.byte	0x40
+ 1021 0197 24       		.byte	0x24
+ 1022 0198 40       		.byte	0x40
+ 1023 0199 26       		.byte	0x26
+ 1024 019a 79       		.byte	0x79
+ 1025 019b 00       		.sleb128 0
+ 1026 019c 1E       		.byte	0x1e
+ 1027 019d 22       		.byte	0x22
+ 1028 019e 72       		.byte	0x72
+ 1029 019f 08       		.sleb128 8
+ 1030 01a0 94       		.byte	0x94
+ 1031 01a1 02       		.byte	0x2
+ 1032 01a2 40       		.byte	0x40
+ 1033 01a3 24       		.byte	0x24
+ 1034 01a4 40       		.byte	0x40
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 23
+
+
+ 1035 01a5 26       		.byte	0x26
+ 1036 01a6 75       		.byte	0x75
+ 1037 01a7 00       		.sleb128 0
+ 1038 01a8 94       		.byte	0x94
+ 1039 01a9 02       		.byte	0x2
+ 1040 01aa 40       		.byte	0x40
+ 1041 01ab 24       		.byte	0x24
+ 1042 01ac 40       		.byte	0x40
+ 1043 01ad 26       		.byte	0x26
+ 1044 01ae 1E       		.byte	0x1e
+ 1045 01af 1C       		.byte	0x1c
+ 1046 01b0 3E       		.byte	0x3e
+ 1047 01b1 26       		.byte	0x26
+ 1048 01b2 9F       		.byte	0x9f
+ 1049 01b3 6C000000 		.4byte	.LVL11
+ 1050 01b7 8C000000 		.4byte	.LVL12
+ 1051 01bb 0100     		.2byte	0x1
+ 1052 01bd 53       		.byte	0x53
+ 1053 01be 98000000 		.4byte	.LVL13
+ 1054 01c2 9C000000 		.4byte	.LVL14
+ 1055 01c6 0600     		.2byte	0x6
+ 1056 01c8 73       		.byte	0x73
+ 1057 01c9 00       		.sleb128 0
+ 1058 01ca 71       		.byte	0x71
+ 1059 01cb 00       		.sleb128 0
+ 1060 01cc 1E       		.byte	0x1e
+ 1061 01cd 9F       		.byte	0x9f
+ 1062 01ce 9C000000 		.4byte	.LVL14
+ 1063 01d2 B8000000 		.4byte	.LVL16
+ 1064 01d6 0100     		.2byte	0x1
+ 1065 01d8 58       		.byte	0x58
+ 1066 01d9 B8000000 		.4byte	.LVL16
+ 1067 01dd CC000000 		.4byte	.LVL19
+ 1068 01e1 0100     		.2byte	0x1
+ 1069 01e3 52       		.byte	0x52
+ 1070 01e4 CC000000 		.4byte	.LVL19
+ 1071 01e8 D2000000 		.4byte	.LVL20
+ 1072 01ec 0F00     		.2byte	0xf
+ 1073 01ee 72       		.byte	0x72
+ 1074 01ef 00       		.sleb128 0
+ 1075 01f0 12       		.byte	0x12
+ 1076 01f1 0A       		.byte	0xa
+ 1077 01f2 FF7F     		.2byte	0x7fff
+ 1078 01f4 16       		.byte	0x16
+ 1079 01f5 14       		.byte	0x14
+ 1080 01f6 2D       		.byte	0x2d
+ 1081 01f7 28       		.byte	0x28
+ 1082 01f8 0100     		.2byte	0x1
+ 1083 01fa 16       		.byte	0x16
+ 1084 01fb 13       		.byte	0x13
+ 1085 01fc 9F       		.byte	0x9f
+ 1086 01fd 00000000 		.4byte	0
+ 1087 0201 00000000 		.4byte	0
+ 1088              	.LLST4:
+ 1089 0205 00000000 		.4byte	.LVL23
+ 1090 0209 52000000 		.4byte	.LVL24
+ 1091 020d 0100     		.2byte	0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 24
+
+
+ 1092 020f 50       		.byte	0x50
+ 1093 0210 52000000 		.4byte	.LVL24
+ 1094 0214 8A000000 		.4byte	.LVL33
+ 1095 0218 0100     		.2byte	0x1
+ 1096 021a 50       		.byte	0x50
+ 1097 021b 8A000000 		.4byte	.LVL33
+ 1098 021f 08010000 		.4byte	.LFE1
+ 1099 0223 0100     		.2byte	0x1
+ 1100 0225 5C       		.byte	0x5c
+ 1101 0226 00000000 		.4byte	0
+ 1102 022a 00000000 		.4byte	0
+ 1103              	.LLST5:
+ 1104 022e 00000000 		.4byte	.LVL23
+ 1105 0232 54000000 		.4byte	.LVL25
+ 1106 0236 0100     		.2byte	0x1
+ 1107 0238 51       		.byte	0x51
+ 1108 0239 54000000 		.4byte	.LVL25
+ 1109 023d 08010000 		.4byte	.LFE1
+ 1110 0241 0400     		.2byte	0x4
+ 1111 0243 F3       		.byte	0xf3
+ 1112 0244 01       		.uleb128 0x1
+ 1113 0245 51       		.byte	0x51
+ 1114 0246 9F       		.byte	0x9f
+ 1115 0247 00000000 		.4byte	0
+ 1116 024b 00000000 		.4byte	0
+ 1117              	.LLST6:
+ 1118 024f 00000000 		.4byte	.LVL23
+ 1119 0253 D2000000 		.4byte	.LVL36
+ 1120 0257 0100     		.2byte	0x1
+ 1121 0259 52       		.byte	0x52
+ 1122 025a D2000000 		.4byte	.LVL36
+ 1123 025e 08010000 		.4byte	.LFE1
+ 1124 0262 0400     		.2byte	0x4
+ 1125 0264 F3       		.byte	0xf3
+ 1126 0265 01       		.uleb128 0x1
+ 1127 0266 52       		.byte	0x52
+ 1128 0267 9F       		.byte	0x9f
+ 1129 0268 00000000 		.4byte	0
+ 1130 026c 00000000 		.4byte	0
+ 1131              	.LLST7:
+ 1132 0270 00000000 		.4byte	.LVL23
+ 1133 0274 52000000 		.4byte	.LVL24
+ 1134 0278 0200     		.2byte	0x2
+ 1135 027a 30       		.byte	0x30
+ 1136 027b 9F       		.byte	0x9f
+ 1137 027c 52000000 		.4byte	.LVL24
+ 1138 0280 58000000 		.4byte	.LVL26
+ 1139 0284 0600     		.2byte	0x6
+ 1140 0286 70       		.byte	0x70
+ 1141 0287 00       		.sleb128 0
+ 1142 0288 7B       		.byte	0x7b
+ 1143 0289 00       		.sleb128 0
+ 1144 028a 1E       		.byte	0x1e
+ 1145 028b 9F       		.byte	0x9f
+ 1146 028c 58000000 		.4byte	.LVL26
+ 1147 0290 68000000 		.4byte	.LVL27
+ 1148 0294 0100     		.2byte	0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 25
+
+
+ 1149 0296 5C       		.byte	0x5c
+ 1150 0297 68000000 		.4byte	.LVL27
+ 1151 029b 6E000000 		.4byte	.LVL29
+ 1152 029f 0500     		.2byte	0x5
+ 1153 02a1 73       		.byte	0x73
+ 1154 02a2 00       		.sleb128 0
+ 1155 02a3 3E       		.byte	0x3e
+ 1156 02a4 26       		.byte	0x26
+ 1157 02a5 9F       		.byte	0x9f
+ 1158 02a6 6E000000 		.4byte	.LVL29
+ 1159 02aa 74000000 		.4byte	.LVL30
+ 1160 02ae 0100     		.2byte	0x1
+ 1161 02b0 53       		.byte	0x53
+ 1162 02b1 74000000 		.4byte	.LVL30
+ 1163 02b5 7C000000 		.4byte	.LVL31
+ 1164 02b9 1100     		.2byte	0x11
+ 1165 02bb 71       		.byte	0x71
+ 1166 02bc 00       		.sleb128 0
+ 1167 02bd 94       		.byte	0x94
+ 1168 02be 02       		.byte	0x2
+ 1169 02bf 40       		.byte	0x40
+ 1170 02c0 24       		.byte	0x24
+ 1171 02c1 40       		.byte	0x40
+ 1172 02c2 26       		.byte	0x26
+ 1173 02c3 7B       		.byte	0x7b
+ 1174 02c4 00       		.sleb128 0
+ 1175 02c5 1E       		.byte	0x1e
+ 1176 02c6 7C       		.byte	0x7c
+ 1177 02c7 00       		.sleb128 0
+ 1178 02c8 22       		.byte	0x22
+ 1179 02c9 3E       		.byte	0x3e
+ 1180 02ca 26       		.byte	0x26
+ 1181 02cb 9F       		.byte	0x9f
+ 1182 02cc 7C000000 		.4byte	.LVL31
+ 1183 02d0 80000000 		.4byte	.LVL32
+ 1184 02d4 2600     		.2byte	0x26
+ 1185 02d6 71       		.byte	0x71
+ 1186 02d7 00       		.sleb128 0
+ 1187 02d8 94       		.byte	0x94
+ 1188 02d9 02       		.byte	0x2
+ 1189 02da 40       		.byte	0x40
+ 1190 02db 24       		.byte	0x24
+ 1191 02dc 40       		.byte	0x40
+ 1192 02dd 26       		.byte	0x26
+ 1193 02de 7B       		.byte	0x7b
+ 1194 02df 00       		.sleb128 0
+ 1195 02e0 1E       		.byte	0x1e
+ 1196 02e1 72       		.byte	0x72
+ 1197 02e2 00       		.sleb128 0
+ 1198 02e3 94       		.byte	0x94
+ 1199 02e4 02       		.byte	0x2
+ 1200 02e5 40       		.byte	0x40
+ 1201 02e6 24       		.byte	0x24
+ 1202 02e7 40       		.byte	0x40
+ 1203 02e8 26       		.byte	0x26
+ 1204 02e9 70       		.byte	0x70
+ 1205 02ea 00       		.sleb128 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 26
+
+
+ 1206 02eb 1E       		.byte	0x1e
+ 1207 02ec 72       		.byte	0x72
+ 1208 02ed 02       		.sleb128 2
+ 1209 02ee 94       		.byte	0x94
+ 1210 02ef 02       		.byte	0x2
+ 1211 02f0 40       		.byte	0x40
+ 1212 02f1 24       		.byte	0x24
+ 1213 02f2 40       		.byte	0x40
+ 1214 02f3 26       		.byte	0x26
+ 1215 02f4 78       		.byte	0x78
+ 1216 02f5 00       		.sleb128 0
+ 1217 02f6 1E       		.byte	0x1e
+ 1218 02f7 22       		.byte	0x22
+ 1219 02f8 22       		.byte	0x22
+ 1220 02f9 3E       		.byte	0x3e
+ 1221 02fa 26       		.byte	0x26
+ 1222 02fb 9F       		.byte	0x9f
+ 1223 02fc C6000000 		.4byte	.LVL34
+ 1224 0300 CE000000 		.4byte	.LVL35
+ 1225 0304 0600     		.2byte	0x6
+ 1226 0306 74       		.byte	0x74
+ 1227 0307 00       		.sleb128 0
+ 1228 0308 7B       		.byte	0x7b
+ 1229 0309 00       		.sleb128 0
+ 1230 030a 1E       		.byte	0x1e
+ 1231 030b 9F       		.byte	0x9f
+ 1232 030c CE000000 		.4byte	.LVL35
+ 1233 0310 DE000000 		.4byte	.LVL37
+ 1234 0314 0100     		.2byte	0x1
+ 1235 0316 53       		.byte	0x53
+ 1236 0317 DE000000 		.4byte	.LVL37
+ 1237 031b E0000000 		.4byte	.LVL38
+ 1238 031f 0500     		.2byte	0x5
+ 1239 0321 73       		.byte	0x73
+ 1240 0322 00       		.sleb128 0
+ 1241 0323 3E       		.byte	0x3e
+ 1242 0324 26       		.byte	0x26
+ 1243 0325 9F       		.byte	0x9f
+ 1244 0326 E0000000 		.4byte	.LVL38
+ 1245 032a E6000000 		.4byte	.LVL40
+ 1246 032e 0100     		.2byte	0x1
+ 1247 0330 53       		.byte	0x53
+ 1248 0331 E6000000 		.4byte	.LVL40
+ 1249 0335 F4000000 		.4byte	.LVL42
+ 1250 0339 2600     		.2byte	0x26
+ 1251 033b 72       		.byte	0x72
+ 1252 033c 00       		.sleb128 0
+ 1253 033d 7B       		.byte	0x7b
+ 1254 033e 00       		.sleb128 0
+ 1255 033f 1E       		.byte	0x1e
+ 1256 0340 F3       		.byte	0xf3
+ 1257 0341 01       		.uleb128 0x1
+ 1258 0342 52       		.byte	0x52
+ 1259 0343 23       		.byte	0x23
+ 1260 0344 0A       		.uleb128 0xa
+ 1261 0345 94       		.byte	0x94
+ 1262 0346 02       		.byte	0x2
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 27
+
+
+ 1263 0347 40       		.byte	0x40
+ 1264 0348 24       		.byte	0x24
+ 1265 0349 40       		.byte	0x40
+ 1266 034a 26       		.byte	0x26
+ 1267 034b 74       		.byte	0x74
+ 1268 034c 00       		.sleb128 0
+ 1269 034d 1E       		.byte	0x1e
+ 1270 034e F3       		.byte	0xf3
+ 1271 034f 01       		.uleb128 0x1
+ 1272 0350 52       		.byte	0x52
+ 1273 0351 23       		.byte	0x23
+ 1274 0352 0C       		.uleb128 0xc
+ 1275 0353 94       		.byte	0x94
+ 1276 0354 02       		.byte	0x2
+ 1277 0355 40       		.byte	0x40
+ 1278 0356 24       		.byte	0x24
+ 1279 0357 40       		.byte	0x40
+ 1280 0358 26       		.byte	0x26
+ 1281 0359 7A       		.byte	0x7a
+ 1282 035a 00       		.sleb128 0
+ 1283 035b 1E       		.byte	0x1e
+ 1284 035c 22       		.byte	0x22
+ 1285 035d 22       		.byte	0x22
+ 1286 035e 3E       		.byte	0x3e
+ 1287 035f 26       		.byte	0x26
+ 1288 0360 9F       		.byte	0x9f
+ 1289 0361 00000000 		.4byte	0
+ 1290 0365 00000000 		.4byte	0
+ 1291              	.LLST8:
+ 1292 0369 00000000 		.4byte	.LVL23
+ 1293 036d 68000000 		.4byte	.LVL27
+ 1294 0371 0200     		.2byte	0x2
+ 1295 0373 30       		.byte	0x30
+ 1296 0374 9F       		.byte	0x9f
+ 1297 0375 68000000 		.4byte	.LVL27
+ 1298 0379 6C000000 		.4byte	.LVL28
+ 1299 037d 1B00     		.2byte	0x1b
+ 1300 037f 72       		.byte	0x72
+ 1301 0380 06       		.sleb128 6
+ 1302 0381 94       		.byte	0x94
+ 1303 0382 02       		.byte	0x2
+ 1304 0383 40       		.byte	0x40
+ 1305 0384 24       		.byte	0x24
+ 1306 0385 40       		.byte	0x40
+ 1307 0386 26       		.byte	0x26
+ 1308 0387 7A       		.byte	0x7a
+ 1309 0388 00       		.sleb128 0
+ 1310 0389 1E       		.byte	0x1e
+ 1311 038a 3E       		.byte	0x3e
+ 1312 038b 26       		.byte	0x26
+ 1313 038c 73       		.byte	0x73
+ 1314 038d 00       		.sleb128 0
+ 1315 038e 3E       		.byte	0x3e
+ 1316 038f 26       		.byte	0x26
+ 1317 0390 22       		.byte	0x22
+ 1318 0391 77       		.byte	0x77
+ 1319 0392 00       		.sleb128 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 28
+
+
+ 1320 0393 79       		.byte	0x79
+ 1321 0394 00       		.sleb128 0
+ 1322 0395 1E       		.byte	0x1e
+ 1323 0396 3E       		.byte	0x3e
+ 1324 0397 26       		.byte	0x26
+ 1325 0398 1C       		.byte	0x1c
+ 1326 0399 9F       		.byte	0x9f
+ 1327 039a 6C000000 		.4byte	.LVL28
+ 1328 039e 6E000000 		.4byte	.LVL29
+ 1329 03a2 2200     		.2byte	0x22
+ 1330 03a4 72       		.byte	0x72
+ 1331 03a5 06       		.sleb128 6
+ 1332 03a6 94       		.byte	0x94
+ 1333 03a7 02       		.byte	0x2
+ 1334 03a8 40       		.byte	0x40
+ 1335 03a9 24       		.byte	0x24
+ 1336 03aa 40       		.byte	0x40
+ 1337 03ab 26       		.byte	0x26
+ 1338 03ac 7A       		.byte	0x7a
+ 1339 03ad 00       		.sleb128 0
+ 1340 03ae 1E       		.byte	0x1e
+ 1341 03af 3E       		.byte	0x3e
+ 1342 03b0 26       		.byte	0x26
+ 1343 03b1 73       		.byte	0x73
+ 1344 03b2 00       		.sleb128 0
+ 1345 03b3 3E       		.byte	0x3e
+ 1346 03b4 26       		.byte	0x26
+ 1347 03b5 22       		.byte	0x22
+ 1348 03b6 91       		.byte	0x91
+ 1349 03b7 54       		.sleb128 -44
+ 1350 03b8 06       		.byte	0x6
+ 1351 03b9 94       		.byte	0x94
+ 1352 03ba 02       		.byte	0x2
+ 1353 03bb 40       		.byte	0x40
+ 1354 03bc 24       		.byte	0x24
+ 1355 03bd 40       		.byte	0x40
+ 1356 03be 26       		.byte	0x26
+ 1357 03bf 79       		.byte	0x79
+ 1358 03c0 00       		.sleb128 0
+ 1359 03c1 1E       		.byte	0x1e
+ 1360 03c2 3E       		.byte	0x3e
+ 1361 03c3 26       		.byte	0x26
+ 1362 03c4 1C       		.byte	0x1c
+ 1363 03c5 9F       		.byte	0x9f
+ 1364 03c6 6E000000 		.4byte	.LVL29
+ 1365 03ca 7C000000 		.4byte	.LVL31
+ 1366 03ce 2E00     		.2byte	0x2e
+ 1367 03d0 72       		.byte	0x72
+ 1368 03d1 06       		.sleb128 6
+ 1369 03d2 94       		.byte	0x94
+ 1370 03d3 02       		.byte	0x2
+ 1371 03d4 40       		.byte	0x40
+ 1372 03d5 24       		.byte	0x24
+ 1373 03d6 40       		.byte	0x40
+ 1374 03d7 26       		.byte	0x26
+ 1375 03d8 7A       		.byte	0x7a
+ 1376 03d9 00       		.sleb128 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 29
+
+
+ 1377 03da 1E       		.byte	0x1e
+ 1378 03db 3E       		.byte	0x3e
+ 1379 03dc 26       		.byte	0x26
+ 1380 03dd 71       		.byte	0x71
+ 1381 03de 00       		.sleb128 0
+ 1382 03df 94       		.byte	0x94
+ 1383 03e0 02       		.byte	0x2
+ 1384 03e1 40       		.byte	0x40
+ 1385 03e2 24       		.byte	0x24
+ 1386 03e3 40       		.byte	0x40
+ 1387 03e4 26       		.byte	0x26
+ 1388 03e5 7B       		.byte	0x7b
+ 1389 03e6 00       		.sleb128 0
+ 1390 03e7 1E       		.byte	0x1e
+ 1391 03e8 7C       		.byte	0x7c
+ 1392 03e9 00       		.sleb128 0
+ 1393 03ea 22       		.byte	0x22
+ 1394 03eb 3E       		.byte	0x3e
+ 1395 03ec 26       		.byte	0x26
+ 1396 03ed 22       		.byte	0x22
+ 1397 03ee 91       		.byte	0x91
+ 1398 03ef 54       		.sleb128 -44
+ 1399 03f0 06       		.byte	0x6
+ 1400 03f1 94       		.byte	0x94
+ 1401 03f2 02       		.byte	0x2
+ 1402 03f3 40       		.byte	0x40
+ 1403 03f4 24       		.byte	0x24
+ 1404 03f5 40       		.byte	0x40
+ 1405 03f6 26       		.byte	0x26
+ 1406 03f7 79       		.byte	0x79
+ 1407 03f8 00       		.sleb128 0
+ 1408 03f9 1E       		.byte	0x1e
+ 1409 03fa 3E       		.byte	0x3e
+ 1410 03fb 26       		.byte	0x26
+ 1411 03fc 1C       		.byte	0x1c
+ 1412 03fd 9F       		.byte	0x9f
+ 1413 03fe 7C000000 		.4byte	.LVL31
+ 1414 0402 80000000 		.4byte	.LVL32
+ 1415 0406 4300     		.2byte	0x43
+ 1416 0408 72       		.byte	0x72
+ 1417 0409 06       		.sleb128 6
+ 1418 040a 94       		.byte	0x94
+ 1419 040b 02       		.byte	0x2
+ 1420 040c 40       		.byte	0x40
+ 1421 040d 24       		.byte	0x24
+ 1422 040e 40       		.byte	0x40
+ 1423 040f 26       		.byte	0x26
+ 1424 0410 7A       		.byte	0x7a
+ 1425 0411 00       		.sleb128 0
+ 1426 0412 1E       		.byte	0x1e
+ 1427 0413 3E       		.byte	0x3e
+ 1428 0414 26       		.byte	0x26
+ 1429 0415 71       		.byte	0x71
+ 1430 0416 00       		.sleb128 0
+ 1431 0417 94       		.byte	0x94
+ 1432 0418 02       		.byte	0x2
+ 1433 0419 40       		.byte	0x40
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 30
+
+
+ 1434 041a 24       		.byte	0x24
+ 1435 041b 40       		.byte	0x40
+ 1436 041c 26       		.byte	0x26
+ 1437 041d 7B       		.byte	0x7b
+ 1438 041e 00       		.sleb128 0
+ 1439 041f 1E       		.byte	0x1e
+ 1440 0420 72       		.byte	0x72
+ 1441 0421 00       		.sleb128 0
+ 1442 0422 94       		.byte	0x94
+ 1443 0423 02       		.byte	0x2
+ 1444 0424 40       		.byte	0x40
+ 1445 0425 24       		.byte	0x24
+ 1446 0426 40       		.byte	0x40
+ 1447 0427 26       		.byte	0x26
+ 1448 0428 70       		.byte	0x70
+ 1449 0429 00       		.sleb128 0
+ 1450 042a 1E       		.byte	0x1e
+ 1451 042b 72       		.byte	0x72
+ 1452 042c 02       		.sleb128 2
+ 1453 042d 94       		.byte	0x94
+ 1454 042e 02       		.byte	0x2
+ 1455 042f 40       		.byte	0x40
+ 1456 0430 24       		.byte	0x24
+ 1457 0431 40       		.byte	0x40
+ 1458 0432 26       		.byte	0x26
+ 1459 0433 78       		.byte	0x78
+ 1460 0434 00       		.sleb128 0
+ 1461 0435 1E       		.byte	0x1e
+ 1462 0436 22       		.byte	0x22
+ 1463 0437 22       		.byte	0x22
+ 1464 0438 3E       		.byte	0x3e
+ 1465 0439 26       		.byte	0x26
+ 1466 043a 22       		.byte	0x22
+ 1467 043b 91       		.byte	0x91
+ 1468 043c 54       		.sleb128 -44
+ 1469 043d 06       		.byte	0x6
+ 1470 043e 94       		.byte	0x94
+ 1471 043f 02       		.byte	0x2
+ 1472 0440 40       		.byte	0x40
+ 1473 0441 24       		.byte	0x24
+ 1474 0442 40       		.byte	0x40
+ 1475 0443 26       		.byte	0x26
+ 1476 0444 79       		.byte	0x79
+ 1477 0445 00       		.sleb128 0
+ 1478 0446 1E       		.byte	0x1e
+ 1479 0447 3E       		.byte	0x3e
+ 1480 0448 26       		.byte	0x26
+ 1481 0449 1C       		.byte	0x1c
+ 1482 044a 9F       		.byte	0x9f
+ 1483 044b DE000000 		.4byte	.LVL37
+ 1484 044f E0000000 		.4byte	.LVL38
+ 1485 0453 1E00     		.2byte	0x1e
+ 1486 0455 F3       		.byte	0xf3
+ 1487 0456 01       		.uleb128 0x1
+ 1488 0457 52       		.byte	0x52
+ 1489 0458 23       		.byte	0x23
+ 1490 0459 10       		.uleb128 0x10
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 31
+
+
+ 1491 045a 94       		.byte	0x94
+ 1492 045b 02       		.byte	0x2
+ 1493 045c 40       		.byte	0x40
+ 1494 045d 24       		.byte	0x24
+ 1495 045e 40       		.byte	0x40
+ 1496 045f 26       		.byte	0x26
+ 1497 0460 7E       		.byte	0x7e
+ 1498 0461 00       		.sleb128 0
+ 1499 0462 1E       		.byte	0x1e
+ 1500 0463 3E       		.byte	0x3e
+ 1501 0464 26       		.byte	0x26
+ 1502 0465 73       		.byte	0x73
+ 1503 0466 00       		.sleb128 0
+ 1504 0467 3E       		.byte	0x3e
+ 1505 0468 26       		.byte	0x26
+ 1506 0469 22       		.byte	0x22
+ 1507 046a 78       		.byte	0x78
+ 1508 046b 00       		.sleb128 0
+ 1509 046c 77       		.byte	0x77
+ 1510 046d 00       		.sleb128 0
+ 1511 046e 1E       		.byte	0x1e
+ 1512 046f 3E       		.byte	0x3e
+ 1513 0470 26       		.byte	0x26
+ 1514 0471 1C       		.byte	0x1c
+ 1515 0472 9F       		.byte	0x9f
+ 1516 0473 E0000000 		.4byte	.LVL38
+ 1517 0477 E4000000 		.4byte	.LVL39
+ 1518 047b 3F00     		.2byte	0x3f
+ 1519 047d F3       		.byte	0xf3
+ 1520 047e 01       		.uleb128 0x1
+ 1521 047f 52       		.byte	0x52
+ 1522 0480 23       		.byte	0x23
+ 1523 0481 10       		.uleb128 0x10
+ 1524 0482 94       		.byte	0x94
+ 1525 0483 02       		.byte	0x2
+ 1526 0484 40       		.byte	0x40
+ 1527 0485 24       		.byte	0x24
+ 1528 0486 40       		.byte	0x40
+ 1529 0487 26       		.byte	0x26
+ 1530 0488 7E       		.byte	0x7e
+ 1531 0489 00       		.sleb128 0
+ 1532 048a 1E       		.byte	0x1e
+ 1533 048b 3E       		.byte	0x3e
+ 1534 048c 26       		.byte	0x26
+ 1535 048d 72       		.byte	0x72
+ 1536 048e 00       		.sleb128 0
+ 1537 048f 7B       		.byte	0x7b
+ 1538 0490 00       		.sleb128 0
+ 1539 0491 1E       		.byte	0x1e
+ 1540 0492 F3       		.byte	0xf3
+ 1541 0493 01       		.uleb128 0x1
+ 1542 0494 52       		.byte	0x52
+ 1543 0495 23       		.byte	0x23
+ 1544 0496 0A       		.uleb128 0xa
+ 1545 0497 94       		.byte	0x94
+ 1546 0498 02       		.byte	0x2
+ 1547 0499 40       		.byte	0x40
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 32
+
+
+ 1548 049a 24       		.byte	0x24
+ 1549 049b 40       		.byte	0x40
+ 1550 049c 26       		.byte	0x26
+ 1551 049d 74       		.byte	0x74
+ 1552 049e 00       		.sleb128 0
+ 1553 049f 1E       		.byte	0x1e
+ 1554 04a0 F3       		.byte	0xf3
+ 1555 04a1 01       		.uleb128 0x1
+ 1556 04a2 52       		.byte	0x52
+ 1557 04a3 23       		.byte	0x23
+ 1558 04a4 0C       		.uleb128 0xc
+ 1559 04a5 94       		.byte	0x94
+ 1560 04a6 02       		.byte	0x2
+ 1561 04a7 40       		.byte	0x40
+ 1562 04a8 24       		.byte	0x24
+ 1563 04a9 40       		.byte	0x40
+ 1564 04aa 26       		.byte	0x26
+ 1565 04ab 7A       		.byte	0x7a
+ 1566 04ac 00       		.sleb128 0
+ 1567 04ad 1E       		.byte	0x1e
+ 1568 04ae 22       		.byte	0x22
+ 1569 04af 22       		.byte	0x22
+ 1570 04b0 3E       		.byte	0x3e
+ 1571 04b1 26       		.byte	0x26
+ 1572 04b2 22       		.byte	0x22
+ 1573 04b3 78       		.byte	0x78
+ 1574 04b4 00       		.sleb128 0
+ 1575 04b5 77       		.byte	0x77
+ 1576 04b6 00       		.sleb128 0
+ 1577 04b7 1E       		.byte	0x1e
+ 1578 04b8 3E       		.byte	0x3e
+ 1579 04b9 26       		.byte	0x26
+ 1580 04ba 1C       		.byte	0x1c
+ 1581 04bb 9F       		.byte	0x9f
+ 1582 04bc E4000000 		.4byte	.LVL39
+ 1583 04c0 EC000000 		.4byte	.LVL41
+ 1584 04c4 4500     		.2byte	0x45
+ 1585 04c6 75       		.byte	0x75
+ 1586 04c7 02       		.sleb128 2
+ 1587 04c8 94       		.byte	0x94
+ 1588 04c9 02       		.byte	0x2
+ 1589 04ca 40       		.byte	0x40
+ 1590 04cb 24       		.byte	0x24
+ 1591 04cc 40       		.byte	0x40
+ 1592 04cd 26       		.byte	0x26
+ 1593 04ce F3       		.byte	0xf3
+ 1594 04cf 01       		.uleb128 0x1
+ 1595 04d0 52       		.byte	0x52
+ 1596 04d1 23       		.byte	0x23
+ 1597 04d2 10       		.uleb128 0x10
+ 1598 04d3 94       		.byte	0x94
+ 1599 04d4 02       		.byte	0x2
+ 1600 04d5 40       		.byte	0x40
+ 1601 04d6 24       		.byte	0x24
+ 1602 04d7 40       		.byte	0x40
+ 1603 04d8 26       		.byte	0x26
+ 1604 04d9 1E       		.byte	0x1e
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 33
+
+
+ 1605 04da 3E       		.byte	0x3e
+ 1606 04db 26       		.byte	0x26
+ 1607 04dc 72       		.byte	0x72
+ 1608 04dd 00       		.sleb128 0
+ 1609 04de 7B       		.byte	0x7b
+ 1610 04df 00       		.sleb128 0
+ 1611 04e0 1E       		.byte	0x1e
+ 1612 04e1 F3       		.byte	0xf3
+ 1613 04e2 01       		.uleb128 0x1
+ 1614 04e3 52       		.byte	0x52
+ 1615 04e4 23       		.byte	0x23
+ 1616 04e5 0A       		.uleb128 0xa
+ 1617 04e6 94       		.byte	0x94
+ 1618 04e7 02       		.byte	0x2
+ 1619 04e8 40       		.byte	0x40
+ 1620 04e9 24       		.byte	0x24
+ 1621 04ea 40       		.byte	0x40
+ 1622 04eb 26       		.byte	0x26
+ 1623 04ec 74       		.byte	0x74
+ 1624 04ed 00       		.sleb128 0
+ 1625 04ee 1E       		.byte	0x1e
+ 1626 04ef F3       		.byte	0xf3
+ 1627 04f0 01       		.uleb128 0x1
+ 1628 04f1 52       		.byte	0x52
+ 1629 04f2 23       		.byte	0x23
+ 1630 04f3 0C       		.uleb128 0xc
+ 1631 04f4 94       		.byte	0x94
+ 1632 04f5 02       		.byte	0x2
+ 1633 04f6 40       		.byte	0x40
+ 1634 04f7 24       		.byte	0x24
+ 1635 04f8 40       		.byte	0x40
+ 1636 04f9 26       		.byte	0x26
+ 1637 04fa 7A       		.byte	0x7a
+ 1638 04fb 00       		.sleb128 0
+ 1639 04fc 1E       		.byte	0x1e
+ 1640 04fd 22       		.byte	0x22
+ 1641 04fe 22       		.byte	0x22
+ 1642 04ff 3E       		.byte	0x3e
+ 1643 0500 26       		.byte	0x26
+ 1644 0501 22       		.byte	0x22
+ 1645 0502 78       		.byte	0x78
+ 1646 0503 00       		.sleb128 0
+ 1647 0504 77       		.byte	0x77
+ 1648 0505 00       		.sleb128 0
+ 1649 0506 1E       		.byte	0x1e
+ 1650 0507 3E       		.byte	0x3e
+ 1651 0508 26       		.byte	0x26
+ 1652 0509 1C       		.byte	0x1c
+ 1653 050a 9F       		.byte	0x9f
+ 1654 050b EC000000 		.4byte	.LVL41
+ 1655 050f F4000000 		.4byte	.LVL42
+ 1656 0513 4E00     		.2byte	0x4e
+ 1657 0515 75       		.byte	0x75
+ 1658 0516 02       		.sleb128 2
+ 1659 0517 94       		.byte	0x94
+ 1660 0518 02       		.byte	0x2
+ 1661 0519 40       		.byte	0x40
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 34
+
+
+ 1662 051a 24       		.byte	0x24
+ 1663 051b 40       		.byte	0x40
+ 1664 051c 26       		.byte	0x26
+ 1665 051d F3       		.byte	0xf3
+ 1666 051e 01       		.uleb128 0x1
+ 1667 051f 52       		.byte	0x52
+ 1668 0520 23       		.byte	0x23
+ 1669 0521 10       		.uleb128 0x10
+ 1670 0522 94       		.byte	0x94
+ 1671 0523 02       		.byte	0x2
+ 1672 0524 40       		.byte	0x40
+ 1673 0525 24       		.byte	0x24
+ 1674 0526 40       		.byte	0x40
+ 1675 0527 26       		.byte	0x26
+ 1676 0528 1E       		.byte	0x1e
+ 1677 0529 3E       		.byte	0x3e
+ 1678 052a 26       		.byte	0x26
+ 1679 052b 72       		.byte	0x72
+ 1680 052c 00       		.sleb128 0
+ 1681 052d 7B       		.byte	0x7b
+ 1682 052e 00       		.sleb128 0
+ 1683 052f 1E       		.byte	0x1e
+ 1684 0530 F3       		.byte	0xf3
+ 1685 0531 01       		.uleb128 0x1
+ 1686 0532 52       		.byte	0x52
+ 1687 0533 23       		.byte	0x23
+ 1688 0534 0A       		.uleb128 0xa
+ 1689 0535 94       		.byte	0x94
+ 1690 0536 02       		.byte	0x2
+ 1691 0537 40       		.byte	0x40
+ 1692 0538 24       		.byte	0x24
+ 1693 0539 40       		.byte	0x40
+ 1694 053a 26       		.byte	0x26
+ 1695 053b 74       		.byte	0x74
+ 1696 053c 00       		.sleb128 0
+ 1697 053d 1E       		.byte	0x1e
+ 1698 053e F3       		.byte	0xf3
+ 1699 053f 01       		.uleb128 0x1
+ 1700 0540 52       		.byte	0x52
+ 1701 0541 23       		.byte	0x23
+ 1702 0542 0C       		.uleb128 0xc
+ 1703 0543 94       		.byte	0x94
+ 1704 0544 02       		.byte	0x2
+ 1705 0545 40       		.byte	0x40
+ 1706 0546 24       		.byte	0x24
+ 1707 0547 40       		.byte	0x40
+ 1708 0548 26       		.byte	0x26
+ 1709 0549 7A       		.byte	0x7a
+ 1710 054a 00       		.sleb128 0
+ 1711 054b 1E       		.byte	0x1e
+ 1712 054c 22       		.byte	0x22
+ 1713 054d 22       		.byte	0x22
+ 1714 054e 3E       		.byte	0x3e
+ 1715 054f 26       		.byte	0x26
+ 1716 0550 22       		.byte	0x22
+ 1717 0551 F3       		.byte	0xf3
+ 1718 0552 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 35
+
+
+ 1719 0553 52       		.byte	0x52
+ 1720 0554 23       		.byte	0x23
+ 1721 0555 12       		.uleb128 0x12
+ 1722 0556 94       		.byte	0x94
+ 1723 0557 02       		.byte	0x2
+ 1724 0558 40       		.byte	0x40
+ 1725 0559 24       		.byte	0x24
+ 1726 055a 40       		.byte	0x40
+ 1727 055b 26       		.byte	0x26
+ 1728 055c 78       		.byte	0x78
+ 1729 055d 00       		.sleb128 0
+ 1730 055e 1E       		.byte	0x1e
+ 1731 055f 3E       		.byte	0x3e
+ 1732 0560 26       		.byte	0x26
+ 1733 0561 1C       		.byte	0x1c
+ 1734 0562 9F       		.byte	0x9f
+ 1735 0563 00000000 		.4byte	0
+ 1736 0567 00000000 		.4byte	0
+ 1737              	.LLST9:
+ 1738 056b 00000000 		.4byte	.LVL23
+ 1739 056f 68000000 		.4byte	.LVL27
+ 1740 0573 0200     		.2byte	0x2
+ 1741 0575 30       		.byte	0x30
+ 1742 0576 9F       		.byte	0x9f
+ 1743 0577 68000000 		.4byte	.LVL27
+ 1744 057b DE000000 		.4byte	.LVL37
+ 1745 057f 0100     		.2byte	0x1
+ 1746 0581 54       		.byte	0x54
+ 1747 0582 DE000000 		.4byte	.LVL37
+ 1748 0586 E4000000 		.4byte	.LVL39
+ 1749 058a 4900     		.2byte	0x49
+ 1750 058c 0B       		.byte	0xb
+ 1751 058d 0080     		.2byte	0x8000
+ 1752 058f 77       		.byte	0x77
+ 1753 0590 00       		.sleb128 0
+ 1754 0591 7E       		.byte	0x7e
+ 1755 0592 00       		.sleb128 0
+ 1756 0593 1E       		.byte	0x1e
+ 1757 0594 3E       		.byte	0x3e
+ 1758 0595 26       		.byte	0x26
+ 1759 0596 F3       		.byte	0xf3
+ 1760 0597 01       		.uleb128 0x1
+ 1761 0598 52       		.byte	0x52
+ 1762 0599 23       		.byte	0x23
+ 1763 059a 10       		.uleb128 0x10
+ 1764 059b 94       		.byte	0x94
+ 1765 059c 02       		.byte	0x2
+ 1766 059d 40       		.byte	0x40
+ 1767 059e 24       		.byte	0x24
+ 1768 059f 40       		.byte	0x40
+ 1769 05a0 26       		.byte	0x26
+ 1770 05a1 78       		.byte	0x78
+ 1771 05a2 00       		.sleb128 0
+ 1772 05a3 1E       		.byte	0x1e
+ 1773 05a4 3E       		.byte	0x3e
+ 1774 05a5 26       		.byte	0x26
+ 1775 05a6 22       		.byte	0x22
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 36
+
+
+ 1776 05a7 77       		.byte	0x77
+ 1777 05a8 00       		.sleb128 0
+ 1778 05a9 7E       		.byte	0x7e
+ 1779 05aa 00       		.sleb128 0
+ 1780 05ab 1E       		.byte	0x1e
+ 1781 05ac 3E       		.byte	0x3e
+ 1782 05ad 26       		.byte	0x26
+ 1783 05ae F3       		.byte	0xf3
+ 1784 05af 01       		.uleb128 0x1
+ 1785 05b0 52       		.byte	0x52
+ 1786 05b1 23       		.byte	0x23
+ 1787 05b2 10       		.uleb128 0x10
+ 1788 05b3 94       		.byte	0x94
+ 1789 05b4 02       		.byte	0x2
+ 1790 05b5 40       		.byte	0x40
+ 1791 05b6 24       		.byte	0x24
+ 1792 05b7 40       		.byte	0x40
+ 1793 05b8 26       		.byte	0x26
+ 1794 05b9 78       		.byte	0x78
+ 1795 05ba 00       		.sleb128 0
+ 1796 05bb 1E       		.byte	0x1e
+ 1797 05bc 3E       		.byte	0x3e
+ 1798 05bd 26       		.byte	0x26
+ 1799 05be 22       		.byte	0x22
+ 1800 05bf 0B       		.byte	0xb
+ 1801 05c0 0080     		.2byte	0x8000
+ 1802 05c2 2D       		.byte	0x2d
+ 1803 05c3 28       		.byte	0x28
+ 1804 05c4 0100     		.2byte	0x1
+ 1805 05c6 16       		.byte	0x16
+ 1806 05c7 13       		.byte	0x13
+ 1807 05c8 12       		.byte	0x12
+ 1808 05c9 0A       		.byte	0xa
+ 1809 05ca FF7F     		.2byte	0x7fff
+ 1810 05cc 16       		.byte	0x16
+ 1811 05cd 14       		.byte	0x14
+ 1812 05ce 2D       		.byte	0x2d
+ 1813 05cf 28       		.byte	0x28
+ 1814 05d0 0100     		.2byte	0x1
+ 1815 05d2 16       		.byte	0x16
+ 1816 05d3 13       		.byte	0x13
+ 1817 05d4 9F       		.byte	0x9f
+ 1818 05d5 E4000000 		.4byte	.LVL39
+ 1819 05d9 EC000000 		.4byte	.LVL41
+ 1820 05dd 5500     		.2byte	0x55
+ 1821 05df 0B       		.byte	0xb
+ 1822 05e0 0080     		.2byte	0x8000
+ 1823 05e2 75       		.byte	0x75
+ 1824 05e3 02       		.sleb128 2
+ 1825 05e4 94       		.byte	0x94
+ 1826 05e5 02       		.byte	0x2
+ 1827 05e6 40       		.byte	0x40
+ 1828 05e7 24       		.byte	0x24
+ 1829 05e8 40       		.byte	0x40
+ 1830 05e9 26       		.byte	0x26
+ 1831 05ea 77       		.byte	0x77
+ 1832 05eb 00       		.sleb128 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 37
+
+
+ 1833 05ec 1E       		.byte	0x1e
+ 1834 05ed 3E       		.byte	0x3e
+ 1835 05ee 26       		.byte	0x26
+ 1836 05ef F3       		.byte	0xf3
+ 1837 05f0 01       		.uleb128 0x1
+ 1838 05f1 52       		.byte	0x52
+ 1839 05f2 23       		.byte	0x23
+ 1840 05f3 10       		.uleb128 0x10
+ 1841 05f4 94       		.byte	0x94
+ 1842 05f5 02       		.byte	0x2
+ 1843 05f6 40       		.byte	0x40
+ 1844 05f7 24       		.byte	0x24
+ 1845 05f8 40       		.byte	0x40
+ 1846 05f9 26       		.byte	0x26
+ 1847 05fa 78       		.byte	0x78
+ 1848 05fb 00       		.sleb128 0
+ 1849 05fc 1E       		.byte	0x1e
+ 1850 05fd 3E       		.byte	0x3e
+ 1851 05fe 26       		.byte	0x26
+ 1852 05ff 22       		.byte	0x22
+ 1853 0600 75       		.byte	0x75
+ 1854 0601 02       		.sleb128 2
+ 1855 0602 94       		.byte	0x94
+ 1856 0603 02       		.byte	0x2
+ 1857 0604 40       		.byte	0x40
+ 1858 0605 24       		.byte	0x24
+ 1859 0606 40       		.byte	0x40
+ 1860 0607 26       		.byte	0x26
+ 1861 0608 77       		.byte	0x77
+ 1862 0609 00       		.sleb128 0
+ 1863 060a 1E       		.byte	0x1e
+ 1864 060b 3E       		.byte	0x3e
+ 1865 060c 26       		.byte	0x26
+ 1866 060d F3       		.byte	0xf3
+ 1867 060e 01       		.uleb128 0x1
+ 1868 060f 52       		.byte	0x52
+ 1869 0610 23       		.byte	0x23
+ 1870 0611 10       		.uleb128 0x10
+ 1871 0612 94       		.byte	0x94
+ 1872 0613 02       		.byte	0x2
+ 1873 0614 40       		.byte	0x40
+ 1874 0615 24       		.byte	0x24
+ 1875 0616 40       		.byte	0x40
+ 1876 0617 26       		.byte	0x26
+ 1877 0618 78       		.byte	0x78
+ 1878 0619 00       		.sleb128 0
+ 1879 061a 1E       		.byte	0x1e
+ 1880 061b 3E       		.byte	0x3e
+ 1881 061c 26       		.byte	0x26
+ 1882 061d 22       		.byte	0x22
+ 1883 061e 0B       		.byte	0xb
+ 1884 061f 0080     		.2byte	0x8000
+ 1885 0621 2D       		.byte	0x2d
+ 1886 0622 28       		.byte	0x28
+ 1887 0623 0100     		.2byte	0x1
+ 1888 0625 16       		.byte	0x16
+ 1889 0626 13       		.byte	0x13
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 38
+
+
+ 1890 0627 12       		.byte	0x12
+ 1891 0628 0A       		.byte	0xa
+ 1892 0629 FF7F     		.2byte	0x7fff
+ 1893 062b 16       		.byte	0x16
+ 1894 062c 14       		.byte	0x14
+ 1895 062d 2D       		.byte	0x2d
+ 1896 062e 28       		.byte	0x28
+ 1897 062f 0100     		.2byte	0x1
+ 1898 0631 16       		.byte	0x16
+ 1899 0632 13       		.byte	0x13
+ 1900 0633 9F       		.byte	0x9f
+ 1901 0634 EC000000 		.4byte	.LVL41
+ 1902 0638 F4000000 		.4byte	.LVL42
+ 1903 063c 6700     		.2byte	0x67
+ 1904 063e 0B       		.byte	0xb
+ 1905 063f 0080     		.2byte	0x8000
+ 1906 0641 F3       		.byte	0xf3
+ 1907 0642 01       		.uleb128 0x1
+ 1908 0643 52       		.byte	0x52
+ 1909 0644 23       		.byte	0x23
+ 1910 0645 12       		.uleb128 0x12
+ 1911 0646 94       		.byte	0x94
+ 1912 0647 02       		.byte	0x2
+ 1913 0648 40       		.byte	0x40
+ 1914 0649 24       		.byte	0x24
+ 1915 064a 40       		.byte	0x40
+ 1916 064b 26       		.byte	0x26
+ 1917 064c 75       		.byte	0x75
+ 1918 064d 02       		.sleb128 2
+ 1919 064e 94       		.byte	0x94
+ 1920 064f 02       		.byte	0x2
+ 1921 0650 40       		.byte	0x40
+ 1922 0651 24       		.byte	0x24
+ 1923 0652 40       		.byte	0x40
+ 1924 0653 26       		.byte	0x26
+ 1925 0654 1E       		.byte	0x1e
+ 1926 0655 3E       		.byte	0x3e
+ 1927 0656 26       		.byte	0x26
+ 1928 0657 F3       		.byte	0xf3
+ 1929 0658 01       		.uleb128 0x1
+ 1930 0659 52       		.byte	0x52
+ 1931 065a 23       		.byte	0x23
+ 1932 065b 10       		.uleb128 0x10
+ 1933 065c 94       		.byte	0x94
+ 1934 065d 02       		.byte	0x2
+ 1935 065e 40       		.byte	0x40
+ 1936 065f 24       		.byte	0x24
+ 1937 0660 40       		.byte	0x40
+ 1938 0661 26       		.byte	0x26
+ 1939 0662 78       		.byte	0x78
+ 1940 0663 00       		.sleb128 0
+ 1941 0664 1E       		.byte	0x1e
+ 1942 0665 3E       		.byte	0x3e
+ 1943 0666 26       		.byte	0x26
+ 1944 0667 22       		.byte	0x22
+ 1945 0668 F3       		.byte	0xf3
+ 1946 0669 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 39
+
+
+ 1947 066a 52       		.byte	0x52
+ 1948 066b 23       		.byte	0x23
+ 1949 066c 12       		.uleb128 0x12
+ 1950 066d 94       		.byte	0x94
+ 1951 066e 02       		.byte	0x2
+ 1952 066f 40       		.byte	0x40
+ 1953 0670 24       		.byte	0x24
+ 1954 0671 40       		.byte	0x40
+ 1955 0672 26       		.byte	0x26
+ 1956 0673 75       		.byte	0x75
+ 1957 0674 02       		.sleb128 2
+ 1958 0675 94       		.byte	0x94
+ 1959 0676 02       		.byte	0x2
+ 1960 0677 40       		.byte	0x40
+ 1961 0678 24       		.byte	0x24
+ 1962 0679 40       		.byte	0x40
+ 1963 067a 26       		.byte	0x26
+ 1964 067b 1E       		.byte	0x1e
+ 1965 067c 3E       		.byte	0x3e
+ 1966 067d 26       		.byte	0x26
+ 1967 067e F3       		.byte	0xf3
+ 1968 067f 01       		.uleb128 0x1
+ 1969 0680 52       		.byte	0x52
+ 1970 0681 23       		.byte	0x23
+ 1971 0682 10       		.uleb128 0x10
+ 1972 0683 94       		.byte	0x94
+ 1973 0684 02       		.byte	0x2
+ 1974 0685 40       		.byte	0x40
+ 1975 0686 24       		.byte	0x24
+ 1976 0687 40       		.byte	0x40
+ 1977 0688 26       		.byte	0x26
+ 1978 0689 78       		.byte	0x78
+ 1979 068a 00       		.sleb128 0
+ 1980 068b 1E       		.byte	0x1e
+ 1981 068c 3E       		.byte	0x3e
+ 1982 068d 26       		.byte	0x26
+ 1983 068e 22       		.byte	0x22
+ 1984 068f 0B       		.byte	0xb
+ 1985 0690 0080     		.2byte	0x8000
+ 1986 0692 2D       		.byte	0x2d
+ 1987 0693 28       		.byte	0x28
+ 1988 0694 0100     		.2byte	0x1
+ 1989 0696 16       		.byte	0x16
+ 1990 0697 13       		.byte	0x13
+ 1991 0698 12       		.byte	0x12
+ 1992 0699 0A       		.byte	0xa
+ 1993 069a FF7F     		.2byte	0x7fff
+ 1994 069c 16       		.byte	0x16
+ 1995 069d 14       		.byte	0x14
+ 1996 069e 2D       		.byte	0x2d
+ 1997 069f 28       		.byte	0x28
+ 1998 06a0 0100     		.2byte	0x1
+ 1999 06a2 16       		.byte	0x16
+ 2000 06a3 13       		.byte	0x13
+ 2001 06a4 9F       		.byte	0x9f
+ 2002 06a5 00000000 		.4byte	0
+ 2003 06a9 00000000 		.4byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 40
+
+
+ 2004              		.section	.debug_aranges,"",%progbits
+ 2005 0000 24000000 		.4byte	0x24
+ 2006 0004 0200     		.2byte	0x2
+ 2007 0006 00000000 		.4byte	.Ldebug_info0
+ 2008 000a 04       		.byte	0x4
+ 2009 000b 00       		.byte	0
+ 2010 000c 0000     		.2byte	0
+ 2011 000e 0000     		.2byte	0
+ 2012 0010 00000000 		.4byte	.LFB0
+ 2013 0014 E8000000 		.4byte	.LFE0-.LFB0
+ 2014 0018 00000000 		.4byte	.LFB1
+ 2015 001c 08010000 		.4byte	.LFE1-.LFB1
+ 2016 0020 00000000 		.4byte	0
+ 2017 0024 00000000 		.4byte	0
+ 2018              		.section	.debug_ranges,"",%progbits
+ 2019              	.Ldebug_ranges0:
+ 2020 0000 00000000 		.4byte	.LFB0
+ 2021 0004 E8000000 		.4byte	.LFE0
+ 2022 0008 00000000 		.4byte	.LFB1
+ 2023 000c 08010000 		.4byte	.LFE1
+ 2024 0010 00000000 		.4byte	0
+ 2025 0014 00000000 		.4byte	0
+ 2026              		.section	.debug_line,"",%progbits
+ 2027              	.Ldebug_line0:
+ 2028 0000 D9000000 		.section	.debug_str,"MS",%progbits,1
+ 2028      02002D00 
+ 2028      00000201 
+ 2028      FB0E0D00 
+ 2028      01010101 
+ 2029              	.LASF2:
+ 2030 0000 636F6566 		.ascii	"coeff\000"
+ 2030      6600
+ 2031              	.LASF4:
+ 2032 0006 61636331 		.ascii	"acc1\000"
+ 2032      00
+ 2033              	.LASF1:
+ 2034 000b 73616D70 		.ascii	"sample\000"
+ 2034      6C6500
+ 2035              	.LASF11:
+ 2036 0012 6969725F 		.ascii	"iir_coupled_form\000"
+ 2036      636F7570 
+ 2036      6C65645F 
+ 2036      666F726D 
+ 2036      00
+ 2037              	.LASF3:
+ 2038 0023 73686F72 		.ascii	"short int\000"
+ 2038      7420696E 
+ 2038      7400
+ 2039              	.LASF6:
+ 2040 002d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2040      43313120 
+ 2040      352E342E 
+ 2040      31203230 
+ 2040      31363036 
+ 2041 0060 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2041      20726576 
+ 2041      6973696F 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccmjbZGY.s 			page 41
+
+
+ 2041      6E203233 
+ 2041      37373135 
+ 2042 0093 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 2042      66756E63 
+ 2042      74696F6E 
+ 2042      2D736563 
+ 2042      74696F6E 
+ 2043 00c6 6E637469 		.ascii	"nctions\000"
+ 2043      6F6E7300 
+ 2044              	.LASF9:
+ 2045 00ce 7265675F 		.ascii	"reg_struct\000"
+ 2045      73747275 
+ 2045      637400
+ 2046              	.LASF7:
+ 2047 00d9 66696C74 		.ascii	"filters.c\000"
+ 2047      6572732E 
+ 2047      6300
+ 2048              	.LASF5:
+ 2049 00e3 61636332 		.ascii	"acc2\000"
+ 2049      00
+ 2050              	.LASF10:
+ 2051 00e8 6969725F 		.ascii	"iir_biquad_4th_order\000"
+ 2051      62697175 
+ 2051      61645F34 
+ 2051      74685F6F 
+ 2051      72646572 
+ 2052              	.LASF0:
+ 2053 00fd 696E7075 		.ascii	"input_scale\000"
+ 2053      745F7363 
+ 2053      616C6500 
+ 2054              	.LASF8:
+ 2055 0109 433A5C55 		.ascii	"C:\\Users\\larco\\Dropbox\\DEVELOPMENT\\Audio spect"
+ 2055      73657273 
+ 2055      5C6C6172 
+ 2055      636F5C44 
+ 2055      726F7062 
+ 2056 0137 72756D20 		.ascii	"rum analyzer\\Firmware\\audioSpectrumAnalyzer\\audi"
+ 2056      616E616C 
+ 2056      797A6572 
+ 2056      5C466972 
+ 2056      6D776172 
+ 2057 0167 6F537065 		.ascii	"oSpectrumAnalyzer.cydsn\000"
+ 2057      63747275 
+ 2057      6D416E61 
+ 2057      6C797A65 
+ 2057      722E6379 
+ 2058              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

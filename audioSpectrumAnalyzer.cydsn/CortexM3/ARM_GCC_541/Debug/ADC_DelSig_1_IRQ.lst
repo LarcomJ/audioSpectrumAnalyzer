@@ -1,0 +1,2457 @@
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"ADC_DelSig_1_IRQ.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ADC_DelSig_1_IRQ_Interrupt,"ax",%progbits
+  20              		.align	2
+  21              		.global	ADC_DelSig_1_IRQ_Interrupt
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	ADC_DelSig_1_IRQ_Interrupt, %function
+  25              	ADC_DelSig_1_IRQ_Interrupt:
+  26              	.LFB3:
+  27              		.file 1 "Generated_Source\\PSoC5\\ADC_DelSig_1_IRQ.c"
+   1:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * File Name: ADC_DelSig_1_IRQ.c  
+   3:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Version 1.70
+   4:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+   5:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  Description:
+   6:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   API for controlling the state of an interrupt.
+   7:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+   8:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+   9:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  Note:
+  10:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+  11:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  14:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  15:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  18:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  19:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #include <cydevice_trm.h>
+  20:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #include <CyLib.h>
+  21:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #include <ADC_DelSig_1_IRQ.h>
+  22:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #include "cyapicallbacks.h"
+  23:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  24:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #if !defined(ADC_DelSig_1_IRQ__REMOVED) /* Check for removal by optimization */
+  25:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  26:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+  27:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  Place your includes, defines and code here 
+  28:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************/
+  29:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /* `#START ADC_DelSig_1_IRQ_intc` */
+  30:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 2
+
+
+  31:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /* `#END` */
+  32:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  33:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #ifndef CYINT_IRQ_BASE
+  34:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #define CYINT_IRQ_BASE      16
+  35:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #endif /* CYINT_IRQ_BASE */
+  36:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #ifndef CYINT_VECT_TABLE
+  37:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #define CYINT_VECT_TABLE    ((cyisraddress **) CYREG_NVIC_VECT_OFFSET)
+  38:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** #endif /* CYINT_VECT_TABLE */
+  39:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  40:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /* Declared in startup, used to set unused interrupts to. */
+  41:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** CY_ISR_PROTO(IntDefaultHandler);
+  42:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  43:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  44:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+  45:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_Start
+  46:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+  47:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+  48:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+  49:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  Set up the interrupt and enable it. This function disables the interrupt, 
+  50:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  sets the default interrupt vector, sets the priority from the value in the
+  51:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  Design Wide Resources Interrupt Editor, then enables the interrupt to the 
+  52:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  interrupt controller.
+  53:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+  54:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:  
+  55:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+  56:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+  57:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+  58:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+  59:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+  60:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+  61:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** void ADC_DelSig_1_IRQ_Start(void)
+  62:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+  63:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* For all we know the interrupt is active. */
+  64:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_Disable();
+  65:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  66:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Set the ISR to point to the ADC_DelSig_1_IRQ Interrupt. */
+  67:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_SetVector(&ADC_DelSig_1_IRQ_Interrupt);
+  68:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  69:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Set the priority. */
+  70:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_SetPriority((uint8)ADC_DelSig_1_IRQ_INTC_PRIOR_NUMBER);
+  71:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  72:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Enable it. */
+  73:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_Enable();
+  74:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+  75:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  76:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  77:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+  78:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_StartEx
+  79:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+  80:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+  81:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+  82:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  Sets up the interrupt and enables it. This function disables the interrupt,
+  83:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  sets the interrupt vector based on the address passed in, sets the priority 
+  84:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  from the value in the Design Wide Resources Interrupt Editor, then enables 
+  85:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  the interrupt to the interrupt controller.
+  86:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  
+  87:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 3
+
+
+  88:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  used to provide consistent definition across compilers:
+  89:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  
+  90:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *  Function definition example:
+  91:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   CY_ISR(MyISR)
+  92:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   {
+  93:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   }
+  94:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Function prototype example:
+  95:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   CY_ISR_PROTO(MyISR);
+  96:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+  97:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:  
+  98:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   address: Address of the ISR to set in the interrupt vector table.
+  99:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 100:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 101:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 102:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 103:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 104:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** void ADC_DelSig_1_IRQ_StartEx(cyisraddress address)
+ 105:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 106:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* For all we know the interrupt is active. */
+ 107:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_Disable();
+ 108:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 109:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Set the ISR to point to the ADC_DelSig_1_IRQ Interrupt. */
+ 110:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_SetVector(address);
+ 111:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 112:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Set the priority. */
+ 113:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_SetPriority((uint8)ADC_DelSig_1_IRQ_INTC_PRIOR_NUMBER);
+ 114:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 115:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Enable it. */
+ 116:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_Enable();
+ 117:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 118:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 119:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 120:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 121:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_Stop
+ 122:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 123:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 124:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 125:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Disables and removes the interrupt.
+ 126:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 127:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:  
+ 128:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 129:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 130:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 131:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 132:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 133:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 134:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** void ADC_DelSig_1_IRQ_Stop(void)
+ 135:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 136:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Disable this interrupt. */
+ 137:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_Disable();
+ 138:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 139:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Set the ISR to point to the passive one. */
+ 140:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ADC_DelSig_1_IRQ_SetVector(&IntDefaultHandler);
+ 141:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 142:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 143:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 144:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 4
+
+
+ 145:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_Interrupt
+ 146:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 147:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 148:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 149:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   The default Interrupt Service Routine for ADC_DelSig_1_IRQ.
+ 150:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 151:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Add custom code between the coments to keep the next version of this file
+ 152:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   from over writting your code.
+ 153:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 154:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:  
+ 155:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 156:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 157:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 158:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 159:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 160:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** CY_ISR(ADC_DelSig_1_IRQ_Interrupt)
+ 161:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+  28              		.loc 1 161 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 7047     		bx	lr
+  34              		.cfi_endproc
+  35              	.LFE3:
+  36              		.size	ADC_DelSig_1_IRQ_Interrupt, .-ADC_DelSig_1_IRQ_Interrupt
+  37 0002 00BF     		.section	.text.ADC_DelSig_1_IRQ_Start,"ax",%progbits
+  38              		.align	2
+  39              		.global	ADC_DelSig_1_IRQ_Start
+  40              		.thumb
+  41              		.thumb_func
+  42              		.type	ADC_DelSig_1_IRQ_Start, %function
+  43              	ADC_DelSig_1_IRQ_Start:
+  44              	.LFB0:
+  62:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* For all we know the interrupt is active. */
+  45              		.loc 1 62 0
+  46              		.cfi_startproc
+  47              		@ args = 0, pretend = 0, frame = 0
+  48              		@ frame_needed = 0, uses_anonymous_args = 0
+  49              		@ link register save eliminated.
+  62:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* For all we know the interrupt is active. */
+  50              		.loc 1 62 0
+  51 0000 70B4     		push	{r4, r5, r6}
+  52              		.cfi_def_cfa_offset 12
+  53              		.cfi_offset 4, -12
+  54              		.cfi_offset 5, -8
+  55              		.cfi_offset 6, -4
+  56              	.LBB22:
+  57              	.LBB23:
+ 162:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     #ifdef ADC_DelSig_1_IRQ_INTERRUPT_INTERRUPT_CALLBACK
+ 163:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****         ADC_DelSig_1_IRQ_Interrupt_InterruptCallback();
+ 164:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     #endif /* ADC_DelSig_1_IRQ_INTERRUPT_INTERRUPT_CALLBACK */ 
+ 165:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 166:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /*  Place your Interrupt code here. */
+ 167:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* `#START ADC_DelSig_1_IRQ_Interrupt` */
+ 168:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 169:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* `#END` */
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 5
+
+
+ 170:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 171:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 172:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 173:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 174:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_SetVector
+ 175:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 176:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 177:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 178:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Change the ISR vector for the Interrupt. Note calling ADC_DelSig_1_IRQ_Start
+ 179:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   will override any effect this method would have had. To set the vector 
+ 180:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   before the component has been started use ADC_DelSig_1_IRQ_StartEx instead.
+ 181:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * 
+ 182:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+ 183:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   used to provide consistent definition across compilers:
+ 184:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 185:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Function definition example:
+ 186:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   CY_ISR(MyISR)
+ 187:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   {
+ 188:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   }
+ 189:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 190:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Function prototype example:
+ 191:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *     CY_ISR_PROTO(MyISR);
+ 192:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 193:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:
+ 194:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   address: Address of the ISR to set in the interrupt vector table.
+ 195:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 196:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 197:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 198:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 199:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 200:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** void ADC_DelSig_1_IRQ_SetVector(cyisraddress address)
+ 201:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 202:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     cyisraddress * ramVectorTable;
+ 203:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 204:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+  58              		.loc 1 204 0
+  59 0002 084B     		ldr	r3, .L4
+  60              	.LBE23:
+  61              	.LBE22:
+  62              	.LBB26:
+  63              	.LBB27:
+ 205:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 206:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ramVectorTable[CYINT_IRQ_BASE + (uint32)ADC_DelSig_1_IRQ__INTC_NUMBER] = address;
+ 207:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 208:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 209:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 210:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 211:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_GetVector
+ 212:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 213:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 214:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 215:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Gets the "address" of the current ISR vector for the Interrupt.
+ 216:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 217:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:
+ 218:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 219:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 220:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 6
+
+
+ 221:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Address of the ISR in the interrupt vector table.
+ 222:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 223:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 224:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** cyisraddress ADC_DelSig_1_IRQ_GetVector(void)
+ 225:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 226:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     cyisraddress * ramVectorTable;
+ 227:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 228:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+ 229:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 230:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     return ramVectorTable[CYINT_IRQ_BASE + (uint32)ADC_DelSig_1_IRQ__INTC_NUMBER];
+ 231:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 232:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 233:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 234:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 235:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_SetPriority
+ 236:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 237:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 238:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 239:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Sets the Priority of the Interrupt. 
+ 240:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 241:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Note calling ADC_DelSig_1_IRQ_Start or ADC_DelSig_1_IRQ_StartEx will 
+ 242:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   override any effect this API would have had. This API should only be called
+ 243:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   after ADC_DelSig_1_IRQ_Start or ADC_DelSig_1_IRQ_StartEx has been called. 
+ 244:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   To set the initial priority for the component, use the Design-Wide Resources
+ 245:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Interrupt Editor.
+ 246:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 247:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Note This API has no effect on Non-maskable interrupt NMI).
+ 248:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 249:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:
+ 250:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   priority: Priority of the interrupt, 0 being the highest priority
+ 251:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *             PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 252:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *             PSoC 4: Priority is from 0 to 3.
+ 253:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 254:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 255:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 256:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 257:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 258:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** void ADC_DelSig_1_IRQ_SetPriority(uint8 priority)
+ 259:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 260:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     *ADC_DelSig_1_IRQ_INTC_PRIOR = priority << 5;
+ 261:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 262:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 263:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 264:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 265:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_GetPriority
+ 266:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 267:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 268:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 269:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Gets the Priority of the Interrupt.
+ 270:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 271:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:
+ 272:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 273:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 274:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 275:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Priority of the interrupt, 0 being the highest priority
+ 276:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *    PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 277:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *    PSoC 4: Priority is from 0 to 3.
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 7
+
+
+ 278:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 279:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 280:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** uint8 ADC_DelSig_1_IRQ_GetPriority(void)
+ 281:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 282:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     uint8 priority;
+ 283:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 284:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 285:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     priority = *ADC_DelSig_1_IRQ_INTC_PRIOR >> 5;
+ 286:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 287:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     return priority;
+ 288:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 289:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 290:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 291:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 292:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_Enable
+ 293:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 294:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 295:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 296:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Enables the interrupt to the interrupt controller. Do not call this function
+ 297:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   unless ISR_Start() has been called or the functionality of the ISR_Start() 
+ 298:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   function, which sets the vector and the priority, has been called.
+ 299:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 300:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:
+ 301:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 302:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 303:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 304:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 305:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 306:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 307:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** void ADC_DelSig_1_IRQ_Enable(void)
+ 308:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 309:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Enable the general interrupt. */
+ 310:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     *ADC_DelSig_1_IRQ_INTC_SET_EN = ADC_DelSig_1_IRQ__INTC_MASK;
+ 311:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 312:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 313:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 314:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 315:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_GetState
+ 316:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 317:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 318:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 319:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Gets the state (enabled, disabled) of the Interrupt.
+ 320:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 321:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:
+ 322:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 323:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 324:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 325:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   1 if enabled, 0 if disabled.
+ 326:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 327:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 328:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** uint8 ADC_DelSig_1_IRQ_GetState(void)
+ 329:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 330:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Get the state of the general interrupt. */
+ 331:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     return ((*ADC_DelSig_1_IRQ_INTC_SET_EN & (uint32)ADC_DelSig_1_IRQ__INTC_MASK) != 0u) ? 1u:0u;
+ 332:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 333:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 334:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 8
+
+
+ 335:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 336:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_Disable
+ 337:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 338:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 339:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 340:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Disables the Interrupt in the interrupt controller.
+ 341:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 342:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:
+ 343:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 344:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 345:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 346:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 347:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 348:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 349:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** void ADC_DelSig_1_IRQ_Disable(void)
+ 350:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 351:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Disable the general interrupt. */
+ 352:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     *ADC_DelSig_1_IRQ_INTC_CLR_EN = ADC_DelSig_1_IRQ__INTC_MASK;
+  64              		.loc 1 352 0
+  65 0004 084E     		ldr	r6, .L4+4
+  66              	.LBE27:
+  67              	.LBE26:
+  68              	.LBB30:
+  69              	.LBB24:
+ 204:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+  70              		.loc 1 204 0
+  71 0006 1C68     		ldr	r4, [r3]
+ 206:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+  72              		.loc 1 206 0
+  73 0008 084D     		ldr	r5, .L4+8
+  74              	.LBE24:
+  75              	.LBE30:
+  76              	.LBB31:
+  77              	.LBB32:
+ 260:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+  78              		.loc 1 260 0
+  79 000a 0949     		ldr	r1, .L4+12
+  80              	.LBE32:
+  81              	.LBE31:
+  82              	.LBB35:
+  83              	.LBB28:
+  84              		.loc 1 352 0
+  85 000c 4FF00053 		mov	r3, #536870912
+  86              	.LBE28:
+  87              	.LBE35:
+  88              	.LBB36:
+  89              	.LBB37:
+ 310:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+  90              		.loc 1 310 0
+  91 0010 084A     		ldr	r2, .L4+16
+  92              	.LBE37:
+  93              	.LBE36:
+  94              	.LBB39:
+  95              	.LBB33:
+ 260:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+  96              		.loc 1 260 0
+  97 0012 E020     		movs	r0, #224
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 9
+
+
+  98              	.LBE33:
+  99              	.LBE39:
+ 100              	.LBB40:
+ 101              	.LBB29:
+ 102              		.loc 1 352 0
+ 103 0014 3360     		str	r3, [r6]
+ 104              	.LVL0:
+ 105              	.LBE29:
+ 106              	.LBE40:
+ 107              	.LBB41:
+ 108              	.LBB25:
+ 206:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 109              		.loc 1 206 0
+ 110 0016 C4F8B450 		str	r5, [r4, #180]
+ 111              	.LVL1:
+ 112              	.LBE25:
+ 113              	.LBE41:
+ 114              	.LBB42:
+ 115              	.LBB34:
+ 260:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 116              		.loc 1 260 0
+ 117 001a 0870     		strb	r0, [r1]
+ 118              	.LVL2:
+ 119              	.LBE34:
+ 120              	.LBE42:
+  74:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 121              		.loc 1 74 0
+ 122 001c 70BC     		pop	{r4, r5, r6}
+ 123              		.cfi_restore 6
+ 124              		.cfi_restore 5
+ 125              		.cfi_restore 4
+ 126              		.cfi_def_cfa_offset 0
+ 127              	.LBB43:
+ 128              	.LBB38:
+ 310:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 129              		.loc 1 310 0
+ 130 001e 1360     		str	r3, [r2]
+ 131              	.LBE38:
+ 132              	.LBE43:
+  74:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 133              		.loc 1 74 0
+ 134 0020 7047     		bx	lr
+ 135              	.L5:
+ 136 0022 00BF     		.align	2
+ 137              	.L4:
+ 138 0024 08ED00E0 		.word	-536810232
+ 139 0028 80E100E0 		.word	-536813184
+ 140 002c 00000000 		.word	ADC_DelSig_1_IRQ_Interrupt
+ 141 0030 1DE400E0 		.word	-536812515
+ 142 0034 00E100E0 		.word	-536813312
+ 143              		.cfi_endproc
+ 144              	.LFE0:
+ 145              		.size	ADC_DelSig_1_IRQ_Start, .-ADC_DelSig_1_IRQ_Start
+ 146              		.section	.text.ADC_DelSig_1_IRQ_StartEx,"ax",%progbits
+ 147              		.align	2
+ 148              		.global	ADC_DelSig_1_IRQ_StartEx
+ 149              		.thumb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 10
+
+
+ 150              		.thumb_func
+ 151              		.type	ADC_DelSig_1_IRQ_StartEx, %function
+ 152              	ADC_DelSig_1_IRQ_StartEx:
+ 153              	.LFB1:
+ 105:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* For all we know the interrupt is active. */
+ 154              		.loc 1 105 0
+ 155              		.cfi_startproc
+ 156              		@ args = 0, pretend = 0, frame = 0
+ 157              		@ frame_needed = 0, uses_anonymous_args = 0
+ 158              		@ link register save eliminated.
+ 159              	.LVL3:
+ 160 0000 70B4     		push	{r4, r5, r6}
+ 161              		.cfi_def_cfa_offset 12
+ 162              		.cfi_offset 4, -12
+ 163              		.cfi_offset 5, -8
+ 164              		.cfi_offset 6, -4
+ 165              	.LBB44:
+ 166              	.LBB45:
+ 204:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 167              		.loc 1 204 0
+ 168 0002 074B     		ldr	r3, .L8
+ 169              	.LBE45:
+ 170              	.LBE44:
+ 171              	.LBB48:
+ 172              	.LBB49:
+ 173              		.loc 1 352 0
+ 174 0004 074E     		ldr	r6, .L8+4
+ 175              	.LBE49:
+ 176              	.LBE48:
+ 177              	.LBB52:
+ 178              	.LBB46:
+ 204:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 179              		.loc 1 204 0
+ 180 0006 1D68     		ldr	r5, [r3]
+ 181              	.LBE46:
+ 182              	.LBE52:
+ 183              	.LBB53:
+ 184              	.LBB54:
+ 260:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 185              		.loc 1 260 0
+ 186 0008 0749     		ldr	r1, .L8+8
+ 187              	.LBE54:
+ 188              	.LBE53:
+ 189              	.LBB57:
+ 190              	.LBB50:
+ 191              		.loc 1 352 0
+ 192 000a 4FF00053 		mov	r3, #536870912
+ 193              	.LBE50:
+ 194              	.LBE57:
+ 195              	.LBB58:
+ 196              	.LBB55:
+ 260:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 197              		.loc 1 260 0
+ 198 000e E024     		movs	r4, #224
+ 199              	.LBE55:
+ 200              	.LBE58:
+ 201              	.LBB59:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 11
+
+
+ 202              	.LBB60:
+ 310:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 203              		.loc 1 310 0
+ 204 0010 064A     		ldr	r2, .L8+12
+ 205              	.LBE60:
+ 206              	.LBE59:
+ 207              	.LBB62:
+ 208              	.LBB51:
+ 209              		.loc 1 352 0
+ 210 0012 3360     		str	r3, [r6]
+ 211              	.LVL4:
+ 212              	.LBE51:
+ 213              	.LBE62:
+ 214              	.LBB63:
+ 215              	.LBB47:
+ 206:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 216              		.loc 1 206 0
+ 217 0014 C5F8B400 		str	r0, [r5, #180]
+ 218              	.LVL5:
+ 219              	.LBE47:
+ 220              	.LBE63:
+ 221              	.LBB64:
+ 222              	.LBB56:
+ 260:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 223              		.loc 1 260 0
+ 224 0018 0C70     		strb	r4, [r1]
+ 225              	.LVL6:
+ 226              	.LBE56:
+ 227              	.LBE64:
+ 117:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 228              		.loc 1 117 0
+ 229 001a 70BC     		pop	{r4, r5, r6}
+ 230              		.cfi_restore 6
+ 231              		.cfi_restore 5
+ 232              		.cfi_restore 4
+ 233              		.cfi_def_cfa_offset 0
+ 234              	.LBB65:
+ 235              	.LBB61:
+ 310:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 236              		.loc 1 310 0
+ 237 001c 1360     		str	r3, [r2]
+ 238              	.LBE61:
+ 239              	.LBE65:
+ 117:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 240              		.loc 1 117 0
+ 241 001e 7047     		bx	lr
+ 242              	.L9:
+ 243              		.align	2
+ 244              	.L8:
+ 245 0020 08ED00E0 		.word	-536810232
+ 246 0024 80E100E0 		.word	-536813184
+ 247 0028 1DE400E0 		.word	-536812515
+ 248 002c 00E100E0 		.word	-536813312
+ 249              		.cfi_endproc
+ 250              	.LFE1:
+ 251              		.size	ADC_DelSig_1_IRQ_StartEx, .-ADC_DelSig_1_IRQ_StartEx
+ 252              		.section	.text.ADC_DelSig_1_IRQ_Stop,"ax",%progbits
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 12
+
+
+ 253              		.align	2
+ 254              		.global	ADC_DelSig_1_IRQ_Stop
+ 255              		.thumb
+ 256              		.thumb_func
+ 257              		.type	ADC_DelSig_1_IRQ_Stop, %function
+ 258              	ADC_DelSig_1_IRQ_Stop:
+ 259              	.LFB2:
+ 135:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Disable this interrupt. */
+ 260              		.loc 1 135 0
+ 261              		.cfi_startproc
+ 262              		@ args = 0, pretend = 0, frame = 0
+ 263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 264              		@ link register save eliminated.
+ 265              	.LBB66:
+ 266              	.LBB67:
+ 204:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 267              		.loc 1 204 0
+ 268 0000 044B     		ldr	r3, .L11
+ 269              	.LBE67:
+ 270              	.LBE66:
+ 271              	.LBB70:
+ 272              	.LBB71:
+ 273              		.loc 1 352 0
+ 274 0002 0549     		ldr	r1, .L11+4
+ 275              	.LBE71:
+ 276              	.LBE70:
+ 277              	.LBB73:
+ 278              	.LBB68:
+ 204:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 279              		.loc 1 204 0
+ 280 0004 1B68     		ldr	r3, [r3]
+ 206:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 281              		.loc 1 206 0
+ 282 0006 054A     		ldr	r2, .L11+8
+ 283              	.LBE68:
+ 284              	.LBE73:
+ 285              	.LBB74:
+ 286              	.LBB72:
+ 287              		.loc 1 352 0
+ 288 0008 4FF00050 		mov	r0, #536870912
+ 289 000c 0860     		str	r0, [r1]
+ 290              	.LVL7:
+ 291              	.LBE72:
+ 292              	.LBE74:
+ 293              	.LBB75:
+ 294              	.LBB69:
+ 206:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 295              		.loc 1 206 0
+ 296 000e C3F8B420 		str	r2, [r3, #180]
+ 297              	.LVL8:
+ 298 0012 7047     		bx	lr
+ 299              	.L12:
+ 300              		.align	2
+ 301              	.L11:
+ 302 0014 08ED00E0 		.word	-536810232
+ 303 0018 80E100E0 		.word	-536813184
+ 304 001c 00000000 		.word	IntDefaultHandler
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 13
+
+
+ 305              	.LBE69:
+ 306              	.LBE75:
+ 307              		.cfi_endproc
+ 308              	.LFE2:
+ 309              		.size	ADC_DelSig_1_IRQ_Stop, .-ADC_DelSig_1_IRQ_Stop
+ 310              		.section	.text.ADC_DelSig_1_IRQ_SetVector,"ax",%progbits
+ 311              		.align	2
+ 312              		.global	ADC_DelSig_1_IRQ_SetVector
+ 313              		.thumb
+ 314              		.thumb_func
+ 315              		.type	ADC_DelSig_1_IRQ_SetVector, %function
+ 316              	ADC_DelSig_1_IRQ_SetVector:
+ 317              	.LFB4:
+ 201:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     cyisraddress * ramVectorTable;
+ 318              		.loc 1 201 0
+ 319              		.cfi_startproc
+ 320              		@ args = 0, pretend = 0, frame = 0
+ 321              		@ frame_needed = 0, uses_anonymous_args = 0
+ 322              		@ link register save eliminated.
+ 323              	.LVL9:
+ 204:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 324              		.loc 1 204 0
+ 325 0000 024B     		ldr	r3, .L14
+ 326 0002 1B68     		ldr	r3, [r3]
+ 327              	.LVL10:
+ 206:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 328              		.loc 1 206 0
+ 329 0004 C3F8B400 		str	r0, [r3, #180]
+ 330 0008 7047     		bx	lr
+ 331              	.L15:
+ 332 000a 00BF     		.align	2
+ 333              	.L14:
+ 334 000c 08ED00E0 		.word	-536810232
+ 335              		.cfi_endproc
+ 336              	.LFE4:
+ 337              		.size	ADC_DelSig_1_IRQ_SetVector, .-ADC_DelSig_1_IRQ_SetVector
+ 338              		.section	.text.ADC_DelSig_1_IRQ_GetVector,"ax",%progbits
+ 339              		.align	2
+ 340              		.global	ADC_DelSig_1_IRQ_GetVector
+ 341              		.thumb
+ 342              		.thumb_func
+ 343              		.type	ADC_DelSig_1_IRQ_GetVector, %function
+ 344              	ADC_DelSig_1_IRQ_GetVector:
+ 345              	.LFB5:
+ 225:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     cyisraddress * ramVectorTable;
+ 346              		.loc 1 225 0
+ 347              		.cfi_startproc
+ 348              		@ args = 0, pretend = 0, frame = 0
+ 349              		@ frame_needed = 0, uses_anonymous_args = 0
+ 350              		@ link register save eliminated.
+ 351              	.LVL11:
+ 228:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 352              		.loc 1 228 0
+ 353 0000 024B     		ldr	r3, .L17
+ 354              	.LVL12:
+ 230:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 355              		.loc 1 230 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 14
+
+
+ 356 0002 1B68     		ldr	r3, [r3]
+ 357              	.LVL13:
+ 231:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 358              		.loc 1 231 0
+ 359 0004 D3F8B400 		ldr	r0, [r3, #180]
+ 360 0008 7047     		bx	lr
+ 361              	.L18:
+ 362 000a 00BF     		.align	2
+ 363              	.L17:
+ 364 000c 08ED00E0 		.word	-536810232
+ 365              		.cfi_endproc
+ 366              	.LFE5:
+ 367              		.size	ADC_DelSig_1_IRQ_GetVector, .-ADC_DelSig_1_IRQ_GetVector
+ 368              		.section	.text.ADC_DelSig_1_IRQ_SetPriority,"ax",%progbits
+ 369              		.align	2
+ 370              		.global	ADC_DelSig_1_IRQ_SetPriority
+ 371              		.thumb
+ 372              		.thumb_func
+ 373              		.type	ADC_DelSig_1_IRQ_SetPriority, %function
+ 374              	ADC_DelSig_1_IRQ_SetPriority:
+ 375              	.LFB6:
+ 259:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     *ADC_DelSig_1_IRQ_INTC_PRIOR = priority << 5;
+ 376              		.loc 1 259 0
+ 377              		.cfi_startproc
+ 378              		@ args = 0, pretend = 0, frame = 0
+ 379              		@ frame_needed = 0, uses_anonymous_args = 0
+ 380              		@ link register save eliminated.
+ 381              	.LVL14:
+ 260:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 382              		.loc 1 260 0
+ 383 0000 4001     		lsls	r0, r0, #5
+ 384              	.LVL15:
+ 385 0002 024B     		ldr	r3, .L20
+ 386 0004 C0B2     		uxtb	r0, r0
+ 387 0006 1870     		strb	r0, [r3]
+ 388 0008 7047     		bx	lr
+ 389              	.L21:
+ 390 000a 00BF     		.align	2
+ 391              	.L20:
+ 392 000c 1DE400E0 		.word	-536812515
+ 393              		.cfi_endproc
+ 394              	.LFE6:
+ 395              		.size	ADC_DelSig_1_IRQ_SetPriority, .-ADC_DelSig_1_IRQ_SetPriority
+ 396              		.section	.text.ADC_DelSig_1_IRQ_GetPriority,"ax",%progbits
+ 397              		.align	2
+ 398              		.global	ADC_DelSig_1_IRQ_GetPriority
+ 399              		.thumb
+ 400              		.thumb_func
+ 401              		.type	ADC_DelSig_1_IRQ_GetPriority, %function
+ 402              	ADC_DelSig_1_IRQ_GetPriority:
+ 403              	.LFB7:
+ 281:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     uint8 priority;
+ 404              		.loc 1 281 0
+ 405              		.cfi_startproc
+ 406              		@ args = 0, pretend = 0, frame = 0
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408              		@ link register save eliminated.
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 15
+
+
+ 285:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 409              		.loc 1 285 0
+ 410 0000 014B     		ldr	r3, .L23
+ 411 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 412              	.LVL16:
+ 288:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 413              		.loc 1 288 0
+ 414 0004 4009     		lsrs	r0, r0, #5
+ 415              	.LVL17:
+ 416 0006 7047     		bx	lr
+ 417              	.L24:
+ 418              		.align	2
+ 419              	.L23:
+ 420 0008 1DE400E0 		.word	-536812515
+ 421              		.cfi_endproc
+ 422              	.LFE7:
+ 423              		.size	ADC_DelSig_1_IRQ_GetPriority, .-ADC_DelSig_1_IRQ_GetPriority
+ 424              		.section	.text.ADC_DelSig_1_IRQ_Enable,"ax",%progbits
+ 425              		.align	2
+ 426              		.global	ADC_DelSig_1_IRQ_Enable
+ 427              		.thumb
+ 428              		.thumb_func
+ 429              		.type	ADC_DelSig_1_IRQ_Enable, %function
+ 430              	ADC_DelSig_1_IRQ_Enable:
+ 431              	.LFB8:
+ 308:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Enable the general interrupt. */
+ 432              		.loc 1 308 0
+ 433              		.cfi_startproc
+ 434              		@ args = 0, pretend = 0, frame = 0
+ 435              		@ frame_needed = 0, uses_anonymous_args = 0
+ 436              		@ link register save eliminated.
+ 310:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 437              		.loc 1 310 0
+ 438 0000 024B     		ldr	r3, .L26
+ 439 0002 4FF00052 		mov	r2, #536870912
+ 440 0006 1A60     		str	r2, [r3]
+ 441 0008 7047     		bx	lr
+ 442              	.L27:
+ 443 000a 00BF     		.align	2
+ 444              	.L26:
+ 445 000c 00E100E0 		.word	-536813312
+ 446              		.cfi_endproc
+ 447              	.LFE8:
+ 448              		.size	ADC_DelSig_1_IRQ_Enable, .-ADC_DelSig_1_IRQ_Enable
+ 449              		.section	.text.ADC_DelSig_1_IRQ_GetState,"ax",%progbits
+ 450              		.align	2
+ 451              		.global	ADC_DelSig_1_IRQ_GetState
+ 452              		.thumb
+ 453              		.thumb_func
+ 454              		.type	ADC_DelSig_1_IRQ_GetState, %function
+ 455              	ADC_DelSig_1_IRQ_GetState:
+ 456              	.LFB9:
+ 329:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Get the state of the general interrupt. */
+ 457              		.loc 1 329 0
+ 458              		.cfi_startproc
+ 459              		@ args = 0, pretend = 0, frame = 0
+ 460              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 16
+
+
+ 461              		@ link register save eliminated.
+ 331:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 462              		.loc 1 331 0
+ 463 0000 024B     		ldr	r3, .L29
+ 464 0002 1868     		ldr	r0, [r3]
+ 332:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 465              		.loc 1 332 0
+ 466 0004 C0F34070 		ubfx	r0, r0, #29, #1
+ 467 0008 7047     		bx	lr
+ 468              	.L30:
+ 469 000a 00BF     		.align	2
+ 470              	.L29:
+ 471 000c 00E100E0 		.word	-536813312
+ 472              		.cfi_endproc
+ 473              	.LFE9:
+ 474              		.size	ADC_DelSig_1_IRQ_GetState, .-ADC_DelSig_1_IRQ_GetState
+ 475              		.section	.text.ADC_DelSig_1_IRQ_Disable,"ax",%progbits
+ 476              		.align	2
+ 477              		.global	ADC_DelSig_1_IRQ_Disable
+ 478              		.thumb
+ 479              		.thumb_func
+ 480              		.type	ADC_DelSig_1_IRQ_Disable, %function
+ 481              	ADC_DelSig_1_IRQ_Disable:
+ 482              	.LFB10:
+ 350:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     /* Disable the general interrupt. */
+ 483              		.loc 1 350 0
+ 484              		.cfi_startproc
+ 485              		@ args = 0, pretend = 0, frame = 0
+ 486              		@ frame_needed = 0, uses_anonymous_args = 0
+ 487              		@ link register save eliminated.
+ 488              		.loc 1 352 0
+ 489 0000 024B     		ldr	r3, .L32
+ 490 0002 4FF00052 		mov	r2, #536870912
+ 491 0006 1A60     		str	r2, [r3]
+ 492 0008 7047     		bx	lr
+ 493              	.L33:
+ 494 000a 00BF     		.align	2
+ 495              	.L32:
+ 496 000c 80E100E0 		.word	-536813184
+ 497              		.cfi_endproc
+ 498              	.LFE10:
+ 499              		.size	ADC_DelSig_1_IRQ_Disable, .-ADC_DelSig_1_IRQ_Disable
+ 500              		.section	.text.ADC_DelSig_1_IRQ_SetPending,"ax",%progbits
+ 501              		.align	2
+ 502              		.global	ADC_DelSig_1_IRQ_SetPending
+ 503              		.thumb
+ 504              		.thumb_func
+ 505              		.type	ADC_DelSig_1_IRQ_SetPending, %function
+ 506              	ADC_DelSig_1_IRQ_SetPending:
+ 507              	.LFB11:
+ 353:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 354:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 355:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 356:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 357:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_SetPending
+ 358:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 359:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 17
+
+
+ 360:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 361:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Causes the Interrupt to enter the pending state, a software method of
+ 362:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   generating the interrupt.
+ 363:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 364:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:
+ 365:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 366:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 367:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 368:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 369:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 370:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Side Effects:
+ 371:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   If interrupts are enabled and the interrupt is set up properly, the ISR is
+ 372:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   entered (depending on the priority of this interrupt and other pending 
+ 373:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   interrupts).
+ 374:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 375:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 376:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** void ADC_DelSig_1_IRQ_SetPending(void)
+ 377:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 508              		.loc 1 377 0
+ 509              		.cfi_startproc
+ 510              		@ args = 0, pretend = 0, frame = 0
+ 511              		@ frame_needed = 0, uses_anonymous_args = 0
+ 512              		@ link register save eliminated.
+ 378:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     *ADC_DelSig_1_IRQ_INTC_SET_PD = ADC_DelSig_1_IRQ__INTC_MASK;
+ 513              		.loc 1 378 0
+ 514 0000 024B     		ldr	r3, .L35
+ 515 0002 4FF00052 		mov	r2, #536870912
+ 516 0006 1A60     		str	r2, [r3]
+ 517 0008 7047     		bx	lr
+ 518              	.L36:
+ 519 000a 00BF     		.align	2
+ 520              	.L35:
+ 521 000c 00E200E0 		.word	-536813056
+ 522              		.cfi_endproc
+ 523              	.LFE11:
+ 524              		.size	ADC_DelSig_1_IRQ_SetPending, .-ADC_DelSig_1_IRQ_SetPending
+ 525              		.section	.text.ADC_DelSig_1_IRQ_ClearPending,"ax",%progbits
+ 526              		.align	2
+ 527              		.global	ADC_DelSig_1_IRQ_ClearPending
+ 528              		.thumb
+ 529              		.thumb_func
+ 530              		.type	ADC_DelSig_1_IRQ_ClearPending, %function
+ 531              	ADC_DelSig_1_IRQ_ClearPending:
+ 532              	.LFB12:
+ 379:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** }
+ 380:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 381:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** 
+ 382:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** /*******************************************************************************
+ 383:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Function Name: ADC_DelSig_1_IRQ_ClearPending
+ 384:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** ********************************************************************************
+ 385:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 386:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Summary:
+ 387:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Clears a pending interrupt in the interrupt controller.
+ 388:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 389:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   Note Some interrupt sources are clear-on-read and require the block 
+ 390:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   interrupt/status register to be read/cleared with the appropriate block API 
+ 391:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   (GPIO, UART, and so on). Otherwise the ISR will continue to remain in 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 18
+
+
+ 392:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   pending state even though the interrupt itself is cleared using this API.
+ 393:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 394:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Parameters:
+ 395:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 396:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 397:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** * Return:
+ 398:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *   None
+ 399:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *
+ 400:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** *******************************************************************************/
+ 401:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** void ADC_DelSig_1_IRQ_ClearPending(void)
+ 402:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c **** {
+ 533              		.loc 1 402 0
+ 534              		.cfi_startproc
+ 535              		@ args = 0, pretend = 0, frame = 0
+ 536              		@ frame_needed = 0, uses_anonymous_args = 0
+ 537              		@ link register save eliminated.
+ 403:Generated_Source\PSoC5/ADC_DelSig_1_IRQ.c ****     *ADC_DelSig_1_IRQ_INTC_CLR_PD = ADC_DelSig_1_IRQ__INTC_MASK;
+ 538              		.loc 1 403 0
+ 539 0000 024B     		ldr	r3, .L38
+ 540 0002 4FF00052 		mov	r2, #536870912
+ 541 0006 1A60     		str	r2, [r3]
+ 542 0008 7047     		bx	lr
+ 543              	.L39:
+ 544 000a 00BF     		.align	2
+ 545              	.L38:
+ 546 000c 80E200E0 		.word	-536812928
+ 547              		.cfi_endproc
+ 548              	.LFE12:
+ 549              		.size	ADC_DelSig_1_IRQ_ClearPending, .-ADC_DelSig_1_IRQ_ClearPending
+ 550              		.text
+ 551              	.Letext0:
+ 552              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 553              		.section	.debug_info,"",%progbits
+ 554              	.Ldebug_info0:
+ 555 0000 7D030000 		.4byte	0x37d
+ 556 0004 0400     		.2byte	0x4
+ 557 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 558 000a 04       		.byte	0x4
+ 559 000b 01       		.uleb128 0x1
+ 560 000c 05020000 		.4byte	.LASF34
+ 561 0010 0C       		.byte	0xc
+ 562 0011 1B030000 		.4byte	.LASF35
+ 563 0015 68000000 		.4byte	.LASF36
+ 564 0019 28010000 		.4byte	.Ldebug_ranges0+0x128
+ 565 001d 00000000 		.4byte	0
+ 566 0021 00000000 		.4byte	.Ldebug_line0
+ 567 0025 02       		.uleb128 0x2
+ 568 0026 04       		.byte	0x4
+ 569 0027 05       		.byte	0x5
+ 570 0028 696E7400 		.ascii	"int\000"
+ 571 002c 03       		.uleb128 0x3
+ 572 002d 04       		.byte	0x4
+ 573 002e 07       		.byte	0x7
+ 574 002f F8010000 		.4byte	.LASF0
+ 575 0033 03       		.uleb128 0x3
+ 576 0034 08       		.byte	0x8
+ 577 0035 05       		.byte	0x5
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 19
+
+
+ 578 0036 EF020000 		.4byte	.LASF1
+ 579 003a 03       		.uleb128 0x3
+ 580 003b 08       		.byte	0x8
+ 581 003c 04       		.byte	0x4
+ 582 003d 65030000 		.4byte	.LASF2
+ 583 0041 03       		.uleb128 0x3
+ 584 0042 01       		.byte	0x1
+ 585 0043 06       		.byte	0x6
+ 586 0044 71030000 		.4byte	.LASF3
+ 587 0048 03       		.uleb128 0x3
+ 588 0049 01       		.byte	0x1
+ 589 004a 08       		.byte	0x8
+ 590 004b 77010000 		.4byte	.LASF4
+ 591 004f 03       		.uleb128 0x3
+ 592 0050 02       		.byte	0x2
+ 593 0051 05       		.byte	0x5
+ 594 0052 11030000 		.4byte	.LASF5
+ 595 0056 03       		.uleb128 0x3
+ 596 0057 02       		.byte	0x2
+ 597 0058 07       		.byte	0x7
+ 598 0059 F1000000 		.4byte	.LASF6
+ 599 005d 03       		.uleb128 0x3
+ 600 005e 04       		.byte	0x4
+ 601 005f 05       		.byte	0x5
+ 602 0060 5C030000 		.4byte	.LASF7
+ 603 0064 03       		.uleb128 0x3
+ 604 0065 04       		.byte	0x4
+ 605 0066 07       		.byte	0x7
+ 606 0067 AC010000 		.4byte	.LASF8
+ 607 006b 03       		.uleb128 0x3
+ 608 006c 08       		.byte	0x8
+ 609 006d 07       		.byte	0x7
+ 610 006e A6020000 		.4byte	.LASF9
+ 611 0072 03       		.uleb128 0x3
+ 612 0073 04       		.byte	0x4
+ 613 0074 07       		.byte	0x7
+ 614 0075 CA020000 		.4byte	.LASF10
+ 615 0079 03       		.uleb128 0x3
+ 616 007a 01       		.byte	0x1
+ 617 007b 08       		.byte	0x8
+ 618 007c FD020000 		.4byte	.LASF11
+ 619 0080 04       		.uleb128 0x4
+ 620 0081 04       		.byte	0x4
+ 621 0082 86000000 		.4byte	0x86
+ 622 0086 05       		.uleb128 0x5
+ 623 0087 06       		.uleb128 0x6
+ 624 0088 BE010000 		.4byte	.LASF12
+ 625 008c 02       		.byte	0x2
+ 626 008d E401     		.2byte	0x1e4
+ 627 008f 48000000 		.4byte	0x48
+ 628 0093 06       		.uleb128 0x6
+ 629 0094 F1010000 		.4byte	.LASF13
+ 630 0098 02       		.byte	0x2
+ 631 0099 E601     		.2byte	0x1e6
+ 632 009b 64000000 		.4byte	0x64
+ 633 009f 03       		.uleb128 0x3
+ 634 00a0 04       		.byte	0x4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 20
+
+
+ 635 00a1 04       		.byte	0x4
+ 636 00a2 71010000 		.4byte	.LASF14
+ 637 00a6 03       		.uleb128 0x3
+ 638 00a7 08       		.byte	0x8
+ 639 00a8 04       		.byte	0x4
+ 640 00a9 EA010000 		.4byte	.LASF15
+ 641 00ad 06       		.uleb128 0x6
+ 642 00ae 9F010000 		.4byte	.LASF16
+ 643 00b2 02       		.byte	0x2
+ 644 00b3 8E02     		.2byte	0x28e
+ 645 00b5 B9000000 		.4byte	0xb9
+ 646 00b9 07       		.uleb128 0x7
+ 647 00ba 87000000 		.4byte	0x87
+ 648 00be 06       		.uleb128 0x6
+ 649 00bf 19000000 		.4byte	.LASF17
+ 650 00c3 02       		.byte	0x2
+ 651 00c4 9002     		.2byte	0x290
+ 652 00c6 CA000000 		.4byte	0xca
+ 653 00ca 07       		.uleb128 0x7
+ 654 00cb 93000000 		.4byte	0x93
+ 655 00cf 06       		.uleb128 0x6
+ 656 00d0 BD020000 		.4byte	.LASF18
+ 657 00d4 02       		.byte	0x2
+ 658 00d5 A002     		.2byte	0x2a0
+ 659 00d7 80000000 		.4byte	0x80
+ 660 00db 08       		.uleb128 0x8
+ 661 00dc 1F000000 		.4byte	.LASF23
+ 662 00e0 01       		.byte	0x1
+ 663 00e1 3301     		.2byte	0x133
+ 664 00e3 01       		.byte	0x1
+ 665 00e4 09       		.uleb128 0x9
+ 666 00e5 C4010000 		.4byte	.LASF19
+ 667 00e9 01       		.byte	0x1
+ 668 00ea 0201     		.2byte	0x102
+ 669 00ec 01       		.byte	0x1
+ 670 00ed FE000000 		.4byte	0xfe
+ 671 00f1 0A       		.uleb128 0xa
+ 672 00f2 E1010000 		.4byte	.LASF21
+ 673 00f6 01       		.byte	0x1
+ 674 00f7 0201     		.2byte	0x102
+ 675 00f9 87000000 		.4byte	0x87
+ 676 00fd 00       		.byte	0
+ 677 00fe 0B       		.uleb128 0xb
+ 678 00ff 1D010000 		.4byte	.LASF20
+ 679 0103 01       		.byte	0x1
+ 680 0104 C8       		.byte	0xc8
+ 681 0105 01       		.byte	0x1
+ 682 0106 21010000 		.4byte	0x121
+ 683 010a 0C       		.uleb128 0xc
+ 684 010b A4010000 		.4byte	.LASF22
+ 685 010f 01       		.byte	0x1
+ 686 0110 C8       		.byte	0xc8
+ 687 0111 CF000000 		.4byte	0xcf
+ 688 0115 0D       		.uleb128 0xd
+ 689 0116 02030000 		.4byte	.LASF30
+ 690 011a 01       		.byte	0x1
+ 691 011b CA       		.byte	0xca
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 21
+
+
+ 692 011c 21010000 		.4byte	0x121
+ 693 0120 00       		.byte	0
+ 694 0121 04       		.uleb128 0x4
+ 695 0122 04       		.byte	0x4
+ 696 0123 CF000000 		.4byte	0xcf
+ 697 0127 08       		.uleb128 0x8
+ 698 0128 04010000 		.4byte	.LASF24
+ 699 012c 01       		.byte	0x1
+ 700 012d 5D01     		.2byte	0x15d
+ 701 012f 01       		.byte	0x1
+ 702 0130 0E       		.uleb128 0xe
+ 703 0131 56010000 		.4byte	.LASF31
+ 704 0135 01       		.byte	0x1
+ 705 0136 A0       		.byte	0xa0
+ 706 0137 00000000 		.4byte	.LFB3
+ 707 013b 02000000 		.4byte	.LFE3-.LFB3
+ 708 013f 01       		.uleb128 0x1
+ 709 0140 9C       		.byte	0x9c
+ 710 0141 0F       		.uleb128 0xf
+ 711 0142 45030000 		.4byte	.LASF25
+ 712 0146 01       		.byte	0x1
+ 713 0147 3D       		.byte	0x3d
+ 714 0148 00000000 		.4byte	.LFB0
+ 715 014c 38000000 		.4byte	.LFE0-.LFB0
+ 716 0150 01       		.uleb128 0x1
+ 717 0151 9C       		.byte	0x9c
+ 718 0152 BE010000 		.4byte	0x1be
+ 719 0156 10       		.uleb128 0x10
+ 720 0157 FE000000 		.4byte	0xfe
+ 721 015b 02000000 		.4byte	.LBB22
+ 722 015f 00000000 		.4byte	.Ldebug_ranges0+0
+ 723 0163 01       		.byte	0x1
+ 724 0164 43       		.byte	0x43
+ 725 0165 82010000 		.4byte	0x182
+ 726 0169 11       		.uleb128 0x11
+ 727 016a 0A010000 		.4byte	0x10a
+ 728 016e 00000000 		.4byte	.LLST0
+ 729 0172 12       		.uleb128 0x12
+ 730 0173 00000000 		.4byte	.Ldebug_ranges0+0
+ 731 0177 13       		.uleb128 0x13
+ 732 0178 15010000 		.4byte	0x115
+ 733 017c 18000000 		.4byte	.LLST1
+ 734 0180 00       		.byte	0
+ 735 0181 00       		.byte	0
+ 736 0182 14       		.uleb128 0x14
+ 737 0183 27010000 		.4byte	0x127
+ 738 0187 04000000 		.4byte	.LBB26
+ 739 018b 20000000 		.4byte	.Ldebug_ranges0+0x20
+ 740 018f 01       		.byte	0x1
+ 741 0190 40       		.byte	0x40
+ 742 0191 10       		.uleb128 0x10
+ 743 0192 E4000000 		.4byte	0xe4
+ 744 0196 0A000000 		.4byte	.LBB31
+ 745 019a 40000000 		.4byte	.Ldebug_ranges0+0x40
+ 746 019e 01       		.byte	0x1
+ 747 019f 46       		.byte	0x46
+ 748 01a0 AE010000 		.4byte	0x1ae
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 22
+
+
+ 749 01a4 11       		.uleb128 0x11
+ 750 01a5 F1000000 		.4byte	0xf1
+ 751 01a9 2B000000 		.4byte	.LLST2
+ 752 01ad 00       		.byte	0
+ 753 01ae 14       		.uleb128 0x14
+ 754 01af DB000000 		.4byte	0xdb
+ 755 01b3 10000000 		.4byte	.LBB36
+ 756 01b7 60000000 		.4byte	.Ldebug_ranges0+0x60
+ 757 01bb 01       		.byte	0x1
+ 758 01bc 49       		.byte	0x49
+ 759 01bd 00       		.byte	0
+ 760 01be 0F       		.uleb128 0xf
+ 761 01bf 00000000 		.4byte	.LASF26
+ 762 01c3 01       		.byte	0x1
+ 763 01c4 68       		.byte	0x68
+ 764 01c5 00000000 		.4byte	.LFB1
+ 765 01c9 30000000 		.4byte	.LFE1-.LFB1
+ 766 01cd 01       		.uleb128 0x1
+ 767 01ce 9C       		.byte	0x9c
+ 768 01cf 48020000 		.4byte	0x248
+ 769 01d3 15       		.uleb128 0x15
+ 770 01d4 A4010000 		.4byte	.LASF22
+ 771 01d8 01       		.byte	0x1
+ 772 01d9 68       		.byte	0x68
+ 773 01da CF000000 		.4byte	0xcf
+ 774 01de 01       		.uleb128 0x1
+ 775 01df 50       		.byte	0x50
+ 776 01e0 10       		.uleb128 0x10
+ 777 01e1 FE000000 		.4byte	0xfe
+ 778 01e5 02000000 		.4byte	.LBB44
+ 779 01e9 78000000 		.4byte	.Ldebug_ranges0+0x78
+ 780 01ed 01       		.byte	0x1
+ 781 01ee 6E       		.byte	0x6e
+ 782 01ef 0C020000 		.4byte	0x20c
+ 783 01f3 11       		.uleb128 0x11
+ 784 01f4 0A010000 		.4byte	0x10a
+ 785 01f8 3F000000 		.4byte	.LLST3
+ 786 01fc 12       		.uleb128 0x12
+ 787 01fd 78000000 		.4byte	.Ldebug_ranges0+0x78
+ 788 0201 13       		.uleb128 0x13
+ 789 0202 15010000 		.4byte	0x115
+ 790 0206 52000000 		.4byte	.LLST4
+ 791 020a 00       		.byte	0
+ 792 020b 00       		.byte	0
+ 793 020c 14       		.uleb128 0x14
+ 794 020d 27010000 		.4byte	0x127
+ 795 0211 04000000 		.4byte	.LBB48
+ 796 0215 98000000 		.4byte	.Ldebug_ranges0+0x98
+ 797 0219 01       		.byte	0x1
+ 798 021a 6B       		.byte	0x6b
+ 799 021b 10       		.uleb128 0x10
+ 800 021c E4000000 		.4byte	0xe4
+ 801 0220 08000000 		.4byte	.LBB53
+ 802 0224 B8000000 		.4byte	.Ldebug_ranges0+0xb8
+ 803 0228 01       		.byte	0x1
+ 804 0229 71       		.byte	0x71
+ 805 022a 38020000 		.4byte	0x238
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 23
+
+
+ 806 022e 11       		.uleb128 0x11
+ 807 022f F1000000 		.4byte	0xf1
+ 808 0233 65000000 		.4byte	.LLST5
+ 809 0237 00       		.byte	0
+ 810 0238 14       		.uleb128 0x14
+ 811 0239 DB000000 		.4byte	0xdb
+ 812 023d 10000000 		.4byte	.LBB59
+ 813 0241 D8000000 		.4byte	.Ldebug_ranges0+0xd8
+ 814 0245 01       		.byte	0x1
+ 815 0246 74       		.byte	0x74
+ 816 0247 00       		.byte	0
+ 817 0248 0F       		.uleb128 0xf
+ 818 0249 37000000 		.4byte	.LASF27
+ 819 024d 01       		.byte	0x1
+ 820 024e 86       		.byte	0x86
+ 821 024f 00000000 		.4byte	.LFB2
+ 822 0253 20000000 		.4byte	.LFE2-.LFB2
+ 823 0257 01       		.uleb128 0x1
+ 824 0258 9C       		.byte	0x9c
+ 825 0259 95020000 		.4byte	0x295
+ 826 025d 10       		.uleb128 0x10
+ 827 025e FE000000 		.4byte	0xfe
+ 828 0262 00000000 		.4byte	.LBB66
+ 829 0266 F0000000 		.4byte	.Ldebug_ranges0+0xf0
+ 830 026a 01       		.byte	0x1
+ 831 026b 8C       		.byte	0x8c
+ 832 026c 85020000 		.4byte	0x285
+ 833 0270 16       		.uleb128 0x16
+ 834 0271 0A010000 		.4byte	0x10a
+ 835 0275 12       		.uleb128 0x12
+ 836 0276 F0000000 		.4byte	.Ldebug_ranges0+0xf0
+ 837 027a 13       		.uleb128 0x13
+ 838 027b 15010000 		.4byte	0x115
+ 839 027f 79000000 		.4byte	.LLST6
+ 840 0283 00       		.byte	0
+ 841 0284 00       		.byte	0
+ 842 0285 14       		.uleb128 0x14
+ 843 0286 27010000 		.4byte	0x127
+ 844 028a 02000000 		.4byte	.LBB70
+ 845 028e 10010000 		.4byte	.Ldebug_ranges0+0x110
+ 846 0292 01       		.byte	0x1
+ 847 0293 89       		.byte	0x89
+ 848 0294 00       		.byte	0
+ 849 0295 17       		.uleb128 0x17
+ 850 0296 FE000000 		.4byte	0xfe
+ 851 029a 00000000 		.4byte	.LFB4
+ 852 029e 10000000 		.4byte	.LFE4-.LFB4
+ 853 02a2 01       		.uleb128 0x1
+ 854 02a3 9C       		.byte	0x9c
+ 855 02a4 B7020000 		.4byte	0x2b7
+ 856 02a8 18       		.uleb128 0x18
+ 857 02a9 0A010000 		.4byte	0x10a
+ 858 02ad 01       		.uleb128 0x1
+ 859 02ae 50       		.byte	0x50
+ 860 02af 19       		.uleb128 0x19
+ 861 02b0 15010000 		.4byte	0x115
+ 862 02b4 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 24
+
+
+ 863 02b5 53       		.byte	0x53
+ 864 02b6 00       		.byte	0
+ 865 02b7 1A       		.uleb128 0x1a
+ 866 02b8 4D000000 		.4byte	.LASF28
+ 867 02bc 01       		.byte	0x1
+ 868 02bd E0       		.byte	0xe0
+ 869 02be CF000000 		.4byte	0xcf
+ 870 02c2 00000000 		.4byte	.LFB5
+ 871 02c6 10000000 		.4byte	.LFE5-.LFB5
+ 872 02ca 01       		.uleb128 0x1
+ 873 02cb 9C       		.byte	0x9c
+ 874 02cc E0020000 		.4byte	0x2e0
+ 875 02d0 1B       		.uleb128 0x1b
+ 876 02d1 02030000 		.4byte	.LASF30
+ 877 02d5 01       		.byte	0x1
+ 878 02d6 E2       		.byte	0xe2
+ 879 02d7 21010000 		.4byte	0x121
+ 880 02db 8C000000 		.4byte	.LLST7
+ 881 02df 00       		.byte	0
+ 882 02e0 17       		.uleb128 0x17
+ 883 02e1 E4000000 		.4byte	0xe4
+ 884 02e5 00000000 		.4byte	.LFB6
+ 885 02e9 10000000 		.4byte	.LFE6-.LFB6
+ 886 02ed 01       		.uleb128 0x1
+ 887 02ee 9C       		.byte	0x9c
+ 888 02ef FD020000 		.4byte	0x2fd
+ 889 02f3 11       		.uleb128 0x11
+ 890 02f4 F1000000 		.4byte	0xf1
+ 891 02f8 BB000000 		.4byte	.LLST8
+ 892 02fc 00       		.byte	0
+ 893 02fd 1C       		.uleb128 0x1c
+ 894 02fe 7D030000 		.4byte	.LASF29
+ 895 0302 01       		.byte	0x1
+ 896 0303 1801     		.2byte	0x118
+ 897 0305 87000000 		.4byte	0x87
+ 898 0309 00000000 		.4byte	.LFB7
+ 899 030d 0C000000 		.4byte	.LFE7-.LFB7
+ 900 0311 01       		.uleb128 0x1
+ 901 0312 9C       		.byte	0x9c
+ 902 0313 28030000 		.4byte	0x328
+ 903 0317 1D       		.uleb128 0x1d
+ 904 0318 E1010000 		.4byte	.LASF21
+ 905 031c 01       		.byte	0x1
+ 906 031d 1A01     		.2byte	0x11a
+ 907 031f 87000000 		.4byte	0x87
+ 908 0323 DC000000 		.4byte	.LLST9
+ 909 0327 00       		.byte	0
+ 910 0328 1E       		.uleb128 0x1e
+ 911 0329 DB000000 		.4byte	0xdb
+ 912 032d 00000000 		.4byte	.LFB8
+ 913 0331 10000000 		.4byte	.LFE8-.LFB8
+ 914 0335 01       		.uleb128 0x1
+ 915 0336 9C       		.byte	0x9c
+ 916 0337 1F       		.uleb128 0x1f
+ 917 0338 85010000 		.4byte	.LASF37
+ 918 033c 01       		.byte	0x1
+ 919 033d 4801     		.2byte	0x148
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 25
+
+
+ 920 033f 87000000 		.4byte	0x87
+ 921 0343 00000000 		.4byte	.LFB9
+ 922 0347 10000000 		.4byte	.LFE9-.LFB9
+ 923 034b 01       		.uleb128 0x1
+ 924 034c 9C       		.byte	0x9c
+ 925 034d 1E       		.uleb128 0x1e
+ 926 034e 27010000 		.4byte	0x127
+ 927 0352 00000000 		.4byte	.LFB10
+ 928 0356 10000000 		.4byte	.LFE10-.LFB10
+ 929 035a 01       		.uleb128 0x1
+ 930 035b 9C       		.byte	0x9c
+ 931 035c 20       		.uleb128 0x20
+ 932 035d D3020000 		.4byte	.LASF32
+ 933 0361 01       		.byte	0x1
+ 934 0362 7801     		.2byte	0x178
+ 935 0364 00000000 		.4byte	.LFB11
+ 936 0368 10000000 		.4byte	.LFE11-.LFB11
+ 937 036c 01       		.uleb128 0x1
+ 938 036d 9C       		.byte	0x9c
+ 939 036e 20       		.uleb128 0x20
+ 940 036f 38010000 		.4byte	.LASF33
+ 941 0373 01       		.byte	0x1
+ 942 0374 9101     		.2byte	0x191
+ 943 0376 00000000 		.4byte	.LFB12
+ 944 037a 10000000 		.4byte	.LFE12-.LFB12
+ 945 037e 01       		.uleb128 0x1
+ 946 037f 9C       		.byte	0x9c
+ 947 0380 00       		.byte	0
+ 948              		.section	.debug_abbrev,"",%progbits
+ 949              	.Ldebug_abbrev0:
+ 950 0000 01       		.uleb128 0x1
+ 951 0001 11       		.uleb128 0x11
+ 952 0002 01       		.byte	0x1
+ 953 0003 25       		.uleb128 0x25
+ 954 0004 0E       		.uleb128 0xe
+ 955 0005 13       		.uleb128 0x13
+ 956 0006 0B       		.uleb128 0xb
+ 957 0007 03       		.uleb128 0x3
+ 958 0008 0E       		.uleb128 0xe
+ 959 0009 1B       		.uleb128 0x1b
+ 960 000a 0E       		.uleb128 0xe
+ 961 000b 55       		.uleb128 0x55
+ 962 000c 17       		.uleb128 0x17
+ 963 000d 11       		.uleb128 0x11
+ 964 000e 01       		.uleb128 0x1
+ 965 000f 10       		.uleb128 0x10
+ 966 0010 17       		.uleb128 0x17
+ 967 0011 00       		.byte	0
+ 968 0012 00       		.byte	0
+ 969 0013 02       		.uleb128 0x2
+ 970 0014 24       		.uleb128 0x24
+ 971 0015 00       		.byte	0
+ 972 0016 0B       		.uleb128 0xb
+ 973 0017 0B       		.uleb128 0xb
+ 974 0018 3E       		.uleb128 0x3e
+ 975 0019 0B       		.uleb128 0xb
+ 976 001a 03       		.uleb128 0x3
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 26
+
+
+ 977 001b 08       		.uleb128 0x8
+ 978 001c 00       		.byte	0
+ 979 001d 00       		.byte	0
+ 980 001e 03       		.uleb128 0x3
+ 981 001f 24       		.uleb128 0x24
+ 982 0020 00       		.byte	0
+ 983 0021 0B       		.uleb128 0xb
+ 984 0022 0B       		.uleb128 0xb
+ 985 0023 3E       		.uleb128 0x3e
+ 986 0024 0B       		.uleb128 0xb
+ 987 0025 03       		.uleb128 0x3
+ 988 0026 0E       		.uleb128 0xe
+ 989 0027 00       		.byte	0
+ 990 0028 00       		.byte	0
+ 991 0029 04       		.uleb128 0x4
+ 992 002a 0F       		.uleb128 0xf
+ 993 002b 00       		.byte	0
+ 994 002c 0B       		.uleb128 0xb
+ 995 002d 0B       		.uleb128 0xb
+ 996 002e 49       		.uleb128 0x49
+ 997 002f 13       		.uleb128 0x13
+ 998 0030 00       		.byte	0
+ 999 0031 00       		.byte	0
+ 1000 0032 05       		.uleb128 0x5
+ 1001 0033 15       		.uleb128 0x15
+ 1002 0034 00       		.byte	0
+ 1003 0035 27       		.uleb128 0x27
+ 1004 0036 19       		.uleb128 0x19
+ 1005 0037 00       		.byte	0
+ 1006 0038 00       		.byte	0
+ 1007 0039 06       		.uleb128 0x6
+ 1008 003a 16       		.uleb128 0x16
+ 1009 003b 00       		.byte	0
+ 1010 003c 03       		.uleb128 0x3
+ 1011 003d 0E       		.uleb128 0xe
+ 1012 003e 3A       		.uleb128 0x3a
+ 1013 003f 0B       		.uleb128 0xb
+ 1014 0040 3B       		.uleb128 0x3b
+ 1015 0041 05       		.uleb128 0x5
+ 1016 0042 49       		.uleb128 0x49
+ 1017 0043 13       		.uleb128 0x13
+ 1018 0044 00       		.byte	0
+ 1019 0045 00       		.byte	0
+ 1020 0046 07       		.uleb128 0x7
+ 1021 0047 35       		.uleb128 0x35
+ 1022 0048 00       		.byte	0
+ 1023 0049 49       		.uleb128 0x49
+ 1024 004a 13       		.uleb128 0x13
+ 1025 004b 00       		.byte	0
+ 1026 004c 00       		.byte	0
+ 1027 004d 08       		.uleb128 0x8
+ 1028 004e 2E       		.uleb128 0x2e
+ 1029 004f 00       		.byte	0
+ 1030 0050 3F       		.uleb128 0x3f
+ 1031 0051 19       		.uleb128 0x19
+ 1032 0052 03       		.uleb128 0x3
+ 1033 0053 0E       		.uleb128 0xe
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 27
+
+
+ 1034 0054 3A       		.uleb128 0x3a
+ 1035 0055 0B       		.uleb128 0xb
+ 1036 0056 3B       		.uleb128 0x3b
+ 1037 0057 05       		.uleb128 0x5
+ 1038 0058 27       		.uleb128 0x27
+ 1039 0059 19       		.uleb128 0x19
+ 1040 005a 20       		.uleb128 0x20
+ 1041 005b 0B       		.uleb128 0xb
+ 1042 005c 00       		.byte	0
+ 1043 005d 00       		.byte	0
+ 1044 005e 09       		.uleb128 0x9
+ 1045 005f 2E       		.uleb128 0x2e
+ 1046 0060 01       		.byte	0x1
+ 1047 0061 3F       		.uleb128 0x3f
+ 1048 0062 19       		.uleb128 0x19
+ 1049 0063 03       		.uleb128 0x3
+ 1050 0064 0E       		.uleb128 0xe
+ 1051 0065 3A       		.uleb128 0x3a
+ 1052 0066 0B       		.uleb128 0xb
+ 1053 0067 3B       		.uleb128 0x3b
+ 1054 0068 05       		.uleb128 0x5
+ 1055 0069 27       		.uleb128 0x27
+ 1056 006a 19       		.uleb128 0x19
+ 1057 006b 20       		.uleb128 0x20
+ 1058 006c 0B       		.uleb128 0xb
+ 1059 006d 01       		.uleb128 0x1
+ 1060 006e 13       		.uleb128 0x13
+ 1061 006f 00       		.byte	0
+ 1062 0070 00       		.byte	0
+ 1063 0071 0A       		.uleb128 0xa
+ 1064 0072 05       		.uleb128 0x5
+ 1065 0073 00       		.byte	0
+ 1066 0074 03       		.uleb128 0x3
+ 1067 0075 0E       		.uleb128 0xe
+ 1068 0076 3A       		.uleb128 0x3a
+ 1069 0077 0B       		.uleb128 0xb
+ 1070 0078 3B       		.uleb128 0x3b
+ 1071 0079 05       		.uleb128 0x5
+ 1072 007a 49       		.uleb128 0x49
+ 1073 007b 13       		.uleb128 0x13
+ 1074 007c 00       		.byte	0
+ 1075 007d 00       		.byte	0
+ 1076 007e 0B       		.uleb128 0xb
+ 1077 007f 2E       		.uleb128 0x2e
+ 1078 0080 01       		.byte	0x1
+ 1079 0081 3F       		.uleb128 0x3f
+ 1080 0082 19       		.uleb128 0x19
+ 1081 0083 03       		.uleb128 0x3
+ 1082 0084 0E       		.uleb128 0xe
+ 1083 0085 3A       		.uleb128 0x3a
+ 1084 0086 0B       		.uleb128 0xb
+ 1085 0087 3B       		.uleb128 0x3b
+ 1086 0088 0B       		.uleb128 0xb
+ 1087 0089 27       		.uleb128 0x27
+ 1088 008a 19       		.uleb128 0x19
+ 1089 008b 20       		.uleb128 0x20
+ 1090 008c 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 28
+
+
+ 1091 008d 01       		.uleb128 0x1
+ 1092 008e 13       		.uleb128 0x13
+ 1093 008f 00       		.byte	0
+ 1094 0090 00       		.byte	0
+ 1095 0091 0C       		.uleb128 0xc
+ 1096 0092 05       		.uleb128 0x5
+ 1097 0093 00       		.byte	0
+ 1098 0094 03       		.uleb128 0x3
+ 1099 0095 0E       		.uleb128 0xe
+ 1100 0096 3A       		.uleb128 0x3a
+ 1101 0097 0B       		.uleb128 0xb
+ 1102 0098 3B       		.uleb128 0x3b
+ 1103 0099 0B       		.uleb128 0xb
+ 1104 009a 49       		.uleb128 0x49
+ 1105 009b 13       		.uleb128 0x13
+ 1106 009c 00       		.byte	0
+ 1107 009d 00       		.byte	0
+ 1108 009e 0D       		.uleb128 0xd
+ 1109 009f 34       		.uleb128 0x34
+ 1110 00a0 00       		.byte	0
+ 1111 00a1 03       		.uleb128 0x3
+ 1112 00a2 0E       		.uleb128 0xe
+ 1113 00a3 3A       		.uleb128 0x3a
+ 1114 00a4 0B       		.uleb128 0xb
+ 1115 00a5 3B       		.uleb128 0x3b
+ 1116 00a6 0B       		.uleb128 0xb
+ 1117 00a7 49       		.uleb128 0x49
+ 1118 00a8 13       		.uleb128 0x13
+ 1119 00a9 00       		.byte	0
+ 1120 00aa 00       		.byte	0
+ 1121 00ab 0E       		.uleb128 0xe
+ 1122 00ac 2E       		.uleb128 0x2e
+ 1123 00ad 00       		.byte	0
+ 1124 00ae 3F       		.uleb128 0x3f
+ 1125 00af 19       		.uleb128 0x19
+ 1126 00b0 03       		.uleb128 0x3
+ 1127 00b1 0E       		.uleb128 0xe
+ 1128 00b2 3A       		.uleb128 0x3a
+ 1129 00b3 0B       		.uleb128 0xb
+ 1130 00b4 3B       		.uleb128 0x3b
+ 1131 00b5 0B       		.uleb128 0xb
+ 1132 00b6 27       		.uleb128 0x27
+ 1133 00b7 19       		.uleb128 0x19
+ 1134 00b8 11       		.uleb128 0x11
+ 1135 00b9 01       		.uleb128 0x1
+ 1136 00ba 12       		.uleb128 0x12
+ 1137 00bb 06       		.uleb128 0x6
+ 1138 00bc 40       		.uleb128 0x40
+ 1139 00bd 18       		.uleb128 0x18
+ 1140 00be 9742     		.uleb128 0x2117
+ 1141 00c0 19       		.uleb128 0x19
+ 1142 00c1 00       		.byte	0
+ 1143 00c2 00       		.byte	0
+ 1144 00c3 0F       		.uleb128 0xf
+ 1145 00c4 2E       		.uleb128 0x2e
+ 1146 00c5 01       		.byte	0x1
+ 1147 00c6 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 29
+
+
+ 1148 00c7 19       		.uleb128 0x19
+ 1149 00c8 03       		.uleb128 0x3
+ 1150 00c9 0E       		.uleb128 0xe
+ 1151 00ca 3A       		.uleb128 0x3a
+ 1152 00cb 0B       		.uleb128 0xb
+ 1153 00cc 3B       		.uleb128 0x3b
+ 1154 00cd 0B       		.uleb128 0xb
+ 1155 00ce 27       		.uleb128 0x27
+ 1156 00cf 19       		.uleb128 0x19
+ 1157 00d0 11       		.uleb128 0x11
+ 1158 00d1 01       		.uleb128 0x1
+ 1159 00d2 12       		.uleb128 0x12
+ 1160 00d3 06       		.uleb128 0x6
+ 1161 00d4 40       		.uleb128 0x40
+ 1162 00d5 18       		.uleb128 0x18
+ 1163 00d6 9742     		.uleb128 0x2117
+ 1164 00d8 19       		.uleb128 0x19
+ 1165 00d9 01       		.uleb128 0x1
+ 1166 00da 13       		.uleb128 0x13
+ 1167 00db 00       		.byte	0
+ 1168 00dc 00       		.byte	0
+ 1169 00dd 10       		.uleb128 0x10
+ 1170 00de 1D       		.uleb128 0x1d
+ 1171 00df 01       		.byte	0x1
+ 1172 00e0 31       		.uleb128 0x31
+ 1173 00e1 13       		.uleb128 0x13
+ 1174 00e2 52       		.uleb128 0x52
+ 1175 00e3 01       		.uleb128 0x1
+ 1176 00e4 55       		.uleb128 0x55
+ 1177 00e5 17       		.uleb128 0x17
+ 1178 00e6 58       		.uleb128 0x58
+ 1179 00e7 0B       		.uleb128 0xb
+ 1180 00e8 59       		.uleb128 0x59
+ 1181 00e9 0B       		.uleb128 0xb
+ 1182 00ea 01       		.uleb128 0x1
+ 1183 00eb 13       		.uleb128 0x13
+ 1184 00ec 00       		.byte	0
+ 1185 00ed 00       		.byte	0
+ 1186 00ee 11       		.uleb128 0x11
+ 1187 00ef 05       		.uleb128 0x5
+ 1188 00f0 00       		.byte	0
+ 1189 00f1 31       		.uleb128 0x31
+ 1190 00f2 13       		.uleb128 0x13
+ 1191 00f3 02       		.uleb128 0x2
+ 1192 00f4 17       		.uleb128 0x17
+ 1193 00f5 00       		.byte	0
+ 1194 00f6 00       		.byte	0
+ 1195 00f7 12       		.uleb128 0x12
+ 1196 00f8 0B       		.uleb128 0xb
+ 1197 00f9 01       		.byte	0x1
+ 1198 00fa 55       		.uleb128 0x55
+ 1199 00fb 17       		.uleb128 0x17
+ 1200 00fc 00       		.byte	0
+ 1201 00fd 00       		.byte	0
+ 1202 00fe 13       		.uleb128 0x13
+ 1203 00ff 34       		.uleb128 0x34
+ 1204 0100 00       		.byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 30
+
+
+ 1205 0101 31       		.uleb128 0x31
+ 1206 0102 13       		.uleb128 0x13
+ 1207 0103 02       		.uleb128 0x2
+ 1208 0104 17       		.uleb128 0x17
+ 1209 0105 00       		.byte	0
+ 1210 0106 00       		.byte	0
+ 1211 0107 14       		.uleb128 0x14
+ 1212 0108 1D       		.uleb128 0x1d
+ 1213 0109 00       		.byte	0
+ 1214 010a 31       		.uleb128 0x31
+ 1215 010b 13       		.uleb128 0x13
+ 1216 010c 52       		.uleb128 0x52
+ 1217 010d 01       		.uleb128 0x1
+ 1218 010e 55       		.uleb128 0x55
+ 1219 010f 17       		.uleb128 0x17
+ 1220 0110 58       		.uleb128 0x58
+ 1221 0111 0B       		.uleb128 0xb
+ 1222 0112 59       		.uleb128 0x59
+ 1223 0113 0B       		.uleb128 0xb
+ 1224 0114 00       		.byte	0
+ 1225 0115 00       		.byte	0
+ 1226 0116 15       		.uleb128 0x15
+ 1227 0117 05       		.uleb128 0x5
+ 1228 0118 00       		.byte	0
+ 1229 0119 03       		.uleb128 0x3
+ 1230 011a 0E       		.uleb128 0xe
+ 1231 011b 3A       		.uleb128 0x3a
+ 1232 011c 0B       		.uleb128 0xb
+ 1233 011d 3B       		.uleb128 0x3b
+ 1234 011e 0B       		.uleb128 0xb
+ 1235 011f 49       		.uleb128 0x49
+ 1236 0120 13       		.uleb128 0x13
+ 1237 0121 02       		.uleb128 0x2
+ 1238 0122 18       		.uleb128 0x18
+ 1239 0123 00       		.byte	0
+ 1240 0124 00       		.byte	0
+ 1241 0125 16       		.uleb128 0x16
+ 1242 0126 05       		.uleb128 0x5
+ 1243 0127 00       		.byte	0
+ 1244 0128 31       		.uleb128 0x31
+ 1245 0129 13       		.uleb128 0x13
+ 1246 012a 00       		.byte	0
+ 1247 012b 00       		.byte	0
+ 1248 012c 17       		.uleb128 0x17
+ 1249 012d 2E       		.uleb128 0x2e
+ 1250 012e 01       		.byte	0x1
+ 1251 012f 31       		.uleb128 0x31
+ 1252 0130 13       		.uleb128 0x13
+ 1253 0131 11       		.uleb128 0x11
+ 1254 0132 01       		.uleb128 0x1
+ 1255 0133 12       		.uleb128 0x12
+ 1256 0134 06       		.uleb128 0x6
+ 1257 0135 40       		.uleb128 0x40
+ 1258 0136 18       		.uleb128 0x18
+ 1259 0137 9742     		.uleb128 0x2117
+ 1260 0139 19       		.uleb128 0x19
+ 1261 013a 01       		.uleb128 0x1
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 31
+
+
+ 1262 013b 13       		.uleb128 0x13
+ 1263 013c 00       		.byte	0
+ 1264 013d 00       		.byte	0
+ 1265 013e 18       		.uleb128 0x18
+ 1266 013f 05       		.uleb128 0x5
+ 1267 0140 00       		.byte	0
+ 1268 0141 31       		.uleb128 0x31
+ 1269 0142 13       		.uleb128 0x13
+ 1270 0143 02       		.uleb128 0x2
+ 1271 0144 18       		.uleb128 0x18
+ 1272 0145 00       		.byte	0
+ 1273 0146 00       		.byte	0
+ 1274 0147 19       		.uleb128 0x19
+ 1275 0148 34       		.uleb128 0x34
+ 1276 0149 00       		.byte	0
+ 1277 014a 31       		.uleb128 0x31
+ 1278 014b 13       		.uleb128 0x13
+ 1279 014c 02       		.uleb128 0x2
+ 1280 014d 18       		.uleb128 0x18
+ 1281 014e 00       		.byte	0
+ 1282 014f 00       		.byte	0
+ 1283 0150 1A       		.uleb128 0x1a
+ 1284 0151 2E       		.uleb128 0x2e
+ 1285 0152 01       		.byte	0x1
+ 1286 0153 3F       		.uleb128 0x3f
+ 1287 0154 19       		.uleb128 0x19
+ 1288 0155 03       		.uleb128 0x3
+ 1289 0156 0E       		.uleb128 0xe
+ 1290 0157 3A       		.uleb128 0x3a
+ 1291 0158 0B       		.uleb128 0xb
+ 1292 0159 3B       		.uleb128 0x3b
+ 1293 015a 0B       		.uleb128 0xb
+ 1294 015b 27       		.uleb128 0x27
+ 1295 015c 19       		.uleb128 0x19
+ 1296 015d 49       		.uleb128 0x49
+ 1297 015e 13       		.uleb128 0x13
+ 1298 015f 11       		.uleb128 0x11
+ 1299 0160 01       		.uleb128 0x1
+ 1300 0161 12       		.uleb128 0x12
+ 1301 0162 06       		.uleb128 0x6
+ 1302 0163 40       		.uleb128 0x40
+ 1303 0164 18       		.uleb128 0x18
+ 1304 0165 9742     		.uleb128 0x2117
+ 1305 0167 19       		.uleb128 0x19
+ 1306 0168 01       		.uleb128 0x1
+ 1307 0169 13       		.uleb128 0x13
+ 1308 016a 00       		.byte	0
+ 1309 016b 00       		.byte	0
+ 1310 016c 1B       		.uleb128 0x1b
+ 1311 016d 34       		.uleb128 0x34
+ 1312 016e 00       		.byte	0
+ 1313 016f 03       		.uleb128 0x3
+ 1314 0170 0E       		.uleb128 0xe
+ 1315 0171 3A       		.uleb128 0x3a
+ 1316 0172 0B       		.uleb128 0xb
+ 1317 0173 3B       		.uleb128 0x3b
+ 1318 0174 0B       		.uleb128 0xb
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 32
+
+
+ 1319 0175 49       		.uleb128 0x49
+ 1320 0176 13       		.uleb128 0x13
+ 1321 0177 02       		.uleb128 0x2
+ 1322 0178 17       		.uleb128 0x17
+ 1323 0179 00       		.byte	0
+ 1324 017a 00       		.byte	0
+ 1325 017b 1C       		.uleb128 0x1c
+ 1326 017c 2E       		.uleb128 0x2e
+ 1327 017d 01       		.byte	0x1
+ 1328 017e 3F       		.uleb128 0x3f
+ 1329 017f 19       		.uleb128 0x19
+ 1330 0180 03       		.uleb128 0x3
+ 1331 0181 0E       		.uleb128 0xe
+ 1332 0182 3A       		.uleb128 0x3a
+ 1333 0183 0B       		.uleb128 0xb
+ 1334 0184 3B       		.uleb128 0x3b
+ 1335 0185 05       		.uleb128 0x5
+ 1336 0186 27       		.uleb128 0x27
+ 1337 0187 19       		.uleb128 0x19
+ 1338 0188 49       		.uleb128 0x49
+ 1339 0189 13       		.uleb128 0x13
+ 1340 018a 11       		.uleb128 0x11
+ 1341 018b 01       		.uleb128 0x1
+ 1342 018c 12       		.uleb128 0x12
+ 1343 018d 06       		.uleb128 0x6
+ 1344 018e 40       		.uleb128 0x40
+ 1345 018f 18       		.uleb128 0x18
+ 1346 0190 9742     		.uleb128 0x2117
+ 1347 0192 19       		.uleb128 0x19
+ 1348 0193 01       		.uleb128 0x1
+ 1349 0194 13       		.uleb128 0x13
+ 1350 0195 00       		.byte	0
+ 1351 0196 00       		.byte	0
+ 1352 0197 1D       		.uleb128 0x1d
+ 1353 0198 34       		.uleb128 0x34
+ 1354 0199 00       		.byte	0
+ 1355 019a 03       		.uleb128 0x3
+ 1356 019b 0E       		.uleb128 0xe
+ 1357 019c 3A       		.uleb128 0x3a
+ 1358 019d 0B       		.uleb128 0xb
+ 1359 019e 3B       		.uleb128 0x3b
+ 1360 019f 05       		.uleb128 0x5
+ 1361 01a0 49       		.uleb128 0x49
+ 1362 01a1 13       		.uleb128 0x13
+ 1363 01a2 02       		.uleb128 0x2
+ 1364 01a3 17       		.uleb128 0x17
+ 1365 01a4 00       		.byte	0
+ 1366 01a5 00       		.byte	0
+ 1367 01a6 1E       		.uleb128 0x1e
+ 1368 01a7 2E       		.uleb128 0x2e
+ 1369 01a8 00       		.byte	0
+ 1370 01a9 31       		.uleb128 0x31
+ 1371 01aa 13       		.uleb128 0x13
+ 1372 01ab 11       		.uleb128 0x11
+ 1373 01ac 01       		.uleb128 0x1
+ 1374 01ad 12       		.uleb128 0x12
+ 1375 01ae 06       		.uleb128 0x6
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 33
+
+
+ 1376 01af 40       		.uleb128 0x40
+ 1377 01b0 18       		.uleb128 0x18
+ 1378 01b1 9742     		.uleb128 0x2117
+ 1379 01b3 19       		.uleb128 0x19
+ 1380 01b4 00       		.byte	0
+ 1381 01b5 00       		.byte	0
+ 1382 01b6 1F       		.uleb128 0x1f
+ 1383 01b7 2E       		.uleb128 0x2e
+ 1384 01b8 00       		.byte	0
+ 1385 01b9 3F       		.uleb128 0x3f
+ 1386 01ba 19       		.uleb128 0x19
+ 1387 01bb 03       		.uleb128 0x3
+ 1388 01bc 0E       		.uleb128 0xe
+ 1389 01bd 3A       		.uleb128 0x3a
+ 1390 01be 0B       		.uleb128 0xb
+ 1391 01bf 3B       		.uleb128 0x3b
+ 1392 01c0 05       		.uleb128 0x5
+ 1393 01c1 27       		.uleb128 0x27
+ 1394 01c2 19       		.uleb128 0x19
+ 1395 01c3 49       		.uleb128 0x49
+ 1396 01c4 13       		.uleb128 0x13
+ 1397 01c5 11       		.uleb128 0x11
+ 1398 01c6 01       		.uleb128 0x1
+ 1399 01c7 12       		.uleb128 0x12
+ 1400 01c8 06       		.uleb128 0x6
+ 1401 01c9 40       		.uleb128 0x40
+ 1402 01ca 18       		.uleb128 0x18
+ 1403 01cb 9742     		.uleb128 0x2117
+ 1404 01cd 19       		.uleb128 0x19
+ 1405 01ce 00       		.byte	0
+ 1406 01cf 00       		.byte	0
+ 1407 01d0 20       		.uleb128 0x20
+ 1408 01d1 2E       		.uleb128 0x2e
+ 1409 01d2 00       		.byte	0
+ 1410 01d3 3F       		.uleb128 0x3f
+ 1411 01d4 19       		.uleb128 0x19
+ 1412 01d5 03       		.uleb128 0x3
+ 1413 01d6 0E       		.uleb128 0xe
+ 1414 01d7 3A       		.uleb128 0x3a
+ 1415 01d8 0B       		.uleb128 0xb
+ 1416 01d9 3B       		.uleb128 0x3b
+ 1417 01da 05       		.uleb128 0x5
+ 1418 01db 27       		.uleb128 0x27
+ 1419 01dc 19       		.uleb128 0x19
+ 1420 01dd 11       		.uleb128 0x11
+ 1421 01de 01       		.uleb128 0x1
+ 1422 01df 12       		.uleb128 0x12
+ 1423 01e0 06       		.uleb128 0x6
+ 1424 01e1 40       		.uleb128 0x40
+ 1425 01e2 18       		.uleb128 0x18
+ 1426 01e3 9742     		.uleb128 0x2117
+ 1427 01e5 19       		.uleb128 0x19
+ 1428 01e6 00       		.byte	0
+ 1429 01e7 00       		.byte	0
+ 1430 01e8 00       		.byte	0
+ 1431              		.section	.debug_loc,"",%progbits
+ 1432              	.Ldebug_loc0:
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 34
+
+
+ 1433              	.LLST0:
+ 1434 0000 16000000 		.4byte	.LVL0
+ 1435 0004 1A000000 		.4byte	.LVL1
+ 1436 0008 0600     		.2byte	0x6
+ 1437 000a 03       		.byte	0x3
+ 1438 000b 00000000 		.4byte	ADC_DelSig_1_IRQ_Interrupt
+ 1439 000f 9F       		.byte	0x9f
+ 1440 0010 00000000 		.4byte	0
+ 1441 0014 00000000 		.4byte	0
+ 1442              	.LLST1:
+ 1443 0018 16000000 		.4byte	.LVL0
+ 1444 001c 1A000000 		.4byte	.LVL1
+ 1445 0020 0100     		.2byte	0x1
+ 1446 0022 54       		.byte	0x54
+ 1447 0023 00000000 		.4byte	0
+ 1448 0027 00000000 		.4byte	0
+ 1449              	.LLST2:
+ 1450 002b 1A000000 		.4byte	.LVL1
+ 1451 002f 1C000000 		.4byte	.LVL2
+ 1452 0033 0200     		.2byte	0x2
+ 1453 0035 37       		.byte	0x37
+ 1454 0036 9F       		.byte	0x9f
+ 1455 0037 00000000 		.4byte	0
+ 1456 003b 00000000 		.4byte	0
+ 1457              	.LLST3:
+ 1458 003f 14000000 		.4byte	.LVL4
+ 1459 0043 18000000 		.4byte	.LVL5
+ 1460 0047 0100     		.2byte	0x1
+ 1461 0049 50       		.byte	0x50
+ 1462 004a 00000000 		.4byte	0
+ 1463 004e 00000000 		.4byte	0
+ 1464              	.LLST4:
+ 1465 0052 14000000 		.4byte	.LVL4
+ 1466 0056 18000000 		.4byte	.LVL5
+ 1467 005a 0100     		.2byte	0x1
+ 1468 005c 55       		.byte	0x55
+ 1469 005d 00000000 		.4byte	0
+ 1470 0061 00000000 		.4byte	0
+ 1471              	.LLST5:
+ 1472 0065 18000000 		.4byte	.LVL5
+ 1473 0069 1A000000 		.4byte	.LVL6
+ 1474 006d 0200     		.2byte	0x2
+ 1475 006f 37       		.byte	0x37
+ 1476 0070 9F       		.byte	0x9f
+ 1477 0071 00000000 		.4byte	0
+ 1478 0075 00000000 		.4byte	0
+ 1479              	.LLST6:
+ 1480 0079 0E000000 		.4byte	.LVL7
+ 1481 007d 12000000 		.4byte	.LVL8
+ 1482 0081 0100     		.2byte	0x1
+ 1483 0083 53       		.byte	0x53
+ 1484 0084 00000000 		.4byte	0
+ 1485 0088 00000000 		.4byte	0
+ 1486              	.LLST7:
+ 1487 008c 00000000 		.4byte	.LVL11
+ 1488 0090 02000000 		.4byte	.LVL12
+ 1489 0094 0600     		.2byte	0x6
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 35
+
+
+ 1490 0096 11       		.byte	0x11
+ 1491 0097 88DA8380 		.sleb128 -536810232
+ 1491      7E
+ 1492 009c 02000000 		.4byte	.LVL12
+ 1493 00a0 04000000 		.4byte	.LVL13
+ 1494 00a4 0200     		.2byte	0x2
+ 1495 00a6 73       		.byte	0x73
+ 1496 00a7 00       		.sleb128 0
+ 1497 00a8 04000000 		.4byte	.LVL13
+ 1498 00ac 10000000 		.4byte	.LFE5
+ 1499 00b0 0100     		.2byte	0x1
+ 1500 00b2 53       		.byte	0x53
+ 1501 00b3 00000000 		.4byte	0
+ 1502 00b7 00000000 		.4byte	0
+ 1503              	.LLST8:
+ 1504 00bb 00000000 		.4byte	.LVL14
+ 1505 00bf 02000000 		.4byte	.LVL15
+ 1506 00c3 0100     		.2byte	0x1
+ 1507 00c5 50       		.byte	0x50
+ 1508 00c6 02000000 		.4byte	.LVL15
+ 1509 00ca 10000000 		.4byte	.LFE6
+ 1510 00ce 0400     		.2byte	0x4
+ 1511 00d0 F3       		.byte	0xf3
+ 1512 00d1 01       		.uleb128 0x1
+ 1513 00d2 50       		.byte	0x50
+ 1514 00d3 9F       		.byte	0x9f
+ 1515 00d4 00000000 		.4byte	0
+ 1516 00d8 00000000 		.4byte	0
+ 1517              	.LLST9:
+ 1518 00dc 04000000 		.4byte	.LVL16
+ 1519 00e0 06000000 		.4byte	.LVL17
+ 1520 00e4 0500     		.2byte	0x5
+ 1521 00e6 70       		.byte	0x70
+ 1522 00e7 00       		.sleb128 0
+ 1523 00e8 35       		.byte	0x35
+ 1524 00e9 25       		.byte	0x25
+ 1525 00ea 9F       		.byte	0x9f
+ 1526 00eb 00000000 		.4byte	0
+ 1527 00ef 00000000 		.4byte	0
+ 1528              		.section	.debug_aranges,"",%progbits
+ 1529 0000 7C000000 		.4byte	0x7c
+ 1530 0004 0200     		.2byte	0x2
+ 1531 0006 00000000 		.4byte	.Ldebug_info0
+ 1532 000a 04       		.byte	0x4
+ 1533 000b 00       		.byte	0
+ 1534 000c 0000     		.2byte	0
+ 1535 000e 0000     		.2byte	0
+ 1536 0010 00000000 		.4byte	.LFB3
+ 1537 0014 02000000 		.4byte	.LFE3-.LFB3
+ 1538 0018 00000000 		.4byte	.LFB0
+ 1539 001c 38000000 		.4byte	.LFE0-.LFB0
+ 1540 0020 00000000 		.4byte	.LFB1
+ 1541 0024 30000000 		.4byte	.LFE1-.LFB1
+ 1542 0028 00000000 		.4byte	.LFB2
+ 1543 002c 20000000 		.4byte	.LFE2-.LFB2
+ 1544 0030 00000000 		.4byte	.LFB4
+ 1545 0034 10000000 		.4byte	.LFE4-.LFB4
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 36
+
+
+ 1546 0038 00000000 		.4byte	.LFB5
+ 1547 003c 10000000 		.4byte	.LFE5-.LFB5
+ 1548 0040 00000000 		.4byte	.LFB6
+ 1549 0044 10000000 		.4byte	.LFE6-.LFB6
+ 1550 0048 00000000 		.4byte	.LFB7
+ 1551 004c 0C000000 		.4byte	.LFE7-.LFB7
+ 1552 0050 00000000 		.4byte	.LFB8
+ 1553 0054 10000000 		.4byte	.LFE8-.LFB8
+ 1554 0058 00000000 		.4byte	.LFB9
+ 1555 005c 10000000 		.4byte	.LFE9-.LFB9
+ 1556 0060 00000000 		.4byte	.LFB10
+ 1557 0064 10000000 		.4byte	.LFE10-.LFB10
+ 1558 0068 00000000 		.4byte	.LFB11
+ 1559 006c 10000000 		.4byte	.LFE11-.LFB11
+ 1560 0070 00000000 		.4byte	.LFB12
+ 1561 0074 10000000 		.4byte	.LFE12-.LFB12
+ 1562 0078 00000000 		.4byte	0
+ 1563 007c 00000000 		.4byte	0
+ 1564              		.section	.debug_ranges,"",%progbits
+ 1565              	.Ldebug_ranges0:
+ 1566 0000 02000000 		.4byte	.LBB22
+ 1567 0004 04000000 		.4byte	.LBE22
+ 1568 0008 06000000 		.4byte	.LBB30
+ 1569 000c 0A000000 		.4byte	.LBE30
+ 1570 0010 16000000 		.4byte	.LBB41
+ 1571 0014 1A000000 		.4byte	.LBE41
+ 1572 0018 00000000 		.4byte	0
+ 1573 001c 00000000 		.4byte	0
+ 1574 0020 04000000 		.4byte	.LBB26
+ 1575 0024 06000000 		.4byte	.LBE26
+ 1576 0028 0C000000 		.4byte	.LBB35
+ 1577 002c 10000000 		.4byte	.LBE35
+ 1578 0030 14000000 		.4byte	.LBB40
+ 1579 0034 16000000 		.4byte	.LBE40
+ 1580 0038 00000000 		.4byte	0
+ 1581 003c 00000000 		.4byte	0
+ 1582 0040 0A000000 		.4byte	.LBB31
+ 1583 0044 0C000000 		.4byte	.LBE31
+ 1584 0048 12000000 		.4byte	.LBB39
+ 1585 004c 14000000 		.4byte	.LBE39
+ 1586 0050 1A000000 		.4byte	.LBB42
+ 1587 0054 1C000000 		.4byte	.LBE42
+ 1588 0058 00000000 		.4byte	0
+ 1589 005c 00000000 		.4byte	0
+ 1590 0060 10000000 		.4byte	.LBB36
+ 1591 0064 12000000 		.4byte	.LBE36
+ 1592 0068 1E000000 		.4byte	.LBB43
+ 1593 006c 20000000 		.4byte	.LBE43
+ 1594 0070 00000000 		.4byte	0
+ 1595 0074 00000000 		.4byte	0
+ 1596 0078 02000000 		.4byte	.LBB44
+ 1597 007c 04000000 		.4byte	.LBE44
+ 1598 0080 06000000 		.4byte	.LBB52
+ 1599 0084 08000000 		.4byte	.LBE52
+ 1600 0088 14000000 		.4byte	.LBB63
+ 1601 008c 18000000 		.4byte	.LBE63
+ 1602 0090 00000000 		.4byte	0
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 37
+
+
+ 1603 0094 00000000 		.4byte	0
+ 1604 0098 04000000 		.4byte	.LBB48
+ 1605 009c 06000000 		.4byte	.LBE48
+ 1606 00a0 0A000000 		.4byte	.LBB57
+ 1607 00a4 0E000000 		.4byte	.LBE57
+ 1608 00a8 12000000 		.4byte	.LBB62
+ 1609 00ac 14000000 		.4byte	.LBE62
+ 1610 00b0 00000000 		.4byte	0
+ 1611 00b4 00000000 		.4byte	0
+ 1612 00b8 08000000 		.4byte	.LBB53
+ 1613 00bc 0A000000 		.4byte	.LBE53
+ 1614 00c0 0E000000 		.4byte	.LBB58
+ 1615 00c4 10000000 		.4byte	.LBE58
+ 1616 00c8 18000000 		.4byte	.LBB64
+ 1617 00cc 1A000000 		.4byte	.LBE64
+ 1618 00d0 00000000 		.4byte	0
+ 1619 00d4 00000000 		.4byte	0
+ 1620 00d8 10000000 		.4byte	.LBB59
+ 1621 00dc 12000000 		.4byte	.LBE59
+ 1622 00e0 1C000000 		.4byte	.LBB65
+ 1623 00e4 1E000000 		.4byte	.LBE65
+ 1624 00e8 00000000 		.4byte	0
+ 1625 00ec 00000000 		.4byte	0
+ 1626 00f0 00000000 		.4byte	.LBB66
+ 1627 00f4 02000000 		.4byte	.LBE66
+ 1628 00f8 04000000 		.4byte	.LBB73
+ 1629 00fc 08000000 		.4byte	.LBE73
+ 1630 0100 0E000000 		.4byte	.LBB75
+ 1631 0104 20000000 		.4byte	.LBE75
+ 1632 0108 00000000 		.4byte	0
+ 1633 010c 00000000 		.4byte	0
+ 1634 0110 02000000 		.4byte	.LBB70
+ 1635 0114 04000000 		.4byte	.LBE70
+ 1636 0118 08000000 		.4byte	.LBB74
+ 1637 011c 0E000000 		.4byte	.LBE74
+ 1638 0120 00000000 		.4byte	0
+ 1639 0124 00000000 		.4byte	0
+ 1640 0128 00000000 		.4byte	.LFB3
+ 1641 012c 02000000 		.4byte	.LFE3
+ 1642 0130 00000000 		.4byte	.LFB0
+ 1643 0134 38000000 		.4byte	.LFE0
+ 1644 0138 00000000 		.4byte	.LFB1
+ 1645 013c 30000000 		.4byte	.LFE1
+ 1646 0140 00000000 		.4byte	.LFB2
+ 1647 0144 20000000 		.4byte	.LFE2
+ 1648 0148 00000000 		.4byte	.LFB4
+ 1649 014c 10000000 		.4byte	.LFE4
+ 1650 0150 00000000 		.4byte	.LFB5
+ 1651 0154 10000000 		.4byte	.LFE5
+ 1652 0158 00000000 		.4byte	.LFB6
+ 1653 015c 10000000 		.4byte	.LFE6
+ 1654 0160 00000000 		.4byte	.LFB7
+ 1655 0164 0C000000 		.4byte	.LFE7
+ 1656 0168 00000000 		.4byte	.LFB8
+ 1657 016c 10000000 		.4byte	.LFE8
+ 1658 0170 00000000 		.4byte	.LFB9
+ 1659 0174 10000000 		.4byte	.LFE9
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 38
+
+
+ 1660 0178 00000000 		.4byte	.LFB10
+ 1661 017c 10000000 		.4byte	.LFE10
+ 1662 0180 00000000 		.4byte	.LFB11
+ 1663 0184 10000000 		.4byte	.LFE11
+ 1664 0188 00000000 		.4byte	.LFB12
+ 1665 018c 10000000 		.4byte	.LFE12
+ 1666 0190 00000000 		.4byte	0
+ 1667 0194 00000000 		.4byte	0
+ 1668              		.section	.debug_line,"",%progbits
+ 1669              	.Ldebug_line0:
+ 1670 0000 A7010000 		.section	.debug_str,"MS",%progbits,1
+ 1670      02004D00 
+ 1670      00000201 
+ 1670      FB0E0D00 
+ 1670      01010101 
+ 1671              	.LASF26:
+ 1672 0000 4144435F 		.ascii	"ADC_DelSig_1_IRQ_StartEx\000"
+ 1672      44656C53 
+ 1672      69675F31 
+ 1672      5F495251 
+ 1672      5F537461 
+ 1673              	.LASF17:
+ 1674 0019 72656733 		.ascii	"reg32\000"
+ 1674      3200
+ 1675              	.LASF23:
+ 1676 001f 4144435F 		.ascii	"ADC_DelSig_1_IRQ_Enable\000"
+ 1676      44656C53 
+ 1676      69675F31 
+ 1676      5F495251 
+ 1676      5F456E61 
+ 1677              	.LASF27:
+ 1678 0037 4144435F 		.ascii	"ADC_DelSig_1_IRQ_Stop\000"
+ 1678      44656C53 
+ 1678      69675F31 
+ 1678      5F495251 
+ 1678      5F53746F 
+ 1679              	.LASF28:
+ 1680 004d 4144435F 		.ascii	"ADC_DelSig_1_IRQ_GetVector\000"
+ 1680      44656C53 
+ 1680      69675F31 
+ 1680      5F495251 
+ 1680      5F476574 
+ 1681              	.LASF36:
+ 1682 0068 443A5C44 		.ascii	"D:\\Dropbox\\DEVELOPMENT\\Audio visualizations\\Aud"
+ 1682      726F7062 
+ 1682      6F785C44 
+ 1682      4556454C 
+ 1682      4F504D45 
+ 1683 0097 696F2073 		.ascii	"io spectrum analyzer zebrawood\\Firmware\\audioSpec"
+ 1683      70656374 
+ 1683      72756D20 
+ 1683      616E616C 
+ 1683      797A6572 
+ 1684 00c8 7472756D 		.ascii	"trumAnalyzer\\audioSpectrumAnalyzer.cydsn\000"
+ 1684      416E616C 
+ 1684      797A6572 
+ 1684      5C617564 
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 39
+
+
+ 1684      696F5370 
+ 1685              	.LASF6:
+ 1686 00f1 73686F72 		.ascii	"short unsigned int\000"
+ 1686      7420756E 
+ 1686      7369676E 
+ 1686      65642069 
+ 1686      6E7400
+ 1687              	.LASF24:
+ 1688 0104 4144435F 		.ascii	"ADC_DelSig_1_IRQ_Disable\000"
+ 1688      44656C53 
+ 1688      69675F31 
+ 1688      5F495251 
+ 1688      5F446973 
+ 1689              	.LASF20:
+ 1690 011d 4144435F 		.ascii	"ADC_DelSig_1_IRQ_SetVector\000"
+ 1690      44656C53 
+ 1690      69675F31 
+ 1690      5F495251 
+ 1690      5F536574 
+ 1691              	.LASF33:
+ 1692 0138 4144435F 		.ascii	"ADC_DelSig_1_IRQ_ClearPending\000"
+ 1692      44656C53 
+ 1692      69675F31 
+ 1692      5F495251 
+ 1692      5F436C65 
+ 1693              	.LASF31:
+ 1694 0156 4144435F 		.ascii	"ADC_DelSig_1_IRQ_Interrupt\000"
+ 1694      44656C53 
+ 1694      69675F31 
+ 1694      5F495251 
+ 1694      5F496E74 
+ 1695              	.LASF14:
+ 1696 0171 666C6F61 		.ascii	"float\000"
+ 1696      7400
+ 1697              	.LASF4:
+ 1698 0177 756E7369 		.ascii	"unsigned char\000"
+ 1698      676E6564 
+ 1698      20636861 
+ 1698      7200
+ 1699              	.LASF37:
+ 1700 0185 4144435F 		.ascii	"ADC_DelSig_1_IRQ_GetState\000"
+ 1700      44656C53 
+ 1700      69675F31 
+ 1700      5F495251 
+ 1700      5F476574 
+ 1701              	.LASF16:
+ 1702 019f 72656738 		.ascii	"reg8\000"
+ 1702      00
+ 1703              	.LASF22:
+ 1704 01a4 61646472 		.ascii	"address\000"
+ 1704      65737300 
+ 1705              	.LASF8:
+ 1706 01ac 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1706      20756E73 
+ 1706      69676E65 
+ 1706      6420696E 
+ 1706      7400
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 40
+
+
+ 1707              	.LASF12:
+ 1708 01be 75696E74 		.ascii	"uint8\000"
+ 1708      3800
+ 1709              	.LASF19:
+ 1710 01c4 4144435F 		.ascii	"ADC_DelSig_1_IRQ_SetPriority\000"
+ 1710      44656C53 
+ 1710      69675F31 
+ 1710      5F495251 
+ 1710      5F536574 
+ 1711              	.LASF21:
+ 1712 01e1 7072696F 		.ascii	"priority\000"
+ 1712      72697479 
+ 1712      00
+ 1713              	.LASF15:
+ 1714 01ea 646F7562 		.ascii	"double\000"
+ 1714      6C6500
+ 1715              	.LASF13:
+ 1716 01f1 75696E74 		.ascii	"uint32\000"
+ 1716      333200
+ 1717              	.LASF0:
+ 1718 01f8 756E7369 		.ascii	"unsigned int\000"
+ 1718      676E6564 
+ 1718      20696E74 
+ 1718      00
+ 1719              	.LASF34:
+ 1720 0205 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1720      43313120 
+ 1720      352E342E 
+ 1720      31203230 
+ 1720      31363036 
+ 1721 0238 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1721      20726576 
+ 1721      6973696F 
+ 1721      6E203233 
+ 1721      37373135 
+ 1722 026b 33202D66 		.ascii	"3 -ffunction-sections -ffat-lto-objects -finline-fu"
+ 1722      66756E63 
+ 1722      74696F6E 
+ 1722      2D736563 
+ 1722      74696F6E 
+ 1723 029e 6E637469 		.ascii	"nctions\000"
+ 1723      6F6E7300 
+ 1724              	.LASF9:
+ 1725 02a6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1725      206C6F6E 
+ 1725      6720756E 
+ 1725      7369676E 
+ 1725      65642069 
+ 1726              	.LASF18:
+ 1727 02bd 63796973 		.ascii	"cyisraddress\000"
+ 1727      72616464 
+ 1727      72657373 
+ 1727      00
+ 1728              	.LASF10:
+ 1729 02ca 73697A65 		.ascii	"sizetype\000"
+ 1729      74797065 
+ 1729      00
+ARM GAS  C:\Users\larco\AppData\Local\Temp\ccWdx4ni.s 			page 41
+
+
+ 1730              	.LASF32:
+ 1731 02d3 4144435F 		.ascii	"ADC_DelSig_1_IRQ_SetPending\000"
+ 1731      44656C53 
+ 1731      69675F31 
+ 1731      5F495251 
+ 1731      5F536574 
+ 1732              	.LASF1:
+ 1733 02ef 6C6F6E67 		.ascii	"long long int\000"
+ 1733      206C6F6E 
+ 1733      6720696E 
+ 1733      7400
+ 1734              	.LASF11:
+ 1735 02fd 63686172 		.ascii	"char\000"
+ 1735      00
+ 1736              	.LASF30:
+ 1737 0302 72616D56 		.ascii	"ramVectorTable\000"
+ 1737      6563746F 
+ 1737      72546162 
+ 1737      6C6500
+ 1738              	.LASF5:
+ 1739 0311 73686F72 		.ascii	"short int\000"
+ 1739      7420696E 
+ 1739      7400
+ 1740              	.LASF35:
+ 1741 031b 47656E65 		.ascii	"Generated_Source\\PSoC5\\ADC_DelSig_1_IRQ.c\000"
+ 1741      72617465 
+ 1741      645F536F 
+ 1741      75726365 
+ 1741      5C50536F 
+ 1742              	.LASF25:
+ 1743 0345 4144435F 		.ascii	"ADC_DelSig_1_IRQ_Start\000"
+ 1743      44656C53 
+ 1743      69675F31 
+ 1743      5F495251 
+ 1743      5F537461 
+ 1744              	.LASF7:
+ 1745 035c 6C6F6E67 		.ascii	"long int\000"
+ 1745      20696E74 
+ 1745      00
+ 1746              	.LASF2:
+ 1747 0365 6C6F6E67 		.ascii	"long double\000"
+ 1747      20646F75 
+ 1747      626C6500 
+ 1748              	.LASF3:
+ 1749 0371 7369676E 		.ascii	"signed char\000"
+ 1749      65642063 
+ 1749      68617200 
+ 1750              	.LASF29:
+ 1751 037d 4144435F 		.ascii	"ADC_DelSig_1_IRQ_GetPriority\000"
+ 1751      44656C53 
+ 1751      69675F31 
+ 1751      5F495251 
+ 1751      5F476574 
+ 1752              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
